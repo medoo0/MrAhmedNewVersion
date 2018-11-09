@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layoutDirection="ltr"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/answercorner"
+    android:layout_margin="10dp"
+
+    >
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|end"
+        android:layout_margin="10dp"
+        android:id="@+id/Liner1"
+        >
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="22sp"
+            android:text="@string/title"
+            android:fontFamily="@font/cairo"
+            android:gravity="center_vertical"
+            android:layout_marginEnd="5dp"
+            android:textColor="@color/color4"
+            android:textStyle="bold"
+            />
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/icon"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/Liner2"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|end"
+        android:layout_margin="10dp"
+        android:layout_below="@+id/Liner1"
+        >
+
+        <TextView
+            android:id="@+id/Message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="@string/message"
+            android:fontFamily="@font/cairo"
+            android:gravity="center_vertical"
+            android:layout_marginEnd="60dp"
+            android:textColor="@android:color/black"
+            />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/Liner3"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|start"
+        android:layout_margin="10dp"
+        android:layout_below="@+id/Liner2"
+        >
+
+        <Button
+            android:id="@+id/no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no"
+            style="@style/flatbutton"
+            android:textSize="18sp"
+            android:textColor="@color/color2"
+            android:fontFamily="@font/cairo"
+
+            />
+
+
+        <Button
+            android:id="@+id/yes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/yes"
+            style="@style/flatbutton"
+            android:textSize="18sp"
+            android:textColor="@color/color4"
+            android:fontFamily="@font/cairo"
+            />
+    </LinearLayout>
+
+</RelativeLayout>

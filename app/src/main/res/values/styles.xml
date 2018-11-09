@@ -1,0 +1,55 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/color1</item>
+        <item name="android:itemBackground">@color/color1</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+
+    </style>
+
+
+
+    <style name="NavigationText" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textColor">@color/black1</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:fontFamily">@font/cairo</item>
+    </style>
+
+
+
+    <style name="ThemeOverlay.AppCompat.navTheme">
+
+        <!-- Color of text and icon when SELECTED -->
+        <item name="colorPrimary">@color/colorAccent</item>
+
+        <!-- Background color when SELECTED -->
+        <item name="colorControlHighlight">@color/colorPrimary</item>
+
+    </style>
+    <style name="flatbutton" parent="Widget.AppCompat.Button.Borderless">
+
+    </style>
+
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@android:color/white</item>
+        <item name="colorControlActivated">@android:color/white</item>
+    </style>
+
+
+
+
+    <style name="MyPopupMenu"
+        parent="@android:style/Widget.Holo.ListPopupWindow">
+        <item name="android:popupBackground">@color/color2</item>
+
+    </style>
+
+    <style name="AppTheme.spinner">
+        <item name="colorAccent">#fff</item>
+    </style>
+
+</resources>

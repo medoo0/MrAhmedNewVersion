@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+>
+
+<group android:checkableBehavior="single">
+
+
+    <item android:id="@+id/emams"
+        android:icon="@drawable/ic_home"
+        android:title="@string/examList"
+        />
+
+    <item android:id="@+id/MYResult"
+        android:icon="@drawable/ic_result"
+        android:title="@string/MyResult"
+        />
+
+    <item android:id="@+id/addExam"
+        android:icon="@drawable/ic_addexamicon"
+        android:title="@string/addExam"/>
+
+
+    <item android:id="@+id/questions"
+        android:icon="@drawable/questionsicon"
+        android:title="@string/questions"/>
+
+    <item android:id="@+id/results"
+        android:icon="@drawable/ic_results"
+        android:title="@string/results"/>
+
+    <item android:id="@+id/studentManger"
+        android:icon="@drawable/ic_gentleman"
+        android:title="@string/mangeStudent"/>
+
+
+
+</group>
+    <item android:title="@string/aboutus">
+
+        <menu>
+
+            <item android:title="@string/aboutDoctor"
+                android:id="@+id/aboutDoctor"
+                android:icon="@drawable/person"/>
+
+
+            <item android:title="@string/aboutProgrammer"
+                android:id="@+id/aboutProgrammer"
+                android:icon="@drawable/ic_programmer"/>
+
+
+
+            <item android:title="@string/exit"
+                  android:id="@+id/exit"
+                  android:icon="@drawable/ic_exiticon"/>
+
+
+
+        </menu>
+
+
+    </item>
+
+
+</menu>

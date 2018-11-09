@@ -1,0 +1,209 @@
+<resources>
+    <string name="app_name">الاستاذ . حسام شملان </string>
+    <string name="Sign_in">تسجيل الدخول</string>
+    <string name="Sign_up">الاشتراك</string>
+    <string name="s_in_up">
+        يرجي تسجيل الدخول
+      \n  او الاشتراك
+      \n  اذا لم يكن لديك حساب
+</string>
+
+
+    <string name="topteacher"> حفيد الفلاسفه </string>
+    <string name="register"> التسجيل </string>
+    <string name="register1">يرجي تعبئة جميع البيانات </string>
+    <string name="third_name"> الاسم الثلاثي </string>
+    <string name="email">البريد الالكتروني</string>
+    <string name="pass"> الرقم السري </string>
+    <string name="Make_sure_From_Pass"> تأكيد الرقم السري </string>
+    <string name="phone"> رقم الهاتف </string>
+    <string name="ihaveacount"> لديك حساب بالفعل ؟ </string>
+    <string name="login"> تسجيل الدخول </string>
+    <string name="no_account">ليس لديك حساب ؟ </string>
+    <string name="write_email">الرجاء كتابة البريد الإلكتروني</string>
+    <string name="write_email_in_correct_way">الرجاء كتابة البريد الإلكتروني بطريقة صحيحة</string>
+
+    // registration //
+    <string name="empty_field"> يرجى تعبئة الحقل من فضلك</string>
+    <string name="notLookedLikeYahoo"> لابد ان يكون علي الشكل  email@example.com   </string>
+    <string name="enterPass">قم بادخال الرقم السري من فضلك</string>
+    <string name="less12char">لابد ان يكون اكثر من 8 حرف للامان</string>
+    <string name="should_like_pass"> الرقم السري لابد ان يكون مشابها للذي ادخلته</string>
+    <string name="edit1_notLoke_edit2">قم بالتاكد من صحه الرقم السري الذي ادخلته</string>
+    <string name="enter_phone">من فضلك قم بادخال رقم الهاتف الخاص بك</string>
+    <string name="select_country">قم باختيار دوله من فضلك</string>
+    <string name="problem_register"> لقد حدثت مشكله اثناء الاتصال </string>
+    <string name="email_exist"> هذا الايميل موجود بالفعل مسبقا حاول مره اخري </string>
+    <string name="makesure_fromNetword"> لا يوجد انترنت تاكد من الاتصال من الانترنت </string>
+    <string name="sameEmailProblem"> com.google.firebase.auth.FirebaseAuthUserCollisionException: The email address is already in use by another account. </string>
+    <string name="netword_error"> com.google.firebase.FirebaseNetworkException: A network error (such as timeout, interrupted connection or unreachable host) has occurred. </string>
+    <string-array name="country">
+
+        <item>الدوله</item>
+        <item>مصر</item>
+        <item>السودان</item>
+        <item>السعوديه</item>
+        <item>الامارات</item>
+        <item>الكويت</item>
+        <item>قطر</item>
+        <item>الصومال</item>
+        <item>ليبيا</item>
+        <item>الاردن</item>
+        <item>لبنان</item>
+        <item>مالطا</item>
+        <item>المغرب</item>
+        <item>فلسطين</item>
+        <item>تونس</item>
+        <item>اليمن</item>
+        <item>الجزائر</item>
+        <item>جيبوتي</item>
+        <item>العراق</item>
+        <item>موريتانيا</item>
+        <item>عمان</item>
+
+    </string-array>
+
+    // menu //
+
+    <string name="addExam">إضافه اختبار</string>
+    <string name="mangeStudent">إدارة الطلاب</string>
+
+    <string name="examList">قائمة الاختبارات</string>
+    <string name="PleaseMakesure"> يرجي التأكد من البريد الالكتروني والرقم السري </string>
+    <string name="banned">حظر الطالب</string>
+    <string name="Rating"> تقييم الطالب </string>
+    <string name="results">نتائج الطلاب</string>
+    <string name="questions">بنك الاسئلة </string>
+    <string name="exit">خروج</string>
+    <string name="Search">البحث</string>
+
+    <string name="Q_One"> كتابة السؤال هنا </string>
+    <string name="addQ">اضافة سؤال</string>
+
+    //aleart dialog
+    <string name="yes">نعم</string>
+    <string name="no">لا</string>
+    <string name="title">تحذير</string>
+    <string name="message">هل حقا تريد تسجيل الخروج ؟ </string>
+    <string name="Ok"> حسناً</string>
+    <string name="ask_banned">هل انت متأكد من حظر هذا الطالب ؟ </string>
+    <string name="successful_banned">تم الحظر بنجاح </string>
+    <string name="WrongTitle">حدث خطأ</string>
+    <string name="YouareBanned">عفوا لقد تم حظرك</string>
+    <string name="removeBan">فك الحظر</string>
+    <string name="RemoveAsk">هل حقا تريد فك حظر هذا الطالب ؟ </string>
+    <string name="RemoveDone">تم فك حظر الطالب بنجاح</string>
+
+    <string name="choosenQuestion">الأسئلة المختارة</string>
+    <string name="question">اسئلة</string>
+    <string name="examTime">مدة الاختبار</string>
+    <string name="s_m_h">ثانية : دقيقة : ساعة</string>
+    <string name="DegreeDistribution">توزيع الدرجات</string>
+
+
+    <string name="writeQuestionempty"> يرجي ادخال السؤال هنا </string>
+    <string name="answerOne"> يرجي ادخال الاجابه الاولي هنا </string>
+    <string name="answerTwo"> يرجي ادخال الاجابه الثانيه هنا </string>
+    <string name="answerThre"> يرجي ادخال الاجابه الثالثه هنا </string>
+    <string name="answerFour"> يرجي ادخال الاجابه الرابعه هنا </string>
+    <string name="ExamName">إسم الاختبار</string>
+
+
+    <string name="edit_Q"> تعديل علي السؤال </string>
+    <string name="edit">  تعديل السؤال </string>
+    <string name="delete"> حذف السؤال </string>
+
+    <string name="MyResult">نتائجي</string>
+    <string name="aboutus">تواصل معنا</string>
+    <string name="aboutDoctor">عن الدكتور</string>
+    <string name="aboutProgrammer">عن المبرمج</string>
+    <string name="sendtoaddexam">إرسال إلى إضافة اختبار</string>
+    <string name="delete_Exam">حذف الاختبار</string>
+    <string name="Aboutus1">دائما نبحث عن التميز والابداع\nومازلنا نبحث عما يرضي أذواق \n عملائنا الكرام</string>
+    <string name="Contectus">للتواصل</string>
+    <string name="Aboutus2">\nم/ علاء محمود \n alaadah95@gmail.com \n م/ محمد رسلان \n mohamed.raslan79@yahoo.com</string>
+    <string name="startexam">إبدأ الاختبار</string>
+    <string name="Next">التالي</string>
+    <string name="Skip">تخطي</string>
+    <string name="Result">نتيجة الاختبار</string>
+    <string name="Home">الرئيسية</string>
+    <string name="result">النتائج</string>
+    <string name="hisAnswer">أجاب : </string>
+    <string name="correctAnswer">الإجابة الصحيحة :</string>
+    <string name="studentsWrongs">اخطاء الطالب</string>
+    <string name="StudentResult">نتائج الطالب  \n في جميع الاختبارات </string>
+    <string name="delete_results">حذف النتائج</string>
+    <string name="DoctorName">د. عصام حسين ضاهر</string>
+    <string name="Personal_Data">بـيـــانـــات شــــخــــصــــيــــــة</string>
+                    <string name="Personal_Data_Details">
+                        - الاســـم : حسام محمد شملان
+                        \n-   تـــاريــخ الـمـيـلاد : 19 / 10 / 1987
+    	\n- الجــنـــسـيــــة : مــصــــــرى
+  \n- الـمــؤهــل : دكتوراه في اللغات الفلسفيه وآدابها – جامعة طنطا كليه الاداب  بتقدير ممتاز مع مرتبة الشرف
+               \n- رقــم الجـوال : 0504223297 -0598960882
+
+
+                    </string>
+    <string name="experiences">الخـبـرات العـلـمـيـة و العـمـليـة</string>
+    <string name="experieences_Data">
+
+        1- أستاذ مساعد  بكلية اللغة العربية  جامعة المدينة العالمية.\n
+2- مدرب دولي معتمد في التنمية البشرية من جامعة عين شمس، بجمهورية مصر العربية.\n
+3- مدرب دولي معتمد في التنمية البشرية من جامعة نوتنجهام البريطانية . \n
+        (Nottingham International university)\n
+ 4- مدرب دولي معتمد في التنمية البشرية من المركز الكندي مونتريال كندا التابع للدكتور إبراهيم الفقي.\n
+ 5- مدرب دولي معتمد  في التنمية البشرية من مؤسسة إبداع للتدرٌب والاستشارات بجمهورية مصر العربية.\n
+6- مدرب معتمد في التعلم السريع ، المنظمة العربية  ، والمركز الاستشاري العالمي للتدريب ، ونادي التدريب العربي .\n
+7- ممارس معتمد في التعلم السريع ، المنظمة العربية  ، والمركز الاستشاري العالمي للتدريب ، ونادي التدريب العربي .\n
+8- كورس الصحة النفسية للطفل من مؤسسة إدراك بالأردن.\n
+9 -المراجعة الداخلية لنظم إدارة الجودة 2008 : 9001 ISO
+        \n
+        مدارس الخندق الأهلية بالمدينة المنورة .\n
+10- معلم لغة عربية ومادة المهارات الحياتية، ومدرب للقدرات العامة والقياس بمدارس الخندق الأهلية بالمدينة المنورة
+        \n
+        – المملكة العربية السعودية .\n
+11 - مشرف المركز الإعلامي بمدارس الخندق الأهلية بالمدينة المنورة .\n
+12- كاتب ، ولي العديد من المقالات المنشورة على شبكة الانترنت .\n
+13-  ضمن فريـق الاستشـارات بالمواقــع التالية :\n
+        - موقع لها أون لاين \n
+        -موقع الإســلام اليوم\n
+        –  موقــع المستشار\n
+        – شبكة الألوكة .\n
+14- مدرس لغة عربية بوزارة التربية والتعليم المصرية.\n
+15- خبير تربوي . وتمت استضافتي على بعض القنوات الفضائية أكثر من مرة .\n
+
+
+
+    </string>
+    <string name="courses">الدورات التي قدمتها</string>
+    <string name="courses_Data">
+        1. أكثر من 100 دورة  في إعداد الطلاب لاختبار القدرات العامة والقياس داخل المدينة المنورة وخارجها.\n
+2. مهارات الاتصال الإنساني .\n
+3. التفكير الإبداعي .\n
+4. إدارة فرق العمل .\n
+5. إدارة الذات .\n
+6. مهارة التخطيط وإعداد الخطط.\n
+7. الموهوب كيف نصنعه ؟\n
+    </string>
+    <string name="experiment">التجارب والأبحاث التربوية المحكمة</string>
+    <string name="experiment_Data">
+        - بحث عن الإبداع لدي التلاميذ ، وكيفية تنميته ، ومعوقاته .\n
+ - تجربة تربوية عن التعلم من خلال اللعب .\n
+- دراسة تحليلية تقويمية لكتاب دروس اللغة العربية لغير الناطقين بها.\n
+- بحث عن الموهوب وكيف نصنعه ؟.\n
+
+    </string>
+    <string name="members">العضويات</string>
+    <string name="members_Details">
+                                                                                                                                            1- عضو رابطة المعلمين المصريين بالمدينة المنورة .\n
+                                                                                                                                    2- عضو رابطة أدباء الشام .\n
+                                                                                                                                    3-  عضو نادي التوستماسترز بالمدينة المنورة .\n
+                                                                                                                                    4- عضو جمعية فتيان الكشافة المصرية .\n
+    </string>
+    <string name="global">المؤتمرات الدولية والمحلية التي شارك فيها</string>
+    <string name="global_Data">
+        - المنتدى التربوي الثاني للقيادات التعليمية والتربوية في إسطانبول بتركيا.  ( في الفترة 24-26 /4/2 /2014) .\n
+-الملتقى الخليجي الأول للاعتماد المدرسي بالمدينة المنورة – جامعة طيبة ( في الفترة 8-11/ 2/ 2014).\n
+
+    </string>
+</resources>

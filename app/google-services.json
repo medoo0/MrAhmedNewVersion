@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1084845782534",
+    "firebase_url": "https://mr-hossam.firebaseio.com",
+    "project_id": "mr-hossam",
+    "storage_bucket": "mr-hossam.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1084845782534:android:bb5711eb9ca59cd6",
+        "android_client_info": {
+          "package_name": "com.example.mohamedraslan.hossamexams"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1084845782534-a7ra5sfgut323r6rqppiovfjrpvcar7k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD--JfJMyQuBW1kNOmShUqALfT9hQBf-yQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

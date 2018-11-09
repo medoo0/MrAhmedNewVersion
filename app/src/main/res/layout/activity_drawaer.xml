@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout android:id="@+id/drawer"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layoutDirection="ltr"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+
+
+
+    <include layout="@layout/activity_controlpanel"/>
+
+
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/navigation"
+        android:layout_width="wrap_content"
+        android:layoutDirection="ltr"
+        app:itemTextAppearance="@style/NavigationText"
+        app:headerLayout="@layout/nav_header"
+        android:fitsSystemWindows="true"
+        app:menu="@menu/items_in_navigation"
+        android:background="@color/colornav"
+        android:layout_gravity="start|left"
+        android:layout_height="match_parent" />
+
+
+
+
+
+
+</android.support.v4.widget.DrawerLayout>

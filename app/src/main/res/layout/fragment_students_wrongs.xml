@@ -1,0 +1,131 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="ltr"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/color3"
+    tools:context="com.essam.microprocess.dressamdaher.Fragment.StudentsWrongs">
+
+    <LinearLayout
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:background="@drawable/toolbar_background"
+        android:elevation="8dp"
+        android:orientation="vertical"
+        android:layout_height="150dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/delete"
+                android:layout_width="40dp"
+                android:layout_height="35dp"
+                android:background="@drawable/ic_round_delete_button"
+                android:layout_weight="1"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                />
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:textDirection="rtl"
+                    android:text="@string/studentsWrongs"
+                    android:fontFamily="@font/cairo"
+                    android:textSize="25sp"
+                    android:textColor="@android:color/white"
+                    android:gravity="center_horizontal"
+                    android:layout_weight="9"
+                    />
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginStart="45dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_marginEnd="5dp"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/txDegree"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="35sp"
+                android:textColor="@android:color/white"
+                android:layout_margin="2dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="/"
+                android:textSize="35sp"
+                android:textColor="@color/color2"
+                android:layout_margin="2dp"
+                />
+            <TextView
+                android:id="@+id/txFinalDegree"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="35sp"
+                android:textColor="@color/color2"
+                android:layout_margin="2dp"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:elevation="8dp"
+        android:layout_marginTop="60dp"
+        android:layout_height="150dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/circleimage"
+            android:layout_width="120dp"
+            android:elevation="5dp"
+            android:layout_height="120dp"
+            android:layout_margin="15dp"
+            android:background="@drawable/ic_student_4"
+            app:civ_border_color="#80ffffff"
+            app:civ_border_width="10dp"
+            android:transitionName="Image"
+            />
+
+        <TextView
+            android:id="@+id/txName"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:textDirection="rtl"
+            android:fontFamily="@font/cairo"
+            android:textSize="22sp"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="5dp"
+            />
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@+id/line1"
+        android:id="@+id/Wrongs_rec"
+        android:paddingTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+    </android.support.v7.widget.RecyclerView>
+
+</RelativeLayout>
