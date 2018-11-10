@@ -11,6 +11,9 @@ import android.widget.Button;
 
 import com.example.mohamedraslan.hossamexams.Contracts.MainActivityContract;
 import com.example.mohamedraslan.hossamexams.R;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,8 +28,7 @@ Button Sign_in;
 
 @BindView(R.id.Goto_signup)
 Button Sign_up;
-
-
+AdView mAdView;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,12 +40,14 @@ Button Sign_up;
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
          View v =inflater.inflate(R.layout.fragment_first_, container, false);
-
+// ca-app-pub-3940256099942544~3347511713
          ButterKnife.bind(this,v); // intialize butterknife .
+        mAdView = v.findViewById(R.id.adView);
 
-
-
-         Sign_in.setOnClickListener(new View.OnClickListener() {
+        MobileAds.initialize(getActivity(), "ca-app-pub-4214877267260040~2367951421");
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        Sign_in.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
                  // add fragment (sign in )
