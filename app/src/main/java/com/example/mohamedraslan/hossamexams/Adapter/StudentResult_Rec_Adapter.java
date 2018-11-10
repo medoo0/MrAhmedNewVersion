@@ -122,6 +122,7 @@ public class StudentResult_Rec_Adapter  extends FirebaseRecyclerAdapter<Result_P
                 bundle.putParcelableArrayList("WrongQuestions",model.getWrongQuestions());
                 //to pass image to next fragment.
                 bundle.putInt("Image", (Integer) holder.circleImageView.getTag());
+                bundle.putString("UserUid",model.getUid());
                 // set MyFragment Arguments
                 StudentsWrongs StudentsWrongs = new StudentsWrongs();
                 StudentsWrongs.setArguments(bundle);

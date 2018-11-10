@@ -99,10 +99,12 @@ public class AboutProgrammer extends Fragment {
         facebookm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
                 String facebookUrl = getFacebookPageURL(getActivity(),"https://www.facebook.com/alaadaherdubai");
                 facebookIntent.setData(Uri.parse(facebookUrl));
                 startActivity(facebookIntent);
+
             }
         });
 
@@ -111,10 +113,12 @@ public class AboutProgrammer extends Fragment {
         facebooka.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
                 String facebookUrl = getFacebookPageURL(getActivity(),"https://www.facebook.com/mohamed.raslan.908");
                 facebookIntent.setData(Uri.parse(facebookUrl));
                 startActivity(facebookIntent);
+
             }
         });
 

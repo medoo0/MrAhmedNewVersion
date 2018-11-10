@@ -54,7 +54,7 @@ public class StudentsWrongs extends Fragment {
 
 
     ArrayList<WorngQestion> wrong ;
-    String examID;
+    String examID , UserUid;
     AnimatedDialog dialog;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -85,6 +85,7 @@ public class StudentsWrongs extends Fragment {
             String total= getArguments().getString("Total");
             String FinalDegree= getArguments().getString("FinalDegree");
             examID = getArguments().getString("examID");
+            UserUid = getArguments().getString("UserUid");
             int source = getArguments().getInt("Image");
             circleimage.setBackgroundResource(source);
             wrong = getArguments().getParcelableArrayList("WrongQuestions");
@@ -130,25 +131,28 @@ public class StudentsWrongs extends Fragment {
         ((AppCompatActivity)getActivity()).getSupportActionBar().show();
     }
 
-  void  Delete(){
-      final DatabaseReference reference = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.RESULT.getRef())
-              .child(examID+ FirebaseAuth.getInstance().getCurrentUser().getUid());
-      reference.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
-          @Override
-          public void onSuccess(Void aVoid) {
-              DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.STARTEDEXAM.getRef())
-                      .child(examID).child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-              reference1.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
-                  @Override
-                  public void onSuccess(Void aVoid) {
-                      dialog.Close_Dialog();
-                      getActivity().onBackPressed();
+    void  Delete() {
+        if (getActivity() != null) {
+            final DatabaseReference reference = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.RESULT.getRef())
+                    .child(examID + UserUid);
+            reference.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.STARTEDEXAM.getRef())
+                            .child(examID).child(UserUid);
+                    reference1.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            dialog.Close_Dialog();
+                            getActivity().onBackPressed();
 
-                  }
-              });
-          }
-      });
+                        }
+                    });
+                }
+            });
 
-  }
+        }
+
+    }
 
 }
