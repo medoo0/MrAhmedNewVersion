@@ -21,6 +21,10 @@ import com.example.mohamedraslan.hossamexams.JsonModel.AddExam_pojo;
 import com.example.mohamedraslan.hossamexams.MainPresnter.ExamListPresenter;
 import com.example.mohamedraslan.hossamexams.R;
 import com.example.mohamedraslan.hossamexams.Views.ControlPanel;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -43,6 +47,8 @@ public class ExamList extends Fragment implements ExamListContract.view{
     @BindView(R.id.backgroundground)
     ImageView background;
 
+    AdView mAdView;
+    private InterstitialAd mInterstitialAd;
     private FirebaseAuth auth;
     ExamListContract.presenter presenter;
 
@@ -63,6 +69,14 @@ public class ExamList extends Fragment implements ExamListContract.view{
          ControlPanel.Title.setText(R.string.examList);
         ControlPanel.progressBar.setVisibility(View.VISIBLE);
         ControlPanel.SetNavChecked(0);
+       // MobileAds.initialize(getActivity(), "ca-app-pub-4214877267260040~2367951421");
+        mAdView = v.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+        mInterstitialAd = new InterstitialAd(getActivity());
+        mInterstitialAd.setAdUnitId("ca-app-pub-4214877267260040/2100906857");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
         //Get Time From Server Then run Recycler .
         presenter = new ExamListPresenter(this);

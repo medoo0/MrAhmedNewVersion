@@ -52,11 +52,10 @@
              android:id="@+id/facebook"
              android:layout_width="60dp"
              android:layout_height="60dp"
-             android:scaleType="fitXY"
-             android:background="@drawable/facingbook"
-             android:layout_marginTop="40dp"
              android:layout_marginStart="80dp"
-             />
+             android:layout_marginTop="10sp"
+             android:background="@drawable/facingbook"
+             android:scaleType="fitXY" />
      </LinearLayout>
          <LinearLayout
              android:id="@+id/essamphotoLayout"
@@ -69,10 +68,10 @@
              <de.hdodenhof.circleimageview.CircleImageView
                  android:id="@+id/home"
                  android:layout_width="150dp"
-                 android:layout_height="200dp"
+                 android:layout_height="150dp"
                  android:layout_marginStart="15dp"
-                 android:layout_marginTop="20dp"
-                 android:background="@drawable/edithossam"
+                 android:layout_marginTop="70dp"
+                 android:background="@drawable/ahmedsamy"
                  android:elevation="8dp"
                  />
 

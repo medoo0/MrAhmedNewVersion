@@ -6,6 +6,19 @@
     android:background="@color/color3"
    >
 
+    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-4214877267260040/2100906857"
+        ads:layout_anchor="@+id/Exam_List_rec"
+        ads:layout_anchorGravity="top|center" />
+
+
+
     <android.support.v7.widget.RecyclerView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -45,5 +58,8 @@
         app:layout_anchorGravity="right|bottom"
         app:layout_behavior="com.example.mohamedraslan.hossamexams.Dialog.FloatingActionButtonScrollBehavior"
         app:rippleColor="@android:color/white" />
+
+
+
 
 </android.support.design.widget.CoordinatorLayout>
