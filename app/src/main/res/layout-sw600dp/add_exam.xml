@@ -25,8 +25,8 @@
             android:padding="10dp">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="100dp"
+                android:layout_height="70sp"
                 android:background="@drawable/ic_choosen_questions" />
 
             <TextView
@@ -37,7 +37,7 @@
                 android:gravity="center_vertical"
                 android:text="@string/choosenQuestion"
                 android:textColor="@android:color/black"
-                android:textSize="18sp" />
+                android:textSize="40sp" />
         </LinearLayout>
 
         <Button
@@ -45,6 +45,7 @@
             style="@style/flatbutton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="40sp"
             android:layout_gravity="start"
             android:layout_marginStart="10dp"
             android:fontFamily="@font/cairo"
@@ -55,6 +56,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/chosen_Qestions_Rec"
             android:layout_width="match_parent"
+            android:layout_margin="10dp"
             android:layout_height="250dp"
             android:layout_marginBottom="10dp"
             android:layout_marginEnd="10dp"
@@ -75,6 +77,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/cairo"
+                android:textSize="40sp"
                 android:text="@string/question"
                 android:textColor="@color/color2"
                 android:textStyle="italic" />
@@ -84,6 +87,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
+                android:textSize="40sp"
                 android:textColor="@color/color2"
                 android:fontFamily="@font/cairo"
                 android:text="0" />
@@ -101,19 +105,20 @@
             android:padding="10dp">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="100dp"
+                android:layout_height="70dp"
                 android:background="@drawable/ic_clock" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
+
                 android:fontFamily="@font/cairo"
                 android:gravity="center_vertical"
                 android:text="@string/examTime"
                 android:textColor="@android:color/black"
-                android:textSize="18sp" />
+                android:textSize="40sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -133,7 +138,7 @@
                 android:gravity="center_horizontal"
                 android:text="@string/s_m_h"
                 android:textColor="@android:color/black"
-                android:textSize="17sp" />
+                android:textSize="40sp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -143,11 +148,12 @@
 
                 <EditText
                     android:id="@+id/et_hour"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:background="@drawable/recycler_background"
                     android:hint="00"
+                    android:textSize="40sp"
                     android:inputType="number"
                     android:textAlignment="center"
                     android:text="00"
@@ -159,18 +165,19 @@
                     android:fontFamily="@font/cairo"
                     android:text=":"
                     android:textColor="@android:color/black"
-                    android:textSize="18sp"
+                    android:textSize="40sp"
 
 
                     />
 
                 <EditText
                     android:id="@+id/et_minute"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:background="@drawable/recycler_background"
                     android:hint="00"
+                    android:textSize="40sp"
                     android:text="00"
                     android:inputType="number"
                     android:textAlignment="center"
@@ -183,17 +190,18 @@
                     android:gravity="center_vertical"
                     android:text=":"
                     android:textColor="@android:color/black"
-                    android:textSize="18sp"
+                    android:textSize="40sp"
 
                     />
 
                 <EditText
                     android:id="@+id/et_second"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:background="@drawable/recycler_background"
                     android:hint="00"
+                    android:textSize="40sp"
                     android:text="00"
                     android:inputType="number"
                     android:textAlignment="center"
@@ -216,8 +224,8 @@
             android:padding="10dp">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="100dp"
+                android:layout_height="70dp"
                 android:background="@drawable/ic_answersicons" />
 
             <TextView
@@ -228,7 +236,7 @@
                 android:gravity="center_vertical"
                 android:text="@string/DegreeDistribution"
                 android:textColor="@android:color/black"
-                android:textSize="18sp" />
+                android:textSize="40sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -254,11 +262,12 @@
                     android:fontFamily="@font/cairo"
                     android:text=" - لكل سؤال "
                     android:textColor="@android:color/black"
-                    android:textSize="18sp" />
+                    android:textSize="40sp" />
 
                 <EditText
                     android:id="@+id/et_degree"
                     android:layout_width="wrap_content"
+                    android:textSize="40sp"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:background="@drawable/recycler_background"
@@ -274,7 +283,7 @@
                     android:fontFamily="@font/cairo"
                     android:text=" درجات . "
                     android:textColor="@android:color/black"
-                    android:textSize="18sp" />
+                    android:textSize="40sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -291,15 +300,16 @@
                     android:fontFamily="@font/cairo"
                     android:text=" - عدد الأسئلة العشوائية "
                     android:textColor="@android:color/black"
-                    android:textSize="18sp" />
+                    android:textSize="40sp" />
 
                 <EditText
                     android:id="@+id/et_random_number_question"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:background="@drawable/recycler_background"
                     android:hint="0"
+                    android:textSize="40sp"
                     android:inputType="number"
                     android:textAlignment="center"
                     android:textColor="@android:color/black" />
@@ -320,18 +330,18 @@
                     android:fontFamily="@font/cairo"
                     android:text=" - الدرجة النهائية "
                     android:textColor="@android:color/black"
-                    android:textSize="18sp" />
+                    android:textSize="40sp" />
 
                 <TextView
                     android:id="@+id/Final_Degree"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:gravity="center_vertical"
                     android:text="0"
                     android:textAlignment="center"
                     android:textColor="@color/color2"
-                    android:textSize="17sp" />
+                    android:textSize="40sp" />
 
             </LinearLayout>
 
@@ -388,9 +398,10 @@
             android:padding="15sp"
             android:text="@string/addExam"
             android:textColor="@android:color/white"
-            android:textSize="20sp"
+            android:textSize="40sp"
 
             />
+
     </LinearLayout>
 
 

@@ -127,6 +127,8 @@
                         />
 
 
+
+
                 </LinearLayout>
 
 
@@ -375,28 +377,28 @@
 
                         <Button
                             android:id="@+id/Next"
-                            android:layout_width="115dp"
-                            android:layout_height="40dp"
+                            android:layout_width="220dp"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_margin="10dp"
                             android:background="@drawable/button_background2"
                             android:fontFamily="@font/cairo"
                             android:text="@string/Next"
                             android:textColor="@color/color1"
-                            android:textSize="16sp" />
+                            android:textSize="40sp" />
+
 
                         <Button
                             android:id="@+id/Skip"
-                            android:layout_width="115dp"
-                            android:layout_height="40dp"
+                            android:layout_width="220dp"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_margin="10dp"
                             android:background="@drawable/button_background"
                             android:fontFamily="@font/cairo"
                             android:text="@string/Skip"
                             android:textColor="@color/color2"
-                            android:textSize="16sp" />
-
+                            android:textSize="40sp" />
                     </LinearLayout>
 
 

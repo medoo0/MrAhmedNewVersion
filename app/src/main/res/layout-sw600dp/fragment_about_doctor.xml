@@ -22,7 +22,7 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
+                    android:layout_height="300dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/group2" />
 
@@ -37,26 +37,26 @@
                     android:id="@+id/toolbar_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="40sp"
                     android:elevation="8dp"
                     android:fontFamily="@font/cairo"
                     android:gravity="center_horizontal|center_vertical"
                     android:text="@string/aboutDoctor"
                     android:textColor="@android:color/white"
-                    android:textSize="20sp"
+                    android:textSize="40sp"
                     android:textStyle="bold" />
 
 
                 <RelativeLayout
-                    android:layout_width="200dp"
+                    android:layout_width="500dp"
                     android:layout_margin="10sp"
                     android:layout_height="150dp">
 
 
                     <ImageView
                         android:id="@+id/facebook"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentTop="true"
                         android:background="@drawable/facebookicon"
@@ -64,8 +64,8 @@
 
                     <ImageView
                         android:id="@+id/twitter"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
                         android:layout_alignParentTop="true"
                         android:layout_toStartOf="@+id/facebook"
                         android:background="@drawable/twittter"
@@ -73,8 +73,8 @@
 
                     <ImageView
                         android:id="@+id/website"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
                         android:layout_alignParentTop="true"
                         android:layout_toEndOf="@+id/youtube"
                         android:background="@drawable/website"
@@ -82,8 +82,8 @@
 
                     <ImageView
                         android:id="@+id/youtube"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentTop="true"
                         android:background="@drawable/youtube"
@@ -107,10 +107,10 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/home"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
                     android:layout_marginStart="15dp"
-                    android:layout_marginTop="70dp"
+                    android:layout_marginTop="200dp"
                     android:background="@drawable/ahmedsamy"
                     android:elevation="8dp" />
 
@@ -123,8 +123,8 @@
                     android:fontFamily="@font/cairo"
                     android:gravity="center_horizontal|center_vertical"
                     android:text="@string/app_name"
-                    android:textColor="@color/color4"
-                    android:textSize="15dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="40sp"
 
                     />
 
@@ -133,11 +133,12 @@
             <android.support.v7.widget.CardView
                 android:id="@+id/Press_on_CardView"
                 android:layout_width="match_parent"
+
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/essamphotoLayout"
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="80dp"
                 android:elevation="8dp"
                 android:padding="5dp">
 
@@ -158,12 +159,12 @@
                         android:gravity="center_horizontal|center_vertical"
                         android:text="@string/Personal_Data"
                         android:textColor="@android:color/black"
-                        android:textSize="20sp" />
+                        android:textSize="40sp" />
 
                     <ImageView
                         android:id="@+id/image_dropdown"
-                        android:layout_width="30dp"
-                        android:layout_height="20dp"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
                         android:layout_gravity="center_vertical"
                         android:layout_margin="20dp"
                         android:layout_weight="0"
@@ -196,7 +197,7 @@
                     android:padding="5dp"
                     android:text="@string/Personal_Data_Details"
                     android:textColor="@android:color/white"
-                    android:textSize="18sp" />
+                    android:textSize="40sp" />
 
 
             </RelativeLayout>
@@ -230,12 +231,12 @@
                         android:gravity="center_horizontal|center_vertical"
                         android:text="@string/experiences"
                         android:textColor="@android:color/black"
-                        android:textSize="20sp" />
+                        android:textSize="40sp" />
 
                     <ImageView
                         android:id="@+id/image_dropdown2"
-                        android:layout_width="30dp"
-                        android:layout_height="20dp"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
                         android:layout_gravity="center_vertical"
                         android:layout_margin="20dp"
                         android:layout_weight="0"
@@ -266,7 +267,7 @@
                     android:fontFamily="@font/cairo"
                     android:text="@string/experieences_Data"
                     android:textColor="@android:color/white"
-                    android:textSize="18sp"
+                    android:textSize="30sp"
                     android:layout_margin="5dp"
                     android:padding="5dp"
                     />

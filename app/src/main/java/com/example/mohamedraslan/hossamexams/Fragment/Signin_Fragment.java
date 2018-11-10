@@ -20,6 +20,9 @@ import com.example.mohamedraslan.hossamexams.Dialog.AnimatedDialog;
 import com.example.mohamedraslan.hossamexams.MainPresnter.SigninPresenter;
 import com.example.mohamedraslan.hossamexams.R;
 import com.example.mohamedraslan.hossamexams.Views.ControlPanel;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,6 +41,7 @@ public class Signin_Fragment extends Fragment implements SigninContract.view {
 
     @BindView(R.id.password)
     EditText et_password;
+    AdView mAdView;
 
     @BindView(R.id.email_sign_in_button)
     Button SignIn;
@@ -50,7 +54,11 @@ public class Signin_Fragment extends Fragment implements SigninContract.view {
 
         // initialize butterknife library .
         ButterKnife.bind(this , v );
-
+        mAdView = v.findViewById(R.id.adView);
+        MobileAds.initialize(getActivity(),
+                "ca-app-pub-4214877267260040~2367951421");
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
         //initialize dialog with context .
         dialog =  new AnimatedDialog(getActivity());
 

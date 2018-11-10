@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/Liner"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/styling_of_view"
+    android:layoutDirection="rtl"
+    android:orientation="vertical"
+    android:padding="5dp"
+    android:layout_margin="10dp"
+    >
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="70dp"
+            android:background="@drawable/ic_icon_qq"
+            android:padding="20dp"
+            />
+        
+        <TextView
+            android:id="@+id/question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/cairo"
+            android:text=""
+            android:padding="5dp"
+            android:textColor="@android:color/black"
+            android:textSize="40sp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/cairo"
+            android:text="@string/hisAnswer"
+            android:padding="5dp"
+            android:textColor="@android:color/black"
+            android:textSize="40sp"
+            />
+        <TextView
+            android:id="@+id/hisanswer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/cairo"
+            android:text=""
+            android:padding="5dp"
+            android:textColor="@color/color2"
+            android:textSize="40sp"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/cairo"
+            android:text="@string/correctAnswer"
+            android:padding="5dp"
+            android:textColor="@android:color/black"
+            android:textSize="40sp"
+            />
+        <TextView
+            android:id="@+id/correct_answer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/cairo"
+            android:text=""
+            android:padding="5dp"
+            android:textColor="@color/color7"
+            android:textSize="40sp"
+            />
+    </LinearLayout>
+
+</LinearLayout>

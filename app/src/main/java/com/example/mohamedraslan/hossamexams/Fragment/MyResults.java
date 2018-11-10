@@ -33,8 +33,9 @@ public class MyResults extends Fragment implements MyResultContract.view {
     @BindView(R.id.MyResult_rec)
     RecyclerView recyclerView;
     @BindView(R.id.backgroundground)
-    AdView mAdView;
     ImageView backgroundground;
+    AdView mAdView;
+
 
     MyResultContract.presenter presenter;
     @Override
@@ -43,9 +44,10 @@ public class MyResults extends Fragment implements MyResultContract.view {
         // Inflate the layout for this fragment .
          View v = inflater.inflate(R.layout.fragment_my_results, container, false);
         ButterKnife.bind(this , v);
-        mAdView = v.findViewById(R.id.adView);
+        mAdView  = v.findViewById(R.id.adView);
         MobileAds.initialize(getActivity(), "ca-app-pub-4214877267260040~2367951421");
         AdRequest adRequest = new AdRequest.Builder().build();
+
         mAdView.loadAd(adRequest);
         ControlPanel.Title.setText(R.string.MyResult);
         ControlPanel.SetNavChecked(1);

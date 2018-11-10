@@ -35,6 +35,8 @@ public class AboutDoctor extends Fragment {
     CardView cardView;
 
 
+    @BindView(R.id.Press_on_CardView2)
+    CardView Press_on_CardView2;
 
     //imageview
     @BindView(R.id.image_dropdown)
@@ -54,6 +56,9 @@ public class AboutDoctor extends Fragment {
 
     @BindView(R.id.twitter)
     ImageView twitter;
+
+    @BindView(R.id.Details_layout2)
+    RelativeLayout Details_layout2;
 
     @BindView(R.id.youtube)
     ImageView youtube;
@@ -90,6 +95,23 @@ public class AboutDoctor extends Fragment {
 
         //animation
 
+        Press_on_CardView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(Details_layout2.isShown()){
+                    Details_layout2.setVisibility(View.GONE);
+                    dropdown2.setImageResource(R.drawable.ic_dropdown);
+                }
+                else {
+                    Details_layout2.setVisibility(View.VISIBLE);
+                    dropdown2.setImageResource(R.drawable.ic_dropup);
+                    openAnimation(Details_layout2);
+                }
+                focusOnView(Press_on_CardView2);
+
+            }
+        });
 
 
 
