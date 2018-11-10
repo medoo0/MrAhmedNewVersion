@@ -90,7 +90,7 @@ public class AboutProgrammer extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
-                String facebookUrl = getFacebookPageURL(getActivity(),"https://www.facebook.com/mohamed.raslan.908");
+                String facebookUrl = getFacebookPageURL(getActivity(),"https://www.facebook.com/alaadaherdubai");
                 facebookIntent.setData(Uri.parse(facebookUrl));
                 startActivity(facebookIntent);
             }
@@ -102,7 +102,7 @@ public class AboutProgrammer extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
-                String facebookUrl = getFacebookPageURL(getActivity(),"https://www.facebook.com/profile.php?id=100007437755276");
+                String facebookUrl = getFacebookPageURL(getActivity(),"https://www.facebook.com/mohamed.raslan.908");
                 facebookIntent.setData(Uri.parse(facebookUrl));
                 startActivity(facebookIntent);
             }

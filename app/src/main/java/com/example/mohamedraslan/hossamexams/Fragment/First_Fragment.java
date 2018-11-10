@@ -44,7 +44,8 @@ AdView mAdView;
          ButterKnife.bind(this,v); // intialize butterknife .
         mAdView = v.findViewById(R.id.adView);
 
-        MobileAds.initialize(getActivity(), "ca-app-pub-4214877267260040~2367951421");
+        MobileAds.initialize(getActivity(),
+                "ca-app-pub-4214877267260040~2367951421");
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
         Sign_in.setOnClickListener(new View.OnClickListener() {
