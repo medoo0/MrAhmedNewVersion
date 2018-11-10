@@ -19,9 +19,13 @@ import android.widget.ScrollView;
 
 
 import com.example.mohamedraslan.hossamexams.R;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 
 public class AboutDoctor extends Fragment {
@@ -48,6 +52,16 @@ public class AboutDoctor extends Fragment {
     @BindView(R.id.facebook)
     ImageView facebook;
 
+    @BindView(R.id.twitter)
+    ImageView twitter;
+
+    @BindView(R.id.youtube)
+    ImageView youtube;
+
+    @BindView(R.id.website)
+    ImageView website;
+
+  AdView mAdView;
     @BindView(R.id.scroll)
     ScrollView scroll;
     @Override
@@ -62,7 +76,12 @@ public class AboutDoctor extends Fragment {
         // Inflate the layout for this fragment
          View v = inflater.inflate(R.layout.fragment_about_doctor, container, false);
         ButterKnife.bind(this,v);
+        mAdView = v.findViewById(R.id.adView);
 
+
+        MobileAds.initialize(getActivity(), "ca-app-pub-4214877267260040~2367951421");
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
         //animation
         cardView.setScaleX(.9f);
         cardView.setScaleY(.9f);
@@ -94,13 +113,48 @@ public class AboutDoctor extends Fragment {
 
 
 
+        youtube.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Intent.ACTION_VIEW,   Uri.parse("https://www.youtube.com/ahmedsamyy?fbclid=IwAR0uPkrDCbzMGRV_tpd-WIuZGHwmQNCHhdMYKM_RKVb6EBmVQoUWpZ1H9x4")));
+            }
+        });
+
         facebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
-                String facebookUrl = getFacebookPageURL(getActivity(),"https://www.facebook.com/profile.php?id=100007437755276");
+                String facebookUrl = getFacebookPageURL(getActivity(),"https://www.facebook.com/ahmedsamy37");
                         facebookIntent.setData(Uri.parse(facebookUrl));
                 startActivity(facebookIntent);
+            }
+        });
+
+        twitter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                try {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("twitter://user?screen_name=" + "ahmedsamy3000")));
+                }catch (Exception e) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/#!/" + "ahmedsamy3000")));
+                }
+
+
+            }
+        });
+
+
+        website.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                intent.setData(Uri.parse("http://english2fun.com/vb/forum.php"));
+                startActivity(intent);
+
             }
         });
 

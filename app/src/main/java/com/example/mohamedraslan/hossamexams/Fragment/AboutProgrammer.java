@@ -21,6 +21,9 @@ import android.widget.TextView;
 
 
 import com.example.mohamedraslan.hossamexams.R;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,6 +36,7 @@ public class AboutProgrammer extends Fragment {
     CircleImageView Alaa ;
 
 
+    AdView mAdView;
     @BindView(R.id.facebookm)
     ImageView facebookm;
 
@@ -65,6 +69,12 @@ public class AboutProgrammer extends Fragment {
         // Inflate the layout for this fragment
        View view = inflater.inflate(R.layout.fragment_about_programmer, container, false);
         ButterKnife.bind(this,view);
+        mAdView = view.findViewById(R.id.adView);
+
+
+        MobileAds.initialize(getActivity(), "ca-app-pub-4214877267260040~2367951421");
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
         textView.setAlpha(0);
         textView2.setAlpha(0);
         //Animation .

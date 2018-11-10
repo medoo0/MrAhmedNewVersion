@@ -7,9 +7,6 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
-
-
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,47 +16,57 @@
         android:theme="@style/AppTheme">
 
 
+
         <activity
             android:name=".Views.ControlPanel"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:windowSoftInputMode="stateHidden|adjustResize" />
-        <activity
-            android:name=".Views.MainActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:windowSoftInputMode="stateHidden|adjustResize">
+
+        <activity android:name=".Views.Splach_Activity">
+
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+
+
+        </activity>
+
+        <activity
+            android:name=".Views.MainActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+
         </activity>
 
         <meta-data
             android:name="com.google.android.gms.ads.AD_MANAGER_APP"
-            android:value="true"/>
+            android:value="true" />
 
         <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
-
-
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
+        <activity
+            android:name=".Views.Exam"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".Views.Result"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
 
-        <activity android:name=".Views.Exam"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:windowSoftInputMode="stateHidden|adjustResize"
-            />
-        <activity android:name=".Views.Result"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:windowSoftInputMode="stateHidden|adjustResize"
-            />
-        <service android:name=".Services.TimerServices"/>
+        <service android:name=".Services.TimerServices" />
 
         <meta-data
             android:name="firebase_crashlytics_collection_enabled"
             android:value="false" />
+
 
     </application>
 

@@ -19,6 +19,7 @@
         ads:adUnitId="ca-app-pub-4214877267260040/2100906857" />
 
 
+
     <ScrollView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

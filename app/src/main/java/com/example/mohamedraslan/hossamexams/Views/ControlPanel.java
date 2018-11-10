@@ -376,7 +376,7 @@ public class ControlPanel extends AppCompatActivity
         nav_Menu.findItem(R.id.questions).setVisible(true);
         nav_Menu.findItem(R.id.results).setVisible(true);
         nav_Menu.findItem(R.id.studentManger).setVisible(true);
-        circleImageView.setBackgroundResource(R.drawable.edithossam);
+        circleImageView.setBackgroundResource(R.drawable.ahmedsamy);
 
     }
 

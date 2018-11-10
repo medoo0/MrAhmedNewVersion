@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="ltr"
+    android:background="@color/color3"
+    tools:context="com.example.mohamedraslan.hossamexams.Views.ControlPanel"
+    android:keepScreenOn="true">
+
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@drawable/toolbar_background"
+        android:elevation="8dp"
+        android:minHeight="80dp"
+        >
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:gravity="center_horizontal|center_vertical"
+
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/open_nav"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_nav_icon"
+                android:layout_gravity="center_vertical|start"
+                android:background="@drawable/ripple"
+                android:clickable="true"
+
+                />
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/cairo"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="@string/examList"
+                android:textColor="@android:color/white"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:layout_weight="2"
+            />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyleSmall"
+                android:theme="@style/AppTheme.spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:padding="10dp"
+                />
+        </LinearLayout>
+
+
+    </android.support.v7.widget.Toolbar>
+
+
+
+    <FrameLayout
+        android:id="@+id/Exam_Frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:layout_centerHorizontal="true">
+
+    </FrameLayout>
+
+
+</RelativeLayout>
