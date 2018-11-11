@@ -14,8 +14,17 @@
           >
 
 
+            <com.google.android.gms.ads.doubleclick.PublisherAdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/publisherAdView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                ads:adSize="BANNER"
+                ads:adUnitId="@string/banner_ad_unit_id"></com.google.android.gms.ads.doubleclick.PublisherAdView>
 
-    <LinearLayout
+
+
+
+            <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -129,7 +138,7 @@
                 android:layout_centerHorizontal="true"
                 android:elevation="8dp"
                 android:layout_below="@+id/circleImageView"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:padding="15dp"
                 android:gravity="center_horizontal"
                 >
@@ -144,18 +153,6 @@
                     android:text="@string/Aboutus1"
                     android:gravity="center_horizontal"
                     />
-
-
-                <com.google.android.gms.ads.doubleclick.PublisherAdView
-                    xmlns:ads="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/publisherAdView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    ads:adSize="BANNER"
-                    ads:adUnitId="@string/banner_ad_unit_id">
-                </com.google.android.gms.ads.doubleclick.PublisherAdView>
-
 
                 <TextView
                         android:layout_width="match_parent"

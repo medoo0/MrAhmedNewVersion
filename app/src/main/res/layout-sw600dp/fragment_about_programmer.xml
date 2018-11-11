@@ -17,7 +17,10 @@
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:orientation="vertical"
             android:layout_height="wrap_content">
+
+
 
 
             <ImageView
@@ -117,7 +120,7 @@
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_margin="25dp"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/shape_layout"
                 android:layout_centerHorizontal="true"
@@ -129,16 +132,19 @@
                 >
 
 
+
+
                 <com.google.android.gms.ads.doubleclick.PublisherAdView
                     xmlns:ads="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/publisherAdView"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_alignParentTop="true"
-                    ads:adSize="BANNER"
+                    ads:adSize="SMART_BANNER"
                     ads:adUnitId="@string/banner_ad_unit_id">
                 </com.google.android.gms.ads.doubleclick.PublisherAdView>
+
 
                 <TextView
                     android:layout_width="match_parent"
