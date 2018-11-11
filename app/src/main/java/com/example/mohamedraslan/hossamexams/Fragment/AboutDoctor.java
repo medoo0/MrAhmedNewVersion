@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Toast;
@@ -51,7 +52,7 @@ public class AboutDoctor extends Fragment {
 
     //Details layout .
     @BindView(R.id.Details_layout)
-    RelativeLayout Details_layout;
+    LinearLayout Details_layout;
 
     PublisherAdView mPublisherAdView;
 
@@ -63,7 +64,7 @@ public class AboutDoctor extends Fragment {
     ImageView twitter;
 
     @BindView(R.id.Details_layout2)
-    RelativeLayout Details_layout2;
+    LinearLayout Details_layout2;
 
     @BindView(R.id.youtube)
     ImageView youtube;
@@ -122,6 +123,9 @@ public class AboutDoctor extends Fragment {
         cardView.setScaleX(.9f);
         cardView.setScaleY(.9f);
         cardView.animate().scaleX(1f).scaleY(1f).setDuration(500);
+        Press_on_CardView2.setScaleX(.9f);
+        Press_on_CardView2.setScaleY(.9f);
+        Press_on_CardView2.animate().scaleX(1f).scaleY(1f).setDuration(500);
         //animation
 
         //animation
@@ -214,7 +218,7 @@ public class AboutDoctor extends Fragment {
         return v ;
     }
 
-    void openAnimation(RelativeLayout CardDownlayout ){
+    void openAnimation(LinearLayout CardDownlayout ){
 
         CardDownlayout.setScaleX(0.0f);
         CardDownlayout.setScaleY(0.0f);
