@@ -1,81 +1,110 @@
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color3"
-   >
+
+    >
 
 
-    <RelativeLayout
+
+
+
+
+
+
+
+    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_marginBottom="40sp"
+        android:layout_height="match_parent"
+        android:background="@color/color3"
+        >
 
 
-
-
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/Exam_List_rec"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
 
-        </android.support.v7.widget.RecyclerView>
-
-        <ImageView
-            android:id="@+id/backgroundground"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            android:layout_centerInParent="true"
-            android:src="@drawable/ic_noexams"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:visibility="gone"
-            android:scaleType="fitXY"
-
-            />
 
 
 
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/Exam_List_rec"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        <com.google.android.gms.ads.doubleclick.PublisherAdView
-            xmlns:ads="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/publisherAdView"
-            android:layout_width="match_parent"
-            android:layout_alignParentStart="true"
+
+            </android.support.v7.widget.RecyclerView>
+
+            <ImageView
+                android:id="@+id/backgroundground"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_noexams"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:visibility="gone"
+                android:scaleType="fitXY"
+
+                />
+
+
+
+
+        </RelativeLayout>
+
+
+
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/FloatActionbutton"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentTop="true"
-            ads:adSize="SMART_BANNER"
-            ads:adUnitId="@string/banner_ad_unit_id">
-        </com.google.android.gms.ads.doubleclick.PublisherAdView>
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="23dp"
+            android:layout_marginEnd="21dp"
+            android:elevation="16dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_add_to_photos_black_24dp"
+            app:backgroundTint="@color/color1"
+            app:borderWidth="3dp"
+            app:fabSize="normal"
+            android:visibility="gone"
+            app:layout_anchor="@+id/Exam_List_rec"
+            app:layout_anchorGravity="right|bottom"
+            app:layout_behavior="com.example.mohamedraslan.hossamexams.Dialog.FloatingActionButtonScrollBehavior"
+            app:rippleColor="@android:color/white" />
 
-    </RelativeLayout>
+
+
+
+    </android.support.design.widget.CoordinatorLayout>
 
 
 
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/FloatActionbutton"
-        android:layout_width="wrap_content"
+
+
+
+
+
+    <com.google.android.gms.ads.doubleclick.PublisherAdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/publisherAdView"
+        android:layout_width="match_parent"
+        android:layout_alignParentStart="true"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="23dp"
-        android:layout_marginEnd="21dp"
-        android:elevation="16dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_add_to_photos_black_24dp"
-        app:backgroundTint="@color/color1"
-        app:borderWidth="3dp"
-        app:fabSize="normal"
-        android:visibility="gone"
-        app:layout_anchor="@+id/Exam_List_rec"
-        app:layout_anchorGravity="right|bottom"
-        app:layout_behavior="com.example.mohamedraslan.hossamexams.Dialog.FloatingActionButtonScrollBehavior"
-        app:rippleColor="@android:color/white" />
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id">
+    </com.google.android.gms.ads.doubleclick.PublisherAdView>
 
 
+</RelativeLayout>
 
-
-</android.support.design.widget.CoordinatorLayout>
