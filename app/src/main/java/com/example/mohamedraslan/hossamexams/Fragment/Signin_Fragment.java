@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.mohamedraslan.hossamexams.Contracts.MainActivityContract;
 import com.example.mohamedraslan.hossamexams.Contracts.SigninContract;
@@ -20,9 +21,12 @@ import com.example.mohamedraslan.hossamexams.Dialog.AnimatedDialog;
 import com.example.mohamedraslan.hossamexams.MainPresnter.SigninPresenter;
 import com.example.mohamedraslan.hossamexams.R;
 import com.example.mohamedraslan.hossamexams.Views.ControlPanel;
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
+import com.google.android.gms.ads.doubleclick.PublisherAdView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,6 +43,8 @@ public class Signin_Fragment extends Fragment implements SigninContract.view {
     @BindView(R.id.email)
     EditText et_email;
 
+    PublisherAdView mPublisherAdView;
+
     @BindView(R.id.password)
     EditText et_password;
     AdView mAdView;
@@ -54,12 +60,40 @@ public class Signin_Fragment extends Fragment implements SigninContract.view {
 
         // initialize butterknife library .
         ButterKnife.bind(this , v );
-        mAdView = v.findViewById(R.id.adView);
-        MobileAds.initialize(getActivity(),
-                "ca-app-pub-4214877267260040~2367951421");
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-        //initialize dialog with context .
+        mPublisherAdView = v.findViewById(R.id.publisherAdView);
+        PublisherAdRequest adRequest = new PublisherAdRequest.Builder().build();
+        mPublisherAdView.loadAd(adRequest);
+        mPublisherAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                // Code to be executed when an ad finishes loading.
+            }
+
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                // Code to be executed when an ad request fails.
+                Toast.makeText(getActivity(), "Fauilure", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAdOpened() {
+                // Code to be executed when an ad opens an overlay that
+                // covers the screen.
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                // Code to be executed when the user has left the app.
+            }
+
+            @Override
+            public void onAdClosed() {
+                // Code to be executed when when the user is about to return
+                // to the app after tapping on an ad.
+            }
+        });
+
+
         dialog =  new AnimatedDialog(getActivity());
 
         //initialize presenter

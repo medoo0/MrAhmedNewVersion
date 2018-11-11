@@ -136,12 +136,11 @@
     <string name="DoctorName">د. عصام حسين ضاهر</string>
     <string name="Personal_Data">بـيـــانـــات شــــخــــصــــيــــــة</string>
     <string name="Personal_Data_Details">
-                        - الاســـم :   أحمد سامي عمر
-                        \n-   تـــاريــخ الـمـيـلاد : 19 / 10 / 1987  -
+                         - الاســـم :   أحمد سامي ابراهيم عمر
                         \n- الجــنـــسـيــــة : مــصــــــرى -
                                           \n- الـمــؤهــل :  -
 
-           1-  ليسانس (آداب وتربية) قسم اللغة الإنجليزية 2007 من كلية التربية فرع السادات جامعة المنوفيه n\
+           \n 1-  ليسانس (آداب وتربية) قسم اللغة الإنجليزية 2007 من كلية التربية فرع السادات جامعة المنوفيه
 
 
 
@@ -161,35 +160,23 @@
 
                     </string>
     <string name="experiences">الخـبـرات العـلـمـيـة و العـمـليـة</string>
-    <string name="experieences_Data">
 
 
-        معلم لغة إنجليزية للمرحلة الثانوية، ومترجم، ومبرمج ويب محترف، ومدرب كورسات معتمدة لغة إنجليزية.. شارك في ترجمة الكثير من الروايات والأفلام والمسلسلات الأجنبية.. ويملك 3 مواقع إنترنت هي: n\
-1. موقع الكابتن ماجد www     \n.CaptainMajed.com
-2. موقع اللغة الإنجليزية www      \n.English2Fun.com
-3. موقع مستر أحمد سامي www    \n.MrAhmedSamy.com
-هواياته الترجمة والتصميم والبرمجة والكمبيوتر والإنترنت والقراءة والتأليف
+    <string name="numberone">   1- الاسم-  \n مستر أحمد سامي  .. معلم لغة إنجليزية للمرحلة الثانوية، ومترجم، ومبرمج ويب محترف، ومدرب كورسات معتمدة لغة إنجليزية.. شارك في ترجمة الكثير من الروايات والأفلام والمسلسلات الأجنبية.. </string>
+    <string name="hobby">  هواياته الترجمة والتصميم والبرمجة والكمبيوتر والإنترنت والقراءة والتأليف.ويملك 3 مواقع إنترنت هي:  </string>
+    <string name="websites1">1- موقع الكابتن ماجد www.CaptainMajed.com </string>
+    <string name="websites2">2- موقع اللغة الإنجليزية www.English2Fun.com </string>
+    <string name="websites3">3- موقع مستر أحمد سامي www.MrAhmedSamy.com </string>
 
-        \nتابع مستر أحمد سامي على مواقع التواصل الاجتماعي:
-1. فيسبوك:\n
- \n  https://www.facebook.com/ahmedsamy37
-2. تويتر:  n\
-\n   https://twitter.com/ahmedsamy3000
- \n 3. OK:
- \n  https://ok.ru/profile/572626292663
-\n 4. يوتيوب:
-\n https://www.youtube.com/ahmedsamyy
- 5. جوجل بلاس:  n\
-\n https://plus.google.com/+AhmedSamyy
-6. انستجرام:n\
-\n https://www.instagram.com/mr.ahmed.samy/
-7. جود ريدز (عمل مقالات نقدية عن الكتب):n\
-\n https://www.goodreads.com/user/show/8020236-mr-ahmed
-8. يمكنك أيضًا إرسال رسالة بريد إلكتروني إلى الإيميل التالي:n\
- \n ahmedsamy37@gmail.com
+    <string name="Xzena">    كما شارك في ترجمة المسلسل الأسطوري (هرقل وزينا) الذي تجدونه مترجمًا على الرابط التالي:    \n
+        www.xena.english2fun.com     </string>
 
 
-    </string>
+    <string name="folows">   1. فيسبوك:    \n
+                                   https://www.facebook.com/ahmedsamy37 </string>
+
+
+
     <string name="courses">الدورات التي قدمتها</string>
     <string name="courses_Data">
         1. أكثر من 100 دورة  في إعداد الطلاب لاختبار القدرات العامة والقياس داخل المدينة المنورة وخارجها.\n

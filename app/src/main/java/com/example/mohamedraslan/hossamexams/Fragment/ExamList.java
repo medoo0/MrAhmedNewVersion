@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.mohamedraslan.hossamexams.Adapter.ExamList_Rec_Adapter;
 import com.example.mohamedraslan.hossamexams.Adapter.ViewHolder;
@@ -21,6 +22,9 @@ import com.example.mohamedraslan.hossamexams.JsonModel.AddExam_pojo;
 import com.example.mohamedraslan.hossamexams.MainPresnter.ExamListPresenter;
 import com.example.mohamedraslan.hossamexams.R;
 import com.example.mohamedraslan.hossamexams.Views.ControlPanel;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
+import com.google.android.gms.ads.doubleclick.PublisherAdView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -42,6 +46,7 @@ public class ExamList extends Fragment implements ExamListContract.view{
 
     @BindView(R.id.backgroundground)
     ImageView background;
+    PublisherAdView mPublisherAdView;
 
     private FirebaseAuth auth;
     ExamListContract.presenter presenter;
@@ -63,6 +68,41 @@ public class ExamList extends Fragment implements ExamListContract.view{
          ControlPanel.Title.setText(R.string.examList);
         ControlPanel.progressBar.setVisibility(View.VISIBLE);
         ControlPanel.SetNavChecked(0);
+
+        mPublisherAdView = v.findViewById(R.id.publisherAdView);
+        PublisherAdRequest adRequest = new PublisherAdRequest.Builder().build();
+        mPublisherAdView.loadAd(adRequest);
+        mPublisherAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                // Code to be executed when an ad finishes loading.
+            }
+
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                // Code to be executed when an ad request fails.
+                Toast.makeText(getActivity(),errorCode + "Fauilure", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onAdOpened() {
+                // Code to be executed when an ad opens an overlay that
+                // covers the screen.
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                // Code to be executed when the user has left the app.
+            }
+
+            @Override
+            public void onAdClosed() {
+                // Code to be executed when when the user is about to return
+                // to the app after tapping on an ad.
+            }
+        });
+
+
 
         //Get Time From Server Then run Recycler .
         presenter = new ExamListPresenter(this);

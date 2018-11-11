@@ -31,9 +31,8 @@
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/ic_nav_icon"
                 android:layout_gravity="center_vertical|start"
-                android:background="@drawable/ripple"
+                android:background="@drawable/ic_nav_icon"
                 android:clickable="true"
 
                 />

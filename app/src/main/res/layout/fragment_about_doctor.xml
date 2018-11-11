@@ -247,24 +247,27 @@
 
 
             </android.support.v7.widget.CardView>
-            <RelativeLayout
+            <LinearLayout
                 android:id="@+id/Details_layout2"
                 android:background="@drawable/toolbar_background"
                 android:layout_width="match_parent"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginStart="20dp"
+                android:orientation="vertical"
                 android:layout_marginEnd="20dp"
                 android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/Press_on_CardView2"
                 >
 
+
+
                 <TextView
-                    android:id="@+id/Details2"
+                    android:id="@+id/websiteone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/cairo"
-                    android:text="@string/experieences_Data"
+                    android:text="@string/numberone"
                     android:textColor="@android:color/white"
                     android:textSize="18sp"
                     android:layout_margin="5dp"
@@ -272,7 +275,73 @@
                     />
 
 
-            </RelativeLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/cairo"
+                    android:text="@string/hobby"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    android:layout_margin="5dp"
+                    android:padding="5dp"
+                    />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/cairo"
+                    android:text="@string/websites1"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    android:layout_margin="5dp"
+                    android:padding="5dp"
+                    />
+
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/cairo"
+                    android:text="@string/websites2"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    android:layout_margin="5dp"
+                    android:padding="5dp"
+                    />
+
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/cairo"
+                    android:text="@string/websites3"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    android:layout_margin="5dp"
+                    android:padding="5dp"
+                    />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/cairo"
+                    android:text="@string/folows"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    android:layout_margin="5dp"
+                    android:padding="5dp"
+                    />
+
+
+
+
+            </LinearLayout>
 
 
 
@@ -281,12 +350,16 @@
     </ScrollView>
 
 
-    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/adView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-4214877267260040/2100906857" />
 
+    <com.google.android.gms.ads.doubleclick.PublisherAdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/publisherAdView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id">
+    </com.google.android.gms.ads.doubleclick.PublisherAdView>
 
 </FrameLayout>

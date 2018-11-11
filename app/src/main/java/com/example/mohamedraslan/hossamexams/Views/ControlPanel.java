@@ -103,6 +103,7 @@ public class ControlPanel extends AppCompatActivity
     public void initializeViews() {
         toolbar    = findViewById(R.id.toolbar);
         open_nav   = findViewById(R.id.open_nav);
+        open_nav.setOnClickListener(this);
         drawer     = findViewById(R.id.drawer);
         navigation = findViewById(R.id.navigation);
         Title      = toolbar.findViewById(R.id.toolbar_title);
@@ -113,7 +114,7 @@ public class ControlPanel extends AppCompatActivity
         circleImageView = headerLayout.findViewById(R.id.myprofile);
         UserName        = headerLayout.findViewById(R.id.UserName);
         setSupportActionBar(toolbar);
-        open_nav.setOnClickListener(this);
+//        open_nav.setOnClickListener(this);
         navigation.setNavigationItemSelectedListener(this);
 
 

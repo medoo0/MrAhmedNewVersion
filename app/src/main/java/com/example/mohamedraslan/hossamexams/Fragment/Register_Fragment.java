@@ -26,6 +26,9 @@ import com.example.mohamedraslan.hossamexams.JsonModel.Resister_form;
 import com.example.mohamedraslan.hossamexams.MainPresnter.RegisterPresnter;
 import com.example.mohamedraslan.hossamexams.R;
 import com.example.mohamedraslan.hossamexams.Utils.ViewsEmpty;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
+import com.google.android.gms.ads.doubleclick.PublisherAdView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -37,6 +40,8 @@ public class Register_Fragment extends Fragment implements View.OnClickListener 
     TextView gotoLogin;
     Spinner spinnerCountry;
     Button registeringToData;
+    PublisherAdView mPublisherAdView;
+
     String[] country;
     AnimatedDialog animatedDialog;
     private FirebaseDatabase firebaseDatabase;
@@ -75,6 +80,40 @@ public class Register_Fragment extends Fragment implements View.OnClickListener 
         makeSureFromPass.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         ArrayAdapter adapter = new ArrayAdapter(getActivity(),R.layout.spinner_style,country);
         spinnerCountry.setAdapter(adapter);
+        mPublisherAdView = v.findViewById(R.id.publisherAdView);
+        PublisherAdRequest adRequest = new PublisherAdRequest.Builder().build();
+        mPublisherAdView.loadAd(adRequest);
+        mPublisherAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                // Code to be executed when an ad finishes loading.
+            }
+
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                // Code to be executed when an ad request fails.
+                Toast.makeText(getActivity(), "Fauilure", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAdOpened() {
+                // Code to be executed when an ad opens an overlay that
+                // covers the screen.
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                // Code to be executed when the user has left the app.
+            }
+
+            @Override
+            public void onAdClosed() {
+                // Code to be executed when when the user is about to return
+                // to the app after tapping on an ad.
+            }
+        });
+
+
         spinnerCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {

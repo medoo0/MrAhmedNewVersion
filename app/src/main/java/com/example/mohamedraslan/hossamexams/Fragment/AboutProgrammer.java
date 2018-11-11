@@ -18,12 +18,16 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.example.mohamedraslan.hossamexams.R;
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
+import com.google.android.gms.ads.doubleclick.PublisherAdView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -51,6 +55,7 @@ public class AboutProgrammer extends Fragment {
 
     @BindView(R.id.textView2)
     TextView textView2;
+    PublisherAdView mPublisherAdView;
 
     @BindView(R.id.Scrollview)
     ScrollView Scrollview;
@@ -69,12 +74,7 @@ public class AboutProgrammer extends Fragment {
         // Inflate the layout for this fragment
        View view = inflater.inflate(R.layout.fragment_about_programmer, container, false);
         ButterKnife.bind(this,view);
-        mAdView = view.findViewById(R.id.adView);
-
-
-        MobileAds.initialize(getActivity(), "ca-app-pub-4214877267260040~2367951421");
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        mPublisherAdView = view.findViewById(R.id.publisherAdView);
         textView.setAlpha(0);
         textView2.setAlpha(0);
         //Animation .
@@ -108,6 +108,38 @@ public class AboutProgrammer extends Fragment {
             }
         });
 
+
+        PublisherAdRequest adRequest = new PublisherAdRequest.Builder().build();
+        mPublisherAdView.loadAd(adRequest);
+        mPublisherAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                // Code to be executed when an ad finishes loading.
+            }
+
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                // Code to be executed when an ad request fails.
+                Toast.makeText(getActivity(), "Fauilure", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAdOpened() {
+                // Code to be executed when an ad opens an overlay that
+                // covers the screen.
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                // Code to be executed when the user has left the app.
+            }
+
+            @Override
+            public void onAdClosed() {
+                // Code to be executed when when the user is about to return
+                // to the app after tapping on an ad.
+            }
+        });
 
 
         facebooka.setOnClickListener(new View.OnClickListener() {
