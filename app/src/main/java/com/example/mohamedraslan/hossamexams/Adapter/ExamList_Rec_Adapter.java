@@ -91,7 +91,7 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
                         if(dataSnapshot.exists()){
                             holder.BtnStartExam.setEnabled(true);
                             dialog.Close_Dialog();
-                            AlertDialog alertDialog = new AlertDialog(context,"انت بالفعل اكملت اختبارك .");
+                            AlertDialog alertDialog = new AlertDialog(context," You have already Completed the Test");
                             alertDialog.show();
 
                         }
@@ -136,16 +136,16 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
     public String Chcek (int Days){
 
         if (Days == 0 ){
-            return " منذ اليوم" ;
+            return " Since Today" ;
         }
         else if (Days == 1){
-            return " منذ أمس";
+            return " Since Yesterday";
         }
         else if (Days == 2){
-            return "منذ قبل أمس";
+            return "Since before Yesterday";
         }
         else if (Days >= 3){
-            return "منذ "+Days+" ايام";
+            return "Since " + Days  +  "  Days";
         }
         else {
             return "منذ ...";
@@ -387,7 +387,7 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
            }
            else {
                dialog.Close_Dialog();
-               AlertDialog alertDialog = new AlertDialog(context,"انتهى وقت اختبارك .");
+               AlertDialog alertDialog = new AlertDialog(context,"Sorry your Test Time is Over ..");
                alertDialog.show();
 
            }
