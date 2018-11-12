@@ -36,44 +36,15 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20sp"
-            android:layout_marginTop="30dp"
-            >
-
-
-            <ImageView
-                android:id="@+id/facebookm"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="89dp"
-                android:background="@drawable/facingbook"
-                android:scaleType="fitXY" />
-
-
-            <ImageView
-                android:id="@+id/facebooka"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginEnd="82dp"
-                android:background="@drawable/facingbook"
-                android:scaleType="fitXY" />
-
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical|center_horizontal"
-            android:layout_marginTop="150dp"
+            android:layout_marginTop="280dp"
+
             >
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="150dp"
-                android:layout_height="160dp"
+                android:layout_width="180dp"
+                android:layout_height="190dp"
                 android:background="@drawable/mohamed"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="5dp"
@@ -83,10 +54,9 @@
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="162dp"
-                android:layout_marginTop="13dp"
+                android:layout_marginTop="29dp"
+                android:layout_toStartOf="@+id/circleImageView2"
                 android:fontFamily="@font/cairo"
                 android:text="م/ علاء محمود "
                 android:textColor="@android:color/white"
@@ -96,8 +66,8 @@
 
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="150dp"
-                android:layout_height="160dp"
+                android:layout_width="180dp"
+                android:layout_height="190dp"
                 android:background="@drawable/alaa"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="5dp"
@@ -107,9 +77,8 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/circleImageView"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="167dp"
+                android:layout_below="@+id/textView"
+                android:layout_toEndOf="@+id/circleImageView"
                 android:fontFamily="@font/cairo"
                 android:text="م/ محمد رسلان "
                 android:textColor="@color/color4"
@@ -178,6 +147,39 @@
                     android:gravity="center_horizontal"
                     />
             </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/facelayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20sp"
+            android:layout_marginTop="150dp"
+
+            >
+
+
+            <ImageView
+                android:id="@+id/facebookm"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="39dp"
+                android:background="@drawable/facingbook"
+                android:scaleType="fitXY" />
+
+
+            <ImageView
+                android:id="@+id/facebooka"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="39dp"
+                android:background="@drawable/facingbook"
+                android:scaleType="fitXY" />
 
         </RelativeLayout>
     </FrameLayout>
