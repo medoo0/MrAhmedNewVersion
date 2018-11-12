@@ -60,7 +60,6 @@ Button Sign_up;
             @Override
             public void onAdFailedToLoad(int errorCode) {
                 // Code to be executed when an ad request fails.
-                Toast.makeText(getActivity(), "Fauilure", Toast.LENGTH_SHORT).show();
             }
 
             @Override

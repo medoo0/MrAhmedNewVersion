@@ -81,7 +81,6 @@ public class ExamList extends Fragment implements ExamListContract.view{
             @Override
             public void onAdFailedToLoad(int errorCode) {
                 // Code to be executed when an ad request fails.
-                Toast.makeText(getActivity(),errorCode + "Fauilure", Toast.LENGTH_LONG).show();
             }
 
             @Override

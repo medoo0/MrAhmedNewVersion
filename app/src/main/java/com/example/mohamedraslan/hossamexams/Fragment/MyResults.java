@@ -16,9 +16,12 @@ import com.example.mohamedraslan.hossamexams.JsonModel.Result_Pojo;
 import com.example.mohamedraslan.hossamexams.MainPresnter.MyResultPresenter;
 import com.example.mohamedraslan.hossamexams.R;
 import com.example.mohamedraslan.hossamexams.Views.ControlPanel;
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
+import com.google.android.gms.ads.doubleclick.PublisherAdView;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
@@ -34,7 +37,7 @@ public class MyResults extends Fragment implements MyResultContract.view {
     RecyclerView recyclerView;
     @BindView(R.id.backgroundground)
     ImageView backgroundground;
-    AdView mAdView;
+    PublisherAdView mPublisherAdView;
 
 
     MyResultContract.presenter presenter;
@@ -44,11 +47,38 @@ public class MyResults extends Fragment implements MyResultContract.view {
         // Inflate the layout for this fragment .
          View v = inflater.inflate(R.layout.fragment_my_results, container, false);
         ButterKnife.bind(this , v);
-        mAdView  = v.findViewById(R.id.adView);
-        MobileAds.initialize(getActivity(), "ca-app-pub-4214877267260040~2367951421");
-        AdRequest adRequest = new AdRequest.Builder().build();
 
-        mAdView.loadAd(adRequest);
+        mPublisherAdView = v.findViewById(R.id.publisherAdView);
+        PublisherAdRequest adRequest = new PublisherAdRequest.Builder().build();
+        mPublisherAdView.loadAd(adRequest);
+        mPublisherAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                // Code to be executed when an ad finishes loading.
+            }
+
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                // Code to be executed when an ad request fails.
+            }
+
+            @Override
+            public void onAdOpened() {
+                // Code to be executed when an ad opens an overlay that
+                // covers the screen.
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                // Code to be executed when the user has left the app.
+            }
+
+            @Override
+            public void onAdClosed() {
+                // Code to be executed when when the user is about to return
+                // to the app after tapping on an ad.
+            }
+        });
         ControlPanel.Title.setText(R.string.MyResult);
         ControlPanel.SetNavChecked(1);
         ControlPanel.progressBar.setVisibility(View.VISIBLE);
