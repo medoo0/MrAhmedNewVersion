@@ -241,14 +241,14 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
                             }
                             else {
 
-                                Toast.makeText(getActivity(), "يرجي كتابة اسم الاختبار", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), "Enter Exam Name", Toast.LENGTH_SHORT).show();
 
                             }
 
                         }
                         else
                         {
-                            Toast.makeText(getActivity(), "لا يوجد اسئلة مختارة ", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "No selected Questions ", Toast.LENGTH_SHORT).show();
 
                         }
 
@@ -335,7 +335,7 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
     public void Successful_Storing() {
         dialog.Close_Dialog();
         com.example.mohamedraslan.hossamexams.Dialog.AlertDialog alertDialog
-                = new com.example.mohamedraslan.hossamexams.Dialog.AlertDialog(getActivity(),"تم اضافة الاختبار بنجاح");
+                = new com.example.mohamedraslan.hossamexams.Dialog.AlertDialog(getActivity(),"Exam added successfully");
         alertDialog.show();
 
         et_hour.setText("00");
@@ -387,7 +387,7 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
             tv.setTextColor(Color.parseColor("#ff0000"));
             tv.setBackgroundColor(Color.parseColor("#FFD2DAA7"));
 
-            dpd.setTitle("قم باختيار وقت الاختبار"); // Uncomment this line to activate it
+            dpd.setTitle("Select Time of Exam"); // Uncomment this line to activate it
 
             return dpd;
         }
@@ -419,7 +419,7 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
             if (hours <= 0 && minutes <= 0) {
 
 
-                Toast.makeText(getActivity(), "يجب ملئ الساعات او الدقائق بقيم اكبر من الصفر", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Enter Values grater than zero", Toast.LENGTH_SHORT).show();
             } else {
                 hour = Integer.parseInt(et_hour.getText().toString());
                 minute = Integer.parseInt(et_minute.getText().toString());
@@ -433,7 +433,7 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
         else if (et_hour.getText().toString().isEmpty() && et_minute.getText().toString().isEmpty()) {
 
 
-            Toast.makeText(getActivity(), "يجب ملئ الساعات او الدقائق بقيم اكبر من الصفر", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Enter Values grater than zero", Toast.LENGTH_SHORT).show();
 
 
         }
@@ -444,8 +444,8 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
 
             if (minutes <= 0) {
 
-                Toast.makeText(getActivity(), "يجب ملئ الدقائق بقيم اكبر من الصفر", Toast.LENGTH_SHORT).show();
-                Toast.makeText(getActivity(), "يجب ملئ الدقائق بقيم اكبر من الصفر", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "fill in the cells with values grater than Zero", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "fill in the cells with values grater than Zero", Toast.LENGTH_SHORT).show();
             } else {
 
                 hour = 0;
@@ -462,7 +462,7 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
 
             if (hours <= 0) {
 
-                Toast.makeText(getActivity(), "يجب ملئ الساعات بقيم اكبر من الصفر", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "fill in the hour with values grater than zero..", Toast.LENGTH_SHORT).show();
             } else {
 
                 minute = 0;
@@ -480,7 +480,7 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
 
             int degree = Integer.parseInt(et_degree.getText().toString());
             if (degree <= 0) {
-                Toast.makeText(getActivity(), "توزيع الدرجات يجب ان يكون اكبر من الصفر", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Degree Distribution must be grater than zero", Toast.LENGTH_SHORT).show();
                 result = 0;
             } else {
 
@@ -489,13 +489,13 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
                     int random = Integer.parseInt(et_random_number_question.getText().toString());
 
                     if (random <= 0) {
-                        Toast.makeText(getActivity(), "يرجى تحديد عدد اسئلة الامتحان", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "please select the number of questions", Toast.LENGTH_SHORT).show();
                         result = 0;
                     } else {
 
                         int finaldegree = Integer.parseInt(Questions_size.getText().toString());
                         if (random > finaldegree) {
-                            Toast.makeText(getActivity(), "الاسئلة العشوائية يجب ان تكون اقل من او تساوي الاسئلة المختارة", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Random Questions must be less than or equal the selected questions", Toast.LENGTH_SHORT).show();
                             result = 0;
                         } else {
                             result = 1;
@@ -506,7 +506,7 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
                 else {
 
                     result = 0;
-                    Toast.makeText(getActivity(), "يرجي ملئ خانة الأسئلة", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "please fill in the question cell", Toast.LENGTH_SHORT).show();
 
                 }
 
@@ -514,7 +514,7 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
 
         } else {
             result = 0;
-            Toast.makeText(getActivity(), "يرجي ملئ خانة الدرجات", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "please fill in the degree cell", Toast.LENGTH_SHORT).show();
         }
 
         return result;

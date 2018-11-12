@@ -207,7 +207,7 @@ public class Question_Bank_Frag extends Fragment
             public void sentSuccessfully(String Result) {
 
 
-                view.setText("تم الإرسال");
+                view.setText("Sended");
 
             }
 
@@ -231,7 +231,7 @@ public class Question_Bank_Frag extends Fragment
                  final Question_BankPresenter presenter = new Question_BankPresenter(this);
                     if(getActivity()!= null) {
 
-                        final AlertDialog alertDialog = new AlertDialog(getActivity(), "تحذير", " متأكد من حذف هذا السؤال ؟");
+                        final AlertDialog alertDialog = new AlertDialog(getActivity(), "Warning", " Are you sure you want to delete the question");
                         alertDialog.show();
                         alertDialog.btnYes.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -257,7 +257,7 @@ public class Question_Bank_Frag extends Fragment
                 dialog.Close_Dialog();
                 if(getActivity() != null) {
 
-                    Toast.makeText(getActivity(), "لقد تم حذف السؤال بنجاح .", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "question deleted .", Toast.LENGTH_SHORT).show();
                     if (adapter != null) {
 
                         //adapter.remove(position);
@@ -279,7 +279,7 @@ public class Question_Bank_Frag extends Fragment
             public void Q_notRemoved_InUI() {
                 dialog.Close_Dialog();
                 if(getActivity() != null) {
-                    Toast.makeText(getActivity(), "يوجد مشكلة . ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "problem", Toast.LENGTH_SHORT).show();
 
                     getActivity().getSupportFragmentManager().popBackStack();
                     getActivity().getSupportFragmentManager()

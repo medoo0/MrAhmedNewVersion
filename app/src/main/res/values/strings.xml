@@ -2,6 +2,7 @@
     <string name="app_name">Mr.Ahmed Samy </string>
     <string name="Sign_in">تسجيل الدخول</string>
     <string name="Sign_up">الاشتراك</string>
+
     <string name="s_in_up">
         يرجي تسجيل الدخول
       \n  او الاشتراك
@@ -13,10 +14,10 @@
     <string name="register"> التسجيل </string>
     <string name="register1">يرجي تعبئة جميع البيانات </string>
     <string name="third_name"> الاسم الثلاثي </string>
-    <string name="email">البريد الالكتروني</string>
+    <string name="email">Email</string>
     <string name="pass"> الرقم السري </string>
     <string name="Make_sure_From_Pass"> تأكيد الرقم السري </string>
-    <string name="phone"> رقم الهاتف </string>
+    <string name="phone"> Phone Number </string>
     <string name="ihaveacount"> لديك حساب بالفعل ؟ </string>
     <string name="login"> تسجيل الدخول </string>
     <string name="no_account">ليس لديك حساب ؟ </string>
@@ -118,7 +119,7 @@
     <string name="aboutDoctor">About Doctor</string>
     <string name="aboutProgrammer">About Programmer </string>
     <string name="sendtoaddexam">Send to Exam</string>
-    <string name="delete_Exam">Delete Emax</string>
+    <string name="delete_Exam">Delete Exam</string>
     <string name="Aboutus1">دائما نبحث عن التميز والابداع\nومازلنا نبحث عما يرضي أذواق \n عملائنا الكرام</string>
     <string name="Contectus">للتواصل</string>
     <string name="Aboutus2">\nم/ علاء محمود \n alaadah95@gmail.com \n م/ محمد رسلان \n mohamed.raslan79@yahoo.com</string>
@@ -131,7 +132,7 @@
     <string name="hisAnswer">Answered : </string>
     <string name="correctAnswer">Correct Answer :</string>
     <string name="studentsWrongs">Student Wrongs</string>
-    <string name="StudentResult">  Student Results /n in All Exams </string>
+    <string name="StudentResult">  StudentResults \n in all Exams </string>
     <string name="delete_results">Delete_Results</string>
     <string name="DoctorName">Mr . Ahmed Samy</string>
     <string name="Personal_Data"> Personal_Data </string>
