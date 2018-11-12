@@ -20,6 +20,7 @@
     </com.google.android.gms.ads.doubleclick.PublisherAdView>
 
     <ScrollView
+        android:layout_below="@id/publisherAdView"
         android:layout_width="match_parent"
         android:isScrollContainer="false"
         android:scrollbars="none"
@@ -257,7 +258,7 @@
                     android:layout_marginEnd="5dp"
                     android:paddingEnd="5sp"
                     android:background="@drawable/spinnershape"
-                    android:layout_height="80dp" />
+                    android:layout_height="120dp" />
 
 
             </LinearLayout>
@@ -273,7 +274,7 @@
                 android:layout_marginStart="40dp"
                 android:layout_marginEnd="40dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="120dp"
                 android:textStyle="bold"
                 />
 
@@ -288,7 +289,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginEnd="40dp"
                 android:layout_marginTop="20dp"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
@@ -303,16 +304,16 @@
                     android:id="@+id/gotoLogin"
                     android:layout_width="wrap_content"
                     android:text="@string/login"
-                    android:fontFamily="@font/cairo"
-                    android:textColor="@color/registercolor"
-                    android:textSize="40sp"
-                    android:textStyle="bold"
-                    android:layout_marginStart="10sp"
-                    android:layout_height="wrap_content" />
+    android:fontFamily="@font/cairo"
+    android:textColor="@color/registercolor"
+    android:textSize="40sp"
+    android:textStyle="bold"
+    android:layout_marginStart="10sp"
+    android:layout_height="wrap_content" />
 
-            </LinearLayout>
+</LinearLayout>
 
-        </RelativeLayout>
+    </RelativeLayout>
 
 
 
