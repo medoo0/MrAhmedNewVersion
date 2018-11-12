@@ -95,7 +95,7 @@
                     android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="120dp"
-                    android:hint="@string/email"
+                    android:hint="البريد الالكتروني"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:gravity="right|center_vertical"

@@ -35,7 +35,7 @@ public class ExamModel implements ExamContract.model {
                         , Pointer.getString(4), Pointer.getString(5), Pointer.getString(6));
             } else {
 
-                presenter.ExamEnd(" لقد انهيت الاختبار . ");
+                presenter.ExamEnd("   ");
 
             }
         } else {

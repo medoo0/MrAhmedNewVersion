@@ -192,7 +192,7 @@ public class Exam extends AppCompatActivity implements View.OnClickListener , Ex
                 presenter.insertAnswerInSql(db,TableName,ID_Qestion,selectAnswer,oneQestionDegree);
             }
             else {
-                Toast.makeText(this,"يرجي اختيار اجابة", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"Please Select Answer", Toast.LENGTH_SHORT).show();
             }
 
 

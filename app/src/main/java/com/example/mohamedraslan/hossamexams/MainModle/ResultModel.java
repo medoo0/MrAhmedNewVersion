@@ -69,7 +69,7 @@ public class ResultModel implements ResultContract.model {
             @Override
             public void onSuccess(Void aVoid) {
 
-                presenter.UploadSuccessFull("تم رفع نتيجة اختبارك");
+                presenter.UploadSuccessFull("Your Result Uploaded successfully");
 
             }
         }).addOnFailureListener(new OnFailureListener() {

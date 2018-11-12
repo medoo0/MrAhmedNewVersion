@@ -52,6 +52,7 @@ public class AddQ_frag extends Fragment
         firebaseDatabaseQuestions = FirebaseDatabase.getInstance();
         databaseReferenceQuestions= firebaseDatabaseQuestions.getReference(DataBase_Refrences.BANKQUESTIONS.getRef());
         animatedDialog            = new AnimatedDialog(getActivity());
+
         ControlPanel.Title.setText(getString(R.string.addQ));
         if (getArguments()!=null){
             ControlPanel.Title.setText(getString(R.string.edit));

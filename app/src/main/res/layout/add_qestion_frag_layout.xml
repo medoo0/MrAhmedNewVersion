@@ -447,7 +447,7 @@
                         android:layout_marginStart="10sp"
                         android:layout_width="60dp"
                         android:textColor="@color/black1"
-                        android:layout_margin="5dp"
+                        android:layout_margin="4dp"
                         android:textSize="12sp"
                         android:fontFamily="@font/cairo"
                         android:text="D"
