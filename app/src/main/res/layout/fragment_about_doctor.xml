@@ -484,21 +484,6 @@
 
 
 
-
-
-                <TextView
-                    android:layout_marginTop="10sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/cairo"
-                    android:text="@string/youtube"
-                    android:textColor="@android:color/white"
-                    android:textSize="18sp"
-                    android:layout_margin="5dp"
-                    android:padding="5dp"
-                    />
-
-
             </LinearLayout>
 
 

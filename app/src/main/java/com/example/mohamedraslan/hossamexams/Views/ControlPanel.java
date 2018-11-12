@@ -383,7 +383,7 @@ public class ControlPanel extends AppCompatActivity
 
     @Override
     public void SetUsername(String nameStudent) {
-        UserName.setText( " مرحبا , " + nameStudent );
+        UserName.setText( "welcom ,  "  + nameStudent );
     }
     public static void SetNavChecked(int position){
 

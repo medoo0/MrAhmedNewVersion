@@ -309,7 +309,6 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
 
         dialog.Close_Dialog();
 
-
         com.example.mohamedraslan.hossamexams.Dialog.AlertDialog alertDialog
                 = new com.example.mohamedraslan.hossamexams.Dialog.AlertDialog(getActivity(),Result);
         alertDialog.show();
