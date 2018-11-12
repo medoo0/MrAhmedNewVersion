@@ -18,6 +18,7 @@
                 android:layout_margin="25dp"
                 android:elevation="15dp"
                 android:padding="10sp"
+
                 android:background="@drawable/styling_of_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -29,7 +30,7 @@
                     android:id="@+id/linear1"
                     android:layout_width="match_parent"
                     android:orientation="horizontal"
-                    android:layoutDirection="rtl"
+                    android:layoutDirection="ltr"
                     android:layout_height="wrap_content">
 
 
@@ -42,7 +43,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:fontFamily="@font/cairo"
-                        android:text="سؤال"
+                        android:text="Question"
                         android:layout_marginTop="2dp"
                         android:layout_marginStart="13dp"
                         android:textSize="16sp"
@@ -77,7 +78,7 @@
                         android:layout_width="match_parent"
                         android:textSize="18sp"
                         android:textColor="@color/black1"
-                        android:textDirection="rtl"
+                        android:textDirection="ltr"
                         android:hint="@string/Q_One"
                         android:background="@drawable/shape_layout"
                         android:fontFamily="@font/cairo"
@@ -105,6 +106,7 @@
                 android:layout_marginBottom="20dp"
                 android:elevation="15dp"
                 android:padding="10sp"
+                android:layoutDirection="ltr"
                 android:background="@drawable/styling_of_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -115,7 +117,7 @@
                     android:id="@+id/linearinrelativetwo"
                     android:layout_width="match_parent"
                     android:orientation="horizontal"
-                    android:layoutDirection="rtl"
+                    android:layoutDirection="ltr"
                     android:layout_height="wrap_content">
 
 
@@ -130,7 +132,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:fontFamily="@font/cairo"
-                        android:text="الاجابات"
+                        android:text="Answers"
                         android:layout_marginTop="10dp"
                         android:layout_marginStart="13dp"
                         android:textSize="16sp"
@@ -146,7 +148,7 @@
                     android:layout_width="match_parent"
                     android:orientation="vertical"
                     android:layout_marginTop="20dp"
-                    android:layoutDirection="rtl"
+                    android:layoutDirection="ltr"
                     android:layout_below="@+id/linearinrelativetwo"
                     android:layout_height="wrap_content">
 
@@ -155,7 +157,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layoutDirection="rtl"
+                        android:layoutDirection="ltr"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="20dp"
                         android:layout_marginTop="20dp"
@@ -167,7 +169,7 @@
 
                         <TextView
                             android:layout_width="40dp"
-                            android:text="أ -"
+                            android:text="A-"
                             android:padding="5dp"
                             android:layout_marginStart="1dp"
                             android:layout_marginBottom="5dp"
@@ -181,8 +183,8 @@
                             android:id="@+id/answerOne"
                             android:layout_marginStart="10sp"
                             android:background="@drawable/radiobutton_check_false"
-                            android:hint="الإجابة الاولي"
-                            android:textDirection="rtl"
+                            android:hint="Answer One"
+                            android:textDirection="ltr"
                             android:gravity="center|center_vertical"
                             android:layout_width="match_parent"
                             android:paddingStart="20dp"
@@ -201,7 +203,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layoutDirection="rtl"
+                        android:layoutDirection="ltr"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="20dp"
                         android:layout_marginTop="20dp"
@@ -213,7 +215,7 @@
 
                         <TextView
                             android:layout_width="40dp"
-                            android:text="ب -"
+                            android:text="B-"
                             android:padding="5dp"
                             android:layout_marginStart="1dp"
                             android:layout_marginBottom="5dp"
@@ -227,7 +229,7 @@
                             android:id="@+id/answerTwo"
                             android:layout_marginStart="10sp"
                             android:background="@drawable/radiobutton_check_false"
-                            android:hint="الإجابة الثانية"
+                            android:hint="Secound Answer "
                             android:textDirection="rtl"
                             android:gravity="center|center_vertical"
                             android:layout_width="match_parent"
@@ -248,7 +250,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layoutDirection="rtl"
+                        android:layoutDirection="ltr"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="20dp"
                         android:layout_marginTop="20dp"
@@ -258,7 +260,7 @@
 
                           <TextView
                               android:layout_width="40dp"
-                            android:text="ج -"
+                            android:text="C-"
                             android:padding="5dp"
                             android:layout_marginStart="1dp"
                             android:layout_marginBottom="5dp"
@@ -272,7 +274,7 @@
                             android:id="@+id/answerThree"
                             android:layout_marginStart="10sp"
                             android:background="@drawable/radiobutton_check_false"
-                            android:hint="الإجابة الثالثة"
+                            android:hint="Answer Three"
                             android:textDirection="rtl"
                             android:gravity="center|center_vertical"
                             android:layout_width="match_parent"
@@ -306,7 +308,7 @@
 
                         <TextView
                             android:layout_width="40dp"
-                            android:text="د -"
+                            android:text="D-"
                             android:padding="5dp"
                             android:layout_marginStart="1dp"
                             android:layout_marginBottom="5dp"
@@ -320,7 +322,7 @@
                             android:id="@+id/answerFour"
                             android:layout_marginStart="10sp"
                             android:background="@drawable/radiobutton_check_false"
-                            android:hint="الإجابة الرابعة"
+                            android:hint="Answer Four"
                             android:textDirection="rtl"
                             android:gravity="center|center_vertical"
                             android:layout_width="match_parent"
@@ -366,7 +368,7 @@
                     android:id="@+id/atherliner"
                     android:layout_width="match_parent"
                     android:orientation="horizontal"
-                    android:layoutDirection="rtl"
+                    android:layoutDirection="ltr"
                     android:layout_height="wrap_content">
 
 
@@ -381,7 +383,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:fontFamily="@font/cairo"
-                        android:text="الإجابه الصحيحه"
+                        android:text="Correct Answer"
                         android:layout_marginTop="10dp"
                         android:layout_marginStart="13dp"
                         android:textSize="16sp"
@@ -396,7 +398,7 @@
 
 
                 <LinearLayout
-                    android:layoutDirection="rtl"
+                    android:layoutDirection="ltr"
                     android:layout_below="@+id/atherliner"
                     android:layout_width="match_parent"
                     android:padding="5dp"
@@ -414,7 +416,7 @@
                         android:layout_margin="5dp"
                         android:textColor="@color/black1"
                         android:fontFamily="@font/cairo"
-                        android:text="أ"
+                        android:text="A"
                         android:background="@drawable/radiobutton_check_false"
                         android:layout_height="50dp" />
 
@@ -423,7 +425,7 @@
                         android:id="@+id/B"
                         android:layout_marginStart="10sp"
                         android:layout_width="60dp"
-                        android:text="ب"
+                        android:text="B"
                         android:textColor="@color/black1"
                         android:layout_margin="5dp"
                         android:fontFamily="@font/cairo"
@@ -437,7 +439,7 @@
                         android:textColor="@color/black1"
                         android:layout_width="60dp"
                         android:layout_margin="5dp"
-                        android:text="ج"
+                        android:text="C"
                         android:background="@drawable/radiobutton_check_false"
                         android:layout_height="50dp" />
                     <Button
@@ -448,7 +450,7 @@
                         android:layout_margin="5dp"
                         android:textSize="12sp"
                         android:fontFamily="@font/cairo"
-                        android:text="د"
+                        android:text="D"
                         android:background="@drawable/radiobutton_check_false"
                         android:layout_height="50dp" />
 
@@ -468,7 +470,7 @@
 
                 <Button
                     android:id="@+id/savingData"
-                    android:text="حفظ"
+                    android:text="Save"
                     android:padding="15sp"
                     android:elevation="8dp"
                     android:textColor="@android:color/white"

@@ -72,31 +72,32 @@
             >
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="250dp"
-                android:layout_height="200dp"
+                android:layout_width="150dp"
+                android:layout_height="160dp"
                 android:background="@drawable/mohamed"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="5dp"
                 android:id="@+id/circleImageView2" />
 
             <TextView
+                android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginTop="18dp"
-                android:layout_toStartOf="@+id/circleImageView2"
+                android:layout_marginStart="162dp"
+                android:layout_marginTop="13dp"
                 android:fontFamily="@font/cairo"
                 android:text="م/ علاء محمود "
                 android:textColor="@android:color/white"
-                android:textSize="40sp"
-                android:id="@+id/textView" />
+                android:textSize="30sp" />
 
 
 
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="250dp"
-                android:layout_height="200dp"
+                android:layout_width="150dp"
+                android:layout_height="160dp"
                 android:background="@drawable/alaa"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="5dp"
@@ -106,13 +107,13 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/circleImageView2"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="250dp"
+                android:layout_alignBottom="@+id/circleImageView"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="167dp"
                 android:fontFamily="@font/cairo"
                 android:text="م/ محمد رسلان "
                 android:textColor="@color/color4"
-                android:textSize="40sp" />
+                android:textSize="30sp" />
 
 
 

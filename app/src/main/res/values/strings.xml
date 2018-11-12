@@ -65,79 +65,78 @@
 
     // menu //
 
-    <string name="addExam">إضافه اختبار</string>
-    <string name="mangeStudent">إدارة الطلاب</string>
+    <string name="addExam">Add-Exam</string>
+    <string name="mangeStudent">Student-MangMent</string>
 
-    <string name="examList">قائمة الاختبارات</string>
-    <string name="PleaseMakesure"> يرجي التأكد من البريد الالكتروني والرقم السري </string>
-    <string name="banned">حظر الطالب</string>
+    <string name="examList">Exams-List</string>
+    <string name="PleaseMakesure">Please Make Sure From Email And Password  </string>
+    <string name="banned">Blocking</string>
     <string name="Rating"> تقييم الطالب </string>
-    <string name="results">نتائج الطلاب</string>
-    <string name="questions">بنك الاسئلة </string>
-    <string name="exit">خروج</string>
-    <string name="Search">البحث</string>
+    <string name="results">Student-Results</string>
+    <string name="questions">Question-Bank </string>
+    <string name="exit">Exit</string>
+    <string name="Search">Search</string>
 
-    <string name="Q_One"> كتابة السؤال هنا </string>
-    <string name="addQ">اضافة سؤال</string>
+    <string name="Q_One"> Write Question here </string>
+    <string name="addQ">Add-Question</string>
 
     //aleart dialog
-    <string name="yes">نعم</string>
-    <string name="no">لا</string>
-    <string name="title">تحذير</string>
-    <string name="message">هل حقا تريد تسجيل الخروج ؟ </string>
-    <string name="Ok"> حسناً</string>
-    <string name="ask_banned">هل انت متأكد من حظر هذا الطالب ؟ </string>
-    <string name="successful_banned">تم الحظر بنجاح </string>
-    <string name="WrongTitle">حدث خطأ</string>
-    <string name="YouareBanned">عفوا لقد تم حظرك</string>
-    <string name="removeBan">فك الحظر</string>
-    <string name="RemoveAsk">هل حقا تريد فك حظر هذا الطالب ؟ </string>
-    <string name="RemoveDone">تم فك حظر الطالب بنجاح</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="title">Warning</string>
+    <string name="message">Do you want to SignOut ? </string>
+    <string name="Ok"> Ok </string>
+    <string name="ask_banned">Are you Sure you are blocking the Student ?</string>
+    <string name="successful_banned">Student Successfully blocked </string>
+    <string name="WrongTitle">Error</string>
+    <string name="YouareBanned">Sorry , ypu have been banned from Admin ..</string>
+    <string name="removeBan">Remove ban  </string>
+    <string name="RemoveAsk">Do you want to unBlock Student ? </string>
+    <string name="RemoveDone">Student Successfully unBlocked</string>
 
-    <string name="choosenQuestion">الأسئلة المختارة</string>
-    <string name="question">اسئلة</string>
-    <string name="examTime">مدة الاختبار</string>
-    <string name="s_m_h">ثانية : دقيقة : ساعة</string>
-    <string name="DegreeDistribution">توزيع الدرجات</string>
-
-
-    <string name="writeQuestionempty"> يرجي ادخال السؤال هنا </string>
-    <string name="answerOne"> يرجي ادخال الاجابه الاولي هنا </string>
-    <string name="answerTwo"> يرجي ادخال الاجابه الثانيه هنا </string>
-    <string name="answerThre"> يرجي ادخال الاجابه الثالثه هنا </string>
-    <string name="answerFour"> يرجي ادخال الاجابه الرابعه هنا </string>
-    <string name="ExamName">إسم الاختبار</string>
+    <string name="choosenQuestion">Selected Questions</string>
+    <string name="question">Questions</string>
+    <string name="examTime">Exam Time</string>
+    <string name="s_m_h">Hour : Minite : Secound </string>
+    <string name="DegreeDistribution">Degree-Distribution</string>
 
 
-    <string name="edit_Q"> تعديل علي السؤال </string>
-    <string name="edit">  تعديل السؤال </string>
-    <string name="delete"> حذف السؤال </string>
+    <string name="writeQuestionempty"> Please Enter Question here </string>
+    <string name="answerOne"> Enter The First Answer </string>
+    <string name="answerTwo"> Enter The Secound Answer</string>
+    <string name="answerThre"> Enter The Third Answer </string>
+    <string name="answerFour"> Enter The Fourth Answer </string>
+    <string name="ExamName">Exam Name</string>
 
-    <string name="MyResult">نتائجي</string>
-    <string name="aboutus">تواصل معنا</string>
-    <string name="aboutDoctor">عن الدكتور</string>
-    <string name="aboutProgrammer">عن المبرمج</string>
-    <string name="sendtoaddexam">إرسال إلى إضافة اختبار</string>
-    <string name="delete_Exam">حذف الاختبار</string>
+
+    <string name="edit_Q">Edit-Question</string>
+    <string name="edit">  Editing </string>
+    <string name="delete"> Delete Question </string>
+
+    <string name="MyResult">MyResults</string>
+    <string name="aboutus">Contact With us</string>
+    <string name="aboutDoctor">About Doctor</string>
+    <string name="aboutProgrammer">About Programmer </string>
+    <string name="sendtoaddexam">Send to Exam</string>
+    <string name="delete_Exam">Delete Emax</string>
     <string name="Aboutus1">دائما نبحث عن التميز والابداع\nومازلنا نبحث عما يرضي أذواق \n عملائنا الكرام</string>
     <string name="Contectus">للتواصل</string>
     <string name="Aboutus2">\nم/ علاء محمود \n alaadah95@gmail.com \n م/ محمد رسلان \n mohamed.raslan79@yahoo.com</string>
-    <string name="startexam">إبدأ الاختبار</string>
-    <string name="Next">التالي</string>
-    <string name="Skip">تخطي</string>
-    <string name="Result">نتيجة الاختبار</string>
-    <string name="Home">الرئيسية</string>
-    <string name="result">النتائج</string>
-    <string name="hisAnswer">أجاب : </string>
-    <string name="correctAnswer">الإجابة الصحيحة :</string>
-    <string name="studentsWrongs">اخطاء الطالب</string>
-    <string name="StudentResult">نتائج الطالب  \n في جميع الاختبارات </string>
-    <string name="delete_results">حذف النتائج</string>
-    <string name="DoctorName">د. عصام حسين ضاهر</string>
-    <string name="Personal_Data">بـيـــانـــات شــــخــــصــــيــــــة</string>
+    <string name="startexam">Starting</string>
+    <string name="Next">Next</string>
+    <string name="Skip">Skip</string>
+    <string name="Result">Exam Result</string>
+    <string name="Home">Main</string>
+    <string name="result">Results</string>
+    <string name="hisAnswer">Answered : </string>
+    <string name="correctAnswer">Correct Answer :</string>
+    <string name="studentsWrongs">Student Wrongs</string>
+    <string name="StudentResult">  Student Results /n in All Exams </string>
+    <string name="delete_results">Delete_Results</string>
+    <string name="DoctorName">Mr . Ahmed Samy</string>
+    <string name="Personal_Data"> Personal_Data </string>
     <string name="Personal_Data_Details">
         - الاســـم :   أحمد سامي ابراهيم عمر
-        \n- الجــنـــسـيــــة : مــصــــــرى -
                     </string>
 
 
@@ -152,7 +151,7 @@
 
 <string name="sex"> 7.     شهادات أخرى مختلفة في الحاسب الآلي من بينها البرمجة وتصميم المواقع والجرافيك.  </string>
 
-    <string name="experiences">الخـبـرات العـلـمـيـة و العـمـليـة</string>
+    <string name="experiences">Scientific and Practical experiences</string>
 
 
     <string name="numberone">   1- الاسم-  \n مستر أحمد سامي  .. معلم لغة إنجليزية للمرحلة الثانوية، ومترجم، ومبرمج ويب محترف، ومدرب كورسات معتمدة لغة إنجليزية.. شارك في ترجمة الكثير من الروايات والأفلام والمسلسلات الأجنبية.. </string>

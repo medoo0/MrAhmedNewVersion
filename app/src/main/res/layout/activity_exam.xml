@@ -7,7 +7,7 @@
     android:background="@drawable/gradiantcolor"
     tools:context="com.example.mohamedraslan.hossamexams.Views.Exam"
     android:keepScreenOn="true"
-    android:layoutDirection="ltr"
+    android:layoutDirection="rtl"
     >
     <ScrollView
         android:id="@+id/scrollView"
@@ -26,6 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:layout_marginStart="10dp"
+
                 android:layout_marginTop="10dp"
                 android:background="@drawable/styling_of_view"
                 android:layoutDirection="ltr"
@@ -69,7 +70,7 @@
                     android:id="@+id/linear1"
                     android:layout_width="match_parent"
                     android:orientation="horizontal"
-                    android:layoutDirection="rtl"
+                    android:layoutDirection="ltr"
                     android:gravity="center_vertical"
                     android:layout_height="wrap_content">
 
@@ -85,7 +86,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="13dp"
                         android:fontFamily="@font/cairo"
-                        android:text="سؤال"
+                        android:text="Question"
                         android:textColor="@color/black1"
                         android:textSize="16sp" />
 
@@ -117,7 +118,7 @@
                         android:layout_width="match_parent"
                         android:textSize="18sp"
                         android:textColor="@color/black1"
-                        android:textDirection="rtl"
+                        android:textDirection="ltr"
                         android:hint="@string/Q_One"
                         android:background="@drawable/shape_layout"
                         android:fontFamily="@font/cairo"
@@ -156,7 +157,7 @@
                     android:id="@+id/linearinrelativetwo"
                     android:layout_width="match_parent"
                     android:orientation="horizontal"
-                    android:layoutDirection="rtl"
+                    android:layoutDirection="ltr"
                     android:gravity="center_vertical"
                     android:layout_height="wrap_content">
 
@@ -172,7 +173,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:fontFamily="@font/cairo"
-                        android:text="اختر الاجابة الصحيحة"
+                        android:text="Choose The Correct Answer"
                         android:layout_marginStart="13dp"
                         android:textSize="16sp"
                         android:textColor="@color/black1"
@@ -187,7 +188,7 @@
                     android:layout_width="match_parent"
                     android:orientation="vertical"
                     android:layout_marginTop="20dp"
-                    android:layoutDirection="rtl"
+                    android:layoutDirection="ltr"
                     android:layout_below="@+id/linearinrelativetwo"
                     android:layout_height="wrap_content">
 
@@ -196,7 +197,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layoutDirection="rtl"
+                        android:layoutDirection="ltr"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="20dp"
                         android:layout_marginTop="20dp"
@@ -208,7 +209,7 @@
 
                         <TextView
                             android:layout_width="40dp"
-                            android:text="أ -"
+                            android:text="A-"
                             android:padding="5dp"
                             android:layout_marginStart="1dp"
                             android:layout_marginBottom="5dp"
@@ -222,7 +223,7 @@
                             android:id="@+id/answerOne"
                             android:layout_marginStart="10sp"
                             android:background="@drawable/radiobutton_check_false"
-                            android:text="الإجابة الاولي"
+                            android:text="Answer One"
                             android:textDirection="rtl"
                             android:gravity="center|center_vertical"
                             android:layout_width="match_parent"
@@ -242,7 +243,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layoutDirection="rtl"
+                        android:layoutDirection="ltr"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="20dp"
                         android:layout_marginTop="20dp"
@@ -254,7 +255,7 @@
 
                         <TextView
                             android:layout_width="40dp"
-                            android:text="ب -"
+                            android:text="B-"
                             android:padding="5dp"
                             android:layout_marginStart="1dp"
                             android:layout_marginBottom="5dp"
@@ -268,7 +269,7 @@
                             android:id="@+id/answerTwo"
                             android:layout_marginStart="10sp"
                             android:background="@drawable/radiobutton_check_false"
-                            android:text="الإجابة الثانية"
+                            android:text="Answer Two"
                             android:textDirection="rtl"
                             android:gravity="center|center_vertical"
                             android:layout_width="match_parent"
@@ -289,7 +290,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layoutDirection="rtl"
+                        android:layoutDirection="ltr"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="20dp"
                         android:layout_marginTop="20dp"
@@ -299,7 +300,7 @@
 
                         <TextView
                             android:layout_width="40dp"
-                            android:text="ج -"
+                            android:text="C-"
                             android:padding="5dp"
                             android:layout_marginStart="1dp"
                             android:layout_marginBottom="5dp"
@@ -313,7 +314,7 @@
                             android:id="@+id/answerThree"
                             android:layout_marginStart="10sp"
                             android:background="@drawable/radiobutton_check_false"
-                            android:text="الإجابة الثالثة"
+                            android:text="Answer Three"
                             android:textDirection="rtl"
                             android:gravity="center|center_vertical"
                             android:layout_width="match_parent"
@@ -335,7 +336,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layoutDirection="rtl"
+                        android:layoutDirection="ltr"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="20dp"
                         android:layout_marginTop="20dp"
@@ -347,7 +348,7 @@
 
                         <TextView
                             android:layout_width="40dp"
-                            android:text="د -"
+                            android:text="D-"
                             android:padding="5dp"
                             android:layout_marginStart="1dp"
                             android:layout_marginBottom="5dp"
@@ -361,7 +362,7 @@
                             android:id="@+id/answerFour"
                             android:layout_marginStart="10sp"
                             android:background="@drawable/radiobutton_check_false"
-                            android:text="الإجابة الرابعة"
+                            android:text="Answer Four"
                             android:textDirection="rtl"
                             android:gravity="center|center_vertical"
                             android:layout_width="match_parent"
