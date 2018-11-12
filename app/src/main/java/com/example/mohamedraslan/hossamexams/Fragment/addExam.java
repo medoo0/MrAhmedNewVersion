@@ -306,11 +306,16 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
 
     @Override
     public void Problem(String Result) {
+
         dialog.Close_Dialog();
 
+
         com.example.mohamedraslan.hossamexams.Dialog.AlertDialog alertDialog
-                = new com.example.mohamedraslan.hossamexams.Dialog.AlertDialog(getActivity(),Result,"");
+                = new com.example.mohamedraslan.hossamexams.Dialog.AlertDialog(getActivity(),Result);
         alertDialog.show();
+
+
+
     }
 
     @Override

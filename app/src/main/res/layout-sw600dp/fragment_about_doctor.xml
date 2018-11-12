@@ -57,8 +57,8 @@
                         android:id="@+id/facebook"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:layout_alignParentEnd="true"
                         android:layout_alignParentTop="true"
+                        android:layout_toEndOf="@+id/twitter"
                         android:background="@drawable/facebookicon"
                         android:scaleType="fitXY" />
 
@@ -67,7 +67,7 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_alignParentTop="true"
-                        android:layout_toStartOf="@+id/facebook"
+                        android:layout_centerHorizontal="true"
                         android:background="@drawable/twittter"
                         android:scaleType="fitXY" />
 

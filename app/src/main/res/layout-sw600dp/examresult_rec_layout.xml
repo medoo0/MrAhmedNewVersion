@@ -55,7 +55,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:textColor="@android:color/white"
-                android:textSize="40sp"
+                android:textSize="30sp"
                 />
             <TextView
                 android:id="@+id/date"
@@ -89,7 +89,7 @@
                 android:textColor="@android:color/white"
                 android:fontFamily="@font/cairo"
                 android:background="@drawable/button_background4"
-                android:textSize="40sp"
+                android:textSize="30sp"
                 android:paddingStart="50dp"
                 android:paddingEnd="50dp"
                 />
