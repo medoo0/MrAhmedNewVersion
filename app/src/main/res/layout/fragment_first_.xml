@@ -25,6 +25,7 @@
     android:layout_height="wrap_content"
     android:layout_centerVertical="true"
     android:isScrollContainer="false"
+        android:layout_below="@+id/publisherAdView"
     android:scrollbars="none"
     android:fillViewport="true"
     >
@@ -84,6 +85,7 @@
         android:layout_marginTop="20dp"
         android:fontFamily="@font/cairo"
         />
+
     <TextView
         android:id="@+id/txt"
         android:layout_width="match_parent"

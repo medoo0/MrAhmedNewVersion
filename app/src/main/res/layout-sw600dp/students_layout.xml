@@ -25,8 +25,8 @@
             >
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/circleimage"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
+                android:layout_width="150sp"
+                android:layout_height="150sp"
                 android:layout_gravity="center_vertical|end"
                 android:layout_margin="15dp"
                 android:background="@drawable/ic_student_1"
@@ -50,7 +50,7 @@
                     android:text="علاء محمود حسين"
                     android:gravity="right"
                     android:textColor="@color/color2"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
                 <TextView
                     android:id="@+id/txcountry"
@@ -60,7 +60,7 @@
                     android:gravity="right"
                     android:padding="1dp"
                     android:textColor="@android:color/darker_gray"
-                    android:textSize="30dp"
+                    android:textSize="20sp"
                     android:fontFamily="@font/cairo"
                     android:textStyle="bold"
                     />
@@ -68,8 +68,8 @@
 
             <ImageView
                 android:id="@+id/image_dropdown"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="20dp"
                 android:scaleType="fitXY"
@@ -127,7 +127,7 @@
                 android:fontFamily="@font/cairo"
                 android:text="@string/phone"
                 android:textColor="@android:color/white"
-                android:textSize="40sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
             <TextView
                 android:id="@+id/txphone"
@@ -136,12 +136,12 @@
                 android:fontFamily="@font/cairo"
                 android:text="00201121341098"
                 android:textColor="@android:color/white"
-                android:textSize="40sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <ImageView
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="40sp"
+                android:layout_height="40sp"
                 android:scaleType="fitXY"
                 android:src="@drawable/ic_mobile_phone"
                 android:padding="2dp"
@@ -170,7 +170,7 @@
                 android:fontFamily="@font/cairo"
                 android:text="@string/email"
                 android:textColor="@android:color/white"
-                android:textSize="40sp"
+                android:textSize="25sp"
                 android:textStyle="bold" />
             <TextView
                 android:id="@+id/txemail"
@@ -179,12 +179,12 @@
                 android:fontFamily="@font/cairo"
                 android:text="Android@example.com"
                 android:textColor="@android:color/white"
-                android:textSize="30dp"
+                android:textSize="25sp"
                 android:textStyle="bold" />
 
             <ImageView
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="50sp"
+                android:layout_height="50sp"
                 android:scaleType="fitXY"
                 android:src="@drawable/ic_mail"
                 android:padding="2dp"
@@ -213,13 +213,13 @@
                 android:fontFamily="@font/cairo"
                 android:text="@string/banned"
                 android:textColor="@android:color/white"
-                android:textSize="40sp"
+                android:textSize="25sp"
                 android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/banImag"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/ic_ban"
                 android:padding="2dp"
@@ -249,7 +249,7 @@
                 android:gravity="center"
                 android:text="@string/StudentResult"
                 android:textColor="@android:color/white"
-                android:textSize="40sp"
+                android:textSize="25sp"
                 android:textStyle="bold" />
 
         </LinearLayout>

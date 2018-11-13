@@ -136,19 +136,20 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
     public String Chcek (int Days){
 
         if (Days == 0 ){
-            return " Since Today" ;
+            return "Today" ;
         }
-        else if (Days == 1){
+        if (Days == 1){
             return " Since Yesterday";
         }
-        else if (Days == 2){
-            return "Since before Yesterday";
+        if (Days >= 2){
+            return ""+Days+ "  days ago";
         }
-        else if (Days >= 3){
-            return "Since " + Days  +  "  Days";
-        }
+
         else {
+
+
             return "منذ ...";
+
         }
 
     }

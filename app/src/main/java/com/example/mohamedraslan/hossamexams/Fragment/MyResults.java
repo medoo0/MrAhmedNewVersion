@@ -79,7 +79,7 @@ public class MyResults extends Fragment implements MyResultContract.view {
                 // to the app after tapping on an ad.
             }
         });
-        ControlPanel.Title.setText(R.string.MyResult);
+        ControlPanel.Title.setText("Results Of Student");
         ControlPanel.SetNavChecked(1);
         ControlPanel.progressBar.setVisibility(View.VISIBLE);
         //initialize Presenter .

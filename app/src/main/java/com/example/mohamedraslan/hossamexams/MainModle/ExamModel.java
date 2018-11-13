@@ -35,11 +35,11 @@ public class ExamModel implements ExamContract.model {
                         , Pointer.getString(4), Pointer.getString(5), Pointer.getString(6));
             } else {
 
-                presenter.ExamEnd("   ");
+                presenter.ExamEnd(" You have finished  the Test ");
 
             }
         } else {
-            presenter.BlockScreen("لقد بدأت اختبارك من هاتف اخر او انك قمت بحذف بيانات البرنامج يرجي مراسلة المختص . ");
+            presenter.BlockScreen("You have Started Testing From another Device or You deleted the Program Details. Please, contact the administrator, Mr. Ahmed Samy.");
         }
 
     }
@@ -71,7 +71,7 @@ public class ExamModel implements ExamContract.model {
             }
 
         } else {
-            presenter.Problem("لم يتم اضافة الاجابة السابقة");
+            presenter.Problem("The last answer wasn't added to the database. Please, check your connection.");
         }
 
     }
@@ -89,7 +89,7 @@ public class ExamModel implements ExamContract.model {
 
         } else {
             // impossible to run as I think .
-            presenter.Problem(" الاجابة الصحيحة غير مرفقة . ");
+            presenter.Problem(" The correct answer isn't attached. ");
 
         }
 

@@ -1,32 +1,29 @@
 <resources>
-    <string name="app_name">Mr.Ahmed Samy </string>
+    <string name="app_name">Mr. Ahmed Samy </string>
     <string name="Sign_in">تسجيل الدخول</string>
     <string name="Sign_up">الاشتراك</string>
 
-    <string name="s_in_up">
-        يرجي تسجيل الدخول
-      \n  او الاشتراك
-      \n  اذا لم يكن لديك حساب
-</string>
+    <string name="s_in_up">    يُرجى تسجيل الدخول \n
+    أو الاشتراك لو لم يكن لديك حساب </string>
 
 
     <string name="topteacher"> www.English2Fun.com </string>
     <string name="register"> التسجيل </string>
     <string name="register1">يرجي تعبئة جميع البيانات </string>
-    <string name="third_name"> الاسم الثلاثي </string>
+    <string name="third_name"> الاسم (ثنائي) </string>
     <string name="email">Email</string>
-    <string name="pass"> الرقم السري </string>
-    <string name="Make_sure_From_Pass"> تأكيد الرقم السري </string>
+    <string name="pass"> كلمة المرور </string>
+    <string name="Make_sure_From_Pass"> تأكيد كلمة المرور </string>
     <string name="phone"> Phone Number </string>
-    <string name="ihaveacount"> لديك حساب بالفعل ؟ </string>
+    <string name="ihaveacount"> لديك حساب بالفعل؟ </string>
     <string name="login"> تسجيل الدخول </string>
-    <string name="no_account">ليس لديك حساب ؟ </string>
+    <string name="no_account">ليس لديك حساب؟ </string>
     <string name="write_email">الرجاء كتابة البريد الإلكتروني</string>
     <string name="write_email_in_correct_way">الرجاء كتابة البريد الإلكتروني بطريقة صحيحة</string>
 
     // registration //
     <string name="empty_field"> يرجى تعبئة الحقل من فضلك</string>
-    <string name="notLookedLikeYahoo"> لابد ان يكون علي الشكل  email@example.com   </string>
+    <string name="notLookedLikeYahoo"> لابد أن يكون علي الشكل  email@example.com   </string>
     <string name="enterPass">قم بادخال الرقم السري من فضلك</string>
     <string name="less12char">لابد ان يكون اكثر من 8 حرف للامان</string>
     <string name="should_like_pass"> الرقم السري لابد ان يكون مشابها للذي ادخلته</string>
@@ -40,8 +37,9 @@
     <string name="netword_error"> com.google.firebase.FirebaseNetworkException: A network error (such as timeout, interrupted connection or unreachable host) has occurred. </string>
     <string-array name="country">
 
-        <item>الدوله</item>
+        <item>الدولة</item>
         <item>مصر</item>
+        <item>تركيا</item>
         <item>السودان</item>
         <item>السعوديه</item>
         <item>الامارات</item>
@@ -49,12 +47,16 @@
         <item>قطر</item>
         <item>الصومال</item>
         <item>ليبيا</item>
-        <item>الاردن</item>
+        <item>الأردن</item>
         <item>لبنان</item>
         <item>مالطا</item>
         <item>المغرب</item>
         <item>فلسطين</item>
         <item>تونس</item>
+        <item>الولايات المتحدة الأمريكية</item>
+        <item>إنجلترا</item>
+        <item>كندا</item>
+        <item>النمسا</item>
         <item>اليمن</item>
         <item>الجزائر</item>
         <item>جيبوتي</item>
@@ -66,64 +68,63 @@
 
     // menu //
 
-    <string name="addExam">Add-Exam</string>
-    <string name="mangeStudent">Student-MangMent</string>
+    <string name="addExam">Add exam</string>
+    <string name="mangeStudent">Students Management</string>
 
-    <string name="examList">Exams-List</string>
-    <string name="PleaseMakesure">Please Make Sure From Email And Password  </string>
+    <string name="examList">Exams List</string>
+    <string name="PleaseMakesure">Please make sure that your email and password are correct</string>
     <string name="banned">Blocking</string>
     <string name="Rating"> تقييم الطالب </string>
-    <string name="results">Student-Results</string>
-    <string name="questions">Question-Bank </string>
+    <string name="results">Results of students</string>
+    <string name="questions">Question Bank </string>
     <string name="exit">Exit</string>
     <string name="Search">Search</string>
 
-    <string name="Q_One"> Write Question here </string>
-    <string name="addQ">Add-Question</string>
+    <string name="Q_One"> Write the question here </string>
+    <string name="addQ">Add a question</string>
 
     //aleart dialog
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="title">Warning</string>
-    <string name="message">Do you want to SignOut ? </string>
+    <string name="message">Do you want to Sign out? </string>
     <string name="Ok"> Ok </string>
-    <string name="ask_banned">Are you Sure you are blocking the Student ?</string>
+    <string name="ask_banned">Are you sure you want to block the Student?</string>
     <string name="successful_banned">Student Successfully blocked </string>
     <string name="WrongTitle">Error</string>
-    <string name="YouareBanned">Sorry , ypu have been banned from Admin ..</string>
-    <string name="removeBan">Remove ban  </string>
-    <string name="RemoveAsk">Do you want to unBlock Student ? </string>
+    <string name="YouareBanned">Sorry, you have been banned by the Admin: Mr. Ahmed Samy ..</string>
+    <string name="removeBan">Remove ban </string>
+    <string name="RemoveAsk">Do you want to unBlock Student? </string>
     <string name="RemoveDone">Student Successfully unBlocked</string>
 
     <string name="choosenQuestion">Selected Questions</string>
     <string name="question">Questions</string>
     <string name="examTime">Exam Time</string>
-    <string name="s_m_h">Hour : Minite : Secound </string>
-    <string name="DegreeDistribution">Degree-Distribution</string>
+    <string name="s_m_h">Hour : Minute : Second </string>
+    <string name="DegreeDistribution">Grades</string>
 
-
-    <string name="writeQuestionempty"> Please Enter Question here </string>
+    <string name="writeQuestionempty"> Please, Enter Question here </string>
     <string name="answerOne"> Enter The First Answer </string>
-    <string name="answerTwo"> Enter The Secound Answer</string>
+    <string name="answerTwo"> Enter The Second Answer</string>
     <string name="answerThre"> Enter The Third Answer </string>
     <string name="answerFour"> Enter The Fourth Answer </string>
     <string name="ExamName">Exam Name</string>
 
 
-    <string name="edit_Q">Edit-Question</string>
+    <string name="edit_Q">Edit Question</string>
     <string name="edit">  Editing </string>
     <string name="delete"> Delete Question </string>
 
-    <string name="MyResult">MyResults</string>
-    <string name="aboutus">Contact With us</string>
-    <string name="aboutDoctor">About Doctor</string>
+    <string name="MyResult">My Results</string>
+    <string name="aboutus">Contact us</string>
+    <string name="aboutDoctor">عن مستر أحمد سامي</string>
     <string name="aboutProgrammer">About Programmer </string>
     <string name="sendtoaddexam">Send to Exam</string>
     <string name="delete_Exam">Delete Exam</string>
-    <string name="Aboutus1">دائما نبحث عن التميز والابداع\nومازلنا نبحث عما يرضي أذواق \n عملائنا الكرام</string>
+    <string name="Aboutus1">دائمًا نبحث عن التميز والإبداع\nومازلنا نبحث عما يرضي أذواق \n عملائنا الكرام</string>
     <string name="Contectus">للتواصل</string>
     <string name="Aboutus2">\nم/ علاء محمود \n alaadah95@gmail.com \n م/ محمد رسلان \n mohamed.raslan79@yahoo.com</string>
-    <string name="startexam">Starting</string>
+    <string name="startexam">Start test</string>
     <string name="Next">Next</string>
     <string name="Skip">Skip</string>
     <string name="Result">Exam Result</string>
@@ -131,35 +132,36 @@
     <string name="result">Results</string>
     <string name="hisAnswer">Answered : </string>
     <string name="correctAnswer">Correct Answer :</string>
-    <string name="studentsWrongs">Student Wrongs</string>
-    <string name="StudentResult">  StudentResults \n in all Exams </string>
-    <string name="delete_results">Delete_Results</string>
+    <string name="studentsWrongs">Mistakes of students</string>
+    <string name="StudentResult">  Results Of Student \n in all Exams </string>
+    <string name="delete_results">Delete Results</string>
     <string name="DoctorName">Mr . Ahmed Samy</string>
-    <string name="Personal_Data"> Personal_Data </string>
+    <string name="Personal_Data"> معلومات عن المستر </string>
     <string name="Personal_Data_Details">
-        - الاســـم :   أحمد سامي ابراهيم عمر
+        - الاســـم :   أحمد سامي إبراهيم عمر
                     </string>
 
 
-    <string name="one"> 1. ليسانس اداب وتربيه قسم اللغه الانجليزيه 2007  \n من كليه التربيه  جامعه السادات منوفيه </string>
-    <string name="two"> 2.     دبلومة (الترجمة والأدب الإنجليزي) 2011 من كلية الآداب بشبين الكوم جامعة المنوفية.</string>
+    <string name="one">  1. ليسانس آداب وتربية قسم اللغة الإنجليزية 2007 من كلية التربية فرع  \n السادات جامعة المنوفية. </string>
+    <string name="two">  2. دبلومة الترجمة والأدب الإنجليزي 2011 من كلية  \n الآداب بشبين الكوم جامعة المنوفية.</string>
 
-    <string name="three"> 3.     يدرس حالياً الماجستير في  (الترجمة واللغة Linguistics) في جامعة القاهرة.</string>
+    <string name="three"> 3. يدرس حالياً الماجستير في  الترجمة واللغة   Linguistics  \n في جامعة القاهرة.</string>
 
-    <string name="four"> 4.     شهادة TOEFL في اللغة الإنجليزية 2010.</string>
-    <string name="five">
-5.     شهادة رخصة قيادة الحاسب الآلي على المستوى الدولي (ICDL International) من مركز نظم وتكنولوجيا المعلومات بإدارة جامعة المنوفية 2010.</string>
+    <string name="four"> 4. شهادة TOEFL في اللغة الإنجليزية 2010.</string>
+    <string name="five">5. شهادة رخصة قيادة الحاسب الآلي على  \nالمستوى الدولي  (ICDL International)
+                                    \n  من مركز نظم وتكنولوجيا المعلومات   بإدارة  جامعة المنوفية 2010 .</string>
 
-<string name="sex"> 7.     شهادات أخرى مختلفة في الحاسب الآلي من بينها البرمجة وتصميم المواقع والجرافيك.  </string>
+    <string name="sexplus"> 7. حاصل على (دورة تأهيل المعلم الحديث) 2009.</string>
+<string name="sex"> 6. شهادات أخرى مختلفة في الحاسب الآلي من بينها البرمجة وتصميم المواقع والجرافيك.  </string>
 
-    <string name="experiences">Scientific and Practical experiences</string>
+    <string name="experiences">الشهادات والمؤهلات العلمية</string>
 
 
-    <string name="numberone">   1- الاسم-  \n مستر أحمد سامي  .. معلم لغة إنجليزية للمرحلة الثانوية، ومترجم، ومبرمج ويب محترف، ومدرب كورسات معتمدة لغة إنجليزية.. شارك في ترجمة الكثير من الروايات والأفلام والمسلسلات الأجنبية.. </string>
-    <string name="hobby">  هواياته الترجمة والتصميم والبرمجة والكمبيوتر والإنترنت والقراءة والتأليف.ويملك 3 مواقع إنترنت هي:  </string>
-    <string name="websites1">1- موقع الكابتن ماجد www.CaptainMajed.com </string>
-    <string name="websites2">2- موقع اللغة الإنجليزية www.English2Fun.com </string>
-    <string name="websites3">3- موقع مستر أحمد سامي www.MrAhmedSamy.com </string>
+    <string name="numberone">  - الاسم: مستر أحمد سامي إبراهيم عمر.. معلم لغة إنجليزية للمرحلة الثانوية، ومترجم، ومبرمج ويب محترف، ومدرب كورسات معتمدة لغة إنجليزية.. شارك في ترجمة الكثير من الروايات والأفلام والمسلسلات الأجنبية..  </string>
+    <string name="hobby">  يملك 3 مواقع رسمية على الإنترنت بالإضافة لقناة رسمية على اليوتيوب وهواياته الترجمة والتصميم والبرمجة والكمبيوتر والإنترنت والقراءة والتأليف. المواقع هي:  </string>
+    <string name="websites1"> www.CaptainMajed.com</string>
+    <string name="websites2"> www.English2Fun.com </string>
+    <string name="websites3"> www.MrAhmedSamy.com </string>
 
     <string name="Xzena">    كما شارك في ترجمة المسلسل الأسطوري (هرقل وزينا) الذي تجدونه مترجمًا على الرابط التالي:    \n
         www.xena.english2fun.com     </string>

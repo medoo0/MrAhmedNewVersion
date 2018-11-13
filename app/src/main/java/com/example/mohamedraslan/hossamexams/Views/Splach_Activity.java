@@ -11,7 +11,7 @@ import com.example.mohamedraslan.hossamexams.R;
 public class Splach_Activity extends AppCompatActivity {
 
     AnimatedDialog dialog;
-    private final int SPLASH_DISPLAY_LENGTH = 5000;
+    private final int SPLASH_DISPLAY_LENGTH = 3000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
