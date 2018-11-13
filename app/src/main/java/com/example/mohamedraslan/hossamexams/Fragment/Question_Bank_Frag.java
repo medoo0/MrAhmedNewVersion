@@ -207,7 +207,7 @@ public class Question_Bank_Frag extends Fragment
             public void sentSuccessfully(String Result) {
 
 
-                view.setText("Sended");
+                view.setText("Sent");
 
             }
 
