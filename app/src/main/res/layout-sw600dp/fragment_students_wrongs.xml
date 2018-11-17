@@ -38,7 +38,7 @@
                     android:textDirection="rtl"
                     android:text="@string/studentsWrongs"
                     android:fontFamily="@font/cairo"
-                    android:textSize="40sp"
+                    android:textSize="30sp"
                     android:textColor="@android:color/white"
                     android:gravity="center_horizontal"
                     android:layout_weight="9"
@@ -50,10 +50,10 @@
 
         <LinearLayout
             android:layout_marginStart="45dp"
-            android:gravity="center"
+            android:gravity="end"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_marginEnd="5dp"
+            android:layout_marginEnd="10dp"
             android:layout_height="wrap_content">
 
 
@@ -62,7 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0"
-                android:textSize="40sp"
+                android:textSize="45sp"
                 android:textColor="@android:color/white"
                 android:layout_margin="2dp"
                 />
@@ -71,7 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="/"
-                android:textSize="40sp"
+                android:textSize="35sp"
                 android:textColor="@color/color2"
                 android:layout_margin="2dp"
                 />
@@ -80,7 +80,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0"
-                android:textSize="40sp"
+                android:textSize="35sp"
                 android:textColor="@color/color2"
                 android:layout_margin="2dp"
                 />
@@ -111,12 +111,13 @@
             android:id="@+id/txName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textDirection="ltr"
+            android:textDirection="rtl"
+
             android:fontFamily="@font/cairo"
             android:textSize="40sp"
             android:textColor="@android:color/white"
             android:layout_marginTop="40dp"
-            android:layout_marginEnd="5dp"
+            android:layout_marginEnd="10dp"
             />
 
     </LinearLayout>
@@ -131,5 +132,19 @@
         >
 
     </android.support.v7.widget.RecyclerView>
+
+
+
+    <TextView
+        android:id="@+id/hidetext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="لقد اجتاز هذا الطالب الاختبار  "
+        android:gravity="center"
+        android:textSize="40dp"
+        android:visibility="gone"
+        android:textColor="#cc0d0d"
+        android:fontFamily="@font/cairo"
+        android:layout_centerInParent="true"/>
 
 </RelativeLayout>

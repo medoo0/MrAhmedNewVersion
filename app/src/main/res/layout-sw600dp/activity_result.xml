@@ -39,7 +39,7 @@
                 android:text="@string/Result"
                 android:fontFamily="@font/cairo"
                 android:textColor="@color/color4"
-                android:textSize="70sp"
+                android:textSize="40dp"
                 android:layout_marginBottom="20dp"
                 />
             <LinearLayout
@@ -59,7 +59,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
-                    android:textSize="70sp"
+                    android:textSize="80sp"
                     android:textColor="@color/color4"
                     android:layout_margin="5dp"
                     />
@@ -77,7 +77,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
-                    android:textSize="70sp"
+                    android:textSize="60sp"
                     android:textColor="@color/color2"
                     android:layout_margin="5dp"
                     />
@@ -94,7 +94,7 @@
         android:padding="15sp"
         android:elevation="8dp"
         android:textColor="@android:color/white"
-        android:textSize="70sp"
+        android:textSize="60sp"
         android:background="@drawable/button_background3"
         android:fontFamily="@font/cairo"
         android:layout_marginBottom="10sp"

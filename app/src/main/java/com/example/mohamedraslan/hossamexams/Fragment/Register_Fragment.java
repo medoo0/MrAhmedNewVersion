@@ -2,6 +2,7 @@ package com.example.mohamedraslan.hossamexams.Fragment;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -25,6 +26,8 @@ import com.example.mohamedraslan.hossamexams.Dialog.AnimatedDialog;
 import com.example.mohamedraslan.hossamexams.JsonModel.Resister_form;
 import com.example.mohamedraslan.hossamexams.MainPresnter.RegisterPresnter;
 import com.example.mohamedraslan.hossamexams.R;
+import com.example.mohamedraslan.hossamexams.SqLite.Operation;
+import com.example.mohamedraslan.hossamexams.SqLite.SQlHelper;
 import com.example.mohamedraslan.hossamexams.Utils.ViewsEmpty;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
@@ -42,6 +45,8 @@ public class Register_Fragment extends Fragment implements View.OnClickListener 
     Button registeringToData;
     PublisherAdView mPublisherAdView;
 
+    SQLiteDatabase mydb , dpread;
+    SQlHelper helper;
     String[] country;
     AnimatedDialog animatedDialog;
     private FirebaseDatabase firebaseDatabase;
@@ -59,6 +64,8 @@ public class Register_Fragment extends Fragment implements View.OnClickListener 
         reference        = firebaseDatabase.getReference("Users");
         preferences      = Objects.requireNonNull(getActivity()).getSharedPreferences("user_details", Context.MODE_PRIVATE);
         editor           = preferences.edit();
+        helper = new SQlHelper(getActivity());
+        mydb   = helper.getWritableDatabase();
         // country array in spinner //
     }
 
@@ -215,13 +222,21 @@ public class Register_Fragment extends Fragment implements View.OnClickListener 
     public void successDataSaved(String email , String password) {
         registeringToData.setEnabled(true);
         animatedDialog.Close_Dialog();
+        if (Operation.storingEmails(mydb,email)){
 
-        MainActivityContract.View view1 = (MainActivityContract.View) getActivity();
-        if (view1!=null){
 
-            view1.openControlPanel(email,password);
+            MainActivityContract.View view1 = (MainActivityContract.View) getActivity();
+            if (view1!=null){
 
-        }
+                view1.openControlPanel(email,password);
+
+            }
+
+
+
+       }
+
+
 
 
         // حنروح للاكتفتي

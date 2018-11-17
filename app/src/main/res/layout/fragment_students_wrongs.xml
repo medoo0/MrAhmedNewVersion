@@ -47,11 +47,11 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginStart="45dp"
-            android:gravity="center"
+            android:layout_marginStart="20dp"
+            android:gravity="end"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_marginEnd="5dp"
+            android:layout_marginEnd="10dp"
             android:layout_height="wrap_content">
 
 
@@ -78,7 +78,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0"
-                android:textSize="35sp"
+                android:textSize="25sp"
                 android:textColor="@color/color2"
                 android:layout_margin="2dp"
                 />
@@ -109,12 +109,13 @@
             android:id="@+id/txName"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:textDirection="ltr"
+            android:textDirection="rtl"
+            android:gravity="start"
             android:fontFamily="@font/cairo"
             android:textSize="22sp"
             android:textColor="@android:color/white"
             android:layout_marginTop="40dp"
-            android:layout_marginEnd="5dp"
+            android:layout_marginEnd="10dp"
             />
 
     </LinearLayout>
@@ -129,5 +130,18 @@
         >
 
     </android.support.v7.widget.RecyclerView>
+
+
+    <TextView
+        android:id="@+id/hidetext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="لقد اجتاز هذا الطالب الاختبار  "
+        android:gravity="center"
+        android:textSize="30dp"
+        android:visibility="gone"
+        android:textColor="#cc0d0d"
+        android:fontFamily="@font/cairo"
+        android:layout_centerInParent="true"/>
 
 </RelativeLayout>

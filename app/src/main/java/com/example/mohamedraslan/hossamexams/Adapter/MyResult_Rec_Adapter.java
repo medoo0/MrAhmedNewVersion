@@ -1,12 +1,18 @@
 package com.example.mohamedraslan.hossamexams.Adapter;
 
+import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.mohamedraslan.hossamexams.Contracts.MyResultContract;
+import com.example.mohamedraslan.hossamexams.Fragment.StudentsWrongs;
 import com.example.mohamedraslan.hossamexams.JsonModel.Result_Pojo;
 import com.example.mohamedraslan.hossamexams.R;
 
@@ -23,9 +29,11 @@ public class MyResult_Rec_Adapter extends RecyclerView.Adapter<MyResult_Rec_Adap
 
 
     List<Result_Pojo> Result;
+    MyResultContract.view view;
 
-    public MyResult_Rec_Adapter(List<Result_Pojo> result) {
-        this.Result = result;
+    public MyResult_Rec_Adapter(List<Result_Pojo> result, MyResultContract.view view) {
+        Result = result;
+        this.view = view;
     }
 
     @NonNull
@@ -36,7 +44,7 @@ public class MyResult_Rec_Adapter extends RecyclerView.Adapter<MyResult_Rec_Adap
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyResult_Rec_Adapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyResult_Rec_Adapter.ViewHolder holder, final int position) {
         holder.txExamName.setText(Result.get(position).getExamName());
         holder.txDegree.setText(Result.get(position).getTotal());
         holder.txFinalDegree.setText(Result.get(position).getFinalDegree());
@@ -56,6 +64,25 @@ public class MyResult_Rec_Adapter extends RecyclerView.Adapter<MyResult_Rec_Adap
             holder.Cardview.animate().translationXBy(-1000).setDuration(800);
 
         }
+
+
+        holder.Cardview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                if(Result.get(position).getWrongQuestions() != null)
+                    if(Result.get(position).getWrongQuestions().size() > 0 ) {
+
+
+                    //show fragment
+                        view.showAtherFragment(Result.get(position),Result.get(position).getFinalDegree(),Result.get(position).getTotal());
+
+
+                    }
+
+            }
+        });
 
 
 

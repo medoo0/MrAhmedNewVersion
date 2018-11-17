@@ -7,6 +7,7 @@
     أو الاشتراك لو لم يكن لديك حساب </string>
 
 
+
     <string name="topteacher"> www.English2Fun.com </string>
     <string name="register"> التسجيل </string>
     <string name="register1">يرجي تعبئة جميع البيانات </string>
@@ -87,7 +88,7 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="title">Warning</string>
-    <string name="message">Do you want to Sign out? </string>
+    <string name="message">Do you want to sign out? </string>
     <string name="Ok"> Ok </string>
     <string name="ask_banned">Are you sure you want to block the Student?</string>
     <string name="successful_banned">Student Successfully blocked </string>

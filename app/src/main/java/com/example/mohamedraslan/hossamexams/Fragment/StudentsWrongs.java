@@ -40,6 +40,12 @@ public class StudentsWrongs extends Fragment {
     @BindView(R.id.txFinalDegree)
     TextView txFinalDegree;
 
+    @BindView(R.id.title)
+    TextView title;
+
+    @BindView(R.id.hidetext)
+    TextView hidetext;
+
     @BindView(R.id.circleimage)
     CircleImageView circleimage;
 
@@ -51,8 +57,7 @@ public class StudentsWrongs extends Fragment {
 
     @BindView(R.id.delete)
     ImageView delete ;
-
-
+    String val = "";
     ArrayList<WorngQestion> wrong ;
     String examID , UserUid;
     AnimatedDialog dialog;
@@ -65,6 +70,15 @@ public class StudentsWrongs extends Fragment {
             setSharedElementEnterTransition(TransitionInflater.from(getContext())
                     .inflateTransition(android.R.transition.move));
         }
+
+        if (getArguments()!=null){
+
+           val = getArguments().getString("me","");
+
+
+        }
+
+
     }
 
     @Override
@@ -80,7 +94,7 @@ public class StudentsWrongs extends Fragment {
         ButterKnife.bind(this,v);
         wrong = new ArrayList<>();
         dialog = new AnimatedDialog(getActivity());
-        if (getArguments() != null) {
+        if (getArguments() != null && val.equals("") ) {
             String name = getArguments().getString("Name");
             String total= getArguments().getString("Total");
             String FinalDegree= getArguments().getString("FinalDegree");
@@ -93,17 +107,54 @@ public class StudentsWrongs extends Fragment {
             txFinalDegree.setText(FinalDegree);
             txName.setText(name);
 
+            if (wrong!=null){
+
+
+                StudentsWrongs_Rec_Adapter adapter = new StudentsWrongs_Rec_Adapter(wrong);
+                Wrongs_rec.setLayoutManager(new LinearLayoutManager(getActivity()));
+                Wrongs_rec.setAdapter(adapter);
+
+
+            }else {
+
+                String nam = getArguments().getString("Name");
+                String tota= getArguments().getString("Total");
+                String FinalDegre= getArguments().getString("FinalDegree");
+                examID = getArguments().getString("examID");
+                UserUid = getArguments().getString("UserUid");
+                int soure = getArguments().getInt("Image");
+                circleimage.setBackgroundResource(soure);
+                txDegree.setText(tota);
+                txFinalDegree.setText(FinalDegre);
+                txName.setText(nam);
+                hidetext.setVisibility(View.VISIBLE);
+
+            }
 
         }
 
-        StudentsWrongs_Rec_Adapter adapter = new StudentsWrongs_Rec_Adapter(wrong);
-        Wrongs_rec.setLayoutManager(new LinearLayoutManager(getActivity()));
-        Wrongs_rec.setAdapter(adapter);
+        else if ( getArguments() !=null &&val.equals("1")){
+            txName.setVisibility(View.GONE);
+            title.setText("My Mistakes");
+            delete.setVisibility(View.GONE);
+            circleimage.setVisibility(View.GONE);
+            wrong             = getArguments().getParcelableArrayList("WrongQuestions");
+            String total      = getArguments().getString("Total");
+            String FinalDegree= getArguments().getString("FinalDegree");
+            txFinalDegree.setText(FinalDegree);
+            txDegree.setText(total);
+            StudentsWrongs_Rec_Adapter adapter = new StudentsWrongs_Rec_Adapter(wrong);
+            Wrongs_rec.setLayoutManager(new LinearLayoutManager(getActivity()));
+            Wrongs_rec.setAdapter(adapter);
+
+        }
+
+
 
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final AlertDialog alertDialog = new AlertDialog(getActivity(),"تحذير" , "يرجي العلم انه في حالة حذف الطالب . سوف يتمكن الطالب من دخول الاختبار مرة اخري وذلك في حالة وجود الاختبار في قائمة الاختبارات , متأكد ؟");
+                final AlertDialog alertDialog = new AlertDialog(getActivity(),"تحذير" , "يُرجى العلم أنه في حالة حذف الطالب، سوف يتمكن الطالب من دخول الاختبار مرة أخرى وذلك في حالة وجود الاختبار في قائمة الاختبارات. متأكد؟");
                 alertDialog.show();
                 alertDialog.btnYes.setOnClickListener(new View.OnClickListener() {
                     @Override

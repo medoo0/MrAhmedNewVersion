@@ -255,7 +255,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:fontFamily="@font/cairo"
-                    android:text=" for each Question "
+                    android:text=" For each question "
                     android:textColor="@android:color/black"
                     android:textSize="18sp" />
 
@@ -275,7 +275,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:fontFamily="@font/cairo"
-                    android:text=" Degree. "
+                    android:text=" Grades "
                     android:textColor="@android:color/black"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -292,7 +292,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:fontFamily="@font/cairo"
-                    android:text=" Number of Random Question "
+                    android:text=" Number of Random Questions "
                     android:textColor="@android:color/black"
                     android:textSize="18sp" />
 
@@ -321,7 +321,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:fontFamily="@font/cairo"
-                    android:text=" final degree - "
+                    android:text=" Final grade - "
                     android:textColor="@android:color/black"
                     android:textSize="18sp" />
 

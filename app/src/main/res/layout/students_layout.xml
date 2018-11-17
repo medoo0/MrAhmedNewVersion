@@ -51,18 +51,42 @@
                     android:textColor="@color/color2"
                     android:textSize="16sp"
                     android:textStyle="bold" />
-                <TextView
-                    android:id="@+id/txcountry"
+
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="مصر"
-                    android:gravity="right"
-                    android:padding="1dp"
-                    android:textColor="@android:color/darker_gray"
-                    android:textSize="14sp"
-                    android:fontFamily="@font/cairo"
-                    android:textStyle="bold"
-                    />
+                    android:orientation="horizontal"
+                    android:layout_height="match_parent">
+
+
+
+                    <TextView
+                        android:id="@+id/txcountry"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="مصر"
+                        android:gravity="right"
+                        android:padding="1dp"
+                        android:layout_marginEnd="20dp"
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/cairo"
+                        android:textStyle="bold"
+                        />
+
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:text="من طلابي"
+                        android:gravity="center"
+                        android:fontFamily="@font/cairo"
+                        android:background="@color/colorAccent"
+                        android:layout_height="match_parent" />
+
+
+                </LinearLayout>
+
+
             </LinearLayout>
 
             <ImageView

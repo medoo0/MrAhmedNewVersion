@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layoutDirection="ltr"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/answercorner"
+    android:layout_margin="10dp"
+
+    >
+
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|end"
+        android:layout_margin="10dp"
+        android:id="@+id/Liner1"
+        >
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="25sp"
+            android:layout_marginStart="50dp"
+            android:text="التقط التطبيق هذه الإيميلات. هل أحدها يخصك؟ "
+            android:fontFamily="@font/atherfont"
+            android:gravity="center_vertical"
+            android:layout_marginEnd="5dp"
+            android:textColor="@color/color4"
+            />
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/icon"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/Liner2"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|end"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_below="@+id/Liner1"
+        >
+
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:id="@+id/emailssuggetion"
+            android:layout_width="match_parent"
+            android:layout_height="250dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/Liner3"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:paddingBottom="20dp"
+        android:layoutDirection="rtl"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|start"
+        android:layout_margin="10dp"
+        android:layout_below="@+id/Liner2">
+
+
+
+
+
+
+        <TextView
+            android:id="@+id/noSuggestion"
+            android:textSize="25sp"
+            android:textColor="@color/color6"
+            android:gravity="center"
+            android:fontFamily="@font/atherfont"
+            android:layout_width="match_parent"
+            android:text="لا إيميل من هؤلاء يخصني"
+            android:layout_height="wrap_content" />
+
+
+
+    </LinearLayout>
+
+
+
+
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

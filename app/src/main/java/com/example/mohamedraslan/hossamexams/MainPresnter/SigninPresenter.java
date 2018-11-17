@@ -30,8 +30,8 @@ public class SigninPresenter implements SigninContract.presenter {
     }
 
     @Override
-    public void updatelogInResult(String Result) {
-        view.logInResult(Result);
+    public void updatelogInResult(String Result,String email) {
+        view.logInResult(Result,email);
     }
 
 

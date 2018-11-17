@@ -6,19 +6,6 @@
     android:background="@drawable/gradiantcolor"
  >
 
-
-    <com.google.android.gms.ads.doubleclick.PublisherAdView
-        xmlns:ads="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/publisherAdView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true"
-        ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_ad_unit_id">
-    </com.google.android.gms.ads.doubleclick.PublisherAdView>
-
-
     <ScrollView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -107,7 +94,7 @@
         android:gravity="center_horizontal"
         android:id="@+id/linearLayout"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="90dp"
 
         >
 
@@ -141,4 +128,16 @@
     </LinearLayout>
 </LinearLayout>
 </ScrollView>
+
+    <com.google.android.gms.ads.doubleclick.PublisherAdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/publisherAdView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id">
+    </com.google.android.gms.ads.doubleclick.PublisherAdView>
+
 </RelativeLayout>

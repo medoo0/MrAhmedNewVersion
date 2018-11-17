@@ -52,7 +52,7 @@
                 android:gravity="center_horizontal"
                 android:text="@string/Sign_in"
                 android:textColor="@android:color/white"
-                android:textSize="40sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
             <TextView
                 android:id="@+id/txt2"
@@ -65,11 +65,11 @@
                 android:gravity="center_horizontal"
                 android:text="@string/register1"
                 android:textColor="@android:color/white"
-                android:textSize="40sp"
+                android:textSize="20sp"
                 android:textStyle="normal" />
 
             <LinearLayout
-                android:layout_width="600dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_gravity="center_horizontal"
@@ -99,7 +99,7 @@
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:gravity="right|center_vertical"
-                    android:textSize="40sp"
+                    android:textSize="20sp"
                     android:background="@android:color/white"
                     android:paddingStart="15dp"
                     android:fontFamily="@font/cairo"
@@ -129,7 +129,7 @@
                     android:gravity="right|center_vertical"
                     android:fontFamily="@font/cairo"
                     android:paddingEnd="15dp"
-                    android:textSize="40sp"
+                    android:textSize="20sp"
                     android:paddingStart="15dp"
                     android:layout_marginTop="5dp"
                     android:background="@android:color/white"
@@ -146,7 +146,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="62dp"
                 android:text="@string/Sign_in"
-                android:textSize="40sp"
+                android:textSize="20sp"
                 android:fontFamily="@font/cairo"
                 android:background="@drawable/button_background2"
                 android:textColor="@color/color1"
@@ -172,17 +172,21 @@
                     android:fontFamily="@font/cairo"
                     android:text="@string/Sign_up"
                     android:textColor="@android:color/white"
-                    android:textSize="40sp"
+                    android:textSize="25sp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="205dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/cairo"
+                    android:paddingEnd="10dp"
+                    android:gravity="center"
+
+                    android:paddingStart="10dp"
                     android:text="@string/no_account"
                     android:textColor="@android:color/white"
-                    android:textSize="40sp"
-                    android:textStyle="italic" />
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 

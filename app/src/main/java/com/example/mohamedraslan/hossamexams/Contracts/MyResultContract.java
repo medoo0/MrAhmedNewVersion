@@ -12,6 +12,7 @@ public interface MyResultContract {
     interface view {
 
         void ConfigRecycler(List<Result_Pojo> result);
+        void showAtherFragment(Result_Pojo result_pojo,String FinalD , String TotalD);
 
         void Problem(String s);
     }

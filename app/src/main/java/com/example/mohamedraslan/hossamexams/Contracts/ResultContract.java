@@ -31,7 +31,7 @@ public interface ResultContract {
 
         void WrongQuestions(ArrayList<WorngQestion> worngQestions);
 
-        void UploadResult(String substring, String uid, String examDate, String examname, String finalDegree, String total, ArrayList<WorngQestion> worngQestions);
+        void UploadResult(String substring, String uid, String examDate, String examname, String finalDegree, String total, ArrayList<WorngQestion> worngQestions,String userName);
 
         void UploadSuccessFull(String s);
 
@@ -43,6 +43,6 @@ public interface ResultContract {
 
         void getWrongQestions(SQLiteDatabase db, String tableName);
 
-        void UploadResult(String examID, String uid, String examDate, String examname, String finalDegree, String total, ArrayList<WorngQestion> worngQestions);
+        void UploadResult(String examID, String uid, String examDate, String examname, String finalDegree, String total, ArrayList<WorngQestion> worngQestions,String userName);
     }
 }

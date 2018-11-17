@@ -3,6 +3,7 @@ package com.example.mohamedraslan.hossamexams.Views;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -11,13 +12,22 @@ import android.widget.TextView;
 import com.example.mohamedraslan.hossamexams.Contracts.ResultContract;
 import com.example.mohamedraslan.hossamexams.Dialog.AlertDialog;
 import com.example.mohamedraslan.hossamexams.Dialog.AnimatedDialog;
+import com.example.mohamedraslan.hossamexams.Enums.DataBase_Refrences;
+import com.example.mohamedraslan.hossamexams.JsonModel.FullResult;
+import com.example.mohamedraslan.hossamexams.JsonModel.Resister_form;
 import com.example.mohamedraslan.hossamexams.JsonModel.WorngQestion;
 import com.example.mohamedraslan.hossamexams.MainPresnter.ResultPresenter;
 import com.example.mohamedraslan.hossamexams.R;
 import com.example.mohamedraslan.hossamexams.SqLite.SQlHelper;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -97,14 +107,39 @@ public class Result extends AppCompatActivity implements ResultContract.view {
     }
 
     @Override
-    public void WrongQuestions(ArrayList<WorngQestion> worngQestions) {
+    public void WrongQuestions(final ArrayList<WorngQestion> worngQestions) {
 
-        presenter.UploadResult(TableName.replace(FirebaseAuth.getInstance().getCurrentUser().getUid(),"").substring(1)
-                , FirebaseAuth.getInstance().getCurrentUser().getUid(),
-                ExamDate,Examname,finalDegree, total ,worngQestions
-                );
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.USERREF.getRef())
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    //Get Student Name .
+                    Resister_form form = dataSnapshot.getValue(Resister_form.class);
 
-        dialog.Close_Dialog();
+
+                    presenter.UploadResult(TableName.replace(FirebaseAuth.getInstance().getCurrentUser().getUid(),"").substring(1)
+                            , FirebaseAuth.getInstance().getCurrentUser().getUid(),
+                            ExamDate,Examname,finalDegree, total ,worngQestions, Objects.requireNonNull(form).getNameStudent());
+
+                    dialog.Close_Dialog();
+
+                }
+                else {
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+
 
     }
 

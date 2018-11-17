@@ -192,7 +192,7 @@ public class AboutDoctor extends Fragment {
             public void onClick(View v) {
 
                 try {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("twitter://user?screen_name=" + "ahmedsamy3000")));
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/ahmedsamy3000")));
                 }catch (Exception e) {
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/#!/" + "ahmedsamy3000")));
                 }

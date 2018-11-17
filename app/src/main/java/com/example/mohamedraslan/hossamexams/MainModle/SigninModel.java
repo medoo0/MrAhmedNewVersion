@@ -57,7 +57,7 @@ public class SigninModel implements SigninContract.model {
     }
 
     @Override
-    public void logIn(String email, String password) {
+    public void logIn(final String email, String password) {
         auth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
 
             @Override
@@ -65,14 +65,14 @@ public class SigninModel implements SigninContract.model {
                 if(task.isSuccessful()) {
 
                     // successful
-                    presenter.updatelogInResult("Successful");
+                    presenter.updatelogInResult("Successful",email);
 
 
                 }
                 else {
 
 
-                    presenter.updatelogInResult("Failure");
+                    presenter.updatelogInResult("Failure",email);
                 }
 
             }

@@ -261,7 +261,7 @@
 
                           <TextView
                               android:layout_width="40dp"
-                            android:text="D-"
+                            android:text="C-"
                             android:padding="5dp"
                             android:layout_marginStart="1dp"
                             android:layout_marginBottom="5dp"

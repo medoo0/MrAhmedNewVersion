@@ -94,7 +94,7 @@ public class addExamModel implements addExamContract.model {
                 }
                 else {
 
-                    presenter.Problem("لم تقم باختيار اسئلة من بنك الاسئلة .");
+                    presenter.Problem("لم تقم باختيار أسئلة من بنك الأسئلة. ");
 
                 }
             }

@@ -22,23 +22,15 @@ public class SQlHelper extends SQLiteOpenHelper {
     public static String Degree = "Degree";
 
     public SQlHelper(Context context  ) {
-        super(context,DataBase_Name,null,4);
+        super(context,DataBase_Name,null,5);
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
-//        sqLiteDatabase.execSQL("CREATE TABLE " + ExamID + " ( "
-//                + ID_Qestion + " TEXT ,"
-//                + question + " TEXT ,"
-//                + answerOne + " TEXT ,"
-//                + answerTwo + " TEXT ,"
-//                + answerThree + " TEXT ,"
-//                + answerFour + " TEXT ,"
-//                + correctAnswer + " TEXT ,"
-//                + Student_Answer + " TEXT "
-//                +" ) "
-//        );
+        String s = " CREATE TABLE Email (ID integer primary key autoincrement , COL1 TEXT  ) ";
+        sqLiteDatabase.execSQL(s);
+
     }
 
     public void createExamTable(String ExamID) {
@@ -63,7 +55,8 @@ public class SQlHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ ExamID + "");
+//        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ ExamID + "");
+
         onCreate(sqLiteDatabase);
     }
 }

@@ -11,13 +11,15 @@ public interface SigninContract {
         void logIn(String email, String password);
     }
     interface presenter{
-
         void passtocheck(String et_email, String et_password);
         void passlogIn(String email, String password);
-        void updatelogInResult(String Result);
+        void updatelogInResult(String Result,String email);
     }
     interface view{
         void checkResult(String Result);
-        void logInResult(String Result);
+        void logInResult(String Result,String email);
+
+
+        void getEmailinEditText(String email);
     }
 }

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -27,11 +28,16 @@ import com.example.mohamedraslan.hossamexams.Fragment.ExamsResults;
 import com.example.mohamedraslan.hossamexams.Fragment.MyResults;
 import com.example.mohamedraslan.hossamexams.Fragment.Question_Bank_Frag;
 import com.example.mohamedraslan.hossamexams.Fragment.StudentManagement;
+import com.example.mohamedraslan.hossamexams.Fragment.StudentsWrongs;
 import com.example.mohamedraslan.hossamexams.Fragment.addExam;
+import com.example.mohamedraslan.hossamexams.JsonModel.Result_Pojo;
+import com.example.mohamedraslan.hossamexams.JsonModel.WorngQestion;
 import com.example.mohamedraslan.hossamexams.MainPresnter.ControlpanelPresnter;
 import com.example.mohamedraslan.hossamexams.R;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -98,6 +104,58 @@ public class ControlPanel extends AppCompatActivity
     }
 
 
+    @Override
+    public void showWrongsforStudent(Result_Pojo result_pojo,String FinalDegree , String TotalD) {
+
+
+        StudentsWrongs myResults = new StudentsWrongs();
+        Bundle b   = new Bundle();
+        b.putString("me" , "1");
+        b.putString("FinalDegree",FinalDegree);
+        b.putString("Total",TotalD);
+        b.putParcelableArrayList("WrongQuestions",result_pojo.getWrongQuestions());
+        myResults.setArguments(b);
+        getSupportFragmentManager().popBackStack();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
+                .replace(R.id.Exam_Frame,myResults).addToBackStack(null)
+                .commit();
+
+    }
+
+    @Override
+    public void showFragmentWrongs(String name, String finalDegree, String total, String examID, ArrayList<WorngQestion> arrayList, Integer imageTag, String uID, CircleImageView imageView) {
+
+
+
+        Bundle bundle = new Bundle();
+        bundle.putString("Name",name );
+        bundle.putString("FinalDegree",finalDegree);
+        bundle.putString("Total",total);
+        bundle.putString("examID",examID);
+        bundle.putParcelableArrayList("WrongQuestions",arrayList);
+        //to pass image to next fragment.
+        bundle.putInt("Image", imageTag);
+        bundle.putString("UserUid",uID);
+        // set MyFragment Arguments
+        StudentsWrongs StudentsWrongs = new StudentsWrongs();
+        StudentsWrongs.setArguments(bundle);
+
+
+
+
+        ViewCompat.setTransitionName(imageView, "Image");
+        getSupportFragmentManager()
+                .beginTransaction()
+                .addSharedElement(imageView, imageView.getTransitionName())
+                .replace(R.id.Exam_Frame, StudentsWrongs)
+                .addToBackStack(null)
+                .commit();
+
+
+
+    }
 
     @Override
     public void initializeViews() {
@@ -372,6 +430,7 @@ public class ControlPanel extends AppCompatActivity
     }
     @Override
     public void AdminTools() {
+
         Menu nav_Menu = navigation.getMenu();
         nav_Menu.findItem(R.id.addExam).setVisible(true);
         nav_Menu.findItem(R.id.questions).setVisible(true);

@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.mohamedraslan.hossamexams.Adapter.MyResult_Rec_Adapter;
+import com.example.mohamedraslan.hossamexams.Contracts.ControlPanelContract;
 import com.example.mohamedraslan.hossamexams.Contracts.MyResultContract;
 import com.example.mohamedraslan.hossamexams.JsonModel.Result_Pojo;
 import com.example.mohamedraslan.hossamexams.MainPresnter.MyResultPresenter;
@@ -105,8 +106,7 @@ public class MyResults extends Fragment implements MyResultContract.view {
         //Stop progress .
         ControlPanel.progressBar.setVisibility(View.INVISIBLE);
 
-        MyResult_Rec_Adapter adapter = new MyResult_Rec_Adapter(result);
-
+        MyResult_Rec_Adapter adapter = new MyResult_Rec_Adapter(result,this);
         //**// reverse Recycler view .
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
@@ -115,6 +115,22 @@ public class MyResults extends Fragment implements MyResultContract.view {
         recyclerView.setLayoutManager(mLayoutManager);
         //**\\
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void showAtherFragment(Result_Pojo result_pojo,String FinalD , String TotalDegree) {
+
+        ControlPanelContract.ControlUI controlUI = (ControlPanelContract.ControlUI) getActivity();
+
+        if (controlUI!=null){
+
+
+            controlUI.showWrongsforStudent(result_pojo,FinalD , TotalDegree);
+
+
+        }
+
+
     }
 
     @Override
