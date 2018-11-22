@@ -48,7 +48,6 @@ public class StudentResult extends Fragment implements StudentResultContract.Mai
     @BindView(R.id.Student_Result_Rec)
     RecyclerView recyclerView;
 
-
     FirebaseDatabase firebaseDatabase;
     DatabaseReference reference;
     SearchView searchresult;

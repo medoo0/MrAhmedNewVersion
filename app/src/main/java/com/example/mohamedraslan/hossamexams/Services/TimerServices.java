@@ -37,13 +37,19 @@ public class TimerServices extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
+        if(intent != null) {
+            TableID = intent.getStringExtra("TableID");
+            final_degree = intent.getStringExtra("final_degree");
+            Examname = intent.getStringExtra("Examname");
+            ExamDate = intent.getStringExtra("ExamDate");
+            TableSqlname = "T" + TableID + FirebaseAuth.getInstance().getCurrentUser().getUid();
+        }
+        else {
 
-        TableID =  intent.getStringExtra("TableID");
-        final_degree = intent.getStringExtra("final_degree");
-        Examname = intent.getStringExtra("Examname");
-        ExamDate = intent.getStringExtra("ExamDate");
-        TableSqlname = "T"+TableID+ FirebaseAuth.getInstance().getCurrentUser().getUid();
+            //Close Services .
+            stopSelf();
 
+        }
         reference = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.STARTEDEXAM.getRef())
                 .child(TableID).child(FirebaseAuth.getInstance().getCurrentUser().getUid());
 

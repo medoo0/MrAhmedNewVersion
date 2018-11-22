@@ -10,7 +10,7 @@
             app:showAsAction="always"
             />
         <item android:id="@+id/allowall"
-            android:icon="@drawable/removingstudent"
+            android:icon="@drawable/ic_round_delete_button"
             android:title="allow"
             app:showAsAction="always"
             />

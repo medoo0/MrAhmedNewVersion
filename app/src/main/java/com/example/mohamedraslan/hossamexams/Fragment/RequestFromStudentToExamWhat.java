@@ -14,12 +14,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.ImageView;
 
 import com.example.mohamedraslan.hossamexams.Adapter.AdapterExamsStudents;
 import com.example.mohamedraslan.hossamexams.Adapter.PermissionExamsAdapter;
 import com.example.mohamedraslan.hossamexams.Contracts.ControlPanelContract;
 import com.example.mohamedraslan.hossamexams.Contracts.RequestFromStudentToExamWhatContract;
+import com.example.mohamedraslan.hossamexams.Dialog.AlertDialog;
 import com.example.mohamedraslan.hossamexams.Dialog.AnimatedDialog;
 import com.example.mohamedraslan.hossamexams.JsonModel.PermissionUserEntering;
 import com.example.mohamedraslan.hossamexams.MainPresnter.RequestFromStudentToExamWhatPresnter;
@@ -160,6 +162,7 @@ public class RequestFromStudentToExamWhat extends Fragment implements RequestFro
             case R.id.allowall:
 
                 if (adapter!=null){
+
                     animatedDialog.ShowDialog();
                     adapter.allowAllusers(examID,animatedDialog);
 

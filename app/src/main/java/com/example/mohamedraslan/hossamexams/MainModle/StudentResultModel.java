@@ -40,6 +40,7 @@ public class StudentResultModel implements StudentResultContract.MainModel {
                             List<Result_Pojo> toutourial = new ArrayList<>(Objects.requireNonNull(results).values());
                             presnter.resulthereupdateview(toutourial,imageView);
 
+
                         }else {
 
                             presnter.noDataExisit(imageView);

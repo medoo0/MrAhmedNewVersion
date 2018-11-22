@@ -191,12 +191,11 @@ public class AdapterExamsStudents extends RecyclerView.Adapter<ExamStudenstHolde
 
 
 
-        final AlertDialog alertDialog = new AlertDialog(context,"تحذير"," يرجي العلم أن جميع الطلاب سوف تتمكن من الدخول الي الإختبار مجددا. متأكد ؟ ");
-        alertDialog.show();
+        final AlertDialog alertDialog = new AlertDialog(context,"تحذير"," يرجي العلم أن جميع المطالبين باعادة الاختبار سوف يتمكنون من الدخول الي الإختبار مجددا. متأكد ؟ ");
         alertDialog.btnYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                alertDialog.show();
                 alertDialog.dismiss();
                 FirebaseDatabase firebaseDatabasea = FirebaseDatabase.getInstance();
                 DatabaseReference reference        = firebaseDatabasea.getReference(DataBase_Refrences.Permissions.getRef());
@@ -212,7 +211,6 @@ public class AdapterExamsStudents extends RecyclerView.Adapter<ExamStudenstHolde
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()){
-
                                         mainView.refreshFragment();
                                         animatedDialog.Close_Dialog();
                                     }

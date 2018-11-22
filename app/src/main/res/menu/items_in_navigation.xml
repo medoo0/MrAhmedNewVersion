@@ -37,7 +37,7 @@ xmlns:tools="http://schemas.android.com/tools"
 
     <item android:title="Student Request"
         android:id="@+id/per"
-        android:icon="@drawable/ic_exiticon"/>
+        android:icon="@drawable/ic_icon_qq"/>
 
 </group>
     <item android:title="@string/aboutus">
