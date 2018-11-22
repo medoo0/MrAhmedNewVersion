@@ -121,6 +121,7 @@ public class PermissionsFromStudent extends Fragment implements PermissionExamsC
     @Override
     public void allRefrenceHere(List<Permission_Refrence> list) {
 
+
         ControlPanel.progressBar.setVisibility(View.INVISIBLE);
         adapter = new PermissionExamsAdapter(list,getActivity(),this);
         permission.setHasFixedSize(true);

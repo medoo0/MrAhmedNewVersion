@@ -21,8 +21,10 @@ import com.example.mohamedraslan.hossamexams.Dialog.AnimatedDialog;
 import com.example.mohamedraslan.hossamexams.Dialog.CustomTypeFaceSpan;
 import com.example.mohamedraslan.hossamexams.Enums.DataBase_Refrences;
 import com.example.mohamedraslan.hossamexams.R;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -145,24 +147,57 @@ public class ViewHolder extends RecyclerView.ViewHolder  {
   private void Delete_Exam(){
 
     DatabaseReference reference = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.EXAMS.getRef()).child(ExamID);
-    reference.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+    reference.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
       @Override
-      public void onSuccess(Void aVoid) {
+      public void onComplete(@NonNull Task<Void> task) {
 
-        dialog.Close_Dialog();
-        AlertDialog alertDialog = new AlertDialog(context,"تم حذف الاختبار بنجاح");
-        alertDialog.show();
+        if (task.isSuccessful()){
+
+          DatabaseReference reference = FirebaseDatabase.getInstance().getReference("PermissionRefrence").child(ExamID);
+          reference.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+              if (task.isSuccessful()){
+
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.Permissions.getRef()).child(ExamID);
+                reference.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                  @Override
+                  public void onComplete(@NonNull Task<Void> task) {
+
+                    if (task.isSuccessful()){
+
+                      DatabaseReference reference = FirebaseDatabase.getInstance().getReference("ExamStarted").child(ExamID);
+                      reference.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                          if (task.isSuccessful()){
 
 
-      }
-    }).addOnFailureListener(new OnFailureListener() {
+                            dialog.Close_Dialog();
+                            AlertDialog alertDialog = new AlertDialog(context,"تم حذف الاختبار بنجاح وجميع الطلبات.");
+                            alertDialog.show();
+                          }
+                        }
+                      });
 
-      @Override
-      public void onFailure(@NonNull Exception e) {
 
-        dialog.Close_Dialog();
-        AlertDialog alertDialog = new AlertDialog(context,"حدثت مشكلة" +e.toString() );
-        alertDialog.show();
+
+
+                    }
+                  }
+                });
+              }
+
+            }
+          });
+
+        }else {
+
+          dialog.Close_Dialog();
+          AlertDialog alertDialog = new AlertDialog(context,"حدثت مشكلة" );
+          alertDialog.show();
+
+        }
 
       }
     });
@@ -172,3 +207,5 @@ public class ViewHolder extends RecyclerView.ViewHolder  {
   }
 
 }
+
+

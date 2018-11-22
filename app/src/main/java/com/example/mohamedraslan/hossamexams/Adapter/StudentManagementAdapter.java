@@ -124,7 +124,7 @@ public class StudentManagementAdapter extends RecyclerView.Adapter<StudentManage
 
 
             // When press on card it should Display Card Down layout .
-            holder.dropDown.setOnClickListener(new View.OnClickListener() {
+            holder.Press_on_CardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
