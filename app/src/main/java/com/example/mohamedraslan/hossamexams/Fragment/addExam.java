@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -334,6 +335,9 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
     @Override
     public void Successful_Storing() {
         dialog.Close_Dialog();
+
+        final MediaPlayer player = MediaPlayer.create(getActivity(),R.raw.plucky);
+        player.start();
         com.example.mohamedraslan.hossamexams.Dialog.AlertDialog alertDialog
                 = new com.example.mohamedraslan.hossamexams.Dialog.AlertDialog(getActivity(),"Exam added successfully");
         alertDialog.show();

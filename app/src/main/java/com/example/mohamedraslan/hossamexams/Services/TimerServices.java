@@ -127,6 +127,7 @@ public class TimerServices extends Service {
                 minutes = timeInSeconds / 60;
                 timeInSeconds = timeInSeconds - (minutes * 60);
                 seconds = timeInSeconds;
+                //
 
                 //  Timer.setText(String.valueOf(hours)+" : "+String.valueOf(minutes)+" : "+String.valueOf(seconds));
                 Log.d("TAG1", String.valueOf(hours)+ " / "+ String.valueOf(minutes) + " / "+ String.valueOf(seconds) );

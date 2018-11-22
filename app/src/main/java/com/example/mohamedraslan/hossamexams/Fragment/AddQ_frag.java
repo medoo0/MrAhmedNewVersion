@@ -1,6 +1,7 @@
 package com.example.mohamedraslan.hossamexams.Fragment;
 
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -205,6 +206,8 @@ public class AddQ_frag extends Fragment
     @Override
     public void dataSaved() {
 
+        final MediaPlayer player = MediaPlayer.create(getActivity(),R.raw.plucky);
+        player.start();
         animatedDialog.Close_Dialog();
         selectAnswer = "";
         buttonD.setBackground(falseClick);

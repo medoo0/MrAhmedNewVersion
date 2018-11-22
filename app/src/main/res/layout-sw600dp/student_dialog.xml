@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layoutDirection="ltr"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/answercorner"
+    android:layout_margin="10dp"
+
+    >
+
+
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:id="@+id/Liner1"
+        >
+
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_marginTop="20dp"
+            android:layout_centerInParent="true"
+            android:layout_height="100dp"
+            android:src="@drawable/icon"
+            />
+
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/Liner2"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|end"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_below="@+id/Liner1"
+        >
+
+        <Button
+            android:id="@+id/allStudent"
+            android:layout_below="@+id/linearLayout"
+            android:background="@drawable/button_background"
+            android:layout_marginTop="10dp"
+            android:text="جميع الطلاب"
+            android:fontFamily="@font/cairo"
+            android:textSize="23dp"
+            android:textColor="@color/color2"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="59dp"
+            android:textStyle="bold"
+            />
+
+        <Button
+            android:id="@+id/myStudent"
+            android:layout_below="@+id/linearLayout"
+            android:background="@drawable/button_background"
+            android:layout_marginTop="30dp"
+
+            android:text="طلابي فقط"
+            android:layout_marginBottom="40dp"
+            android:fontFamily="@font/cairo"
+            android:textSize="23dp"
+            android:textColor="@color/color2"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="59dp"
+            android:textStyle="bold"
+            />
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -60,12 +60,14 @@ public class Result extends AppCompatActivity implements ResultContract.view {
         intial();
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){
+
             TableName      = bundle.getString("SqlTableName");
             finalDegree    = bundle.getString("final_degree");
             Examname = bundle.getString("Examname");
             ExamDate = bundle.getString("ExamDate");
             Message  = bundle.getString("Message");
             presenter.CountDegree(db,TableName);
+
         }
 
             home.setOnClickListener(new View.OnClickListener() {

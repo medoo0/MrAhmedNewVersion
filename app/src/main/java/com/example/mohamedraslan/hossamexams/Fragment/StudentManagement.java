@@ -2,6 +2,7 @@ package com.example.mohamedraslan.hossamexams.Fragment;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 
@@ -23,6 +25,7 @@ import com.example.mohamedraslan.hossamexams.MainPresnter.StudentMangementPresen
 import com.example.mohamedraslan.hossamexams.R;
 import com.example.mohamedraslan.hossamexams.Views.ControlPanel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -37,6 +40,20 @@ public class StudentManagement extends Fragment implements StudentManagementCont
     StudentManagementAdapter adapter;
     StudentManagementContract.presenter presenter ;
     AnimatedDialog dialog;
+    @BindView(R.id.background1)
+    ImageView background1;
+    String AreInGroup;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Bundle b = getArguments();
+        if (b!=null)
+        AreInGroup = getArguments().getString("what","");
+
+
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -87,10 +104,62 @@ public class StudentManagement extends Fragment implements StudentManagementCont
     @Override
     public void RecyclerConfig(List<FullRegisterForm> Result) {
 
-        adapter = new StudentManagementAdapter(getActivity(),Result,getActivity().getSupportFragmentManager());
-        recyclerView.setAdapter(adapter);
-        //close
-        dialog.Close_Dialog();
+
+        if (!AreInGroup.equals("")&& AreInGroup.equals("allStudents")){
+
+
+
+            adapter = new StudentManagementAdapter(getActivity(),Result,getActivity().getSupportFragmentManager(),"");
+            recyclerView.setAdapter(adapter);
+            //close
+            dialog.Close_Dialog();
+
+        }
+
+        if (!AreInGroup.equals("")&& AreInGroup.equals("myStudents")){
+
+            List<FullRegisterForm>list = new ArrayList<>();
+
+
+                for (int i=0 ; i<Result.size();i++){
+
+
+                    if (Result.get(i).getAreINGroup().equals("Yes")){
+
+                        list.add(Result.get(i));
+
+                    }
+
+            }
+
+
+            if (!list.isEmpty()){
+
+                adapter = new StudentManagementAdapter(getActivity(),list,getActivity().getSupportFragmentManager(),"myStudents");
+                recyclerView.setAdapter(adapter);
+                //close
+                dialog.Close_Dialog();
+            }else {
+
+
+                background1.setVisibility(View.VISIBLE);
+                dialog.Close_Dialog();
+
+            }
+
+
+
+
+
+
+
+
+
+
+        }
+
+
+
 
     }
 

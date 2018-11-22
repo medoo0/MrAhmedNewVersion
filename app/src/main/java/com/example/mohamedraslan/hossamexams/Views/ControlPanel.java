@@ -1,9 +1,12 @@
 package com.example.mohamedraslan.hossamexams.Views;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -16,17 +19,21 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.mohamedraslan.hossamexams.Contracts.ControlPanelContract;
 import com.example.mohamedraslan.hossamexams.Dialog.AlertDialog;
 import com.example.mohamedraslan.hossamexams.Dialog.AnimatedDialog;
+import com.example.mohamedraslan.hossamexams.Dialog.StudentDialog;
 import com.example.mohamedraslan.hossamexams.Fragment.AboutDoctor;
 import com.example.mohamedraslan.hossamexams.Fragment.AboutProgrammer;
 import com.example.mohamedraslan.hossamexams.Fragment.AddQ_frag;
 import com.example.mohamedraslan.hossamexams.Fragment.ExamList;
 import com.example.mohamedraslan.hossamexams.Fragment.ExamsResults;
 import com.example.mohamedraslan.hossamexams.Fragment.MyResults;
+import com.example.mohamedraslan.hossamexams.Fragment.PermissionsFromStudent;
 import com.example.mohamedraslan.hossamexams.Fragment.Question_Bank_Frag;
+import com.example.mohamedraslan.hossamexams.Fragment.RequestFromStudentToExamWhat;
 import com.example.mohamedraslan.hossamexams.Fragment.StudentManagement;
 import com.example.mohamedraslan.hossamexams.Fragment.StudentsWrongs;
 import com.example.mohamedraslan.hossamexams.Fragment.addExam;
@@ -53,6 +60,7 @@ public class ControlPanel extends AppCompatActivity
     private static NavigationView navigation;
     public static TextView Title ;
     private FirebaseAuth auth;
+    StudentDialog studentDialog;
     ControlpanelPresnter controlpanelPresnter;
     AnimatedDialog animatedDialog;
     CircleImageView circleImageView;
@@ -152,6 +160,56 @@ public class ControlPanel extends AppCompatActivity
                 .replace(R.id.Exam_Frame, StudentsWrongs)
                 .addToBackStack(null)
                 .commit();
+
+
+
+    }
+
+    @Override
+    public void showDialogStudent(String what) {
+
+        studentDialog.dismiss();
+
+        switch (what){
+
+            case "allStudents":
+
+
+                StudentManagement all = new StudentManagement();
+                Bundle b = new Bundle();
+                b.putString("what","allStudents");
+                all.setArguments(b);
+                getSupportFragmentManager().popBackStack();
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
+                        .replace(R.id.Exam_Frame,all)
+                        .addToBackStack(null)
+                        .commit();
+
+                break;
+
+           case "myStudents":
+
+               StudentManagement myStudnet = new StudentManagement();
+               Bundle b1 = new Bundle();
+               b1.putString("what","myStudents");
+               myStudnet.setArguments(b1);
+               getSupportFragmentManager().popBackStack();
+               getSupportFragmentManager()
+                       .beginTransaction()
+                       .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
+                       .replace(R.id.Exam_Frame,myStudnet)
+                       .addToBackStack(null)
+                       .commit();
+
+               break;
+
+
+        }
+
+
+
 
 
 
@@ -306,15 +364,35 @@ public class ControlPanel extends AppCompatActivity
             case R.id.studentManger:
 
                 //  اداره الطلاب
+
+
+                studentDialog = new StudentDialog(ControlPanel.this,R.style.PauseDialog,this);
+                studentDialog.show();
+
+
+//
+//
+//                getSupportFragmentManager().popBackStack();
+//                getSupportFragmentManager()
+//                        .beginTransaction()
+//                        .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
+//                        .replace(R.id.Exam_Frame,new StudentManagement())
+//                        .addToBackStack(null)
+//                        .commit();
+
+                
+                break;
+
+            case R.id.per:
+
                 getSupportFragmentManager().popBackStack();
                 getSupportFragmentManager()
                         .beginTransaction()
                         .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
-                        .replace(R.id.Exam_Frame,new StudentManagement())
-                        .addToBackStack(null)
+                        .replace(R.id.Exam_Frame,new PermissionsFromStudent()).addToBackStack(null)
                         .commit();
 
-                
+
                 break;
 
             case R.id.exit:
@@ -337,9 +415,9 @@ public class ControlPanel extends AppCompatActivity
 
 
 
-
-
                 break;
+
+
             case R.id.questions:
 
 
@@ -426,6 +504,7 @@ public class ControlPanel extends AppCompatActivity
         nav_Menu.findItem(R.id.questions).setVisible(false);
         nav_Menu.findItem(R.id.results).setVisible(false);
         nav_Menu.findItem(R.id.studentManger).setVisible(false);
+        nav_Menu.findItem(R.id.per).setVisible(false);
 
     }
     @Override
@@ -436,7 +515,88 @@ public class ControlPanel extends AppCompatActivity
         nav_Menu.findItem(R.id.questions).setVisible(true);
         nav_Menu.findItem(R.id.results).setVisible(true);
         nav_Menu.findItem(R.id.studentManger).setVisible(true);
+        nav_Menu.findItem(R.id.per).setVisible(true);
         circleImageView.setBackgroundResource(R.drawable.ahmedsamy);
+
+    }
+
+    @Override
+    public void showRequestsFromStudent(String examID,String what) {
+
+
+        RequestFromStudentToExamWhat requestFromStudentToExamWhat = new RequestFromStudentToExamWhat();
+        switch (what){
+
+
+            case "0":
+
+                Bundle b = new Bundle();
+                b.putString("examid", examID);
+                requestFromStudentToExamWhat.setArguments(b);
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
+                        .replace(R.id.Exam_Frame,requestFromStudentToExamWhat,"K")
+                        .addToBackStack(null)
+                        .commit();
+                break;
+            case "1":
+
+
+
+
+                getSupportFragmentManager().popBackStack();
+                RequestFromStudentToExamWhat requestFromStudentToExamWhat1 = new RequestFromStudentToExamWhat();
+                Bundle b1 = new Bundle();
+                b1.putString("examid", examID);
+                requestFromStudentToExamWhat1.setArguments(b1);
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.Exam_Frame,requestFromStudentToExamWhat1)
+                        .addToBackStack(null)
+                        .commit();
+                break;
+
+        }
+
+
+
+
+        // حنظهر ام الطلبات بتاعه الامتحان بقااااااااااااااا
+
+
+    }
+
+    @Override
+    public void showingresults() {
+
+
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag("K");
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.Exam_Frame,fragment,"K")
+                .addToBackStack(null)
+                .commit();
+        android.app.AlertDialog.Builder builder1b = new android.app.AlertDialog.Builder(this);
+        builder1b.setMessage("يستطيع الطالب من الان دخول الإختبار.");
+        builder1b.setCancelable(true);
+        builder1b.show();
+
+
+    }
+
+    @Override
+    public void userAreDeletedSussess() {
+        animatedDialog.Close_Dialog();
+        startActivity(new Intent(ControlPanel.this,MainActivity.class));
+        finish();
+    }
+
+    @Override
+    public void problemwithDeleteUser() {
+        animatedDialog.Close_Dialog();
+        Toast.makeText(this, "لقد حدثت مشكله اثناء الحذف.", Toast.LENGTH_SHORT).show();
 
     }
 

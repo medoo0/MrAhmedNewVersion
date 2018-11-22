@@ -1,11 +1,13 @@
 package com.example.mohamedraslan.hossamexams.Views;
 
+import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -85,6 +87,13 @@ public class Exam extends AppCompatActivity implements View.OnClickListener , Ex
         //Animation
         Animation();
 
+
+
+
+
+
+
+
         Bundle bundle = getIntent().getExtras();
         if( bundle != null ){
              TableName = bundle.getString("SqlTableName");
@@ -110,6 +119,10 @@ public class Exam extends AppCompatActivity implements View.OnClickListener , Ex
         SQlHelper helper = new SQlHelper(this);
         db = helper.getWritableDatabase();
         presenter.getQuestion(db,TableName);
+
+
+
+
 
     }
     private void intialViews(){
@@ -180,6 +193,8 @@ public class Exam extends AppCompatActivity implements View.OnClickListener , Ex
         @OnClick(R.id.Skip)
         void BtnSkip(View view){
 
+            final MediaPlayer player = MediaPlayer.create(this,R.raw.plucky);
+            player.start();
             presenter.Skip(db,TableName,ID_Qestion);
 
         }
@@ -189,6 +204,9 @@ public class Exam extends AppCompatActivity implements View.OnClickListener , Ex
         void BtnNext(View view){
 
             if(!selectAnswer.isEmpty()) {
+
+                final MediaPlayer player = MediaPlayer.create(this,R.raw.plucky);
+                player.start();
                 presenter.insertAnswerInSql(db,TableName,ID_Qestion,selectAnswer,oneQestionDegree);
             }
             else {
@@ -280,9 +298,8 @@ public class Exam extends AppCompatActivity implements View.OnClickListener , Ex
         alertDialog.btnNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 finish();
-
-
 
             }
         });
@@ -292,7 +309,9 @@ public class Exam extends AppCompatActivity implements View.OnClickListener , Ex
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
         stopService(Timerservices);
+
         if(broadcastReceiver != null) {
             unregisterReceiver(broadcastReceiver);
         }
@@ -307,15 +326,20 @@ public class Exam extends AppCompatActivity implements View.OnClickListener , Ex
     @Override
     protected void onStart() {
         super.onStart();
-         broadcastReceiver = new BroadcastReceiver() {
+
+
+
+        broadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
                 String action = intent.getAction();
                 if (action.equals("ServicesTimer")) {
-                    long hours =  intent.getLongExtra("hours",0);
+                    long hours   =  intent.getLongExtra("hours",0);
                     long minutes =  intent.getLongExtra("minutes",0);
                     long seconds =  intent.getLongExtra("seconds",0);
                     Timer.setText(hours+" : "+minutes+" : "+seconds);
+
+
                 }
             }
         };
@@ -326,5 +350,21 @@ public class Exam extends AppCompatActivity implements View.OnClickListener , Ex
         // register the receiver
         registerReceiver(broadcastReceiver, intentFilter);
 
+
+
+
+
+    }
+
+
+
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

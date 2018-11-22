@@ -51,4 +51,20 @@ public class ControlpanelPresnter implements ControlPanelContract.ControlPresnte
     public void SetUsername(String nameStudent) {
         view.SetUsername(nameStudent);
     }
+
+    @Override
+    public void tellModeltoDeleteUser(String uID) {
+        controlPanelModel.removeUserFromAuth(uID);
+    }
+
+
+    @Override
+    public void userDeleted() {
+        view.userAreDeletedSussess();
+    }
+
+    @Override
+    public void problemUserNotDeleted() {
+        view.problemwithDeleteUser();
+    }
 }

@@ -10,17 +10,27 @@ public class FullRegisterForm implements Parcelable{
     private String phone;
     private String uID;
     private String country;
+    private String areINGroup;
 
-    public FullRegisterForm(String nameStudent, String email, String phone, String uID, String country) {
+    public FullRegisterForm(String nameStudent, String email, String phone, String uID, String country,String areINGroup) {
         this.nameStudent = nameStudent;
         this.email = email;
         this.phone = phone;
         this.uID = uID;
         this.country = country;
+        this.areINGroup = areINGroup;
+    }
+
+    public String getAreINGroup() {
+        return areINGroup;
     }
 
     public FullRegisterForm(){
 
+    }
+
+    public String getCountry() {
+        return country;
     }
 
     protected FullRegisterForm(Parcel in) {
@@ -73,7 +83,4 @@ public class FullRegisterForm implements Parcelable{
         return uID;
     }
 
-    public String getCountry() {
-        return country;
-    }
 }

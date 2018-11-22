@@ -35,6 +35,10 @@ xmlns:tools="http://schemas.android.com/tools"
 
 
 
+    <item android:title="Student Request"
+        android:id="@+id/per"
+        android:icon="@drawable/ic_exiticon"/>
+
 </group>
     <item android:title="@string/aboutus">
 
@@ -54,8 +58,6 @@ xmlns:tools="http://schemas.android.com/tools"
             <item android:title="@string/exit"
                   android:id="@+id/exit"
                   android:icon="@drawable/ic_exiticon"/>
-
-
 
         </menu>
 

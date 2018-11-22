@@ -117,7 +117,6 @@ public class Signin_Fragment extends Fragment implements SigninContract.view {
             @Override
             public void onAdFailedToLoad(int errorCode) {
                 // Code to be executed when an ad request fails.
-                Toast.makeText(getActivity(), "Fauilure", Toast.LENGTH_SHORT).show();
             }
 
             @Override

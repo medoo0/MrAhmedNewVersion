@@ -35,7 +35,7 @@ public class RegisterMode implements RegisterFragContracts.ModelRegister {
                     // added to authentication  //
                     UID              =  auth.getUid();
                     assert UID != null;
-                    final FullRegisterForm fullRegisterForm = new FullRegisterForm(resister_form.getNameStudent(),resister_form.getEmail(),resister_form.getPhone(),UID,resister_form.getCountry());
+                    final FullRegisterForm fullRegisterForm = new FullRegisterForm(resister_form.getNameStudent(),resister_form.getEmail(),resister_form.getPhone(),UID,resister_form.getCountry(),"no");
                     reference.child(UID).setValue(fullRegisterForm).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {

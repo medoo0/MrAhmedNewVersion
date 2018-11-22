@@ -3,21 +3,27 @@ package com.example.mohamedraslan.hossamexams.Adapter;
 
 import android.app.Activity;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.mohamedraslan.hossamexams.Dialog.AlertDialog;
 import com.example.mohamedraslan.hossamexams.Dialog.AnimatedDialog;
 import com.example.mohamedraslan.hossamexams.Enums.DataBase_Refrences;
 import com.example.mohamedraslan.hossamexams.JsonModel.AddExam_pojo;
 import com.example.mohamedraslan.hossamexams.JsonModel.ExamStartTime_Pojo;
+import com.example.mohamedraslan.hossamexams.JsonModel.PermissionUserEntering;
+import com.example.mohamedraslan.hossamexams.JsonModel.Permission_Refrence;
 import com.example.mohamedraslan.hossamexams.SqLite.SQlHelper;
 import com.example.mohamedraslan.hossamexams.Views.Exam;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -80,6 +86,7 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
         holder.BtnStartExam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 holder.BtnStartExam.setEnabled(false);
                 dialog.ShowDialog();
                 String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -148,7 +155,7 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
         else {
 
 
-            return "منذ ...";
+            return "Since Days ..";
 
         }
 
@@ -387,10 +394,209 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
 
            }
            else {
-               dialog.Close_Dialog();
-               AlertDialog alertDialog = new AlertDialog(context,"Sorry your Test Time is Over ..");
-               alertDialog.show();
 
+
+
+
+
+              FirebaseAuth firebaseAuth  = FirebaseAuth.getInstance();
+              final String uID      = firebaseAuth.getUid();
+              final String ExamID   = model.getExamID();
+              final String ExamName = model.getExamName();
+
+
+               FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+               DatabaseReference referencep      = firebaseDatabase.getReference(DataBase_Refrences.Permissions.getRef());
+
+
+               referencep.child(ExamID).child(uID).addListenerForSingleValueEvent(new ValueEventListener() {
+                   @Override
+                   public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+
+                       if (dataSnapshot.exists()){
+
+                           dialog.Close_Dialog();
+
+                           android.app.AlertDialog.Builder builderc = new android.app.AlertDialog.Builder(context);
+                           builderc.setMessage("لقد إنتهي وقت إختبارك وقمت بالطلب من  Mr.Ahmed Samy من قبل.");
+                           builderc.setCancelable(true);
+                           builderc.show();
+
+
+                       }else {
+
+
+                           FirebaseDatabase database = FirebaseDatabase.getInstance();
+                           DatabaseReference reference = database.getReference(DataBase_Refrences.USERREF.getRef());
+                           reference.child(uID).child("nameStudent").addValueEventListener(new ValueEventListener() {
+                               @Override
+                               public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                   final String nameStudnet = (String) dataSnapshot.getValue();
+
+                                   android.app.AlertDialog.Builder builder1 = new android.app.AlertDialog.Builder(context);
+                                   builder1.setMessage("لقد أنتهي وقت أختبارك بالفعل هل تريد أذن الدخول مره اخري..");
+                                   builder1.setCancelable(false);
+
+                                   builder1.setPositiveButton(
+                                           "Yes",
+                                           new DialogInterface.OnClickListener() {
+                                               public void onClick(DialogInterface dialog1, int id) {
+
+
+
+                                                   final FirebaseDatabase firebaseDatabase1 = FirebaseDatabase.getInstance();
+                                                   DatabaseReference reference1             = firebaseDatabase1.getReference("PermissionRefrence");
+                                                   reference1.child(ExamID).addListenerForSingleValueEvent(new ValueEventListener() {
+                                                       @Override
+                                                       public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                                           if (dataSnapshot.exists()){
+
+
+
+
+                                                               FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                                                               final DatabaseReference reference = firebaseDatabase.getReference(DataBase_Refrences.Permissions.getRef());
+                                                               PermissionUserEntering permissionUserEntering = new PermissionUserEntering(uID,nameStudnet);
+
+                                                               reference.child(ExamID).child(permissionUserEntering.getuID()).setValue(permissionUserEntering).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                   @Override
+                                                                   public void onComplete(@NonNull Task<Void> task) {
+
+                                                                       if (task.isSuccessful()){
+
+
+
+                                                                           dialog.Close_Dialog();
+                                                                           android.app.AlertDialog.Builder builder1b = new android.app.AlertDialog.Builder(context);
+                                                                           builder1b.setMessage("لقد تم الطلب يرجي الانتظار حتي يوافق Mr.Ahmed Samy علي طلبك");
+                                                                           builder1b.setCancelable(true);
+                                                                           builder1b.show();
+
+                                                                       }
+
+                                                                   }
+                                                               });
+
+
+
+
+
+                                                           }else {
+
+
+
+                                                               final FirebaseDatabase firebaseDatabase1 = FirebaseDatabase.getInstance();
+                                                               DatabaseReference reference1             = firebaseDatabase1.getReference("PermissionRefrence");
+                                                               Permission_Refrence permission_refrence = new Permission_Refrence(ExamID,ExamName);
+                                                               reference1.child(ExamID).setValue(permission_refrence).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                   @Override
+                                                                   public void onComplete(@NonNull Task<Void> task) {
+
+                                                                       if (task.isSuccessful()){
+
+                                                                           FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                                                                           final DatabaseReference reference = firebaseDatabase.getReference(DataBase_Refrences.Permissions.getRef());
+                                                                           PermissionUserEntering permissionUserEntering = new PermissionUserEntering(uID,nameStudnet);
+
+                                                                           reference.child(ExamID).child(permissionUserEntering.getuID()).setValue(permissionUserEntering).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                               @Override
+                                                                               public void onComplete(@NonNull Task<Void> task) {
+
+                                                                                   if (task.isSuccessful()){
+
+
+
+                                                                                       dialog.Close_Dialog();
+                                                                                       android.app.AlertDialog.Builder builder1b = new android.app.AlertDialog.Builder(context);
+                                                                                       builder1b.setMessage("لقد تم الطلب يرجي الانتظار حتي يوافق Mr.Ahmed Samy علي طلبك");
+                                                                                       builder1b.setCancelable(true);
+
+                                                                                   }
+
+                                                                               }
+                                                                           });
+
+
+                                                                       }
+
+                                                                   }
+                                                               });
+
+
+
+                                                           }
+
+                                                       }
+
+                                                       @Override
+                                                       public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                       }
+                                                   });
+
+
+
+
+
+                                               }
+                                           });
+
+                                   builder1.setNegativeButton(
+                                           "No",
+                                           new DialogInterface.OnClickListener() {
+                                               public void onClick(DialogInterface dialog1, int id) {
+                                                   dialog1.cancel();
+                                                   dialog.Close_Dialog();
+                                               }
+                                           });
+
+                                   builder1.show();
+
+
+
+
+                               }
+
+                               @Override
+                               public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                               }
+                           });
+
+                       }
+
+
+
+                   }
+
+                   @Override
+                   public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                   }
+               });
+
+
+
+
+
+//               AlertDialog alertDialog = new AlertDialog(context,"Sorry your Test Time is Over ..");
+//               alertDialog.show();
+
+
+
+
+
+
+
+
+
+
+
+
+               // حنسمح الوقت من الفير بيز
            }
 
 
@@ -405,3 +611,17 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
 
 
 }
+//
+//
+//                                       reference.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+//@Override
+//public void onComplete(@NonNull Task<Void> task) {
+//
+//        if (task.isSuccessful()){
+//
+//        Toast.makeText(context, "تم قم بالدخول الي الأمتحان ", Toast.LENGTH_LONG).show();
+//
+//        }
+//
+//        }
+//        });

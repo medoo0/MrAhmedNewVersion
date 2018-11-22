@@ -5,6 +5,12 @@ import android.support.annotation.NonNull;
 import com.example.mohamedraslan.hossamexams.Contracts.ControlPanelContract;
 import com.example.mohamedraslan.hossamexams.Enums.DataBase_Refrences;
 import com.example.mohamedraslan.hossamexams.JsonModel.Resister_form;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -98,4 +104,45 @@ public class ControlPanelModel implements ControlPanelContract.ControlModelUI {
         });
 
     }
+
+    @Override
+    public void removeUserFromAuth(final String uID) {
+
+
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference reference       = firebaseDatabase.getReference(DataBase_Refrences.USERREF.getRef()).child(uID);
+        reference.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+
+                if (task.isSuccessful()){
+
+
+                    removedetailsforUser("");
+
+                }else {
+
+
+                     presnterUI.problemUserNotDeleted();
+
+                }
+
+            }
+        });
+
+
+
+    }
+
+    @Override
+    public void removedetailsforUser(String uID) {
+
+
+
+
+
+    }
+
+
+
 }

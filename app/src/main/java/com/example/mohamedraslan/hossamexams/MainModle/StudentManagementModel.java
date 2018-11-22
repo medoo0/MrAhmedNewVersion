@@ -1,17 +1,23 @@
 package com.example.mohamedraslan.hossamexams.MainModle;
 
+import android.support.annotation.NonNull;
+
 import com.example.mohamedraslan.hossamexams.Contracts.StudentManagementContract;
 import com.example.mohamedraslan.hossamexams.Enums.DataBase_Refrences;
 import com.example.mohamedraslan.hossamexams.JsonModel.FullRegisterForm;
+import com.example.mohamedraslan.hossamexams.JsonModel.Result_Pojo;
 import com.example.mohamedraslan.hossamexams.MainPresnter.StudentMangementPresenter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by microprocess on 2018-10-01.
@@ -37,13 +43,17 @@ public class StudentManagementModel implements StudentManagementContract.model {
 
         myref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()) {
-                    for (DataSnapshot data : dataSnapshot.getChildren()) {
-                        FullRegisterForm g1 = data.getValue(FullRegisterForm.class);
-                        StudentsDetails.add(g1);
-                        presenter.SendListToView(StudentsDetails);
-                    }
+
+                    HashMap<String, FullRegisterForm> results = dataSnapshot.getValue(new GenericTypeIndicator<HashMap<String, FullRegisterForm>>() {});
+                    List<FullRegisterForm> toutourial = new ArrayList<>(Objects.requireNonNull(results).values());
+                    presenter.SendListToView(toutourial);
+//                    for (DataSnapshot data : dataSnapshot.getChildren()) {
+//                        FullRegisterForm g1 = data.getValue(FullRegisterForm.class);
+//                        StudentsDetails.add(g1);
+//                        presenter.SendListToView(StudentsDetails);
+//                    }
                 }
                 else {
 
@@ -53,7 +63,7 @@ public class StudentManagementModel implements StudentManagementContract.model {
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
                 //problem
                 presenter.problem(databaseError.getMessage());

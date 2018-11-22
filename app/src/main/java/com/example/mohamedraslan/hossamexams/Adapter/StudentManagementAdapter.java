@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -22,8 +23,10 @@ import com.example.mohamedraslan.hossamexams.Fragment.MyResults;
 import com.example.mohamedraslan.hossamexams.JsonModel.FullRegisterForm;
 import com.example.mohamedraslan.hossamexams.Permissions.Call_permission;
 import com.example.mohamedraslan.hossamexams.R;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -46,12 +49,15 @@ public class StudentManagementAdapter extends RecyclerView.Adapter<StudentManage
     int photosCounter = 0 ;
     Context context;
     FragmentManager fragmentManager;
-    public  StudentManagementAdapter (Context context, List<FullRegisterForm> items  , FragmentManager fragmentManager){
+    String what;
+
+    public  StudentManagementAdapter (Context context, List<FullRegisterForm> items  , FragmentManager fragmentManager,String what){
 
         this.items = items ;
         this.context = context;
         auth = FirebaseAuth.getInstance();
         this.fragmentManager = fragmentManager ;
+       this.what = what;
     }
 
 
@@ -67,8 +73,17 @@ public class StudentManagementAdapter extends RecyclerView.Adapter<StudentManage
 
 
 
+
+        if (what.equals("myStudents")){
+
+            holder.hidetext.setVisibility(View.GONE);
+            holder.addstudent.setVisibility(View.GONE);
+
+        }
+
+
             holder.Name.setText(items.get(position).getNameStudent());
-            holder.Contry.setText(items.get(position).getCountry());
+            holder.Con.setText(items.get(position).getCountry());
             holder.phone.setText(items.get(position).getPhone());
             holder.email.setText(items.get(position).getEmail());
 
@@ -97,8 +112,19 @@ public class StudentManagementAdapter extends RecyclerView.Adapter<StudentManage
             holder.Press_on_CardView.setScaleY(.9f);
             holder.Press_on_CardView.animate().scaleX(1f).scaleY(1f).setDuration(500);
 
+
+
+
+            checkifStudentInorOUt( items.get(position).getuID() ,holder );
+
+
+
+
+
+
+
             // When press on card it should Display Card Down layout .
-            holder.Press_on_CardView.setOnClickListener(new View.OnClickListener() {
+            holder.dropDown.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
@@ -185,8 +211,14 @@ public class StudentManagementAdapter extends RecyclerView.Adapter<StudentManage
         @BindView(R.id.txNameStudent)
         TextView Name ;
 
-        @BindView(R.id.txcountry)
-        TextView Contry;
+        @BindView(R.id.hidetext)
+        TextView hidetext;
+
+        @BindView(R.id.addstudent)
+        Button addstudent;
+
+        @BindView(R.id.con)
+        TextView Con;
 
         @BindView(R.id.image_dropdown)
         ImageView dropDown;
@@ -307,6 +339,8 @@ public class StudentManagementAdapter extends RecyclerView.Adapter<StudentManage
                     holder.ban_linear.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+
+
                             //First put this Line in Firebase Database Rule ".write": "auth != null && !root.child('Blocked_User').hasChild(auth.uid)"
                             //Ban user
 
@@ -429,5 +463,106 @@ public class StudentManagementAdapter extends RecyclerView.Adapter<StudentManage
     }
 
 
+    public void checkifStudentInorOUt(final String uID , final ViewHolder holder){
+
+
+
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        final DatabaseReference reference       = firebaseDatabase.getReference(DataBase_Refrences.USERREF.getRef()).child(uID).child("areINGroup");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                if (dataSnapshot.exists()){
+
+                    String AreinGroup = (String) dataSnapshot.getValue();
+
+                    if (AreinGroup!=null){
+
+                        if (AreinGroup.equals("no")){
+
+                            holder.hidetext.setVisibility(View.GONE);
+                            holder.addstudent.setBackgroundResource(R.drawable.ic_addthistomestudent);
+
+
+                            holder.addstudent.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+
+
+                                    reference.setValue("Yes").addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()){
+
+                                                holder.hidetext.setVisibility(View.VISIBLE);
+                                                holder.addstudent.setBackgroundResource(R.drawable.removingstudent);
+
+                                            }
+
+
+
+                                        }
+                                    });
+
+
+
+                                }
+                            });
+
+
+                        }else if (AreinGroup.equals("Yes")) {
+
+                            holder.hidetext.setVisibility(View.VISIBLE);
+                            holder.addstudent.setBackgroundResource(R.drawable.removingstudent);
+
+                            holder.addstudent.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+
+
+
+                                    reference.setValue("no").addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()){
+
+                                                holder.hidetext.setVisibility(View.GONE);
+                                                holder.addstudent.setBackgroundResource(R.drawable.ic_addthistomestudent);
+
+                                            }
+
+
+
+                                        }
+                                    });
+
+
+
+                                }
+                            });
+
+
+
+                        }
+
+                    }
+                }
+
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+
+
+    }
 
 }
