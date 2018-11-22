@@ -92,9 +92,7 @@ public class AdapterExamsStudents extends RecyclerView.Adapter<ExamStudenstHolde
                     public void onComplete(@NonNull Task<Void> task) {
 
                         if (task.isSuccessful()){
-
-
-
+                            
                             FirebaseDatabase firebaseDatabase2 = FirebaseDatabase.getInstance();
                             DatabaseReference reference1       = firebaseDatabase2.getReference("ExamStarted");
                             reference1.child(examID).child(list.get(position).getuID()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
