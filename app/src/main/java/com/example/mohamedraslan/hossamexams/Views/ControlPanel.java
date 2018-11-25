@@ -1,12 +1,23 @@
 package com.example.mohamedraslan.hossamexams.Views;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -40,8 +51,16 @@ import com.example.mohamedraslan.hossamexams.Fragment.addExam;
 import com.example.mohamedraslan.hossamexams.JsonModel.Result_Pojo;
 import com.example.mohamedraslan.hossamexams.JsonModel.WorngQestion;
 import com.example.mohamedraslan.hossamexams.MainPresnter.ControlpanelPresnter;
+import com.example.mohamedraslan.hossamexams.Notifications.MyFirebaseMessagingService;
 import com.example.mohamedraslan.hossamexams.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,6 +82,7 @@ public class ControlPanel extends AppCompatActivity
     StudentDialog studentDialog;
     ControlpanelPresnter controlpanelPresnter;
     AnimatedDialog animatedDialog;
+    BroadcastReceiver broadcastReceiver;
     CircleImageView circleImageView;
     TextView UserName;
     public static ProgressBar progressBar;
@@ -71,10 +91,22 @@ public class ControlPanel extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawaer);
 
+        // حنسجل الtokendevice في الداتا بيز الاول
 
+        //notification
+        FirebaseMessaging.getInstance().subscribeToTopic("all");
 
         controlpanelPresnter = new ControlpanelPresnter(this);
         controlpanelPresnter.updateUitoViews();
+
+//        controlpanelPresnter.tellmodelAretokenExisitorNot();
+        //  حنشةف التوكن متخزن اصلا ولا لا في الداتا بيز
+
+        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+
+        controlpanelPresnter.tellModeltostoreToken(refreshedToken);
+
+
         //اخفاء الادوات من المستخدم العادي
         hideAdminToolsFromUsers();
 
@@ -110,6 +142,7 @@ public class ControlPanel extends AppCompatActivity
         controlpanelPresnter.getuserName(auth.getCurrentUser().getUid());
 
     }
+
 
 
     @Override
@@ -403,12 +436,17 @@ public class ControlPanel extends AppCompatActivity
                     @Override
                     public void onClick(View view) {
 
+//
+//                        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+//                        String uID                = firebaseAuth.getCurrentUser().getUid();
+
 //                         حنتشيك علي الي في الداتا ولو صح حنطلع بره
-                            animatedDialog.ShowDialog();
-                            auth.signOut();
-                            startActivity(new Intent(ControlPanel.this,MainActivity.class));
-                            animatedDialog.Close_Dialog();
-                            finish();
+                        animatedDialog.ShowDialog();
+                        FirebaseMessaging.getInstance().unsubscribeFromTopic("all");
+                        auth.signOut();
+                        startActivity(new Intent(ControlPanel.this,MainActivity.class));
+                        animatedDialog.Close_Dialog();
+                        finish();
 
                     }
                 });
@@ -521,7 +559,7 @@ public class ControlPanel extends AppCompatActivity
     }
 
     @Override
-    public void showRequestsFromStudent(String examID,String what) {
+    public void showRequestsFromStudent(String examID,String what,String nameExam) {
 
 
         RequestFromStudentToExamWhat requestFromStudentToExamWhat = new RequestFromStudentToExamWhat();
@@ -532,6 +570,7 @@ public class ControlPanel extends AppCompatActivity
 
                 Bundle b = new Bundle();
                 b.putString("examid", examID);
+                b.putString("name",nameExam);
                 requestFromStudentToExamWhat.setArguments(b);
                 getSupportFragmentManager()
                         .beginTransaction()
@@ -549,6 +588,7 @@ public class ControlPanel extends AppCompatActivity
                 RequestFromStudentToExamWhat requestFromStudentToExamWhat1 = new RequestFromStudentToExamWhat();
                 Bundle b1 = new Bundle();
                 b1.putString("examid", examID);
+                b1.putString("name",nameExam);
                 requestFromStudentToExamWhat1.setArguments(b1);
                 getSupportFragmentManager()
                         .beginTransaction()
@@ -587,6 +627,31 @@ public class ControlPanel extends AppCompatActivity
     }
 
     @Override
+    public void tokenSussessfullystored() {
+        Toast.makeText(this, "التوكن اتخزن تمااااااااااام", Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void problemwithtoken() {
+
+        Toast.makeText(this, "التوكن فيه مشكله مش عارف", Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void tokenisExisitinFirebase() {
+
+    }
+
+    @Override
+    public void tokennotExisitinFirebase() {
+
+
+
+    }
+
+    @Override
     public void userAreDeletedSussess() {
         animatedDialog.Close_Dialog();
         startActivity(new Intent(ControlPanel.this,MainActivity.class));
@@ -610,6 +675,7 @@ public class ControlPanel extends AppCompatActivity
 
     }
     public static void SetNavUnChecked(){
+
         for (int position = 0 ; position < navigation.getMenu().size(); position++  ) {
             navigation.getMenu().getItem(position).setChecked(false);
         }

@@ -62,7 +62,17 @@
             android:windowSoftInputMode="stateHidden|adjustResize" />
 
         <service android:name=".Services.TimerServices" />
+        <service android:name=".Notifications.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
 
+        <service android:name=".Notifications.MyFirebaseInstanceIdService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
         <meta-data
             android:name="firebase_crashlytics_collection_enabled"
             android:value="false" />

@@ -16,6 +16,7 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -28,6 +29,15 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.mohamedraslan.hossamexams.Adapter.addExamTouchHelper;
 import com.example.mohamedraslan.hossamexams.Adapter.addExam_Rec_Adapter;
 import com.example.mohamedraslan.hossamexams.Contracts.addExamContract;
@@ -39,6 +49,10 @@ import com.example.mohamedraslan.hossamexams.MainPresnter.addExamPresenter;
 import com.example.mohamedraslan.hossamexams.R;
 import com.example.mohamedraslan.hossamexams.Views.ControlPanel;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -334,14 +348,21 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
 
     @Override
     public void Successful_Storing() {
+
         dialog.Close_Dialog();
 
         final MediaPlayer player = MediaPlayer.create(getActivity(),R.raw.plucky);
         player.start();
-        com.example.mohamedraslan.hossamexams.Dialog.AlertDialog alertDialog
-                = new com.example.mohamedraslan.hossamexams.Dialog.AlertDialog(getActivity(),"Exam added successfully");
-        alertDialog.show();
+        if(getActivity() != null) {
+            com.example.mohamedraslan.hossamexams.Dialog.AlertDialog alertDialog
+                    = new com.example.mohamedraslan.hossamexams.Dialog.AlertDialog(getActivity(), "Exam added successfully");
+            alertDialog.show();
+        }
+        //send notification to all users
+        sendPost(ExamName.getText().toString());
 
+
+        //reset every thing
         et_hour.setText("00");
         et_minute.setText("00");
         et_second.setText("00");
@@ -351,7 +372,6 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
         txFinal_Degree.setText("0");
         ExamName.setText("");
         dialog.Close_Dialog();
-
 
     }
 
@@ -533,5 +553,66 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
           return DateFormat.format("dd-MM-yyyy", cal).toString();
 
     }
+
+    public void sendPost(String s) {
+
+
+        JSONObject obj = null;
+        JSONObject dataobjData = null;
+
+        try {
+
+            obj = new JSONObject();
+
+            dataobjData = new JSONObject();
+            dataobjData.put("image", "0");
+            dataobjData.put("message","A new test has been added ( "+s+" )");
+
+            obj.put("to", "/topics/all");
+            obj.put("data", dataobjData);
+
+            Log.d("MYOBJs", obj.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, "https://fcm.googleapis.com/fcm/send", obj,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.e("SUCCESS", response + "");
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        String response= null;
+                        try {
+                            response = new String(error.networkResponse.data,"UTF-8");
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
+                        Log.e("Error Response",response);
+                    }
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<String, String>();
+                headers.put("Authorization", "key=" + "AAAA0NknKjs:APA91bH8x30IaI5ZAz49kUGAOXEwjiFxZnWTpELAu2DMOu_vgz5GhNDnERYkv7X5Z-NveF02btyVdkMyHWhYH0wYTU3nqtbW9vx67M4Xv1vn7-rOisNEYixwQpeImD-7yguPEhTM_Nkk");
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+        if(getActivity() != null) {
+
+            RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+            int socketTimeout = 1000 * 60;// 60 seconds
+            RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+            jsObjRequest.setRetryPolicy(policy);
+            requestQueue.add(jsObjRequest);
+
+        }
+    }
+
 
 }

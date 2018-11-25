@@ -143,6 +143,69 @@ public class ControlPanelModel implements ControlPanelContract.ControlModelUI {
 
     }
 
+    @Override
+    public void storingTokentoDatabase(String token) {
+
+
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        String uID        = auth.getCurrentUser().getUid();
+
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference reference       = firebaseDatabase.getReference("Tokens_Device");
+        reference.child(uID).setValue(token).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+
+                if (task.isSuccessful()){
+
+                    presnterUI.tellUitokenStored();
+
+
+                }else {
+
+                    presnterUI.tellUitokenDosentStore();
+
+                }
+
+            }
+        });
+
+
+
+
+    }
+
+    @Override
+    public void checkifTokenExisitorNot() {
+
+        String uID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference reference       = firebaseDatabase.getReference("Tokens_Device");
+        reference.child(uID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                if (dataSnapshot.exists()){
+
+                    presnterUI.tellUItokenisExisit();
+
+                }else {
+
+                    presnterUI.tellUItokennotExisit();
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+    }
 
 
 }

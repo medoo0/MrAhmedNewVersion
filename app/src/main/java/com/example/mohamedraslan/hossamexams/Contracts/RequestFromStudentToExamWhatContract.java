@@ -12,7 +12,7 @@ public interface RequestFromStudentToExamWhatContract  {
         void Studenssssss(List<PermissionUserEntering> list);
         void notFoundAnythings();
 
-        void refreshFragment();
+        void refreshFragment(String nameExam);
 
     }
 

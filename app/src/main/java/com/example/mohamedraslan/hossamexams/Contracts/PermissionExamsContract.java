@@ -13,7 +13,7 @@ public interface PermissionExamsContract {
 
         void allRefrenceHere(List<Permission_Refrence>list);
         void noRefrenceHere();
-        void ApplicationForExams(String examID);
+        void ApplicationForExams(String examID,String nameExam);
 
 
     }

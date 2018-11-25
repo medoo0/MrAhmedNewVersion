@@ -179,13 +179,13 @@ public class PermissionsFromStudent extends Fragment implements PermissionExamsC
     }
 
     @Override
-    public void ApplicationForExams(String examID) {
+    public void ApplicationForExams(String examID,String examName) {
 
         ControlPanelContract.ControlUI controlUI = (ControlPanelContract.ControlUI) getActivity();
 
         if (controlUI!=null){
 
-            controlUI.showRequestsFromStudent(examID,"0");
+            controlUI.showRequestsFromStudent(examID,"0",examName);
 
         }
 

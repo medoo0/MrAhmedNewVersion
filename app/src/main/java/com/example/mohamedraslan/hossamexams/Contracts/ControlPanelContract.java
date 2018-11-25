@@ -25,10 +25,18 @@ public interface ControlPanelContract {
         void AdminTools();
 
 
-        void showRequestsFromStudent(String examID,String what);
+        void showRequestsFromStudent(String examID,String what,String nameExam);
+
+
 
         void showingresults();
 
+
+
+        void tokenSussessfullystored();
+        void problemwithtoken();
+        void tokenisExisitinFirebase();
+        void tokennotExisitinFirebase();
 
 
         void userAreDeletedSussess();
@@ -54,6 +62,18 @@ public interface ControlPanelContract {
         void problemUserNotDeleted();
 
 
+        void tellModeltostoreToken(String token);
+
+        void tellUitokenStored();
+
+        void tellUitokenDosentStore();
+
+
+        void tellmodelAretokenExisitorNot();
+        void tellUItokenisExisit();
+        void tellUItokennotExisit();
+
+
 
 
     }
@@ -68,6 +88,12 @@ public interface ControlPanelContract {
         void getuserName(String uid);
         void removeUserFromAuth(String uID);
         void removedetailsforUser(String uID);
+
+
+
+        void storingTokentoDatabase(String token);
+
+        void checkifTokenExisitorNot();
 
     }
 

@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.example.mohamedraslan.hossamexams.Contracts.ExamContract;
 import com.example.mohamedraslan.hossamexams.Dialog.AlertDialog;
 import com.example.mohamedraslan.hossamexams.MainPresnter.ExamPresenter;
+import com.example.mohamedraslan.hossamexams.Notifications.MyFirebaseMessagingService;
 import com.example.mohamedraslan.hossamexams.R;
 import com.example.mohamedraslan.hossamexams.Services.TimerServices;
 import com.example.mohamedraslan.hossamexams.SqLite.SQlHelper;
@@ -86,6 +87,7 @@ public class Exam extends AppCompatActivity implements View.OnClickListener , Ex
         intialViews();
         //Animation
         Animation();
+        startService(new Intent(this, MyFirebaseMessagingService.class));
 
 
 

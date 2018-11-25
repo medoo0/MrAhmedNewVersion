@@ -41,7 +41,7 @@ public class RequestFromStudentToExamWhat extends Fragment implements RequestFro
     ImageView background111;
     PublisherAdView mPublisherAdView;
     RequestFromStudentToExamWhatPresnter presnter;
-    String examID ;
+    String examID ,examName;
     AdapterExamsStudents adapter;
     AnimatedDialog animatedDialog;
 
@@ -53,7 +53,7 @@ public class RequestFromStudentToExamWhat extends Fragment implements RequestFro
         Bundle b = getArguments();
         if (b!=null){
 
-
+            examName = b.getString("name","");
             examID   = b.getString("examid","");
             presnter = new RequestFromStudentToExamWhatPresnter(this);
             presnter.tellModeltoGetStudents(examID);
@@ -181,7 +181,7 @@ public class RequestFromStudentToExamWhat extends Fragment implements RequestFro
     public void Studenssssss(List <PermissionUserEntering> list) {
 
         ControlPanel.progressBar.setVisibility(View.INVISIBLE);
-        adapter = new AdapterExamsStudents(list,getActivity(),examID,this);
+        adapter = new AdapterExamsStudents(list,getActivity(),examID,this,examName);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mLayoutManager.setReverseLayout(true);
         mLayoutManager.setStackFromEnd(true);
@@ -200,14 +200,14 @@ public class RequestFromStudentToExamWhat extends Fragment implements RequestFro
 
 
     @Override
-    public void refreshFragment() {
+    public void refreshFragment(String nameee) {
 
 
         ControlPanelContract.ControlUI controlUI = (ControlPanelContract.ControlUI) getActivity();
         if (controlUI!=null){
 
 
-            controlUI.showRequestsFromStudent(examID,"1");
+            controlUI.showRequestsFromStudent(examID,"1",examName);
 
         }
 

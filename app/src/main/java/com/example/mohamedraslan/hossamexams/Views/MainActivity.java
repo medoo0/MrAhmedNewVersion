@@ -9,6 +9,7 @@ import com.example.mohamedraslan.hossamexams.Contracts.MainActivityContract;
 import com.example.mohamedraslan.hossamexams.Fragment.First_Fragment;
 import com.example.mohamedraslan.hossamexams.Fragment.Register_Fragment;
 import com.example.mohamedraslan.hossamexams.Fragment.Signin_Fragment;
+import com.example.mohamedraslan.hossamexams.Notifications.MyFirebaseMessagingService;
 import com.example.mohamedraslan.hossamexams.R;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
@@ -45,6 +46,9 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
                 beginTransaction().
                 replace(R.id.Main_fragment,new First_Fragment(),"firestFrag")
                 .commit();
+
+
+        stopService(new Intent(this, MyFirebaseMessagingService.class));
 
     }
 

@@ -16,6 +16,7 @@ import com.example.mohamedraslan.hossamexams.Dialog.AnimatedDialog;
 import com.example.mohamedraslan.hossamexams.Enums.DataBase_Refrences;
 import com.example.mohamedraslan.hossamexams.JsonModel.AddExam_pojo;
 import com.example.mohamedraslan.hossamexams.JsonModel.ExamStartTime_Pojo;
+import com.example.mohamedraslan.hossamexams.JsonModel.FullRegisterForm;
 import com.example.mohamedraslan.hossamexams.JsonModel.PermissionUserEntering;
 import com.example.mohamedraslan.hossamexams.JsonModel.Permission_Refrence;
 import com.example.mohamedraslan.hossamexams.SqLite.SQlHelper;
@@ -29,6 +30,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
@@ -37,6 +39,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
@@ -469,11 +474,15 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
 
 
 
+
                                                                            dialog.Close_Dialog();
                                                                            android.app.AlertDialog.Builder builder1b = new android.app.AlertDialog.Builder(context);
                                                                            builder1b.setMessage("لقد تم الطلب يرجي الانتظار حتي يوافق Mr.Ahmed Samy علي طلبك");
                                                                            builder1b.setCancelable(true);
                                                                            builder1b.show();
+
+
+
 
                                                                        }
 
@@ -605,9 +614,40 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
         }
 
 
+
+
+
+
     }
 
-
+//public void sendNotificationtoMRAhmedSamy(){
+//
+//
+//
+//        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+//        DatabaseReference reference       = firebaseDatabase.getReference("Admins");
+//        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//
+//                if (dataSnapshot.exists()){
+//
+//                    HashMap<String, String> results = dataSnapshot.getValue(new GenericTypeIndicator<HashMap<String, String>>() {});
+//                    List<String> toutourial = new ArrayList<>(Objects.requireNonNull(results).values());
+//
+//
+//
+//
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
+//}
 
 
 }

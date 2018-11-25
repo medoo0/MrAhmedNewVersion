@@ -17,6 +17,7 @@ import com.example.mohamedraslan.hossamexams.JsonModel.FullResult;
 import com.example.mohamedraslan.hossamexams.JsonModel.Resister_form;
 import com.example.mohamedraslan.hossamexams.JsonModel.WorngQestion;
 import com.example.mohamedraslan.hossamexams.MainPresnter.ResultPresenter;
+import com.example.mohamedraslan.hossamexams.Notifications.MyFirebaseMessagingService;
 import com.example.mohamedraslan.hossamexams.R;
 import com.example.mohamedraslan.hossamexams.SqLite.SQlHelper;
 import com.google.firebase.auth.FirebaseAuth;
@@ -57,6 +58,8 @@ public class Result extends AppCompatActivity implements ResultContract.view {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
+        startService(new Intent(this, MyFirebaseMessagingService.class));
+
         intial();
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){

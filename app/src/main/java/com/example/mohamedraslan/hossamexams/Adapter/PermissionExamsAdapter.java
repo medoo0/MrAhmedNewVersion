@@ -53,7 +53,7 @@ public class PermissionExamsAdapter extends RecyclerView.Adapter<Permision_Holde
             @Override
             public void onClick(View v) {
 
-                viewMainmain.ApplicationForExams(Result.get(position).getExamID());
+                viewMainmain.ApplicationForExams(Result.get(position).getExamID(),Result.get(position).getExamName());
 
             }
         });

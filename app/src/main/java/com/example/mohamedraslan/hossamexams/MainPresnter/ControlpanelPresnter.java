@@ -67,4 +67,50 @@ public class ControlpanelPresnter implements ControlPanelContract.ControlPresnte
     public void problemUserNotDeleted() {
         view.problemwithDeleteUser();
     }
+
+
+
+
+
+
+
+
+
+    @Override
+    public void tellModeltostoreToken(String token) {
+
+        controlPanelModel.storingTokentoDatabase(token);
+
+    }
+
+    @Override
+    public void tellUitokenStored() {
+        view.tokenSussessfullystored();
+
+
+    }
+
+    @Override
+    public void tellUitokenDosentStore() {
+        view.problemwithtoken();
+    }
+
+    @Override
+    public void tellmodelAretokenExisitorNot() {
+
+        controlPanelModel.checkifTokenExisitorNot();
+    }
+
+    @Override
+    public void tellUItokenisExisit() {
+        view.tokenisExisitinFirebase();
+
+    }
+
+    @Override
+    public void tellUItokennotExisit() {
+
+        view.tokennotExisitinFirebase();
+
+    }
 }
