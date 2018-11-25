@@ -430,12 +430,12 @@ public class ControlPanel extends AppCompatActivity
 
             case R.id.exit:
 
-                AlertDialog aleartDialog = new AlertDialog(this,getString(R.string.title),getString(R.string.message));
+                final AlertDialog aleartDialog = new AlertDialog(this,getString(R.string.title),getString(R.string.message));
                 aleartDialog.show();
                 aleartDialog.btnYes.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
+                        aleartDialog.dismiss();
 //
 //                        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 //                        String uID                = firebaseAuth.getCurrentUser().getUid();

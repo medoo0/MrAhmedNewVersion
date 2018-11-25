@@ -38,20 +38,27 @@ public class MyFirebaseInstanceIdService extends com.google.firebase.iid.Firebas
 
 
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-           String mUserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            try {
+                String mUserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                DatabaseReference reference       = firebaseDatabase.getReference("Tokens_Device");
+                reference.child(mUserID).setValue(token).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
 
 
-            FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-            DatabaseReference reference       = firebaseDatabase.getReference("Tokens_Device");
-            reference.child(mUserID).setValue(token).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
+                        // checking ig stored or not
+
+                    }
+                });
+
+            }
+            catch (Exception e){
+                //Do what you want .
+            }
 
 
-                    // checking ig stored or not
 
-                }
-            });
 
 
 

@@ -49,8 +49,19 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
         Bitmap Image_Bitmap = BitmapFactory.decodeResource(getApplicationContext().getResources(),
                 R.drawable.contracting);
 
-            sendNotification(message,Image_Bitmap);
+        if(FirebaseAuth.getInstance().getCurrentUser() != null) {
 
+
+                String Uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                if (Uid != null && !Uid.isEmpty()) {
+
+                  // doSomething
+                    sendNotification(message, Image_Bitmap);
+
+                }
+
+
+        }
 
 
     }
