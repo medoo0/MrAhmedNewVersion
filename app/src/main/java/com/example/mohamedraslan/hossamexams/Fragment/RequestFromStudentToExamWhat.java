@@ -53,8 +53,8 @@ public class RequestFromStudentToExamWhat extends Fragment implements RequestFro
         Bundle b = getArguments();
         if (b!=null){
 
-            examName = b.getString("name","");
-            examID   = b.getString("examid","");
+            examName = b.getString("name"    ,"");
+            examID   = b.getString("examid"  ,"");
             presnter = new RequestFromStudentToExamWhatPresnter(this);
             presnter.tellModeltoGetStudents(examID);
 

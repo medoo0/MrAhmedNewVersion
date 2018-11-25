@@ -29,6 +29,9 @@ public interface ControlPanelContract {
 
 
 
+        void notificationMessages(String message);
+
+
         void showingresults();
 
 

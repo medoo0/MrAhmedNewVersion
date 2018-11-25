@@ -23,18 +23,31 @@ import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.mohamedraslan.hossamexams.Contracts.ControlPanelContract;
 import com.example.mohamedraslan.hossamexams.Dialog.AlertDialog;
 import com.example.mohamedraslan.hossamexams.Dialog.AnimatedDialog;
+import com.example.mohamedraslan.hossamexams.Dialog.NotificationDialog;
 import com.example.mohamedraslan.hossamexams.Dialog.StudentDialog;
 import com.example.mohamedraslan.hossamexams.Fragment.AboutDoctor;
 import com.example.mohamedraslan.hossamexams.Fragment.AboutProgrammer;
@@ -62,8 +75,14 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -517,6 +536,13 @@ public class ControlPanel extends AppCompatActivity
 
 
                 break;
+
+            case R.id.addnotification:
+
+                NotificationDialog notificationDialog = new NotificationDialog(this,R.style.PauseDialog,this);
+                notificationDialog.show();
+
+                break;
         }
 //        getSupportFragmentManager().popBackStack();   //finish
         drawer.closeDrawer(GravityCompat.START);
@@ -543,6 +569,7 @@ public class ControlPanel extends AppCompatActivity
         nav_Menu.findItem(R.id.results).setVisible(false);
         nav_Menu.findItem(R.id.studentManger).setVisible(false);
         nav_Menu.findItem(R.id.per).setVisible(false);
+        nav_Menu.findItem(R.id.addnotification).setVisible(false);
 
     }
     @Override
@@ -554,6 +581,7 @@ public class ControlPanel extends AppCompatActivity
         nav_Menu.findItem(R.id.results).setVisible(true);
         nav_Menu.findItem(R.id.studentManger).setVisible(true);
         nav_Menu.findItem(R.id.per).setVisible(true);
+        nav_Menu.findItem(R.id.addnotification).setVisible(true);
         circleImageView.setBackgroundResource(R.drawable.ahmedsamy);
 
     }
@@ -595,6 +623,12 @@ public class ControlPanel extends AppCompatActivity
                         .replace(R.id.Exam_Frame,requestFromStudentToExamWhat1)
                         .addToBackStack(null)
                         .commit();
+
+
+                android.app.AlertDialog.Builder builder1b = new android.app.AlertDialog.Builder(this);
+                builder1b.setMessage("يستطيع الطالب من الان دخول الإختبار.");
+                builder1b.setCancelable(true);
+                builder1b.show();
                 break;
 
         }
@@ -603,6 +637,19 @@ public class ControlPanel extends AppCompatActivity
 
 
         // حنظهر ام الطلبات بتاعه الامتحان بقااااااااااااااا
+
+
+    }
+
+    @Override
+    public void notificationMessages(String message) {
+
+        // send notification to allstudent //
+        sendnotificationtoallUsers(message);
+
+
+
+
 
 
     }
@@ -618,10 +665,7 @@ public class ControlPanel extends AppCompatActivity
                 .replace(R.id.Exam_Frame,fragment,"K")
                 .addToBackStack(null)
                 .commit();
-        android.app.AlertDialog.Builder builder1b = new android.app.AlertDialog.Builder(this);
-        builder1b.setMessage("يستطيع الطالب من الان دخول الإختبار.");
-        builder1b.setCancelable(true);
-        builder1b.show();
+
 
 
     }
@@ -681,4 +725,71 @@ public class ControlPanel extends AppCompatActivity
         }
 
     }
+
+
+
+
+    public void sendnotificationtoallUsers(String s) {
+
+
+        JSONObject obj = null;
+        JSONObject dataobjData = null;
+
+        try {
+
+            obj = new JSONObject();
+
+            dataobjData = new JSONObject();
+            dataobjData.put("image", "0");
+            dataobjData.put("message",s);
+
+            obj.put("to", "/topics/all");
+            obj.put("data", dataobjData);
+
+            Log.d("MYOBJs", obj.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, "https://fcm.googleapis.com/fcm/send", obj,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.e("SUCCESS", response + "");
+
+                        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+                        Toast.makeText(ControlPanel.this, "لقد تم إرسال الإشعار بنجاح.", Toast.LENGTH_SHORT).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        String response= null;
+                        try {
+                            response = new String(error.networkResponse.data,"UTF-8");
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
+                        Log.e("Error Response",response);
+                    }
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<String, String>();
+                headers.put("Authorization", "key=" + "AAAA0NknKjs:APA91bH8x30IaI5ZAz49kUGAOXEwjiFxZnWTpELAu2DMOu_vgz5GhNDnERYkv7X5Z-NveF02btyVdkMyHWhYH0wYTU3nqtbW9vx67M4Xv1vn7-rOisNEYixwQpeImD-7yguPEhTM_Nkk");
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+
+
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            int socketTimeout = 1000 * 60;// 60 seconds
+            RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+            jsObjRequest.setRetryPolicy(policy);
+            requestQueue.add(jsObjRequest);
+
+
+    }
+
 }

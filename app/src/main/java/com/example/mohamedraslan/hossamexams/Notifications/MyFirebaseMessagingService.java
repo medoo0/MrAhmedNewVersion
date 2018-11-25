@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Date;
 
 /**
  * Created by microprocess on 2018-07-08.
@@ -68,6 +69,7 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
 
     //This method is only generating push notification
     private void sendNotification(String messageBody ,Bitmap imageUri ) {
+        int m = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE);
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
@@ -98,7 +100,8 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
                 notificationManager.createNotificationChannel(mChannel);
             }
         }
-        notificationManager.notify(0, notificationBuilder.build());
+        notificationManager.notify(m, notificationBuilder.build());
+
     }
     public static Bitmap getBitmapFromURL(String url) {
         try {
