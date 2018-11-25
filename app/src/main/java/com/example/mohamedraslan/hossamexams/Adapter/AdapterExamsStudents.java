@@ -23,10 +23,12 @@ import com.android.volley.toolbox.Volley;
 import com.example.mohamedraslan.hossamexams.Contracts.RequestFromStudentToExamWhatContract;
 import com.example.mohamedraslan.hossamexams.Dialog.AlertDialog;
 import com.example.mohamedraslan.hossamexams.Dialog.AnimatedDialog;
+import com.example.mohamedraslan.hossamexams.Dialog.NotificationDialog;
 import com.example.mohamedraslan.hossamexams.Enums.DataBase_Refrences;
 import com.example.mohamedraslan.hossamexams.JsonModel.PermissionUserEntering;
 import com.example.mohamedraslan.hossamexams.JsonModel.Permission_Refrence;
 import com.example.mohamedraslan.hossamexams.R;
+import com.example.mohamedraslan.hossamexams.Views.ControlPanel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -314,13 +316,22 @@ public class AdapterExamsStudents extends RecyclerView.Adapter<ExamStudenstHolde
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        String response= null;
-                        try {
-                            response = new String(error.networkResponse.data,"UTF-8");
-                        } catch (UnsupportedEncodingException e) {
-                            e.printStackTrace();
+
+
+
+                        if (error.toString().equals("com.android.volley.NoConnectionError: java.net.UnknownHostException: Unable to resolve host fcm.googleapis.com: No address associated with hostname")){
+
+                            Toast.makeText(context, "تاكد من الإتصال بالإنترنت", Toast.LENGTH_SHORT).show();
+
+
                         }
-                        Log.e("Error Response",response);
+//                        String response= null;
+//                        try {
+//                            response = new String(error.networkResponse.data,"UTF-8");
+//                        } catch (UnsupportedEncodingException e) {
+//                            e.printStackTrace();
+//                        }
+//                        Log.e("Error Response",response);
                     }
                 }) {
             @Override

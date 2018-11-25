@@ -102,6 +102,7 @@ public class ControlPanel extends AppCompatActivity
     ControlpanelPresnter controlpanelPresnter;
     AnimatedDialog animatedDialog;
     BroadcastReceiver broadcastReceiver;
+    NotificationDialog notificationDialog;
     CircleImageView circleImageView;
     TextView UserName;
     public static ProgressBar progressBar;
@@ -539,7 +540,7 @@ public class ControlPanel extends AppCompatActivity
 
             case R.id.addnotification:
 
-                NotificationDialog notificationDialog = new NotificationDialog(this,R.style.PauseDialog,this);
+                 notificationDialog = new NotificationDialog(this,R.style.PauseDialog,this);
                 notificationDialog.show();
 
                 break;
@@ -642,14 +643,10 @@ public class ControlPanel extends AppCompatActivity
     }
 
     @Override
-    public void notificationMessages(String message) {
+    public void notificationMessages(String message,ProgressBar p1 , ProgressBar p2) {
 
         // send notification to allstudent //
-        sendnotificationtoallUsers(message);
-
-
-
-
+        sendnotificationtoallUsers(message,p1,p2);
 
 
     }
@@ -729,7 +726,7 @@ public class ControlPanel extends AppCompatActivity
 
 
 
-    public void sendnotificationtoallUsers(String s) {
+    public void sendnotificationtoallUsers(String s, final ProgressBar p1, final ProgressBar p2) {
 
 
         JSONObject obj = null;
@@ -756,21 +753,31 @@ public class ControlPanel extends AppCompatActivity
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.e("SUCCESS", response + "");
-
+                        NotificationDialog.edTextNot.setText("");
+                        p1.setVisibility(View.GONE);
+                        p2.setVisibility(View.GONE);
+                        NotificationDialog.sendfeedback.setEnabled(true);
                         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
                         Toast.makeText(ControlPanel.this, "لقد تم إرسال الإشعار بنجاح.", Toast.LENGTH_SHORT).show();
+                        if (notificationDialog!=null){
+
+                            notificationDialog.dismiss();
+
+                        }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        String response= null;
-                        try {
-                            response = new String(error.networkResponse.data,"UTF-8");
-                        } catch (UnsupportedEncodingException e) {
-                            e.printStackTrace();
-                        }
-                        Log.e("Error Response",response);
+
+
+                        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+                            Toast.makeText(ControlPanel.this, "تاكد من الإتصال بالإنترنت", Toast.LENGTH_SHORT).show();
+                            NotificationDialog.sendfeedback.setEnabled(true);
+                            p1.setVisibility(View.GONE);
+                            p2.setVisibility(View.GONE);
+
+
                     }
                 }) {
             @Override
@@ -781,6 +788,7 @@ public class ControlPanel extends AppCompatActivity
                 return headers;
             }
         };
+
 
 
             RequestQueue requestQueue = Volley.newRequestQueue(this);

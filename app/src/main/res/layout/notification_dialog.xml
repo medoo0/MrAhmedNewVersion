@@ -20,6 +20,24 @@
         >
 
 
+        <ProgressBar
+            android:id="@+id/P1"
+            android:layout_width="20sp"
+            android:visibility="gone"
+            android:layout_height="20sp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="48dp" />
+
+        <ProgressBar
+            android:id="@+id/p2"
+            android:layout_width="20sp"
+            android:visibility="gone"
+            android:layout_height="20sp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="48dp" />
+
         <ImageView
             android:layout_width="70dp"
             android:layout_marginTop="20dp"

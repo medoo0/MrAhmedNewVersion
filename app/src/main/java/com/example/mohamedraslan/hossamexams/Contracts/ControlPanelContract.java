@@ -1,6 +1,8 @@
 package com.example.mohamedraslan.hossamexams.Contracts;
 
 
+import android.widget.ProgressBar;
+
 import com.example.mohamedraslan.hossamexams.JsonModel.Result_Pojo;
 import com.example.mohamedraslan.hossamexams.JsonModel.WorngQestion;
 
@@ -29,7 +31,7 @@ public interface ControlPanelContract {
 
 
 
-        void notificationMessages(String message);
+        void notificationMessages(String message, ProgressBar p1,ProgressBar p2);
 
 
         void showingresults();

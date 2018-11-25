@@ -9,14 +9,16 @@ import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import com.example.mohamedraslan.hossamexams.Contracts.ControlPanelContract;
 import com.example.mohamedraslan.hossamexams.R;
 
 public class NotificationDialog extends Dialog implements View.OnClickListener {
 
-    Button   sendfeedback;
-    private EditText  edTextNot;
+    public static Button   sendfeedback;
+    public  static EditText  edTextNot;
+    ProgressBar P1,p2;
     ControlPanelContract.ControlUI controlUI;
 
 
@@ -36,6 +38,8 @@ public class NotificationDialog extends Dialog implements View.OnClickListener {
                 new ColorDrawable(android.graphics.Color.TRANSPARENT));
         setContentView(R.layout.notification_dialog);
         edTextNot = findViewById(R.id.edTextNot);
+        p2        = findViewById(R.id.p2);
+        P1        = findViewById(R.id.P1);
         sendfeedback = findViewById(R.id.sendfeedback);
         sendfeedback.setOnClickListener(this);
 
@@ -57,9 +61,11 @@ public class NotificationDialog extends Dialog implements View.OnClickListener {
 
             }
             else {
+                P1.setVisibility(View.VISIBLE);
+                p2.setVisibility(View.VISIBLE);
+                controlUI.notificationMessages(edTextNot.getText().toString(),p2,P1);
+                sendfeedback.setEnabled(false);
 
-                controlUI.notificationMessages(edTextNot.getText().toString());
-                this.dismiss();
             }
 
         }

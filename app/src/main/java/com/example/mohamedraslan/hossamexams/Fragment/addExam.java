@@ -586,13 +586,20 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        String response= null;
-                        try {
-                            response = new String(error.networkResponse.data,"UTF-8");
-                        } catch (UnsupportedEncodingException e) {
-                            e.printStackTrace();
+
+
+                        if (error.toString().equals("com.android.volley.NoConnectionError: java.net.UnknownHostException: Unable to resolve host fcm.googleapis.com: No address associated with hostname")){
+
+                            Toast.makeText(getActivity(), "تاكد من الإتصال بالإنترنت.", Toast.LENGTH_SHORT).show();
+
                         }
-                        Log.e("Error Response",response);
+//                        String response= null;
+//                        try {
+//                            response = new String(error.networkResponse.data,"UTF-8");
+//                        } catch (UnsupportedEncodingException e) {
+//                            e.printStackTrace();
+//                        }
+//                        Log.e("Error Response",response);
                     }
                 }) {
             @Override
