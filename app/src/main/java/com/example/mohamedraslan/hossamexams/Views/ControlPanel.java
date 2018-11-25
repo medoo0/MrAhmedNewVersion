@@ -628,14 +628,14 @@ public class ControlPanel extends AppCompatActivity
 
     @Override
     public void tokenSussessfullystored() {
-        Toast.makeText(this, "التوكن اتخزن تمااااااااااام", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "التوكن اتخزن تمااااااااااام", Toast.LENGTH_SHORT).show();
 
     }
 
     @Override
     public void problemwithtoken() {
 
-        Toast.makeText(this, "التوكن فيه مشكله مش عارف", Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, "التوكن فيه مشكله مش عارف", Toast.LENGTH_SHORT).show();
 
     }
 

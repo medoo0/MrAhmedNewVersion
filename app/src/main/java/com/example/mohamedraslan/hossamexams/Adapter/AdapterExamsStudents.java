@@ -294,7 +294,7 @@ public class AdapterExamsStudents extends RecyclerView.Adapter<ExamStudenstHolde
 
             dataobjData = new JSONObject();
             dataobjData.put("image", "0");
-            dataobjData.put("message","  لقد وافق Mr.Ahmed علي إعادتك إختبار "  + examName );
+            dataobjData.put("message","  لقد وافق Mr.Ahmed علي إعادة إختبار "  + examName );
 
             obj.put("to", tokenDevice);
             obj.put("data", dataobjData);
