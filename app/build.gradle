@@ -5,7 +5,8 @@ android {
 
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.example.mohamedraslan.hossamexams"
+
+        applicationId "com.am.mohamedraslan.hossamexams"
         minSdkVersion 21
         targetSdkVersion 28
         multiDexEnabled true

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:layoutDirection="ltr"
     android:background="@color/color3"
-    tools:context="com.example.mohamedraslan.hossamexams.Views.ControlPanel"
+    tools:context="com.am.mohamedraslan.hossamexams.Views.ControlPanel"
     android:keepScreenOn="true">
 
 
