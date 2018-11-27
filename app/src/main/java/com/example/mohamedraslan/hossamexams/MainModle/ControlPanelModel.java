@@ -71,6 +71,8 @@ public class ControlPanelModel implements ControlPanelContract.ControlModelUI {
                 }
                 else {
 
+                    presnterUI.HeIsUser();
+
                 }
             }
 

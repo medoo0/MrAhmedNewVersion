@@ -16,6 +16,9 @@ public interface PermissionExamsContract {
         void ApplicationForExams(String examID,String nameExam);
 
 
+        void numberExams(int numbers);
+
+
     }
 
 

@@ -43,6 +43,11 @@ public class ControlpanelPresnter implements ControlPanelContract.ControlPresnte
     }
 
     @Override
+    public void HeIsUser() {
+        view.UserTools();
+    }
+
+    @Override
     public void getuserName(String uid) {
         controlPanelModel.getuserName(uid);
     }

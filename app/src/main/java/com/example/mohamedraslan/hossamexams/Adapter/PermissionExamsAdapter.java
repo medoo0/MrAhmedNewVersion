@@ -48,7 +48,7 @@ public class PermissionExamsAdapter extends RecyclerView.Adapter<Permision_Holde
 
         holder.animates();
         holder.ExamNamerequest.setText(Result.get(position).getExamName());
-
+        viewMainmain.numberExams(getItemCount());
         holder.buttongetallRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,7 +109,12 @@ public class PermissionExamsAdapter extends RecyclerView.Adapter<Permision_Holde
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
 
-                Result = (ArrayList<Permission_Refrence>) results.values; // has the filtered values
+                Result = (ArrayList<Permission_Refrence>) results.values;
+                if (results.count<1){
+
+                    viewMainmain.numberExams(0);
+                    // has the filtered values
+                }
                 notifyDataSetChanged();
 
             }

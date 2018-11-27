@@ -36,6 +36,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -78,7 +79,7 @@ public class AdapterExamsStudents extends RecyclerView.Adapter<ExamStudenstHolde
     public void onBindViewHolder(@NonNull ExamStudenstHolder holder, final int position) {
 
         holder.txNameStudentt.setText(list.get(position).getStudentNanme());
-
+        mainView.numberStu(getItemCount());
 
 
         if (photosCounter == 0 ) {
@@ -108,6 +109,7 @@ public class AdapterExamsStudents extends RecyclerView.Adapter<ExamStudenstHolde
             @Override
             public void onClick(View v) {
 
+                ControlPanel.progressBar.setVisibility(View.VISIBLE);
                 FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
                 DatabaseReference reference = firebaseDatabase.getReference(DataBase_Refrences.Permissions.getRef());
                 reference.child(examID).child(list.get(position).getuID()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -197,7 +199,12 @@ public class AdapterExamsStudents extends RecyclerView.Adapter<ExamStudenstHolde
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
 
-                list = (ArrayList<PermissionUserEntering>) results.values; // has the filtered values
+                list = (ArrayList<PermissionUserEntering>) results.values;
+                if (results.count<1){
+
+                    mainView.numberStu(0);
+                }
+                // has the filtered values
                 notifyDataSetChanged();
 
             }
@@ -256,8 +263,11 @@ public class AdapterExamsStudents extends RecyclerView.Adapter<ExamStudenstHolde
                                             public void onComplete(@NonNull Task<Void> task) {
 
                                                 if (task.isSuccessful()){
-                                                    mainView.refreshFragment(examName);
+
+
                                                     animatedDialog.Close_Dialog();
+                                                    sendtoStudentThaAcceptFromMrAhmed(context);
+
 
                                                 }
 
@@ -283,6 +293,73 @@ public class AdapterExamsStudents extends RecyclerView.Adapter<ExamStudenstHolde
     }
 
 
+
+
+    public void sendtoStudentThaAcceptFromMrAhmed(Context mcontext) {
+
+
+        JSONObject obj = null;
+        JSONObject dataobjData = null;
+
+        try {
+
+            obj = new JSONObject();
+
+            dataobjData = new JSONObject();
+            dataobjData.put("image", "0");
+            dataobjData.put("message","  لقد وافق Mr.Ahmed علي جميع  طلبات إعاده اختبار  "  +  examName  );
+
+            obj.put("to", "/topics/all");
+            obj.put("data", dataobjData);
+
+            Log.d("MYOBJs", obj.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, "https://fcm.googleapis.com/fcm/send", obj,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.e("SUCCESS", response + "");
+                        mainView.refreshFragment(examName);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+
+
+                            mainView.refreshFragment(examName);
+                        Toast.makeText(context, "تاكد من الإتصال بالإنترنت", Toast.LENGTH_SHORT).show();
+
+//                        String response= null;
+//                        try {
+//                            response = new String(error.networkResponse.data,"UTF-8");
+//                        } catch (UnsupportedEncodingException e) {
+//                            e.printStackTrace();
+//                        }
+//                        Log.e("Error Response",response);
+                    }
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<String, String>();
+                headers.put("Authorization", "key=" + "AAAA0NknKjs:APA91bH8x30IaI5ZAz49kUGAOXEwjiFxZnWTpELAu2DMOu_vgz5GhNDnERYkv7X5Z-NveF02btyVdkMyHWhYH0wYTU3nqtbW9vx67M4Xv1vn7-rOisNEYixwQpeImD-7yguPEhTM_Nkk");
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(mcontext);
+        int socketTimeout = 1000 * 60;// 60 seconds
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        jsObjRequest.setRetryPolicy(policy);
+        requestQueue.add(jsObjRequest);
+
+
+    }
 
     public void sendPost(Context mcontext,String tokenDevice) {
 

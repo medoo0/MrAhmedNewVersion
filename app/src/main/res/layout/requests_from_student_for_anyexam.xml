@@ -54,6 +54,21 @@
         />
 
 
+    <TextView
+        android:id="@+id/txmarks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="21dp"
+        android:layout_above="@+id/publisherAdView"
+        android:background="@drawable/text_nuber_list"
+        android:elevation="16dp"
+        android:gravity="center"
+        android:scaleType="fitCenter"
+        android:text="@string/students"
+        android:layout_marginBottom="7dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="15dp" />
 
     <com.google.android.gms.ads.doubleclick.PublisherAdView
         xmlns:ads="http://schemas.android.com/apk/res-auto"

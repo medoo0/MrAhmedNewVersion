@@ -37,5 +37,7 @@ public interface QuestionsBankContract {
         void removingQuestion(String questionID, int position);
         void Q_Removed_InUI(int position);
         void Q_notRemoved_InUI();
+
+        void nuberQuestions(int number);
     }
 }

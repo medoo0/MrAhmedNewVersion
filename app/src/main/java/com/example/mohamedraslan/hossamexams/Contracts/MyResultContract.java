@@ -15,6 +15,9 @@ public interface MyResultContract {
         void showAtherFragment(Result_Pojo result_pojo,String FinalD , String TotalD);
 
         void Problem(String s);
+
+
+        void numberofExamsForMe(int number);
     }
     interface presenter {
 

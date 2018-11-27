@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -40,6 +41,7 @@ public class StudentManagement extends Fragment implements StudentManagementCont
     StudentManagementAdapter adapter;
     StudentManagementContract.presenter presenter ;
     AnimatedDialog dialog;
+    TextView marked;
     @BindView(R.id.background1)
     ImageView background1;
     String AreInGroup;
@@ -62,7 +64,7 @@ public class StudentManagement extends Fragment implements StudentManagementCont
         ButterKnife.bind(this,v);
         ControlPanel.Title.setText(R.string.mangeStudent);
         ControlPanel.SetNavChecked(5);
-
+        marked = v.findViewById(R.id.marked);
         searchview = v.findViewById(R.id.search);
 
         searchview.setQueryHint("قم بالبحث عن طريق الاسم ");
@@ -109,7 +111,7 @@ public class StudentManagement extends Fragment implements StudentManagementCont
 
 
 
-            adapter = new StudentManagementAdapter(getActivity(),Result,getActivity().getSupportFragmentManager(),"");
+            adapter = new StudentManagementAdapter(getActivity(),Result,getActivity().getSupportFragmentManager(),"",this);
             recyclerView.setAdapter(adapter);
             //close
             dialog.Close_Dialog();
@@ -135,7 +137,7 @@ public class StudentManagement extends Fragment implements StudentManagementCont
 
             if (!list.isEmpty()){
 
-                adapter = new StudentManagementAdapter(getActivity(),list,getActivity().getSupportFragmentManager(),"myStudents");
+                adapter = new StudentManagementAdapter(getActivity(),list,getActivity().getSupportFragmentManager(),"myStudents",this);
                 recyclerView.setAdapter(adapter);
                 //close
                 dialog.Close_Dialog();
@@ -168,6 +170,11 @@ public class StudentManagement extends Fragment implements StudentManagementCont
         //close
         dialog.Close_Dialog();
         Toast.makeText(getActivity(), problem + "", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void numberStudent(int number) {
+        marked.setText(number + "\n" + "طالب");
     }
 
     @Override

@@ -21,6 +21,8 @@ public interface StudentResultContract {
         void noDataHere(ImageView imageView);
         void problemss(String Error);
 
+        void  numberResult(int number);
+
         void showErrorsFragment(String name , String finalDegree , String total, String examID , ArrayList<WorngQestion> arrayList, Integer imageTag, String uID, CircleImageView imageView);
 
 

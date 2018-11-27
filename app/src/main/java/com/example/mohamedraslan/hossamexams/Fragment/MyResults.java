@@ -1,14 +1,20 @@
 package com.example.mohamedraslan.hossamexams.Fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.mohamedraslan.hossamexams.Adapter.MyResult_Rec_Adapter;
 import com.example.mohamedraslan.hossamexams.Contracts.ControlPanelContract;
@@ -25,6 +31,7 @@ import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
 import com.google.android.gms.ads.doubleclick.PublisherAdView;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -38,6 +45,9 @@ public class MyResults extends Fragment implements MyResultContract.view {
     RecyclerView recyclerView;
     @BindView(R.id.backgroundground)
     ImageView backgroundground;
+    MyResult_Rec_Adapter adapter;
+    SearchView myresultsearch;
+    TextView markresult;
     PublisherAdView mPublisherAdView;
 
 
@@ -48,7 +58,9 @@ public class MyResults extends Fragment implements MyResultContract.view {
         // Inflate the layout for this fragment .
          View v = inflater.inflate(R.layout.fragment_my_results, container, false);
         ButterKnife.bind(this , v);
-
+        markresult = v.findViewById(R.id.markresult);
+        setHasOptionsMenu(true);
+        myresultsearch = v.findViewById(R.id.myresultsearch);
         mPublisherAdView = v.findViewById(R.id.publisherAdView);
         PublisherAdRequest adRequest = new PublisherAdRequest.Builder().build();
         mPublisherAdView.loadAd(adRequest);
@@ -97,6 +109,37 @@ public class MyResults extends Fragment implements MyResultContract.view {
             presenter.getMyResults(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
         }
+        myresultsearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                if (adapter!=null){
+
+                    adapter.getFilter().filter(query);
+
+
+                }
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if (adapter!=null){
+
+                    adapter.getFilter().filter(newText);
+
+//                    if (adapter.getItemCount()<1){
+//
+//                        markresult.setText(0 + "\n" + "نتيجه");
+//
+//                    }
+                }
+                return false;
+            }
+
+
+        });
+
 
         return v;
     }
@@ -106,15 +149,17 @@ public class MyResults extends Fragment implements MyResultContract.view {
         //Stop progress .
         ControlPanel.progressBar.setVisibility(View.INVISIBLE);
 
-        MyResult_Rec_Adapter adapter = new MyResult_Rec_Adapter(result,this);
-        //**// reverse Recycler view .
-        recyclerView.setHasFixedSize(true);
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-        mLayoutManager.setReverseLayout(true);
-        mLayoutManager.setStackFromEnd(true);
-        recyclerView.setLayoutManager(mLayoutManager);
-        //**\\
-        recyclerView.setAdapter(adapter);
+            adapter = new MyResult_Rec_Adapter(result, this);
+            //**// reverse Recycler view .
+            recyclerView.setHasFixedSize(true);
+            LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+            mLayoutManager.setReverseLayout(true);
+            mLayoutManager.setStackFromEnd(true);
+            recyclerView.setLayoutManager(mLayoutManager);
+            //**\\
+            recyclerView.setAdapter(adapter);
+
+
     }
 
     @Override
@@ -138,6 +183,63 @@ public class MyResults extends Fragment implements MyResultContract.view {
         //Stop progress .
         ControlPanel.progressBar.setVisibility(View.INVISIBLE);
         backgroundground.setVisibility(View.VISIBLE);
+//        List<Result_Pojo>list1 = new ArrayList<>();
+//        backgroundground.setVisibility(View.VISIBLE);
+//        adapter = new MyResult_Rec_Adapter(list1,this);
+//        //**// reverse Recycler view .
+//        recyclerView.setHasFixedSize(true);
+//        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+//        mLayoutManager.setReverseLayout(true);
+//        mLayoutManager.setStackFromEnd(true);
+//        recyclerView.setLayoutManager(mLayoutManager);
+//        //**\\
+//        recyclerView.setAdapter(adapter);
+
+
+    }
+
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.search, menu);
+
+
+
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+
+            case R.id.Search:
+
+                myresultsearch.setIconified(false); //Expand the search view
+
+                if (myresultsearch.isShown()){
+                    myresultsearch.setVisibility(View.GONE);
+
+                }else {
+                    myresultsearch.setVisibility(View.VISIBLE);
+
+                }
+
+                // Do Fragment menu item stuff here
+                return true;
+
+            default:
+                break;
+        }
+
+        return false;
+    }
+    @Override
+    public void numberofExamsForMe(int number) {
+
+        markresult.setText(number + "\n" + "نتيجه");
+
+
+
 
 
     }

@@ -70,4 +70,21 @@
         ads:adUnitId="@string/banner_ad_unit_id">
     </com.google.android.gms.ads.doubleclick.PublisherAdView>
 
+    <TextView
+        android:id="@+id/markedd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="21dp"
+        android:layout_above="@+id/publisherAdView"
+        android:background="@drawable/text_nuber_list"
+        android:elevation="16dp"
+        android:layout_marginBottom="7dp"
+
+        android:gravity="center"
+        android:scaleType="fitCenter"
+        android:text="@string/numberExams"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp" />
+
 </RelativeLayout>

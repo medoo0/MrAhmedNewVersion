@@ -24,6 +24,7 @@ public interface StudentManagementContract {
     interface view {
         void RecyclerConfig(List<FullRegisterForm> Result);
         void problem(String problem);
+        void numberStudent(int number);
 
     }
 }

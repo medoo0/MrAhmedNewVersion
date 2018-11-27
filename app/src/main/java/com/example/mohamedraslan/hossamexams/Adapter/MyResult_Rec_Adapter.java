@@ -9,13 +9,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
 import android.widget.TextView;
 
 import com.example.mohamedraslan.hossamexams.Contracts.MyResultContract;
 import com.example.mohamedraslan.hossamexams.Fragment.StudentsWrongs;
+import com.example.mohamedraslan.hossamexams.JsonModel.Questions_Form;
 import com.example.mohamedraslan.hossamexams.JsonModel.Result_Pojo;
 import com.example.mohamedraslan.hossamexams.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -28,7 +31,7 @@ import butterknife.ButterKnife;
 public class MyResult_Rec_Adapter extends RecyclerView.Adapter<MyResult_Rec_Adapter.ViewHolder> {
 
 
-    List<Result_Pojo> Result;
+    List<Result_Pojo> Result,listnew;
     MyResultContract.view view;
 
     public MyResult_Rec_Adapter(List<Result_Pojo> result, MyResultContract.view view) {
@@ -45,6 +48,8 @@ public class MyResult_Rec_Adapter extends RecyclerView.Adapter<MyResult_Rec_Adap
 
     @Override
     public void onBindViewHolder(@NonNull MyResult_Rec_Adapter.ViewHolder holder, final int position) {
+
+        view.numberofExamsForMe(getItemCount());
         holder.txExamName.setText(Result.get(position).getExamName());
         holder.txDegree.setText(Result.get(position).getTotal());
         holder.txFinalDegree.setText(Result.get(position).getFinalDegree());
@@ -90,7 +95,8 @@ public class MyResult_Rec_Adapter extends RecyclerView.Adapter<MyResult_Rec_Adap
 
     @Override
     public int getItemCount() {
-        return Result.size();
+
+      return Result.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -109,4 +115,61 @@ public class MyResult_Rec_Adapter extends RecyclerView.Adapter<MyResult_Rec_Adap
 
         }
     }
+    public Filter getFilter() {
+
+
+
+        Filter filter = new Filter() {
+
+
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+
+                FilterResults results = new FilterResults();        // Holds the results of a filtering operation in values
+                ArrayList<Result_Pojo> FilteredArrList = new ArrayList<>();
+                if (listnew == null) {
+
+                    listnew = new ArrayList<>(Result); // saves the original data in mOriginalValues
+
+                }
+
+                if (constraint == null || constraint.length() == 0) {
+
+                    // set the Original result to return
+                    results.count = listnew.size();
+                    results.values = listnew;
+                } else {
+                    constraint = constraint.toString().toLowerCase();
+                    for (int i = 0; i < listnew.size(); i++) {
+                        String data = listnew.get(i).getExamName();
+                        if (data.toLowerCase().contains(constraint.toString())) {
+                            FilteredArrList.add(listnew.get(i));
+                        }
+                    }
+                    // set the Filtered result to return
+                    results.count = FilteredArrList.size();
+                    results.values = FilteredArrList;
+
+                }
+                return results;
+            }
+
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+
+
+
+                Result = (ArrayList<Result_Pojo>) results.values;
+
+                if(results.count < 1){
+                    view.numberofExamsForMe(0);
+                }
+                notifyDataSetChanged();
+
+            }
+        };
+        return filter;
+    }
+
 }

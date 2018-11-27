@@ -11,6 +11,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.mohamedraslan.hossamexams.Dialog.AlertDialog;
 import com.example.mohamedraslan.hossamexams.Dialog.AnimatedDialog;
 import com.example.mohamedraslan.hossamexams.Enums.DataBase_Refrences;
@@ -19,8 +28,11 @@ import com.example.mohamedraslan.hossamexams.JsonModel.ExamStartTime_Pojo;
 import com.example.mohamedraslan.hossamexams.JsonModel.FullRegisterForm;
 import com.example.mohamedraslan.hossamexams.JsonModel.PermissionUserEntering;
 import com.example.mohamedraslan.hossamexams.JsonModel.Permission_Refrence;
+import com.example.mohamedraslan.hossamexams.R;
 import com.example.mohamedraslan.hossamexams.SqLite.SQlHelper;
+import com.example.mohamedraslan.hossamexams.Views.ControlPanel;
 import com.example.mohamedraslan.hossamexams.Views.Exam;
+import com.example.mohamedraslan.hossamexams.Views.MainActivity;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -33,6 +45,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -41,6 +57,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
@@ -132,6 +149,91 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
 
 
     }
+
+
+
+
+    public void sendPost(String s, String nameStudent) {
+
+
+        JSONObject obj = null;
+        JSONObject dataobjData = null;
+
+        try {
+
+            obj = new JSONObject();
+
+
+                dataobjData = new JSONObject();
+                dataobjData.put("image", "0");
+                dataobjData.put("message","الطالب "  +  nameStudent   +  "    يريد إعاده اختبار  " +   (s)  );
+
+                obj.put("to", "/topics/Admins");
+                obj.put("data", dataobjData);
+
+                Log.d("MYOBJs", obj.toString());
+
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, "https://fcm.googleapis.com/fcm/send", obj,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.e("SUCCESS", response + "");
+
+                            dialog.Close_Dialog();
+
+                        com.example.mohamedraslan.hossamexams.Dialog.AlertDialog alertDialog
+                                = new com.example.mohamedraslan.hossamexams.Dialog.AlertDialog(context, "لقد تم الطلب يرجي الانتظار حتي يوافق Mr.Ahmed Samy علي طلبك.");
+                        alertDialog.show();
+
+
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                        dialog.Close_Dialog();
+                        com.example.mohamedraslan.hossamexams.Dialog.AlertDialog alertDialog
+                                = new com.example.mohamedraslan.hossamexams.Dialog.AlertDialog(context, "تاكد من الإتصال بالإنترنت.");
+                        alertDialog.show();
+
+
+
+//                        String response= null;
+//                        try {
+//                            response = new String(error.networkResponse.data,"UTF-8");
+//                        } catch (UnsupportedEncodingException e) {
+//                            e.printStackTrace();
+//                        }
+//                        Log.e("Error Response",response);
+                    }
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<String, String>();
+                headers.put("Authorization", "key=" + "AAAA0NknKjs:APA91bH8x30IaI5ZAz49kUGAOXEwjiFxZnWTpELAu2DMOu_vgz5GhNDnERYkv7X5Z-NveF02btyVdkMyHWhYH0wYTU3nqtbW9vx67M4Xv1vn7-rOisNEYixwQpeImD-7yguPEhTM_Nkk");
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        int socketTimeout = 1000 * 60;// 60 seconds
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        jsObjRequest.setRetryPolicy(policy);
+        requestQueue.add(jsObjRequest);
+
+    }
+
+
+
 
 
     public static long SubtractTwoDate(SimpleDateFormat format, String oldDate, String newDate) {
@@ -392,6 +494,8 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
             // لو الوقت الحالي بعد وقت البداية وقبل وقت النهاية ادخل جوه .
            if(currentTimeDate.after(StartTimeDate) && currentTimeDate.before(endTimeDateDate)){
 
+               ////
+
 
                GotoExam(TableName,model.getOneQestionDegree(),model.getFinal_degree()
                        ,model.getExamName(),model.getCurrentDateandTime());
@@ -423,10 +527,9 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
 
                            dialog.Close_Dialog();
 
-                           android.app.AlertDialog.Builder builderc = new android.app.AlertDialog.Builder(context);
-                           builderc.setMessage("لقد إنتهي وقت إختبارك وقمت بالطلب من  Mr.Ahmed Samy من قبل.");
-                           builderc.setCancelable(true);
-                           builderc.show();
+                           com.example.mohamedraslan.hossamexams.Dialog.AlertDialog alertDialog
+                                   = new com.example.mohamedraslan.hossamexams.Dialog.AlertDialog(context, "لقد إنتهي وقت إختبارك وقمت بالطلب من  Mr.Ahmed Samy من قبل.");
+                           alertDialog.show();
 
 
                        }else {
@@ -440,129 +543,143 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
 
                                    final String nameStudnet = (String) dataSnapshot.getValue();
 
-                                   android.app.AlertDialog.Builder builder1 = new android.app.AlertDialog.Builder(context);
-                                   builder1.setMessage("لقد أنتهي وقت أختبارك بالفعل هل تريد أذن الدخول مره اخري..");
-                                   builder1.setCancelable(false);
-
-                                   builder1.setPositiveButton(
-                                           "Yes",
-                                           new DialogInterface.OnClickListener() {
-                                               public void onClick(DialogInterface dialog1, int id) {
 
 
-
-                                                   final FirebaseDatabase firebaseDatabase1 = FirebaseDatabase.getInstance();
-                                                   DatabaseReference reference1             = firebaseDatabase1.getReference("PermissionRefrence");
-                                                   reference1.child(ExamID).addListenerForSingleValueEvent(new ValueEventListener() {
-                                                       @Override
-                                                       public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                                                           if (dataSnapshot.exists()){
+                                   final AlertDialog aleartDialog = new AlertDialog(context,"Message","لقد أنتهي وقت أختبارك بالفعل هل تريد أذن الدخول مره اخري.");
+                                   aleartDialog.setCancelable(false);
+                                   aleartDialog.show();
+                                   aleartDialog.btnYes.setOnClickListener(new View.OnClickListener() {
+                                       @Override
+                                       public void onClick(View view) {
 
 
 
+                                           final FirebaseDatabase firebaseDatabase1 = FirebaseDatabase.getInstance();
+                                           DatabaseReference reference1             = firebaseDatabase1.getReference("PermissionRefrence");
+                                           reference1.child(ExamID).addListenerForSingleValueEvent(new ValueEventListener() {
+                                               @Override
+                                               public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                                                               FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                                                               final DatabaseReference reference = firebaseDatabase.getReference(DataBase_Refrences.Permissions.getRef());
-                                                               PermissionUserEntering permissionUserEntering = new PermissionUserEntering(uID,nameStudnet);
-
-                                                               reference.child(ExamID).child(permissionUserEntering.getuID()).setValue(permissionUserEntering).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                   @Override
-                                                                   public void onComplete(@NonNull Task<Void> task) {
-
-                                                                       if (task.isSuccessful()){
+                                                   if (dataSnapshot.exists()){
 
 
 
+                                                       FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                                                       final DatabaseReference reference = firebaseDatabase.getReference(DataBase_Refrences.Permissions.getRef());
+                                                       PermissionUserEntering permissionUserEntering = new PermissionUserEntering(uID,nameStudnet);
 
-                                                                           dialog.Close_Dialog();
-                                                                           android.app.AlertDialog.Builder builder1b = new android.app.AlertDialog.Builder(context);
-                                                                           builder1b.setMessage("لقد تم الطلب يرجي الانتظار حتي يوافق Mr.Ahmed Samy علي طلبك");
-                                                                           builder1b.setCancelable(true);
-                                                                           builder1b.show();
+                                                       reference.child(ExamID).child(permissionUserEntering.getuID()).setValue(permissionUserEntering).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                           @Override
+                                                           public void onComplete(@NonNull Task<Void> task) {
 
+                                                               if (task.isSuccessful()){
 
+                                                                   aleartDialog.dismiss();
 
+                                                                   sendPost(ExamName,nameStudnet);
 
-                                                                       }
+                                                                   // send  notification to admin Mr.Ahmed Samy..
 
-                                                                   }
-                                                               });
-
-
-
-
-
-                                                           }else {
-
-
-
-                                                               final FirebaseDatabase firebaseDatabase1 = FirebaseDatabase.getInstance();
-                                                               DatabaseReference reference1             = firebaseDatabase1.getReference("PermissionRefrence");
-                                                               Permission_Refrence permission_refrence = new Permission_Refrence(ExamID,ExamName);
-                                                               reference1.child(ExamID).setValue(permission_refrence).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                   @Override
-                                                                   public void onComplete(@NonNull Task<Void> task) {
-
-                                                                       if (task.isSuccessful()){
-
-                                                                           FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                                                                           final DatabaseReference reference = firebaseDatabase.getReference(DataBase_Refrences.Permissions.getRef());
-                                                                           PermissionUserEntering permissionUserEntering = new PermissionUserEntering(uID,nameStudnet);
-
-                                                                           reference.child(ExamID).child(permissionUserEntering.getuID()).setValue(permissionUserEntering).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                               @Override
-                                                                               public void onComplete(@NonNull Task<Void> task) {
-
-                                                                                   if (task.isSuccessful()){
-
-
-
-                                                                                       dialog.Close_Dialog();
-                                                                                       android.app.AlertDialog.Builder builder1b = new android.app.AlertDialog.Builder(context);
-                                                                                       builder1b.setMessage("لقد تم الطلب يرجي الانتظار حتي يوافق Mr.Ahmed Samy علي طلبك");
-                                                                                       builder1b.setCancelable(true);
-
-                                                                                   }
-
-                                                                               }
-                                                                           });
-
-
-                                                                       }
-
-                                                                   }
-                                                               });
-
-
+                                                               }
 
                                                            }
-
-                                                       }
-
-                                                       @Override
-                                                       public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                                       }
-                                                   });
+                                                       });
 
 
 
 
+
+                                                   }else {
+
+
+
+                                                       final FirebaseDatabase firebaseDatabase1 = FirebaseDatabase.getInstance();
+                                                       DatabaseReference reference1             = firebaseDatabase1.getReference("PermissionRefrence");
+                                                       Permission_Refrence permission_refrence = new Permission_Refrence(ExamID,ExamName);
+                                                       reference1.child(ExamID).setValue(permission_refrence).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                           @Override
+                                                           public void onComplete(@NonNull Task<Void> task) {
+
+                                                               if (task.isSuccessful()){
+
+                                                                   FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                                                                   final DatabaseReference reference = firebaseDatabase.getReference(DataBase_Refrences.Permissions.getRef());
+                                                                   PermissionUserEntering permissionUserEntering = new PermissionUserEntering(uID,nameStudnet);
+
+                                                                   reference.child(ExamID).child(permissionUserEntering.getuID()).setValue(permissionUserEntering).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                       @Override
+                                                                       public void onComplete(@NonNull Task<Void> task) {
+
+                                                                           if (task.isSuccessful()){
+
+
+                                                                               // send  notification to admin Mr.Ahmed Samy..
+                                                                               aleartDialog.dismiss();
+                                                                               sendPost(ExamName,nameStudnet);
+
+//                                                                                       dialog.Close_Dialog();
+//                                                                                       android.app.AlertDialog.Builder builder1b = new android.app.AlertDialog.Builder(context);
+//                                                                                       builder1b.setMessage("لقد تم الطلب يرجي الانتظار حتي يوافق Mr.Ahmed Samy علي طلبك");
+//                                                                                       builder1b.setCancelable(true);
+
+                                                                           }
+
+                                                                       }
+                                                                   });
+
+
+                                                               }
+
+                                                           }
+                                                       });
+
+
+
+                                                   }
+
+                                               }
+
+                                               @Override
+                                               public void onCancelled(@NonNull DatabaseError databaseError) {
 
                                                }
                                            });
 
-                                   builder1.setNegativeButton(
-                                           "No",
-                                           new DialogInterface.OnClickListener() {
-                                               public void onClick(DialogInterface dialog1, int id) {
-                                                   dialog1.cancel();
-                                                   dialog.Close_Dialog();
-                                               }
-                                           });
 
-                                   builder1.show();
+
+
+
+                                       }
+                                   });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   aleartDialog.btnNo.setOnClickListener(new View.OnClickListener() {
+                                       @Override
+                                       public void onClick(View view) {
+                                           dialog.Close_Dialog();
+                                           aleartDialog.dismiss();
+
+                                       }
+                                   });
 
 
 
@@ -592,19 +709,7 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
 
 
 //               AlertDialog alertDialog = new AlertDialog(context,"Sorry your Test Time is Over ..");
-//               alertDialog.show();
-
-
-
-
-
-
-
-
-
-
-
-
+//               alertDialog.show
                // حنسمح الوقت من الفير بيز
            }
 
@@ -612,6 +717,7 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
 
 
 

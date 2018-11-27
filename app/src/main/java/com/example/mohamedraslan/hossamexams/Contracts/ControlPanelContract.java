@@ -26,8 +26,21 @@ public interface ControlPanelContract {
         void SetUsername(String nameStudent);
         void AdminTools();
 
+        void UserTools();
+
 
         void showRequestsFromStudent(String examID,String what,String nameExam);
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -57,8 +70,14 @@ public interface ControlPanelContract {
         void CheckifUserBannedResult(String Result);
         void CheckifAdmin(String uid);
         void HeIsAdmin();
+        void HeIsUser();
         void getuserName(String uid);
         void SetUsername(String nameStudent);
+
+
+
+
+
 
 
 
@@ -81,6 +100,10 @@ public interface ControlPanelContract {
 
 
 
+
+
+
+
     }
 
 
@@ -99,6 +122,10 @@ public interface ControlPanelContract {
         void storingTokentoDatabase(String token);
 
         void checkifTokenExisitorNot();
+
+
+
+
 
     }
 

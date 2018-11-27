@@ -100,6 +100,7 @@ public class ControlPanel extends AppCompatActivity
     private FirebaseAuth auth;
     StudentDialog studentDialog;
     ControlpanelPresnter controlpanelPresnter;
+    boolean AreAdmin = false;
     AnimatedDialog animatedDialog;
     BroadcastReceiver broadcastReceiver;
     NotificationDialog notificationDialog;
@@ -111,10 +112,14 @@ public class ControlPanel extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawaer);
 
+
+
+
         // حنسجل الtokendevice في الداتا بيز الاول
 
         //notification
         FirebaseMessaging.getInstance().subscribeToTopic("all");
+
 
         controlpanelPresnter = new ControlpanelPresnter(this);
         controlpanelPresnter.updateUitoViews();
@@ -275,6 +280,8 @@ public class ControlPanel extends AppCompatActivity
         open_nav.setOnClickListener(this);
         drawer     = findViewById(R.id.drawer);
         navigation = findViewById(R.id.navigation);
+        Menu nav_Menu = navigation.getMenu();
+        nav_Menu.findItem(R.id.exit).setEnabled(false);
         Title      = toolbar.findViewById(R.id.toolbar_title);
         auth       = FirebaseAuth.getInstance();
         progressBar = findViewById(R.id.progressBar);
@@ -463,6 +470,13 @@ public class ControlPanel extends AppCompatActivity
 //                         حنتشيك علي الي في الداتا ولو صح حنطلع بره
                         animatedDialog.ShowDialog();
                         FirebaseMessaging.getInstance().unsubscribeFromTopic("all");
+
+                        if (AreAdmin){
+
+                            // notificationstoAdmin Mr.AhmedSamyFrom Students disable when SignOut
+                            FirebaseMessaging.getInstance().unsubscribeFromTopic("admins");
+                        }
+
                         auth.signOut();
                         startActivity(new Intent(ControlPanel.this,MainActivity.class));
                         animatedDialog.Close_Dialog();
@@ -572,6 +586,7 @@ public class ControlPanel extends AppCompatActivity
         nav_Menu.findItem(R.id.per).setVisible(false);
         nav_Menu.findItem(R.id.addnotification).setVisible(false);
 
+
     }
     @Override
     public void AdminTools() {
@@ -584,6 +599,25 @@ public class ControlPanel extends AppCompatActivity
         nav_Menu.findItem(R.id.per).setVisible(true);
         nav_Menu.findItem(R.id.addnotification).setVisible(true);
         circleImageView.setBackgroundResource(R.drawable.ahmedsamy);
+        AreAdmin = true;
+        FirebaseMessaging.getInstance().subscribeToTopic("Admins");
+        nav_Menu.findItem(R.id.exit).setEnabled(true);
+
+
+    }
+
+    @Override
+    public void UserTools() {
+
+        Menu nav_Menu = navigation.getMenu();
+        nav_Menu.findItem(R.id.addExam).setVisible(false);
+        nav_Menu.findItem(R.id.questions).setVisible(false);
+        nav_Menu.findItem(R.id.results).setVisible(false);
+        nav_Menu.findItem(R.id.studentManger).setVisible(false);
+        AreAdmin = true;
+        nav_Menu.findItem(R.id.per).setVisible(false);
+        nav_Menu.findItem(R.id.addnotification).setVisible(false);
+        nav_Menu.findItem(R.id.exit).setEnabled(true);
 
     }
 
@@ -608,11 +642,10 @@ public class ControlPanel extends AppCompatActivity
                         .addToBackStack(null)
                         .commit();
                 break;
+
             case "1":
 
-
-
-
+                progressBar.setVisibility(View.INVISIBLE);
                 getSupportFragmentManager().popBackStack();
                 RequestFromStudentToExamWhat requestFromStudentToExamWhat1 = new RequestFromStudentToExamWhat();
                 Bundle b1 = new Bundle();
@@ -626,10 +659,10 @@ public class ControlPanel extends AppCompatActivity
                         .commit();
 
 
-                android.app.AlertDialog.Builder builder1b = new android.app.AlertDialog.Builder(this);
-                builder1b.setMessage("يستطيع الطالب من الان دخول الإختبار.");
-                builder1b.setCancelable(true);
-                builder1b.show();
+                com.example.mohamedraslan.hossamexams.Dialog.AlertDialog alertDialog
+                        = new com.example.mohamedraslan.hossamexams.Dialog.AlertDialog(this, "لقد تم تنفيذ طلبك بنجاح.");
+                alertDialog.show();
+
                 break;
 
         }

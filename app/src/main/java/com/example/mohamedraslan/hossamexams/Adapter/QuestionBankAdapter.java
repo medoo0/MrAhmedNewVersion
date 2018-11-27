@@ -64,6 +64,10 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
         holder.background.setScaleX(.9f);
         holder.background.setScaleY(.9f);
         holder.background.animate().scaleX(1f).scaleY(1f).setDuration(500);
+
+        listinParent.nuberQuestions(getItemCount());
+
+
         holder.Cardview.setOnClickListener(new View.OnClickListener() {    // when click to edit question
             @Override
             public void onClick(final View view) {
@@ -199,6 +203,11 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
             protected void publishResults(CharSequence constraint, FilterResults results) {
 
                 qestions = (ArrayList<Questions_Form>) results.values;
+                if(results.count<1){
+
+                    listinParent.nuberQuestions(0);
+                }
+
                 notifyDataSetChanged();
 
             }

@@ -42,4 +42,22 @@
         android:src="@drawable/ic_noresult"
         android:visibility="gone" />
 
+    <TextView
+        android:id="@+id/marked"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="22dp"
+        android:layout_marginStart="21dp"
+
+        android:background="@drawable/text_nuber_list"
+        android:elevation="16dp"
+        android:gravity="center"
+        android:scaleType="fitCenter"
+        android:text="0 \n نتيجه"
+
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="15dp" />
+
 </RelativeLayout>

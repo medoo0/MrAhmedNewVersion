@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.mohamedraslan.hossamexams.Adapter.AdapterExamsStudents;
 import com.example.mohamedraslan.hossamexams.Adapter.PermissionExamsAdapter;
@@ -31,6 +32,7 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
 import com.google.android.gms.ads.doubleclick.PublisherAdView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RequestFromStudentToExamWhat extends Fragment implements RequestFromStudentToExamWhatContract.MainView{
@@ -39,6 +41,7 @@ public class RequestFromStudentToExamWhat extends Fragment implements RequestFro
     RecyclerView permissionstudentrec;
     SearchView searchingstudent;
     ImageView background111;
+    TextView txmarks;
     PublisherAdView mPublisherAdView;
     RequestFromStudentToExamWhatPresnter presnter;
     String examID ,examName;
@@ -76,6 +79,7 @@ public class RequestFromStudentToExamWhat extends Fragment implements RequestFro
         searchingstudent     = v.findViewById(R.id.searchingstudent);
         mPublisherAdView     = v.findViewById(R.id.publisherAdView);
         background111        = v.findViewById(R.id.background111);
+        txmarks              = v.findViewById(R.id.txmarks);
         PublisherAdRequest adRequest = new PublisherAdRequest.Builder().build();
         mPublisherAdView.loadAd(adRequest);
         mPublisherAdView.setAdListener(new AdListener() {
@@ -163,8 +167,13 @@ public class RequestFromStudentToExamWhat extends Fragment implements RequestFro
 
                 if (adapter!=null){
 
-                    animatedDialog.ShowDialog();
-                    adapter.allowAllusers(examID,animatedDialog);
+                    if (adapter.getItemCount()>0){
+
+                        animatedDialog.ShowDialog();
+                        adapter.allowAllusers(examID,animatedDialog);
+
+                    }
+
 
                 }
 
@@ -193,8 +202,16 @@ public class RequestFromStudentToExamWhat extends Fragment implements RequestFro
 
     @Override
     public void notFoundAnythings() {
+
+        List<PermissionUserEntering>listempty = new ArrayList<>();
         ControlPanel.progressBar.setVisibility(View.INVISIBLE);
         background111.setVisibility(View.VISIBLE);
+        adapter = new AdapterExamsStudents(listempty,getActivity(),examID,this,examName);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        mLayoutManager.setReverseLayout(true);
+        mLayoutManager.setStackFromEnd(true);
+        permissionstudentrec.setLayoutManager(mLayoutManager);
+        permissionstudentrec.setAdapter(adapter);
 
     }
 
@@ -213,5 +230,10 @@ public class RequestFromStudentToExamWhat extends Fragment implements RequestFro
 
 
 
+    }
+
+    @Override
+    public void numberStu(int number) {
+        txmarks.setText(number + "\n" + "طالب");
     }
 }

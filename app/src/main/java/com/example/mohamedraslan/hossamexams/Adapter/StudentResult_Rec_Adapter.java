@@ -128,6 +128,8 @@ public class StudentResult_Rec_Adapter  extends RecyclerView.Adapter<ViewHolder3
 
         }
 //
+        view1.numberResult(getItemCount());
+
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -213,7 +215,13 @@ public class StudentResult_Rec_Adapter  extends RecyclerView.Adapter<ViewHolder3
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
 
-                list = (ArrayList<Result_Pojo>) results.values; // has the filtered values
+                list = (ArrayList<Result_Pojo>) results.values;
+
+                if (results.count<1){
+
+                    view1.numberResult(0);
+                }
+                // has the filtered values
                 notifyDataSetChanged();
 
             }

@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.mohamedraslan.hossamexams.Contracts.StudentManagementContract;
 import com.example.mohamedraslan.hossamexams.Dialog.AlertDialog;
 import com.example.mohamedraslan.hossamexams.Dialog.AnimatedDialog;
 import com.example.mohamedraslan.hossamexams.Enums.DataBase_Refrences;
@@ -50,14 +51,16 @@ public class StudentManagementAdapter extends RecyclerView.Adapter<StudentManage
     Context context;
     FragmentManager fragmentManager;
     String what;
+    StudentManagementContract.view views;
 
-    public  StudentManagementAdapter (Context context, List<FullRegisterForm> items  , FragmentManager fragmentManager,String what){
+    public  StudentManagementAdapter (Context context, List<FullRegisterForm> items  , FragmentManager fragmentManager, String what, StudentManagementContract.view view){
 
         this.items = items ;
         this.context = context;
         auth = FirebaseAuth.getInstance();
         this.fragmentManager = fragmentManager ;
-       this.what = what;
+        this.what = what;
+        this.views = view;
     }
 
 
@@ -113,6 +116,7 @@ public class StudentManagementAdapter extends RecyclerView.Adapter<StudentManage
             holder.Press_on_CardView.animate().scaleX(1f).scaleY(1f).setDuration(500);
 
 
+            views.numberStudent(getItemCount());
 
 
             checkifStudentInorOUt( items.get(position).getuID() ,holder );
@@ -454,7 +458,14 @@ public class StudentManagementAdapter extends RecyclerView.Adapter<StudentManage
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
 
-                items = (ArrayList<FullRegisterForm>) results.values; // has the filtered values
+                items = (ArrayList<FullRegisterForm>) results.values;
+
+                if (results.count<1){
+
+                    views.numberStudent(0);
+
+                }
+                // has the filtered values
                 notifyDataSetChanged();
 
             }

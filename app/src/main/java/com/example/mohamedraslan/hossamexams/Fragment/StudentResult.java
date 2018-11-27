@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mohamedraslan.hossamexams.Adapter.StudentResult_Rec_Adapter;
@@ -47,7 +48,7 @@ public class StudentResult extends Fragment implements StudentResultContract.Mai
 
     @BindView(R.id.Student_Result_Rec)
     RecyclerView recyclerView;
-
+    TextView marking;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference reference;
     SearchView searchresult;
@@ -75,6 +76,7 @@ public class StudentResult extends Fragment implements StudentResultContract.Mai
         View v = inflater.inflate(R.layout.fragment_student_result, container, false);
         ButterKnife.bind(this, v);
         ControlPanel.progressBar.setVisibility(View.VISIBLE);
+        marking = v.findViewById(R.id.marking);
         setHasOptionsMenu(true);
         searchresult = v.findViewById(R.id.searchresult);
         ControlPanel.Title.setText(R.string.results);
@@ -180,6 +182,13 @@ public class StudentResult extends Fragment implements StudentResultContract.Mai
 
     @Override
     public void problemss(String Error) {
+
+    }
+
+    @Override
+    public void numberResult(int number) {
+
+            marking.setText(number + "\n" + "نتيجه");
 
     }
 

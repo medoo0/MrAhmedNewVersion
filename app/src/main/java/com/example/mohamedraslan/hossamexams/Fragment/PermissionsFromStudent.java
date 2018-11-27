@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mohamedraslan.hossamexams.Adapter.PermissionExamsAdapter;
@@ -36,6 +37,7 @@ public class PermissionsFromStudent extends Fragment implements PermissionExamsC
     RecyclerView permission;
     PermissionExamPresnter presnter;
     SearchView searching;
+    TextView markedd;
     ImageView backgroundgroundempty;
     PermissionExamsAdapter adapter;
 
@@ -60,6 +62,7 @@ public class PermissionsFromStudent extends Fragment implements PermissionExamsC
         permission       = v.findViewById(R.id.permission);
         mPublisherAdView = v.findViewById(R.id.publisherAdView);
         backgroundgroundempty = v.findViewById(R.id.backgroundgroundempty);
+        markedd          = v.findViewById(R.id.markedd);
         searching        = v.findViewById(R.id.searching);
         setHasOptionsMenu(true);
         searching.setQueryHint("قم بالبحث عن طريق الاسم ");
@@ -191,5 +194,10 @@ public class PermissionsFromStudent extends Fragment implements PermissionExamsC
 
 
 
+    }
+
+    @Override
+    public void numberExams(int numbers) {
+        markedd.setText(numbers + "\n" + "أمتحان");
     }
 }

@@ -14,6 +14,9 @@ public interface RequestFromStudentToExamWhatContract  {
 
         void refreshFragment(String nameExam);
 
+
+        void numberStu(int number);
+
     }
 
 

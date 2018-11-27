@@ -51,6 +51,7 @@ public class Question_Bank_Frag extends Fragment
     FirebaseDatabase firebaseDatabase;
     DatabaseReference reference;
     AnimatedDialog dialog;
+    TextView mark;
         //   public static List<Questions_Form> qestions ;
             QuestionBankAdapter adapter;
             TextView view;
@@ -74,6 +75,7 @@ public class Question_Bank_Frag extends Fragment
         show_addQ_frag = v.findViewById(R.id.show_addQ_frag);
         recyclerView   = v.findViewById(R.id.rec);
         presenter      = new Question_BankPresenter(this);
+        mark           = v.findViewById(R.id.mark);
         setHasOptionsMenu(true);
         show_addQ_frag.setOnClickListener(this);
         searchaboutquestion = v.findViewById(R.id.searchaboutquestion);
@@ -292,5 +294,13 @@ public class Question_Bank_Frag extends Fragment
                 }
             }
 
+    @Override
+    public void nuberQuestions(int number) {
 
-        }
+        mark.setText(number + "\n" + "سؤال");
+
+
+    }
+
+
+}
