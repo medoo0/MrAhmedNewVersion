@@ -1,22 +1,13 @@
-
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
     >
 
-
-
-
-
-
-
-
-
-    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_marginBottom="40sp"
         android:layout_height="match_parent"
@@ -77,7 +68,7 @@
             android:visibility="gone"
             app:layout_anchor="@+id/Exam_List_rec"
             app:layout_anchorGravity="right|bottom"
-            app:layout_behavior="com.example.mohamedraslan.hossamexams.Dialog.FloatingActionButtonScrollBehavior"
+            app:layout_behavior="com.am.mohamedraslan.hossamexams.Dialog.FloatingActionButtonScrollBehavior"
             app:rippleColor="@android:color/white" />
 
 

@@ -67,6 +67,7 @@ public class StudentResult extends Fragment implements StudentResultContract.Mai
         View v = inflater.inflate(R.layout.fragment_student_result, container, false);
         ButterKnife.bind(this, v);
         ControlPanel.progressBar.setVisibility(View.VISIBLE);
+        ControlPanel.SetNavChecked(4);
         marking = v.findViewById(R.id.marking);
         setHasOptionsMenu(true);
         searchresult = v.findViewById(R.id.searchresult);

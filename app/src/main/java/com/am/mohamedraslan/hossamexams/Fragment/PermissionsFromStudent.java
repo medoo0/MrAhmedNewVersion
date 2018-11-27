@@ -57,6 +57,7 @@ public class PermissionsFromStudent extends Fragment implements PermissionExamsC
         View v = inflater.inflate(R.layout.permiisions_student, container, false);
         presnter.tellModeltoGetRefrence();
         ControlPanel.Title.setText("جميع الطلبات");
+        ControlPanel.SetNavChecked(6);
         permission       = v.findViewById(R.id.permission);
         mPublisherAdView = v.findViewById(R.id.publisherAdView);
         backgroundgroundempty = v.findViewById(R.id.backgroundgroundempty);

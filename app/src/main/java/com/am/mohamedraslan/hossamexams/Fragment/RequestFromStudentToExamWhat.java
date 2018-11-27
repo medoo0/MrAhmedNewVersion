@@ -70,6 +70,7 @@ public class RequestFromStudentToExamWhat extends Fragment implements RequestFro
         View v = inflater.inflate(R.layout.requests_from_student_for_anyexam,container,false);
         ControlPanel.progressBar.setVisibility(View.VISIBLE);
         ControlPanel.Title.setText("طلبه قد إنتهي عليهم الوقت.");
+        ControlPanel.SetNavChecked(6);
         setHasOptionsMenu(true);
         permissionstudentrec = v.findViewById(R.id.permissionstudentrec);
         searchingstudent     = v.findViewById(R.id.searchingstudent);
@@ -143,6 +144,7 @@ public class RequestFromStudentToExamWhat extends Fragment implements RequestFro
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         switch (item.getItemId()) {
 
             case R.id.Search:
