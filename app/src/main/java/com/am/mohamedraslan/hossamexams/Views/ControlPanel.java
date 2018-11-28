@@ -453,7 +453,7 @@ public class ControlPanel extends AppCompatActivity
                         if (AreAdmin){
 
                             // notificationstoAdmin Mr.AhmedSamyFrom Students disable when SignOut
-                            FirebaseMessaging.getInstance().unsubscribeFromTopic("admins");
+                            FirebaseMessaging.getInstance().unsubscribeFromTopic("Admins");
                         }
 
                         auth.signOut();
