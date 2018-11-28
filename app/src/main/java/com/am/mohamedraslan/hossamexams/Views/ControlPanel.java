@@ -578,7 +578,11 @@ public class ControlPanel extends AppCompatActivity
         nav_Menu.findItem(R.id.per).setVisible(true);
         nav_Menu.findItem(R.id.addnotification).setVisible(true);
         circleImageView.setBackgroundResource(R.drawable.ahmedsamy);
-        AreAdmin = true;
+        if (!AreAdmin){
+
+            AreAdmin = true;
+        }
+
         FirebaseMessaging.getInstance().subscribeToTopic("Admins");
         nav_Menu.findItem(R.id.exit).setEnabled(true);
 
@@ -593,7 +597,11 @@ public class ControlPanel extends AppCompatActivity
         nav_Menu.findItem(R.id.questions).setVisible(false);
         nav_Menu.findItem(R.id.results).setVisible(false);
         nav_Menu.findItem(R.id.studentManger).setVisible(false);
-        AreAdmin = true;
+        if (AreAdmin){
+
+            AreAdmin = false;
+        }
+
         nav_Menu.findItem(R.id.per).setVisible(false);
         nav_Menu.findItem(R.id.addnotification).setVisible(false);
         nav_Menu.findItem(R.id.exit).setEnabled(true);

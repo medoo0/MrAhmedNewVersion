@@ -156,7 +156,7 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
 
                 dataobjData = new JSONObject();
                 dataobjData.put("image", "0");
-                dataobjData.put("message","الطالب "  +  nameStudent   +  "    يريد إعاده اختبار  " +   (s)  );
+                dataobjData.put("message","الطالب "  +  nameStudent   +  " يريد إعاده اختبار " +   (s)  );
 
                 obj.put("to", "/topics/Admins");
                 obj.put("data", dataobjData);
