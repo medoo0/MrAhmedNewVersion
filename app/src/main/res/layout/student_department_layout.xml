@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layoutDirection="ltr"
+    android:layout_height="match_parent">
+
+
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layoutDirection="ltr"
+        android:layout_height="match_parent"
+        >
+
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recdep"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+
+        </LinearLayout>
+
+
+
+
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/add_departments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="23dp"
+            android:layout_marginEnd="21dp"
+            android:elevation="16dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_add_to_photos_black_24dp"
+            app:backgroundTint="@color/color1"
+            app:borderWidth="3dp"
+            app:fabSize="normal"
+            app:layout_anchor="@+id/linearLayout1"
+            app:layout_anchorGravity="right|bottom"
+            app:layout_behavior="com.developer.mohamedraslan.hossamexams.Dialog.FloatingActionButtonScrollBehavior" />
+
+
+    </android.support.design.widget.CoordinatorLayout>
+
+    <TextView
+        android:id="@+id/numberOflistDep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="22dp"
+        android:layout_marginStart="21dp"
+        android:background="@drawable/text_nuber_list"
+        android:elevation="16dp"
+        android:gravity="center"
+        android:scaleType="fitCenter"
+        android:text="0 \n فرقه"
+
+        android:textColor="@android:color/white"
+        android:textSize="15dp" />
+
+</RelativeLayout>
+

@@ -74,6 +74,97 @@
 
     // menu //
 
+
+
+
+
+
+
+
+
+
+
+
+    // more info
+
+    <string name="depStudent"> Study Teams  </string>
+    <string name="Student_complaints"> Student complaints </string>
+
+
+
+
+    // educationsArray
+
+
+    <string-array name="educations">
+
+        <item>  Select Item </item>
+        <item> PrimaryEducation </item>
+        <item> SecondaryEducation </item>
+        <item> highschool </item>
+        <item> Universities </item>
+
+
+    </string-array>
+
+
+    <string-array name="PrimaryEducation">
+
+        <item>إختر صف دراسي</item>
+        <item>الصف الأول   الأبتدائي</item>
+        <item>الصف الثاني الأبتدائي</item>
+        <item>الصف الثالث الأبتدائي</item>
+        <item>الصف الرابع الأبتدائي</item>
+        <item>الصف الخامس الأبتدائي</item>
+        <item>الصف السادس الأبتدائي</item>
+
+
+    </string-array>
+
+
+    <string-array name="SecondaryEducation">
+
+        <item>إختر صف دراسي</item>
+        <item>الصف الأول   الأعدادي</item>
+        <item>الصف الثاني الأعدادي</item>
+        <item>الصف الثالث الأعدادي</item>
+
+
+
+    </string-array>
+
+
+    <string-array name="highschool">
+
+        <item>إختر صف دراسي</item>
+        <item>الصف الأول   الثانوي</item>
+        <item>الصف الثاني الثانوي</item>
+        <item>الصف الثالث الثانوي</item>
+
+
+
+    </string-array>
+
+    <string-array name="Universities">
+
+        <item>إختر فرقه دراسي</item>
+        <item> الفرقه الدراسيه الأولي </item>
+        <item>الفرقه الدراسيه الثانيه</item>
+        <item>الفرقه الدراسيه الثالثه</item>
+
+        <item>الفرقه الدراسيه الرابعه</item>
+        <item>الفرقه الدراسيه الخامسه</item>
+        <item>الفرقه الدراسيه السادسه</item>
+        <item>الفرقه الدراسيه السابعه</item>
+
+
+    </string-array>
+
+
+
+
+
+
     <string name="addExam">Add exam</string>
     <string name="mangeStudent">Students Management</string>
 

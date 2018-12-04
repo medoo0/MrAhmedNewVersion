@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:background="@color/color3"
     android:layout_height="match_parent"
     >
 
@@ -10,8 +11,8 @@
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/cor"
         android:layout_width="match_parent"
+        android:layout_marginBottom="80dp"
         android:layout_height="match_parent"
-        android:layout_marginBottom="60dp"
         android:background="@color/color3"
         >
 
@@ -52,7 +53,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginBottom="23dp"
             android:layout_marginEnd="21dp"
             android:elevation="16dp"
             android:scaleType="fitCenter"
@@ -63,15 +63,13 @@
             android:visibility="gone"
             app:layout_anchor="@+id/Exam_List_rec"
             app:layout_anchorGravity="right|bottom"
-            app:layout_behavior="com.am.mohamedraslan.hossamexams.Dialog.FloatingActionButtonScrollBehavior"
+            app:layout_behavior="com.developer.mohamedraslan.hossamexams.Dialog.FloatingActionButtonScrollBehavior"
             app:rippleColor="@android:color/white" />
 
 
 
 
     </android.support.design.widget.CoordinatorLayout>
-
-
 
 
     <com.google.android.gms.ads.doubleclick.PublisherAdView
@@ -83,6 +81,7 @@
         ads:adSize="SMART_BANNER"
         ads:adUnitId="@string/banner_ad_unit_id">
     </com.google.android.gms.ads.doubleclick.PublisherAdView>
+
 
 
 

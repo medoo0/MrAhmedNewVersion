@@ -1,35 +1,35 @@
 {
   "project_info": {
-    "project_number": "896996420155",
-    "firebase_url": "https://mrahmedsamy-a06a3.firebaseio.com",
-    "project_id": "mrahmedsamy-a06a3",
-    "storage_bucket": "mrahmedsamy-a06a3.appspot.com"
+    "project_number": "641838269761",
+    "firebase_url": "https://mrahmednewversion.firebaseio.com",
+    "project_id": "mrahmednewversion",
+    "storage_bucket": "mrahmednewversion.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:896996420155:android:f62bac5023c55524",
+        "mobilesdk_app_id": "1:641838269761:android:459a60821e8c3cc6",
         "android_client_info": {
-          "package_name": "com.am.mohamedraslan.hossamexams"
+          "package_name": "com.developer.mohamedraslan.hossamexams"
         }
       },
       "oauth_client": [
         {
-          "client_id": "896996420155-dm089ig40hr780nkrmp7o5lkvrkfrrau.apps.googleusercontent.com",
+          "client_id": "641838269761-3bhmcec91618qvj16cgbfvj757amdgol.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.am.mohamedraslan.hossamexams",
-            "certificate_hash": "65e5aae573f22313709f4745a95094e337013e37"
+            "package_name": "com.developer.mohamedraslan.hossamexams",
+            "certificate_hash": "1d28c2fe6a8ccd2c67a320098bdb3af918de7841"
           }
         },
         {
-          "client_id": "896996420155-t10e6h3f9l2kclsi33715rf2c8i69co4.apps.googleusercontent.com",
+          "client_id": "641838269761-0enh7011c995u1frnnbntdj3jn0m6lau.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAUAXEdhTf1fsirwLSaQl-EwtGE0JnYp7A"
+          "current_key": "AIzaSyAERVdbGQ5uEvtfqFzVc0Pbk8gWrcnBuIc"
         }
       ],
       "services": {
@@ -40,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "896996420155-t10e6h3f9l2kclsi33715rf2c8i69co4.apps.googleusercontent.com",
+              "client_id": "641838269761-0enh7011c995u1frnnbntdj3jn0m6lau.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

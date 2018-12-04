@@ -4,8 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layoutDirection="ltr"
+    android:id="@+id/snackBarr"
     android:background="@color/color3"
-    tools:context="com.am.mohamedraslan.hossamexams.Views.ControlPanel"
+    tools:context="com.developer.mohamedraslan.hossamexams.Views.ControlPanel"
     android:keepScreenOn="true">
 
 

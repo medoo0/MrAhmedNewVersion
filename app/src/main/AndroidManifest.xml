@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.am.mohamedraslan.hossamexams">
+    package="com.developer.mohamedraslan.hossamexams">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -18,11 +18,11 @@
 
 
         <activity
-            android:name="com.am.mohamedraslan.hossamexams.Views.ControlPanel"
+            android:name="com.developer.mohamedraslan.hossamexams.Views.ControlPanel"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:windowSoftInputMode="stateHidden|adjustResize" />
 
-        <activity android:name="com.am.mohamedraslan.hossamexams.Views.Splach_Activity">
+        <activity android:name="com.developer.mohamedraslan.hossamexams.Views.Splach_Activity">
 
 
             <intent-filter>
@@ -36,7 +36,7 @@
         </activity>
 
         <activity
-            android:name="com.am.mohamedraslan.hossamexams.Views.MainActivity"
+            android:name="com.developer.mohamedraslan.hossamexams.Views.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:windowSoftInputMode="stateHidden|adjustResize">
 
@@ -53,22 +53,22 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity
-            android:name="com.am.mohamedraslan.hossamexams.Views.Exam"
+            android:name="com.developer.mohamedraslan.hossamexams.Views.Exam"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
-            android:name="com.am.mohamedraslan.hossamexams.Views.Result"
+            android:name="com.developer.mohamedraslan.hossamexams.Views.Result"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:windowSoftInputMode="stateHidden|adjustResize" />
 
-        <service android:name="com.am.mohamedraslan.hossamexams.Services.TimerServices" />
-        <service android:name="com.am.mohamedraslan.hossamexams.Notifications.MyFirebaseMessagingService">
+        <service android:name="com.developer.mohamedraslan.hossamexams.Services.TimerServices" />
+        <service android:name="com.developer.mohamedraslan.hossamexams.Notifications.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
-        <service android:name="com.am.mohamedraslan.hossamexams.Notifications.MyFirebaseInstanceIdService">
+        <service android:name="com.developer.mohamedraslan.hossamexams.Notifications.MyFirebaseInstanceIdService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>

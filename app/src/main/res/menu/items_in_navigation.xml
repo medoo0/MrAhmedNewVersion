@@ -43,6 +43,10 @@ xmlns:tools="http://schemas.android.com/tools"
         android:icon="@drawable/pushnotification"
         android:title="Send Notification"/>
 
+    <item android:id="@+id/more"
+        android:icon="@drawable/more"
+        android:title="More"/>
+
 </group>
     <item android:title="@string/aboutus">
 
