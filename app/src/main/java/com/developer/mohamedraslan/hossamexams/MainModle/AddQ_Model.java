@@ -15,9 +15,9 @@ public class AddQ_Model implements AddQuestionContract.AddQModel {
     String QKey;
 
     @Override
-    public void upload_Questions_toServer(DatabaseReference reference, final AddQuestionContract.AddQPresnter addQPresnter, Questions_Form questions_form) {
+    public void upload_Questions_toServer(DatabaseReference reference, final AddQuestionContract.AddQPresnter addQPresnter, Questions_Form questions_form,String depName , String yearName, String unitName) {
 
-        reference.child(questions_form.getQuestionID()).setValue(questions_form).addOnCompleteListener(new OnCompleteListener<Void>() {
+        reference.child(depName).child(yearName).child(unitName).child(questions_form.getQuestionID()).setValue(questions_form).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
 
@@ -45,10 +45,10 @@ public class AddQ_Model implements AddQuestionContract.AddQModel {
 
 
     @Override
-    public void getQuestionDetails(DatabaseReference reference, final AddQuestionContract.AddQPresnter addQPresnter, String qID) {
+    public void getQuestionDetails(DatabaseReference reference, final AddQuestionContract.AddQPresnter addQPresnter, String qID,String depName , String yearName, String unitName) {
 
 
-        reference.child(qID).addValueEventListener(new ValueEventListener() {
+        reference.child(depName).child(yearName).child(unitName).child(qID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -71,17 +71,18 @@ public class AddQ_Model implements AddQuestionContract.AddQModel {
     }
 
     @Override
-    public void editingQuestion(DatabaseReference reference, final AddQuestionContract.AddQPresnter addQPresnter, String QID, Questions_Form questions_form) {
+    public void editingQuestion(DatabaseReference reference, final AddQuestionContract.AddQPresnter addQPresnter, String QID, Questions_Form questions_form, final String depName , final String yearName, final String unitName) {
 
 
-        reference.child(QID).setValue(questions_form).addOnCompleteListener(new OnCompleteListener<Void>() {
+        reference.child(depName).child(yearName).child(unitName).child(QID).setValue(questions_form).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
 
 
                 if (task.isSuccessful()){
 
-                   addQPresnter.dataedited();
+
+                   addQPresnter.dataedited(depName,yearName,unitName);
 
 
                 }

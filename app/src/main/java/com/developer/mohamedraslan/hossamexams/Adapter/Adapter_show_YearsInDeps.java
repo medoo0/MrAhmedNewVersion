@@ -15,7 +15,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.developer.mohamedraslan.hossamexams.Contracts.Years_inDepsContract;
+import com.developer.mohamedraslan.hossamexams.JsonModel.Year_modle_json;
 import com.developer.mohamedraslan.hossamexams.R;
+import com.developer.mohamedraslan.hossamexams.Views.ControlPanel;
 
 import java.util.List;
 
@@ -23,27 +25,29 @@ public class Adapter_show_YearsInDeps extends RecyclerView.Adapter<Adapter_show_
 
 
     private  Context mContext;
-    private List<String>list;
+    private List<Year_modle_json>list;
     private Years_inDepsContract.ViewMainYear yearlistener;
+    String depName ;
 
 
-    public Adapter_show_YearsInDeps(Context mContext, List<String> list, Years_inDepsContract.ViewMainYear yearlistener) {
+    public Adapter_show_YearsInDeps(Context mContext, List<Year_modle_json> list, Years_inDepsContract.ViewMainYear yearlistener,String depName) {
         this.mContext = mContext;
         this.list = list;
         this.yearlistener = yearlistener;
+        this.depName = depName;
     }
 
     @NonNull
     @Override
     public HolderYearsInDeps onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
        View row = LayoutInflater.from(mContext).inflate(R.layout.year_shown_inadapter,parent,false);
-       return new HolderYearsInDeps(row,mContext,list);
+       return new HolderYearsInDeps(row,mContext,list,yearlistener,depName);
     }
 
     @Override
     public void onBindViewHolder(@NonNull HolderYearsInDeps holder, int position) {
 
-        holder.setTextinTextView(list.get(position));
+        holder.setTextinTextView(list.get(position).getYearName());
         holder.animateCard();
         yearlistener.getSizeofarray(getItemCount());
 
@@ -54,25 +58,24 @@ public class Adapter_show_YearsInDeps extends RecyclerView.Adapter<Adapter_show_
         return list.size();
     }
 
+
     public static class HolderYearsInDeps extends RecyclerView.ViewHolder implements View.OnClickListener{
 
     CardView  presstoshowdetailsofYears;
     TextView  name_of_year;
-    ImageView image_dropdownn;
-    RelativeLayout relativefocus;
-    LinearLayout Details_layout;
-    private List<String>list;
+    private List<Year_modle_json>list;
     Context context;
+    String depName;
+    Years_inDepsContract.ViewMainYear yearlistener;
 
-        public HolderYearsInDeps(View itemView,Context context,  List<String>list) {
+        public HolderYearsInDeps(View itemView,Context context,  List<Year_modle_json>list,Years_inDepsContract.ViewMainYear yearlistener,String depName) {
             super(itemView);
             this.context = context;
+            this.depName = depName;
             this.list    = list;
+            this.yearlistener = yearlistener;
             presstoshowdetailsofYears = itemView.findViewById(R.id.presstoshowdetailsofYears);
             name_of_year              = itemView.findViewById(R.id.name_of_year);
-            Details_layout            = itemView.findViewById(R.id.Details_layout);
-            image_dropdownn           = itemView.findViewById(R.id.image_dropdownn);
-            relativefocus             = itemView.findViewById(R.id.relativefocus);
             presstoshowdetailsofYears.setOnClickListener(this);
         }
 
@@ -83,17 +86,9 @@ public class Adapter_show_YearsInDeps extends RecyclerView.Adapter<Adapter_show_
             if (view == presstoshowdetailsofYears){
 
 
-                if(Details_layout.isShown()){
-                    Details_layout.setVisibility(View.GONE);
-                    image_dropdownn.setImageResource(R.drawable.ic_dropdown);
-                }
-                else {
-                    Details_layout.setVisibility(View.VISIBLE);
-                    image_dropdownn.setImageResource(R.drawable.ic_dropup);
-                    openAnimation(Details_layout);
-                }
+                yearlistener.getValuesofdepandyear(depName,list.get(getAdapterPosition()).getYearName());
 
-                Toast.makeText(context,list.get(getAdapterPosition()) , Toast.LENGTH_SHORT).show();
+                //  حتجيب كل البيانات بتاعه الصف الدراسي
 
             }
 
@@ -108,14 +103,9 @@ public class Adapter_show_YearsInDeps extends RecyclerView.Adapter<Adapter_show_
 
         public void setTextinTextView(String text){
 
-            name_of_year.setText(text);
+            name_of_year.setText("طلاب " + text);
         }
     }
-    public static void openAnimation(LinearLayout CardDownlayout ){
 
-        CardDownlayout.setScaleX(0.0f);
-        CardDownlayout.setScaleY(0.0f);
-        CardDownlayout.animate().scaleX(1f).scaleY(1f).setDuration(350);
-    }
 
 }

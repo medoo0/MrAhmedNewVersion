@@ -1,6 +1,7 @@
 package com.developer.mohamedraslan.hossamexams.MainPresnter;
 
 import com.developer.mohamedraslan.hossamexams.Contracts.Years_inDepsContract;
+import com.developer.mohamedraslan.hossamexams.JsonModel.Year_modle_json;
 import com.developer.mohamedraslan.hossamexams.MainModle.Year_Model;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public class Year_Presnter implements Years_inDepsContract.MainPYear {
     }
 
     @Override
-    public void tellUIYearExisit(List<String> years) {
+    public void tellUIYearExisit(List<Year_modle_json> years) {
         mainYear.exisityear(years);
     }
 

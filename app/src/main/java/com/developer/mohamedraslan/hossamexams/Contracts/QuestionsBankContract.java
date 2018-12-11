@@ -11,32 +11,46 @@ import java.util.List;
 
 public interface QuestionsBankContract {
     interface model {
-        void getQuestionData();
-        void addQuestionToAddTestRecycler(String questionID);
-        void removingQuestionFromDatabase(DatabaseReference reference, String Qid, QuestionsBankContract.presenter presenter, int position);
+        void getQuestionData(String depName , String yearName , String unitName);
+
+        void removallQinTheUnit(String depName , String yearName , String unitName);
+
+        void addQuestionToAddTestRecycler(String questionID,String depName , String yearName ,String unitName);
+        void removingQuestionFromDatabase(DatabaseReference reference, String Qid, QuestionsBankContract.presenter presenter, int position, String depName , String yearName , String unitName);
 
     }
     interface presenter{
 
-        void Qremoved(int position);
-        void Q_notRemoved_checking();
+        void Qremoved(int position, String depName , String yearName , String unitName);
+        void Q_notRemoved_checking( String depName , String yearName , String unitName);
 
 
-        void tellModletoDeleteQuestion(DatabaseReference reference, String Qid, int position);
-        void callQuestionData();
-        void SendListToView(List<Questions_Form> Result);
-        void problem(String problem);
+
+        void tellModeltoRemoveAllQuestions(String depName , String yearName , String unitName);
+        void tellUIallQuestionRemoved(String depName , String yearName , String unitName);
+        void tellUiallQuestionNotRemoved(String depName , String yearName , String unitName);
+
+
+
+        void tellModletoDeleteQuestion(DatabaseReference reference, String Qid, int position , String depName , String yearName , String unitName);
+        void callQuestionData(String depName , String yearName , String unitName);
+        void SendListToView  (List<Questions_Form> Result);
+        void problem         (String problem);
         void sentSuccessfully(String Result);
-        void addQuestionToAddTestRecycler(String questionID);
+        void addQuestionToAddTestRecycler(String questionID,String depName , String yearName ,String unitName);      // mor Info
     }
     interface view{
         void RecyclerConfig(List<Questions_Form> Result);
         void problem(String problem);
         void sentSuccessfully(String Result);
-        void updateFragbyValuesTogoEditFrag(String questionID);
-        void removingQuestion(String questionID, int position);
-        void Q_Removed_InUI(int position);
-        void Q_notRemoved_InUI();
+        void updateFragbyValuesTogoEditFrag(String depName , String yearName , String unitName,String questionID);
+        void removingQuestion(String questionID, int position , String depName , String yearName , String unitName);
+        void Q_Removed_InUI(int position, String depName , String yearName , String unitName);
+        void Q_notRemoved_InUI(String depName , String yearName , String unitName);
+
+        void allQuestioninUnitRemoved(String depName , String yearName , String unitName);
+
+        void allQuestioninUnitNotRemoved(String depName , String yearName , String unitName);
 
         void nuberQuestions(int number);
     }

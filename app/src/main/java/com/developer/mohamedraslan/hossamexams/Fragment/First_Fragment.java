@@ -99,10 +99,11 @@ Button Sign_up;
 
                  // we will listen in activity to update fragment .....//
 
+
                  MainActivityContract.View view1 = (MainActivityContract.View) getActivity();
                  if (view1!=null){
 
-                     view1.showFragmentRegister();
+                     view1.showParentOrStudentFragment();
 
                  }
 

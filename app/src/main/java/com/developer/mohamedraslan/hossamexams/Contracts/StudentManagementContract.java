@@ -11,12 +11,12 @@ import java.util.List;
 public interface StudentManagementContract {
     interface model{
 
-        void getstudentData();
+        void getstudentData(String depName , String yearName);
 
 
     }
     interface presenter{
-        void callStudentData();
+        void callStudentData(String depName , String yearName);
         void SendListToView(List<FullRegisterForm> Result);
         void problem(String problem);
 

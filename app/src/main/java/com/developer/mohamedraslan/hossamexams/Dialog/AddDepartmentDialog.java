@@ -67,10 +67,10 @@ public class AddDepartmentDialog extends Dialog implements View.OnClickListener{
                 if (i>0){
 
                     spinner_years.setVisibility(View.VISIBLE);
-                    int arryid = getContext().getResources().getIdentifier(educations[i], "array",
+                    int arryid  = getContext().getResources().getIdentifier(educations[i], "array",
                             getContext().getPackageName());
                     termsArray  = getContext().getResources().getStringArray(arryid);
-                    adapter = new ArrayAdapter(getContext(),R.layout.spinner_style, termsArray);
+                    adapter     = new ArrayAdapter(getContext(),R.layout.spinner_style, termsArray);
                     spinner_years.setAdapter(adapter);
                     itemSelected = educations[i];
 

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layoutDirection="ltr"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/snackBarr"
+    android:background="@drawable/gradiantcolor"
+    android:layout_margin="10dp"
+
+    >
+
+
+
+
+    <LinearLayout
+        android:layoutDirection="ltr"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|end"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+
+        >
+
+
+        <TextView
+            android:id="@+id/details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/cairo"
+            android:gravity="center_horizontal"
+            android:layout_marginBottom="40dp"
+            android:text="@string/register1"
+            android:textColor="@color/registercolor"
+            android:textSize="16sp" />
+
+
+        <Spinner
+            android:id="@+id/spinnerAllDeps"
+            android:layout_width="match_parent"
+            android:textDirection="rtl"
+            android:paddingStart="5sp"
+            android:layout_marginStart="5dp"
+
+            android:layout_marginEnd="5dp"
+            android:paddingEnd="5sp"
+            android:background="@drawable/spinnershape"
+            android:layout_height="60dp" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:background="@color/black"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_height="1dp"/>
+
+        <Spinner
+            android:id="@+id/spinner_yearss"
+            android:layout_width="match_parent"
+            android:textDirection="rtl"
+            android:paddingStart="5sp"
+            android:layout_marginStart="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginEnd="5dp"
+            android:paddingEnd="5sp"
+            android:background="@drawable/spinnershape"
+            android:layout_height="60dp" />
+
+        <Button
+            android:id="@+id/gotonext"
+            android:background="@drawable/button_background"
+            android:layout_marginTop="50dp"
+            android:text="متابعة"
+            android:layout_marginBottom="40dp"
+            android:fontFamily="@font/cairo"
+            android:textSize="16sp"
+            android:textColor="@color/color2"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="59dp"
+            android:textStyle="bold"
+            />
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

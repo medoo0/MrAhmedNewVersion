@@ -5,8 +5,15 @@ import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.PopupMenu;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.android.volley.AuthFailureError;
@@ -20,11 +27,13 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.developer.mohamedraslan.hossamexams.Dialog.AlertDialog;
 import com.developer.mohamedraslan.hossamexams.Dialog.AnimatedDialog;
+import com.developer.mohamedraslan.hossamexams.Dialog.CustomTypeFaceSpan;
 import com.developer.mohamedraslan.hossamexams.Enums.DataBase_Refrences;
 import com.developer.mohamedraslan.hossamexams.JsonModel.AddExam_pojo;
 import com.developer.mohamedraslan.hossamexams.JsonModel.ExamStartTime_Pojo;
 import com.developer.mohamedraslan.hossamexams.JsonModel.PermissionUserEntering;
 import com.developer.mohamedraslan.hossamexams.JsonModel.Permission_Refrence;
+import com.developer.mohamedraslan.hossamexams.R;
 import com.developer.mohamedraslan.hossamexams.SqLite.SQlHelper;
 import com.developer.mohamedraslan.hossamexams.Views.Exam;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -61,6 +70,10 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
     Activity context;
     String ServerDate;
     AnimatedDialog dialog ;
+
+    String depName  ;
+    String yearName ;
+    String unitName ;
     /**
      * @param modelClass      Firebase will marshall the data at a location into
      *                        an instance of a class that you provide
@@ -73,11 +86,14 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
      * @param ServerDate
      * @param context
      */
-    public ExamList_Rec_Adapter(Class<AddExam_pojo> modelClass, int modelLayout, Class<ViewHolder> viewHolderClass, Query ref, String ServerDate, Activity context) {
+    public ExamList_Rec_Adapter(Class<AddExam_pojo> modelClass, int modelLayout, Class<ViewHolder> viewHolderClass, Query ref, String ServerDate, Activity context,String depName , String yearName , String unitName) {
         super(modelClass, modelLayout, viewHolderClass, ref);
         this.ServerDate = ServerDate;
-        this.context = context;
-        dialog = new AnimatedDialog(context);
+        this.context    = context;
+        dialog          = new AnimatedDialog(context);
+        this.depName    = depName;
+        this.yearName   = yearName;
+        this.unitName   = unitName;
     }
 
     @Override
@@ -90,24 +106,84 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
 
 
 
+
+        holder.linear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                PopupMenu popup = new PopupMenu(context, holder.Cardview);
+                //Inflating the Popup using xml file
+                popup.getMenuInflater().inflate(R.menu.deleteexam, popup.getMenu());
+
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        if (item.getItemId() == R.id.Delete_exam){
+
+                            //Deleting
+                            final AlertDialog alertDialog = new AlertDialog(context,"تحذير","هل انت متأكد من حذف هذا الاختبار ؟ ");
+                            alertDialog.show();
+                            alertDialog.btnYes.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    dialog.ShowDialog();
+                                    Delete_Exam(model.getExamID(),depName,yearName,unitName);
+                                    alertDialog.dismiss();
+                                }
+                            });
+
+
+                        }
+
+                        return true;
+                    }
+                });
+
+
+                Menu menu = popup.getMenu();
+                for (int i = 0; i < menu.size(); i++) {
+                    MenuItem mi = menu.getItem(i);
+                    applyFontToMenuItem(mi);
+
+                }
+
+
+
+                popup.show();
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
         //Data
         int dateDifference = (int) SubtractTwoDate(new SimpleDateFormat("dd-MM-yyyy"), model.getCurrentDateandTime() ,ServerDate);
         holder.Date.setText(Chcek(dateDifference));
 
         //StartExam
-        holder.BtnStartExam.setOnClickListener(new View.OnClickListener() {
+        holder.BtnStartExam.setOnClickListener(new View.OnClickListener() {  // more info will added ...........
             @Override
             public void onClick(View view) {
 
                 holder.BtnStartExam.setEnabled(false);
                 dialog.ShowDialog();
                 String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                DatabaseReference reference = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.RESULT.getRef())
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.RESULT.getRef()).child(depName).child(yearName).child(unitName)
                         .child(model.getExamID()+uid);
                 reference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if(dataSnapshot.exists()){
+
                             holder.BtnStartExam.setEnabled(true);
                             dialog.Close_Dialog();
                             AlertDialog alertDialog = new AlertDialog(context," You have already Completed the Test");
@@ -118,7 +194,7 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
                             //withServer
                             //getDateAndTime(model);
                             //withoutServer
-                            realtimehere(model);
+                            realtimehere(model,depName,yearName,unitName);
                             holder.BtnStartExam.setEnabled(true);
                         }
                     }
@@ -208,7 +284,7 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<String, String>();
-                headers.put("Authorization", "key=" + "AAAA0NknKjs:APA91bH8x30IaI5ZAz49kUGAOXEwjiFxZnWTpELAu2DMOu_vgz5GhNDnERYkv7X5Z-NveF02btyVdkMyHWhYH0wYTU3nqtbW9vx67M4Xv1vn7-rOisNEYixwQpeImD-7yguPEhTM_Nkk");
+                headers.put("Authorization", "key=" + "AAAAlXCKxUE:APA91bFGSM9okl_Va_Q5wGeK6LW3KAZNoFeme6l95iRGz5z-llVh1ZLXZ-yH0q5Ua3PmLPghxAirqgBujN-FLR5-OB-gKkGkHlOdW8wO3CkEAZ0x5_-h-SvKyAw_8eKlYDvNA4EO5kvM");
                 headers.put("Content-Type", "application/json");
                 return headers;
             }
@@ -250,7 +326,6 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
         }
 
         else {
-
 
             return "Since Days ..";
 
@@ -309,7 +384,7 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
 /*
 
  */
-    public void realtimehere(/*Zone zone, */ final AddExam_pojo model) {
+    public void realtimehere(/*Zone zone, */ final AddExam_pojo model,String depName , String yearName , String unitName) {
 
         //withServer
         //final String startTime  = getDate(zone.getTimestamp());
@@ -321,7 +396,7 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
 
 
         //Check if User Logged in Exam Before ? .
-        final DatabaseReference reference = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.STARTEDEXAM.getRef())
+        final DatabaseReference reference = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.STARTEDEXAM.getRef()).child(depName).child(yearName).child(unitName)
                 .child(model.getExamID()).child(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -451,8 +526,14 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
                   String final_degree, String Examname , String ExamDate
                   ){
 
+
+        // حنضيف بيانات ال الفرقه الدراسيه معانا
+
                 dialog.Close_Dialog();
                 Intent intent = new Intent(context,Exam.class);
+                intent.putExtra("depName",depName);
+                intent.putExtra("yearName", yearName);
+                intent.putExtra("unitName",unitName);
                 intent.putExtra("SqlTableName",SqlTableName);
                 intent.putExtra("oneQestionDegree",oneQestionDegree);
                 intent.putExtra("final_degree",final_degree);
@@ -495,9 +576,6 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
            else {
 
 
-
-
-
               FirebaseAuth firebaseAuth  = FirebaseAuth.getInstance();
               final String uID      = firebaseAuth.getUid();
               final String ExamID   = model.getExamID();
@@ -508,7 +586,7 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
                DatabaseReference referencep      = firebaseDatabase.getReference(DataBase_Refrences.Permissions.getRef());
 
 
-               referencep.child(ExamID).child(uID).addListenerForSingleValueEvent(new ValueEventListener() {
+               referencep.child(depName).child(yearName).child(unitName).child(ExamID).child(uID).addListenerForSingleValueEvent(new ValueEventListener() {
                    @Override
                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -546,7 +624,7 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
 
                                            final FirebaseDatabase firebaseDatabase1 = FirebaseDatabase.getInstance();
                                            DatabaseReference reference1             = firebaseDatabase1.getReference("PermissionRefrence");
-                                           reference1.child(ExamID).addListenerForSingleValueEvent(new ValueEventListener() {
+                                           reference1.child(depName).child(yearName).child(unitName).child(ExamID).addListenerForSingleValueEvent(new ValueEventListener() {
                                                @Override
                                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -558,7 +636,7 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
                                                        final DatabaseReference reference = firebaseDatabase.getReference(DataBase_Refrences.Permissions.getRef());
                                                        PermissionUserEntering permissionUserEntering = new PermissionUserEntering(uID,nameStudnet);
 
-                                                       reference.child(ExamID).child(permissionUserEntering.getuID()).setValue(permissionUserEntering).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                       reference.child(depName).child(yearName).child(unitName).child(ExamID).child(permissionUserEntering.getuID()).setValue(permissionUserEntering).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                            @Override
                                                            public void onComplete(@NonNull Task<Void> task) {
 
@@ -586,7 +664,7 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
                                                        final FirebaseDatabase firebaseDatabase1 = FirebaseDatabase.getInstance();
                                                        DatabaseReference reference1             = firebaseDatabase1.getReference("PermissionRefrence");
                                                        Permission_Refrence permission_refrence = new Permission_Refrence(ExamID,ExamName);
-                                                       reference1.child(ExamID).setValue(permission_refrence).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                       reference1.child(depName).child(yearName).child(unitName).child(ExamID).setValue(permission_refrence).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                            @Override
                                                            public void onComplete(@NonNull Task<Void> task) {
 
@@ -596,7 +674,7 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
                                                                    final DatabaseReference reference = firebaseDatabase.getReference(DataBase_Refrences.Permissions.getRef());
                                                                    PermissionUserEntering permissionUserEntering = new PermissionUserEntering(uID,nameStudnet);
 
-                                                                   reference.child(ExamID).child(permissionUserEntering.getuID()).setValue(permissionUserEntering).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                   reference.child(depName).child(yearName).child(unitName).child(ExamID).child(permissionUserEntering.getuID()).setValue(permissionUserEntering).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                        @Override
                                                                        public void onComplete(@NonNull Task<Void> task) {
 
@@ -716,6 +794,16 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
 
     }
 
+
+
+    private void applyFontToMenuItem(MenuItem mi) {
+
+        Typeface font = Typeface.createFromAsset(context.getAssets(),"atherfont.ttf");
+        SpannableString mNewTitle = new SpannableString(mi.getTitle());
+        mNewTitle.setSpan(new CustomTypeFaceSpan("", font, Color.WHITE), 0, mNewTitle.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        mi.setTitle(mNewTitle);
+
+    }
 //public void sendNotificationtoMRAhmedSamy(){
 //
 //
@@ -744,7 +832,67 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
 //            }
 //        });
 //}
+ private void Delete_Exam(final String ExamID, final String depName , final String yearName , final String unitName){
 
+     DatabaseReference reference = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.EXAMS.getRef()).child(depName).child(yearName).child(unitName).child(ExamID);
+     reference.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+         @Override
+         public void onComplete(@NonNull Task<Void> task) {
+
+             if (task.isSuccessful()){
+
+                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference("PermissionRefrence").child(depName).child(yearName).child(unitName).child(ExamID);
+                 reference.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                     @Override
+                     public void onComplete(@NonNull Task<Void> task) {
+                         if (task.isSuccessful()){
+
+                             DatabaseReference reference = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.Permissions.getRef()).child(depName).child(yearName).child(unitName).child(ExamID);
+                             reference.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                 @Override
+                                 public void onComplete(@NonNull Task<Void> task) {
+
+                                     if (task.isSuccessful()){
+
+                                         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("ExamStarted").child(depName).child(yearName).child(unitName).child(ExamID);
+                                         reference.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                             @Override
+                                             public void onComplete(@NonNull Task<Void> task) {
+                                                 if (task.isSuccessful()){
+
+
+                                                     dialog.Close_Dialog();
+                                                     AlertDialog alertDialog = new AlertDialog(context,"تم حذف الاختبار بنجاح وجميع الطلبات.");
+                                                     alertDialog.show();
+                                                 }
+                                             }
+                                         });
+
+
+
+
+                                     }
+                                 }
+                             });
+                         }
+
+                     }
+                 });
+
+             }else {
+
+                 dialog.Close_Dialog();
+                 AlertDialog alertDialog = new AlertDialog(context,"حدثت مشكلة" );
+                 alertDialog.show();
+
+             }
+
+         }
+     });
+
+
+
+ }
 
 }
 //

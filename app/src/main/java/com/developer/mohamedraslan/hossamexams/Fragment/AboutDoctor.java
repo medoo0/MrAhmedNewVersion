@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 
+import com.developer.mohamedraslan.hossamexams.Contracts.ControlPanelContract;
 import com.developer.mohamedraslan.hossamexams.R;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdView;
@@ -81,6 +83,11 @@ public class AboutDoctor extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
          View v = inflater.inflate(R.layout.fragment_about_doctor, container, false);
+        ControlPanelContract.ControlUI controlUI = (ControlPanelContract.ControlUI) getActivity();
+        if (controlUI!=null){
+
+            controlUI.enableDisableDrawer(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        }
         ButterKnife.bind(this,v);
         mPublisherAdView = v.findViewById(R.id.publisherAdView);
         PublisherAdRequest adRequest = new PublisherAdRequest.Builder().build();

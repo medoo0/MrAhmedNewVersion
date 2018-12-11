@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.developer.mohamedraslan.hossamexams.Contracts.StudentManagementContract;
 import com.developer.mohamedraslan.hossamexams.Dialog.AlertDialog;
@@ -22,6 +23,7 @@ import com.developer.mohamedraslan.hossamexams.Dialog.AnimatedDialog;
 import com.developer.mohamedraslan.hossamexams.Enums.DataBase_Refrences;
 import com.developer.mohamedraslan.hossamexams.Fragment.MyResults;
 import com.developer.mohamedraslan.hossamexams.JsonModel.FullRegisterForm;
+import com.developer.mohamedraslan.hossamexams.JsonModel.Unites_Model_Json;
 import com.developer.mohamedraslan.hossamexams.Permissions.Call_permission;
 import com.developer.mohamedraslan.hossamexams.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -76,15 +78,6 @@ public class StudentManagementAdapter extends RecyclerView.Adapter<StudentManage
 
 
 
-
-        if (what.equals("myStudents")){
-
-            holder.hidetext.setVisibility(View.GONE);
-            holder.addstudent.setVisibility(View.GONE);
-
-        }
-
-
             holder.Name.setText(items.get(position).getNameStudent());
             holder.Con.setText(items.get(position).getCountry());
             holder.phone.setText(items.get(position).getPhone());
@@ -117,11 +110,6 @@ public class StudentManagementAdapter extends RecyclerView.Adapter<StudentManage
 
 
             views.numberStudent(getItemCount());
-
-
-            checkifStudentInorOUt( items.get(position).getuID() ,holder );
-
-
 
 
 
@@ -204,7 +192,18 @@ public class StudentManagementAdapter extends RecyclerView.Adapter<StudentManage
 
 
     }
-
+    public void restoreItem(FullRegisterForm item, int position) {
+        items.add(position, item);
+        // notify item added by position
+        notifyItemInserted(position);
+    }
+    public void removeItem(int position) {
+        items.remove(position);
+        // notify the item removed by position
+        // to perform recycler view delete animations
+        // NOTE: don't call notifyDataSetChanged()
+        notifyItemRemoved(position);
+    }
 
     @Override
     public int getItemCount() {
@@ -215,11 +214,10 @@ public class StudentManagementAdapter extends RecyclerView.Adapter<StudentManage
         @BindView(R.id.txNameStudent)
         TextView Name ;
 
-        @BindView(R.id.hidetext)
-        TextView hidetext;
+//        @BindView(R.id.hidetext)
+//        TextView hidetext;
 
-        @BindView(R.id.addstudent)
-        Button addstudent;
+
 
         @BindView(R.id.con)
         TextView Con;
@@ -473,107 +471,5 @@ public class StudentManagementAdapter extends RecyclerView.Adapter<StudentManage
         return filter;
     }
 
-
-    public void checkifStudentInorOUt(final String uID , final ViewHolder holder){
-
-
-
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        final DatabaseReference reference       = firebaseDatabase.getReference(DataBase_Refrences.USERREF.getRef()).child(uID).child("areINGroup");
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                if (dataSnapshot.exists()){
-
-                    String AreinGroup = (String) dataSnapshot.getValue();
-
-                    if (AreinGroup!=null){
-
-                        if (AreinGroup.equals("no")){
-
-                            holder.hidetext.setVisibility(View.GONE);
-                            holder.addstudent.setBackgroundResource(R.drawable.ic_addthistomestudent);
-
-
-                            holder.addstudent.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-
-
-                                    reference.setValue("Yes").addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()){
-
-                                                holder.hidetext.setVisibility(View.VISIBLE);
-                                                holder.addstudent.setBackgroundResource(R.drawable.removingstudent);
-
-                                            }
-
-
-
-                                        }
-                                    });
-
-
-
-                                }
-                            });
-
-
-                        }else if (AreinGroup.equals("Yes")) {
-
-                            holder.hidetext.setVisibility(View.VISIBLE);
-                            holder.addstudent.setBackgroundResource(R.drawable.removingstudent);
-
-                            holder.addstudent.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-
-
-
-                                    reference.setValue("no").addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()){
-
-                                                holder.hidetext.setVisibility(View.GONE);
-                                                holder.addstudent.setBackgroundResource(R.drawable.ic_addthistomestudent);
-
-                                            }
-
-
-
-                                        }
-                                    });
-
-
-
-                                }
-                            });
-
-
-
-                        }
-
-                    }
-                }
-
-
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-
-
-
-
-    }
 
 }

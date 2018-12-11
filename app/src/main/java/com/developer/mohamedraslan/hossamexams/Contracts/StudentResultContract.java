@@ -31,7 +31,7 @@ public interface StudentResultContract {
 
     interface MainPresnter{
 
-        void tellModeltoGetDataResults(DatabaseReference reference , String ExamID , ImageView imageView);
+        void tellModeltoGetDataResults(DatabaseReference reference , String ExamID , ImageView imageView,String depName , String yearName  , String unitName);
         void resulthereupdateview(List<Result_Pojo>list,ImageView imageView);
         void noDataExisit(ImageView imageView);
         void ProblemInternet(String E);
@@ -42,7 +42,7 @@ public interface StudentResultContract {
     interface MainModel{
 
 
-        void getResultsFromFirebase(DatabaseReference reference, String ExamID,ImageView background1);
+        void getResultsFromFirebase(DatabaseReference reference, String ExamID,ImageView background1,String depName , String yearName  , String unitName);
 
     }
 }

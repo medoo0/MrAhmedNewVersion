@@ -9,9 +9,14 @@ import android.view.View;
 public class addExamTouchHelper extends ItemTouchHelper.SimpleCallback {
     private RecyclerItemTouchHelperListener listener;
 
-    public addExamTouchHelper(int dragDirs, int swipeDirs, RecyclerItemTouchHelperListener listener) {
+    String depName , yearName  , unitName ;
+
+    public addExamTouchHelper(int dragDirs, int swipeDirs, RecyclerItemTouchHelperListener listener,String depName , String yearName , String unitName) {
         super(dragDirs, swipeDirs);
         this.listener = listener;
+        this.depName = depName;
+        this.yearName = yearName ;
+        this.unitName = unitName;
     }
 
     @Override
@@ -64,6 +69,7 @@ public class addExamTouchHelper extends ItemTouchHelper.SimpleCallback {
     }
 
     public interface RecyclerItemTouchHelperListener {
+
         void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position);
     }
 }

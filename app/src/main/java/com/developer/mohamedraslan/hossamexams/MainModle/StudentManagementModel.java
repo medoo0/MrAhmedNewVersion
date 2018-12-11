@@ -36,11 +36,11 @@ public class StudentManagementModel implements StudentManagementContract.model {
     }
 
     @Override
-    public void getstudentData() {
+    public void getstudentData(String depName , String yearName) {
 
-        DatabaseReference myref = FirebaseDatabase.getInstance().getReference().child(DataBase_Refrences.USERREF.getRef());
+        DatabaseReference myref = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.USERREF.getRef());
 
-        myref.addListenerForSingleValueEvent(new ValueEventListener() {
+        myref.orderByChild("year").equalTo(yearName).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()) {

@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.developer.mohamedraslan.hossamexams.Contracts.Student_Department_Contract;
@@ -48,6 +49,11 @@ public class Department_Refrence_Adapter extends RecyclerView.Adapter<Department
             holder.cardallDeps.setScaleX(.9f);
             holder.cardallDeps.setScaleY(.9f);
             holder.cardallDeps.animate().scaleX(1f).scaleY(1f).setDuration(500);
+            holder.showRelative.setX(1000);
+            holder.showRelative.animate().translationXBy(-1000).setDuration(800);
+            holder.showRelative.setScaleX(.9f);
+            holder.showRelative.setScaleY(.9f);
+            holder.showRelative.animate().scaleX(1f).scaleY(1f).setDuration(500);
         }
         else
         {
@@ -57,6 +63,11 @@ public class Department_Refrence_Adapter extends RecyclerView.Adapter<Department
             holder.cardallDeps.setScaleX(.9f);
             holder.cardallDeps.setScaleY(.9f);
             holder.cardallDeps.animate().scaleX(1f).scaleY(1f).setDuration(500);
+            holder.showRelative.setX(-1000);
+            holder.showRelative.animate().translationXBy(1000).setDuration(800);
+            holder.showRelative.setScaleX(.9f);
+            holder.showRelative.setScaleY(.9f);
+            holder.showRelative.animate().scaleX(1f).scaleY(1f).setDuration(500);
 
         }
 
@@ -94,12 +105,14 @@ public class Department_Refrence_Adapter extends RecyclerView.Adapter<Department
 
 
         CardView cardallDeps;
+        RelativeLayout showRelative;
         TextView depsName;
 
         public MyDepHolder(View itemView) {
             super(itemView);
             cardallDeps = itemView.findViewById(R.id.cardallDeps);
             depsName    = itemView.findViewById(R.id.depsName);
+            showRelative= itemView.findViewById(R.id.showRelative);
         }
     }
 

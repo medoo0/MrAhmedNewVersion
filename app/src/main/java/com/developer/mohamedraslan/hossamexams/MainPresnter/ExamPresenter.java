@@ -20,8 +20,8 @@ public class ExamPresenter implements ExamContract.presenter {
 
 
     @Override
-    public void getQuestion(SQLiteDatabase db, String sqlTableName) {
-        model.getQuestion(db,sqlTableName);
+    public void getQuestion(SQLiteDatabase db, String sqlTableName,String depName , String yearName  , String unitName) {
+        model.getQuestion(db,sqlTableName,depName,yearName,unitName);
     }
 
     @Override
@@ -59,8 +59,8 @@ public class ExamPresenter implements ExamContract.presenter {
     }
 
     @Override
-    public void ExamEnd(String s) {
-        view.ExamEnd(s);
+    public void ExamEnd(String s,String depName , String yearName  , String unitName) {
+        view.ExamEnd(s,depName,yearName,unitName);
     }
 
     @Override

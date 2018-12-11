@@ -20,8 +20,11 @@ public class MyResultPresenter implements MyResultContract.presenter {
     }
 
     @Override
-    public void getMyResults(String uid) {
-        model.getMyResults(uid);
+    public void getMyResults(String uid,String depName , String yearName , String unitName) {
+
+
+        model.getMyResults(uid,depName,yearName,unitName);
+
     }
 
     @Override

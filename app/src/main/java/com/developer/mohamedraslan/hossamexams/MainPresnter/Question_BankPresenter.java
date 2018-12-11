@@ -19,29 +19,31 @@ public class Question_BankPresenter implements QuestionsBankContract.presenter {
 
 
     @Override
-    public void Qremoved(int position) {
+    public void Qremoved(int position, String depName , String yearName , String unitName) {
 
-        view.Q_Removed_InUI(position);
-
-    }
-
-    @Override
-    public void Q_notRemoved_checking() {
-        view.Q_notRemoved_InUI();
+        view.Q_Removed_InUI(position,depName,yearName,unitName);
 
     }
 
     @Override
-    public void tellModletoDeleteQuestion(DatabaseReference reference, String Qid, int position) {
+    public void Q_notRemoved_checking( String depName , String yearName , String unitName) {
+        view.Q_notRemoved_InUI(depName,yearName,unitName);
 
-        model.removingQuestionFromDatabase(reference,Qid,this, position);
+    }
+
+
+
+    @Override
+    public void tellModletoDeleteQuestion(DatabaseReference reference, String Qid, int position, String depName , String yearName , String unitName) {
+
+        model.removingQuestionFromDatabase(reference,Qid,this, position,depName,yearName,unitName);
 
     }
 
     @Override
-    public void callQuestionData() {
+    public void callQuestionData(String depName , String yearName , String unitName) {
 
-        model.getQuestionData();
+        model.getQuestionData(depName,yearName,unitName);
     }
 
     @Override
@@ -57,9 +59,9 @@ public class Question_BankPresenter implements QuestionsBankContract.presenter {
 
 
     @Override
-    public void addQuestionToAddTestRecycler(String questionID) {
+    public void addQuestionToAddTestRecycler(String questionID,String depName , String yearName ,String unitName) {      //  add depNAME and yearName and unitName
 
-        model.addQuestionToAddTestRecycler(questionID);
+        model.addQuestionToAddTestRecycler(questionID,depName,yearName,unitName);
 
     }
 
@@ -67,4 +69,33 @@ public class Question_BankPresenter implements QuestionsBankContract.presenter {
     public void sentSuccessfully(String Result) {
             view.sentSuccessfully(Result);
     }
+
+
+
+
+
+
+
+    @Override
+    public void tellModeltoRemoveAllQuestions(String depName, String yearName, String unitName) {
+
+        model.removallQinTheUnit(depName,yearName,unitName);
+    }
+
+    @Override
+    public void tellUIallQuestionRemoved(String depName, String yearName, String unitName) {
+
+        view.allQuestioninUnitRemoved(depName,yearName,unitName);
+
+    }
+
+    @Override
+    public void tellUiallQuestionNotRemoved(String depName, String yearName, String unitName) {
+
+        view.allQuestioninUnitNotRemoved(depName,yearName,unitName);
+    }
+
+
+
+
 }

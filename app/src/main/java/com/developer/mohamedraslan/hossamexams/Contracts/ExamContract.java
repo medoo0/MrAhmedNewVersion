@@ -17,13 +17,13 @@ public interface ExamContract {
 
         void Skipped();
 
-        void ExamEnd(String s);
+        void ExamEnd(String s,String depName , String yearName  , String unitName);
 
         void BlockScreen(String s);
     }
     interface presenter{
 
-        void getQuestion(SQLiteDatabase db, String sqlTableName);
+        void getQuestion(SQLiteDatabase db, String sqlTableName,String depName , String yearName  , String unitName);
 
         void quetionIs(String ID_Qestion, String question, String answerOne, String answerTwo, String answerThree, String answerFour, String correctAnswer);
 
@@ -37,13 +37,13 @@ public interface ExamContract {
 
         void Skip(SQLiteDatabase db, String tableName, String id_qestion);
 
-        void ExamEnd(String s);
+        void ExamEnd(String s,String depName , String yearName  , String unitName);
 
         void BlockScreen(String s);
     }
     interface model{
 
-        void getQuestion(SQLiteDatabase db, String sqlTableName);
+        void getQuestion(SQLiteDatabase db, String sqlTableName,String depName , String yearName  , String unitName);
 
         void insertAnswerInSql(SQLiteDatabase db, String sqlTableName, String ID_Qestion, String selectAnswer, String oneQestionDegree);
         String getCorrectAnswer(SQLiteDatabase db, String sqlTableName, String ID_Qestion);

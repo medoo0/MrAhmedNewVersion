@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 
+import com.developer.mohamedraslan.hossamexams.Contracts.ControlPanelContract;
 import com.developer.mohamedraslan.hossamexams.R;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdView;
@@ -71,6 +73,11 @@ public class AboutProgrammer extends Fragment {
         // Inflate the layout for this fragment
        View view = inflater.inflate(R.layout.fragment_about_programmer, container, false);
         ButterKnife.bind(this,view);
+        ControlPanelContract.ControlUI controlUI = (ControlPanelContract.ControlUI) getActivity();
+        if (controlUI!=null){
+
+            controlUI.enableDisableDrawer(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        }
         mPublisherAdView = view.findViewById(R.id.publisherAdView);
         textView.setAlpha(0);
         textView2.setAlpha(0);

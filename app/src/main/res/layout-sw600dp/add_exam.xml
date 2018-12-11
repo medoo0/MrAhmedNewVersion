@@ -40,18 +40,36 @@
                 android:textSize="30sp" />
         </LinearLayout>
 
-        <Button
-            android:id="@+id/deleteAll"
-            style="@style/flatbutton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="25sp"
-            android:layout_gravity="start"
-            android:layout_marginStart="10dp"
-            android:fontFamily="@font/cairo"
-            android:gravity="center_vertical"
-            android:text="Delete All"
-            android:textColor="@color/color2" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/deleteAll"
+                style="@style/flatbutton"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/cairo"
+                android:gravity="center_vertical"
+                android:text="Delete All"
+                android:textColor="@color/color2" />
+            <ProgressBar
+                android:id="@+id/loadremoveQ"
+                style="?android:attr/progressBarStyleSmall"
+                android:theme="@style/AppTheme.spinner"
+                android:layout_gravity="center"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:visibility="invisible"
+                android:padding="10dp"
+                />
+
+        </LinearLayout>
+
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/chosen_Qestions_Rec"
@@ -352,6 +370,19 @@
 
 
         </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

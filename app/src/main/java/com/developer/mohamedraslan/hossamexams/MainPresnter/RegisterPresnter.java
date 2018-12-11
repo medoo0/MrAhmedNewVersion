@@ -24,8 +24,8 @@ public class RegisterPresnter implements RegisterFragContracts.PresnterRegister 
     }
 
     @Override
-    public void updatUISuccessfull(String email , String password) {
-        view.successDataSaved(email,password);
+    public void updatUISuccessfull(String email , String password,String depOfStudent) {
+        view.successDataSaved(email,password,depOfStudent);
     }
 
     @Override

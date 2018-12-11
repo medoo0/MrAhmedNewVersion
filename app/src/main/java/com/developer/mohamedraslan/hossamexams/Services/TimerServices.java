@@ -26,6 +26,9 @@ import java.util.Date;
 public class TimerServices extends Service {
     CountDownTimer TimerCounter ;
     String TableID ,final_degree , Examname,ExamDate, TableSqlname ;
+    String depName  = "";
+    String yearName = "";
+    String unitName = "";
     DatabaseReference reference;
 
     @Override
@@ -38,6 +41,10 @@ public class TimerServices extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
 
         if(intent != null) {
+
+            depName = intent.getStringExtra("depName");
+            yearName= intent.getStringExtra("yearName");
+            unitName= intent.getStringExtra("unitName");
             TableID = intent.getStringExtra("TableID");
             final_degree = intent.getStringExtra("final_degree");
             Examname = intent.getStringExtra("Examname");
@@ -50,7 +57,7 @@ public class TimerServices extends Service {
             stopSelf();
 
         }
-        reference = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.STARTEDEXAM.getRef())
+        reference = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.STARTEDEXAM.getRef()).child(depName).child(yearName).child(unitName)
                 .child(TableID).child(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
 
@@ -64,7 +71,7 @@ public class TimerServices extends Service {
                     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
                     String CurrentTime = sdf.format(new Date());
 
-                    StartThread(ConvertRemiderTimeToMilliSecond(CurrentTime,EndTime));
+                    StartThread(ConvertRemiderTimeToMilliSecond(CurrentTime,EndTime),depName,yearName,unitName);
 
                 }
 
@@ -119,7 +126,7 @@ public class TimerServices extends Service {
         return diff ;
     }
 
-    void StartThread(long TimerInMilliSecond){
+    void StartThread(long TimerInMilliSecond, final String depName , final String yearName , final String unitName){
 
         TimerCounter =  new CountDownTimer(TimerInMilliSecond, 1000) {
             @Override
@@ -156,6 +163,9 @@ public class TimerServices extends Service {
                 intent.putExtra("SqlTableName",TableSqlname);
                 intent.putExtra("Message","انتهى الوقت .");
                 intent.putExtra("final_degree",final_degree);
+                intent.putExtra("depName" ,depName);
+                intent.putExtra("yearName",yearName);
+                intent.putExtra("unitName",unitName);
                 intent.putExtra("Examname",Examname);
                 intent.putExtra("ExamDate",ExamDate);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

@@ -48,16 +48,21 @@ public class AdapterExamsStudents extends RecyclerView.Adapter<ExamStudenstHolde
     Context context;
     int photosCounter = 0;
     String examID;
+    String depName , yearName , unitName;
     RequestFromStudentToExamWhatContract.MainView mainView;
     String examName;
 
 
 
-    public AdapterExamsStudents(List<PermissionUserEntering> list, Context context, String examID, RequestFromStudentToExamWhatContract.MainView mainView,String examName) {
+    public AdapterExamsStudents(List<PermissionUserEntering> list, Context context, String examID, RequestFromStudentToExamWhatContract.MainView mainView,
+                                String examName,String depName,String yearName , String unitName) {
         this.list    = list;
         this.examID  = examID;
         this.context = context;
         this.mainView = mainView;
+        this.depName = depName;
+        this.yearName= yearName;
+        this.unitName = unitName;
         this.examName = examName;
 
     }
@@ -107,7 +112,7 @@ public class AdapterExamsStudents extends RecyclerView.Adapter<ExamStudenstHolde
                 ControlPanel.progressBar.setVisibility(View.VISIBLE);
                 FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
                 DatabaseReference reference = firebaseDatabase.getReference(DataBase_Refrences.Permissions.getRef());
-                reference.child(examID).child(list.get(position).getuID()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                reference.child(depName).child(yearName).child(unitName).child(examID).child(list.get(position).getuID()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
 
@@ -115,7 +120,7 @@ public class AdapterExamsStudents extends RecyclerView.Adapter<ExamStudenstHolde
 
                             FirebaseDatabase firebaseDatabase2 = FirebaseDatabase.getInstance();
                             DatabaseReference reference1       = firebaseDatabase2.getReference("ExamStarted");
-                            reference1.child(examID).child(list.get(position).getuID()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            reference1.child(depName).child(yearName).child(unitName).child(examID).child(list.get(position).getuID()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()){
@@ -239,7 +244,7 @@ public class AdapterExamsStudents extends RecyclerView.Adapter<ExamStudenstHolde
                 alertDialog.dismiss();
                 FirebaseDatabase firebaseDatabasea = FirebaseDatabase.getInstance();
                 DatabaseReference reference        = firebaseDatabasea.getReference(DataBase_Refrences.Permissions.getRef());
-                reference.child(examID).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                reference.child(depName).child(yearName).child(unitName).child(examID).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
 
@@ -247,13 +252,13 @@ public class AdapterExamsStudents extends RecyclerView.Adapter<ExamStudenstHolde
 
                             FirebaseDatabase firebaseDatabasea = FirebaseDatabase.getInstance();
                             DatabaseReference reference        = firebaseDatabasea.getReference("ExamStarted");
-                            reference.child(examID).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            reference.child(depName).child(yearName).child(unitName).child(examID).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()){
                                         FirebaseDatabase firebaseDatabasea = FirebaseDatabase.getInstance();
                                         DatabaseReference reference        = firebaseDatabasea.getReference("PermissionRefrence");
-                                        reference.child(examID).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        reference.child(depName).child(yearName).child(unitName).child(examID).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
 
@@ -261,7 +266,7 @@ public class AdapterExamsStudents extends RecyclerView.Adapter<ExamStudenstHolde
 
 
                                                     animatedDialog.Close_Dialog();
-                                                    sendtoStudentThaAcceptFromMrAhmed(context);
+                                                    sendtoStudentThaAcceptFromMrAhmed(context,depName,yearName);
 
 
                                                 }
@@ -290,8 +295,10 @@ public class AdapterExamsStudents extends RecyclerView.Adapter<ExamStudenstHolde
 
 
 
-    public void sendtoStudentThaAcceptFromMrAhmed(Context mcontext) {
+    public void sendtoStudentThaAcceptFromMrAhmed(Context mcontext,String depName , String yearname) {
 
+
+        String toTopic = depName+yearname;
 
         JSONObject obj = null;
         JSONObject dataobjData = null;
@@ -304,7 +311,7 @@ public class AdapterExamsStudents extends RecyclerView.Adapter<ExamStudenstHolde
             dataobjData.put("image", "0");
             dataobjData.put("message","  لقد وافق Mr.Ahmed علي جميع  طلبات إعاده اختبار  "  +  examName  );
 
-            obj.put("to", "/topics/all");
+            obj.put("to", "/topics/'"+toTopic+"'");
             obj.put("data", dataobjData);
 
             Log.d("MYOBJs", obj.toString());
@@ -341,7 +348,7 @@ public class AdapterExamsStudents extends RecyclerView.Adapter<ExamStudenstHolde
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<String, String>();
-                headers.put("Authorization", "key=" + "AAAA0NknKjs:APA91bH8x30IaI5ZAz49kUGAOXEwjiFxZnWTpELAu2DMOu_vgz5GhNDnERYkv7X5Z-NveF02btyVdkMyHWhYH0wYTU3nqtbW9vx67M4Xv1vn7-rOisNEYixwQpeImD-7yguPEhTM_Nkk");
+                headers.put("Authorization", "key=" + "AAAAlXCKxUE:APA91bFGSM9okl_Va_Q5wGeK6LW3KAZNoFeme6l95iRGz5z-llVh1ZLXZ-yH0q5Ua3PmLPghxAirqgBujN-FLR5-OB-gKkGkHlOdW8wO3CkEAZ0x5_-h-SvKyAw_8eKlYDvNA4EO5kvM");
                 headers.put("Content-Type", "application/json");
                 return headers;
             }
@@ -409,7 +416,7 @@ public class AdapterExamsStudents extends RecyclerView.Adapter<ExamStudenstHolde
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<String, String>();
-                headers.put("Authorization", "key=" + "AAAA0NknKjs:APA91bH8x30IaI5ZAz49kUGAOXEwjiFxZnWTpELAu2DMOu_vgz5GhNDnERYkv7X5Z-NveF02btyVdkMyHWhYH0wYTU3nqtbW9vx67M4Xv1vn7-rOisNEYixwQpeImD-7yguPEhTM_Nkk");
+                headers.put("Authorization", "key=" + "AAAAlXCKxUE:APA91bFGSM9okl_Va_Q5wGeK6LW3KAZNoFeme6l95iRGz5z-llVh1ZLXZ-yH0q5Ua3PmLPghxAirqgBujN-FLR5-OB-gKkGkHlOdW8wO3CkEAZ0x5_-h-SvKyAw_8eKlYDvNA4EO5kvM");
                 headers.put("Content-Type", "application/json");
                 return headers;
             }

@@ -18,8 +18,8 @@ public class PermissionExamPresnter implements PermissionExamsContract.Permissio
     }
 
     @Override
-    public void tellModeltoGetRefrence() {
-        permissionExamModel.getRequestsExams();
+    public void tellModeltoGetRefrence(String depName , String yearName , String unitName) {
+        permissionExamModel.getRequestsExams(depName,yearName,unitName);
     }
 
     @Override

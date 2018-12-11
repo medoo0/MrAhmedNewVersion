@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -52,6 +53,11 @@ public class Question_Bank_Frag extends Fragment
     DatabaseReference reference;
     AnimatedDialog dialog;
     TextView mark;
+    Bundle b;
+
+    String depNameforUnite = "";
+    String yearNameforUnit = "";
+    String unitName        = "";
         //   public static List<Questions_Form> qestions ;
             QuestionBankAdapter adapter;
             TextView view;
@@ -61,6 +67,19 @@ public class Question_Bank_Frag extends Fragment
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         reference        = firebaseDatabase.getReference(DataBase_Refrences.BANKQUESTIONS.getRef());
+         b = getArguments();
+
+
+        if (b!=null){
+
+
+            depNameforUnite = b.getString("depName","");
+            yearNameforUnit = b.getString("yearName","");
+            unitName        = b.getString("unitName","");
+
+        }
+
+
        // qestions = new ArrayList<>();
 
     }
@@ -70,8 +89,20 @@ public class Question_Bank_Frag extends Fragment
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.question_bank_layout,container,false);
-        ControlPanel.Title.setText(R.string.questions);
-        ControlPanel.SetNavChecked(3);
+        if (b!=null){
+
+
+            depNameforUnite = b.getString("depName","");
+            yearNameforUnit = b.getString("yearName","");
+            unitName        = b.getString("unitName","");
+
+        }
+        ControlPanelContract.ControlUI controlUI = (ControlPanelContract.ControlUI) getActivity();
+        if (controlUI!=null){
+
+            controlUI.enableDisableDrawer(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        }
+        ControlPanel.Title.setText("question bank \n  in this Unit");
         show_addQ_frag = v.findViewById(R.id.show_addQ_frag);
         recyclerView   = v.findViewById(R.id.rec);
         presenter      = new Question_BankPresenter(this);
@@ -83,7 +114,7 @@ public class Question_Bank_Frag extends Fragment
         dialog = new AnimatedDialog(getActivity());
         dialog.ShowDialog();
         //call data from firebase .
-        presenter.callQuestionData();
+        presenter.callQuestionData(depNameforUnite,yearNameforUnit,unitName);
 
         searchaboutquestion.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -121,7 +152,7 @@ public class Question_Bank_Frag extends Fragment
 
             if (controlUI!=null){
 
-                controlUI.whenClickFAB_showFrag();
+                controlUI.whenClickFAB_showFrag(depNameforUnite,yearNameforUnit,unitName);
 
             }
 
@@ -134,7 +165,7 @@ public class Question_Bank_Frag extends Fragment
             public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 
                 super.onCreateOptionsMenu(menu, inflater);
-                inflater.inflate(R.menu.search, menu);
+                inflater.inflate(R.menu.questionbankmenu, menu);
 
 
 
@@ -158,6 +189,49 @@ public class Question_Bank_Frag extends Fragment
                         // Do Fragment menu item stuff here
                         return true;
 
+
+                       case R.id.deletingthisquetion :
+
+                           if (adapter!=null){
+
+                               if (adapter.getItemCount()>0){
+
+                                   if (getActivity()!=null){
+
+
+                                       final AlertDialog alert  = new AlertDialog(getActivity(),
+                                               getActivity().getString(R.string.title),
+                                               "هل انت متاكد من حذف جميع الاسئله الخاصه بهذه الوحده.");
+                                       alert.show();
+
+                                       alert.btnYes.setOnClickListener(new View.OnClickListener() {
+                                           @Override
+                                           public void onClick(View view) {
+
+                                               dialog.ShowDialog();
+                                               presenter.tellModeltoRemoveAllQuestions(depNameforUnite,yearNameforUnit,unitName);
+
+
+                                           }
+                                       });
+                                       alert.btnNo.setOnClickListener(new View.OnClickListener() {
+                                           @Override
+                                           public void onClick(View view) {
+                                               alert.dismiss();
+                                           }
+                                       });
+
+
+                                   }
+
+
+
+
+                               }
+
+                           }
+                           //  حنمسح كل الاسئله الي موجوده في الوحده
+                           break;
                     default:
                         break;
                 }
@@ -171,8 +245,11 @@ public class Question_Bank_Frag extends Fragment
 
                     ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new RecyclerItemTouchHelper(0, ItemTouchHelper.LEFT, this);
                     new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                    adapter     = new QuestionBankAdapter(Result,getActivity(),this);
+                    LinearLayoutManager linearLayoutManager  = new LinearLayoutManager(getActivity());
+                    linearLayoutManager.setStackFromEnd(true);
+                    linearLayoutManager.setReverseLayout(true);
+                    recyclerView.setLayoutManager(linearLayoutManager);
+                    adapter     = new QuestionBankAdapter(Result,getActivity(),this,depNameforUnite,yearNameforUnit,unitName);
                     adapter.notifyDataSetChanged();
                     recyclerView.setAdapter(adapter);
                     dialog.Close_Dialog();
@@ -200,7 +277,7 @@ public class Question_Bank_Frag extends Fragment
 
                  view    = viewHolder.itemView.findViewById(R.id.tx);
                  presenter.addQuestionToAddTestRecycler(QuestionBankAdapter.qestions
-                        .get(viewHolder.getAdapterPosition()).getQuestionID());
+                        .get(viewHolder.getAdapterPosition()).getQuestionID(),depNameforUnite,yearNameforUnit,unitName);
 
 
             }
@@ -214,13 +291,13 @@ public class Question_Bank_Frag extends Fragment
             }
 
             @Override
-            public void updateFragbyValuesTogoEditFrag(String questionID) {
+            public void updateFragbyValuesTogoEditFrag(String questionID,String depName , String yearname , String unitName) {
 
                 ControlPanelContract.ControlUI controlUI = (ControlPanelContract.ControlUI) getActivity();
 
                 if (controlUI!=null){
 
-                    controlUI.editQuestions(questionID,"Editing");
+                    controlUI.editQuestions(questionID,"Editing",depName,yearname,unitName);
 
                 }
 
@@ -228,19 +305,19 @@ public class Question_Bank_Frag extends Fragment
             }
 
             @Override
-            public void removingQuestion(final String questionID, final int position) {
+            public void removingQuestion(final String questionID, final int position, final String depName , final String yearName , final String unitName) {
 
                  final Question_BankPresenter presenter = new Question_BankPresenter(this);
                     if(getActivity()!= null) {
 
-                        final AlertDialog alertDialog = new AlertDialog(getActivity(), "Warning", " Are you sure you want to delete the question");
+                        final AlertDialog alertDialog = new AlertDialog(getActivity(), "Warning", " Are you sure you want to delete the question?");
                         alertDialog.show();
                         alertDialog.btnYes.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
 
                                 //delete
-                                presenter.tellModletoDeleteQuestion(reference, questionID, position);
+                                presenter.tellModletoDeleteQuestion(reference, questionID, position,depName,yearName,unitName);
                                 alertDialog.dismiss();
 
                                 dialog.ShowDialog();
@@ -255,44 +332,107 @@ public class Question_Bank_Frag extends Fragment
 
 
             @Override
-            public void Q_Removed_InUI(int position) {
+            public void Q_Removed_InUI(int position, String depName , String yearName , String unitName) {
+
+
                 dialog.Close_Dialog();
-                if(getActivity() != null) {
-
-                    Toast.makeText(getActivity(), "question deleted .", Toast.LENGTH_SHORT).show();
-                    if (adapter != null) {
-
-                        //adapter.remove(position);
-
-                        getActivity().getSupportFragmentManager().popBackStack();
-                        getActivity().getSupportFragmentManager()
-                                .beginTransaction()
-                                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
-                                .replace(R.id.Exam_Frame,new Question_Bank_Frag())
-                                .addToBackStack(null)
-                                .commit();
 
 
-                    }
+
+                ControlPanelContract.ControlUI controlUI  = (ControlPanelContract.ControlUI) getActivity();
+
+                if (controlUI!=null){
+
+
+                    controlUI.removedsussesswewillupdateQuestionBankFragment(depName,yearName,unitName,"");
+
                 }
+
+
+//                if(getActivity() != null) {
+//
+//                    Toast.makeText(getActivity(), "question deleted .", Toast.LENGTH_SHORT).show();
+//                    if (adapter != null) {
+//
+//                        //adapter.remove(position);
+//
+//                        getActivity().getSupportFragmentManager().popBackStack();
+//                        getActivity().getSupportFragmentManager()
+//                                .beginTransaction()
+//                                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
+//                                .replace(R.id.Exam_Frame,new Question_Bank_Frag())
+//                                .addToBackStack(null)
+//                                .commit();
+//
+//
+//                    }
+//                }
             }
 
             @Override
-            public void Q_notRemoved_InUI() {
+            public void Q_notRemoved_InUI (String depName , String yearName , String unitName) {
                 dialog.Close_Dialog();
-                if(getActivity() != null) {
-                    Toast.makeText(getActivity(), "problem", Toast.LENGTH_SHORT).show();
 
-                    getActivity().getSupportFragmentManager().popBackStack();
-                    getActivity().getSupportFragmentManager()
-                            .beginTransaction()
-                            .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
-                            .replace(R.id.Exam_Frame,new Question_Bank_Frag())
-                            .addToBackStack(null)
-                            .commit();
+
+                ControlPanelContract.ControlUI controlUI  = (ControlPanelContract.ControlUI) getActivity();
+
+                if (controlUI!=null){
+
+
+                    controlUI.removedsussesswewillupdateQuestionBankFragment(depName,yearName,unitName,"");
 
                 }
+
+
+//
+//                if(getActivity() != null) {
+//                    Toast.makeText(getActivity(), "problem", Toast.LENGTH_SHORT).show();
+//
+//                    getActivity().getSupportFragmentManager().popBackStack();
+//                    getActivity().getSupportFragmentManager()
+//                            .beginTransaction()
+//                            .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
+//                            .replace(R.id.Exam_Frame,new Question_Bank_Frag())
+//                            .addToBackStack(null)
+//                            .commit();
+//
+//                }
+
+
             }
+
+    @Override
+    public void allQuestioninUnitRemoved(String depName, String yearName, String unitName) {
+
+        dialog.Close_Dialog();
+
+        ControlPanelContract.ControlUI controlUI  = (ControlPanelContract.ControlUI) getActivity();
+
+        if (controlUI!=null){
+
+            controlUI.removedsussesswewillupdateQuestionBankFragment(depName,yearName,unitName,"allQRemoved");
+
+        }
+
+
+    }
+
+    @Override
+    public void allQuestioninUnitNotRemoved(String depName, String yearName, String unitName) {
+
+        dialog.Close_Dialog();
+
+        ControlPanelContract.ControlUI controlUI  = (ControlPanelContract.ControlUI) getActivity();
+
+        if (controlUI!=null){
+
+            controlUI.removedsussesswewillupdateQuestionBankFragment(depName,yearName,unitName,"NoRemoved");
+
+        }
+
+
+
+    }
 
     @Override
     public void nuberQuestions(int number) {

@@ -75,6 +75,7 @@ public class Exam extends AppCompatActivity implements View.OnClickListener , Ex
     SQLiteDatabase db;
     String TableName = "";
     private String Examname;
+    String depName = "" , yearName = "", unitName = "";
     private String ExamDate;
     Intent Timerservices;
     BroadcastReceiver broadcastReceiver ;
@@ -91,36 +92,34 @@ public class Exam extends AppCompatActivity implements View.OnClickListener , Ex
 
 
 
-
-
-
-
-
         Bundle bundle = getIntent().getExtras();
         if( bundle != null ){
+
              TableName = bundle.getString("SqlTableName");
-
-
-            oneQestionDegree = bundle.getString("oneQestionDegree");
-            final_degree = bundle.getString("final_degree");
-            Examname = bundle.getString("Examname");
-            ExamDate = bundle.getString("ExamDate");
-
-
+             depName   = bundle.getString("depName","");
+             yearName  = bundle.getString("yearName","");
+             unitName  = bundle.getString("unitName","");
+             oneQestionDegree = bundle.getString("oneQestionDegree");
+             final_degree = bundle.getString("final_degree");
+             Examname = bundle.getString("Examname");
+             ExamDate = bundle.getString("ExamDate");
 
         }
 
         //start Timer Config .
-        Timerservices = new Intent(this, TimerServices.class);
+        Timerservices         = new Intent(this, TimerServices.class);
         Timerservices.putExtra("TableID",TableName.replace(FirebaseAuth.getInstance().getCurrentUser().getUid(),"").substring(1));
         Timerservices.putExtra("final_degree",final_degree);
         Timerservices.putExtra("Examname",Examname);
         Timerservices.putExtra("ExamDate",ExamDate);
+        Timerservices.putExtra("depName",depName);
+        Timerservices.putExtra("yearName",yearName);
+        Timerservices.putExtra("unitName",unitName);
 
 
         SQlHelper helper = new SQlHelper(this);
-        db = helper.getWritableDatabase();
-        presenter.getQuestion(db,TableName);
+        db               = helper.getWritableDatabase();
+        presenter.getQuestion(db,TableName,depName,yearName,unitName);
 
 
 
@@ -259,7 +258,7 @@ public class Exam extends AppCompatActivity implements View.OnClickListener , Ex
         scrollView.scrollTo(5, 10);
         Animation();
         //get Another Question.
-        presenter.getQuestion(db,TableName);
+        presenter.getQuestion(db,TableName,depName,yearName,unitName);
     }
 
     @Override
@@ -273,12 +272,17 @@ public class Exam extends AppCompatActivity implements View.OnClickListener , Ex
         buttonA.setBackground(falseClick);
         buttonC.setBackground(falseClick);
         //get Another Question.
-        presenter.getQuestion(db,TableName);
+        presenter.getQuestion(db,TableName,depName,yearName,unitName);
     }
 
     @Override
-    public void ExamEnd(String s) {
+    public void ExamEnd(String s,String depName , String yearName  , String unitName) {
+
         Intent intent = new Intent(this,Result.class);
+
+        intent.putExtra("depName",depName);
+        intent.putExtra("yearName",yearName);
+        intent.putExtra("unitName",unitName);
         intent.putExtra("SqlTableName",TableName);
         intent.putExtra("Message",s);
         intent.putExtra("final_degree",final_degree);

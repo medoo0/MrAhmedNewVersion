@@ -74,15 +74,6 @@ public class Signin_Fragment extends Fragment implements SigninContract.view {
         dp       = helper.getReadableDatabase();
         dpWrite  = helper.getWritableDatabase();
         emails   = new ArrayList<>();
-
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View v =  inflater.inflate(R.layout.fragment_signin, container, false);
-
         Cursor pointer  = Operation.getData(dp);
 
         if (pointer!=null){
@@ -98,6 +89,13 @@ public class Signin_Fragment extends Fragment implements SigninContract.view {
 
         }
 
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View v =  inflater.inflate(R.layout.fragment_signin, container, false);
 
 
         // initialize butterknife library .
@@ -169,7 +167,7 @@ public class Signin_Fragment extends Fragment implements SigninContract.view {
         MainActivityContract.View view1 = (MainActivityContract.View) getActivity();
         if (view1!=null){
 
-            view1.showFragmentRegister();
+            view1.showParentOrStudentFragment();
         }
     }
 

@@ -11,7 +11,7 @@ public interface PermissionExamsContract {
 
         void allRefrenceHere(List<Permission_Refrence>list);
         void noRefrenceHere();
-        void ApplicationForExams(String examID,String nameExam);
+        void ApplicationForExams(String examID,String nameExam,String depName , String yearName , String unitName);
 
 
         void numberExams(int numbers);
@@ -21,7 +21,8 @@ public interface PermissionExamsContract {
 
 
     interface PermissionPresnter{
-        void tellModeltoGetRefrence();
+
+        void tellModeltoGetRefrence(String depName , String yearName , String unitName);
         void refrenceExisit(List<Permission_Refrence>list);
         void refrenceNotExisit();
 
@@ -33,7 +34,7 @@ public interface PermissionExamsContract {
 
     interface PermissionModel{
 
-        void getRequestsExams();
+        void getRequestsExams(String depName , String yearName , String unitName);
 
     }
 

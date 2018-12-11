@@ -14,6 +14,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Date;
+
 public class RegisterMode implements RegisterFragContracts.ModelRegister {
 
     private FirebaseAuth auth ;
@@ -33,16 +35,17 @@ public class RegisterMode implements RegisterFragContracts.ModelRegister {
                 if (task.isSuccessful()){
 
                     // added to authentication  //
+                    int m = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE);
                     UID              =  auth.getUid();
                     assert UID != null;
-                    final FullRegisterForm fullRegisterForm = new FullRegisterForm(resister_form.getNameStudent(),resister_form.getEmail(),resister_form.getPhone(),UID,resister_form.getCountry(),"no");
+                    final FullRegisterForm fullRegisterForm = new FullRegisterForm(resister_form.getNameStudent(),resister_form.getEmail(),resister_form.getPhone(),UID,resister_form.getCountry(),"no",resister_form.getYear(),String.valueOf(m),resister_form.getParentYear());
                     reference.child(UID).setValue(fullRegisterForm).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
 
                             if (task.isSuccessful()){
 
-                                presnterRegister.updatUISuccessfull(Email,passord);
+                                presnterRegister.updatUISuccessfull(Email,passord,resister_form.getParentYear());
 
 
                             }

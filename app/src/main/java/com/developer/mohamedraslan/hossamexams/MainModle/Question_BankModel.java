@@ -33,11 +33,11 @@ public class Question_BankModel implements QuestionsBankContract.model {
     }
 
     @Override
-    public void getQuestionData() {
+    public void getQuestionData(String depName , String yearName , String unitName) {
 
         DatabaseReference myref = FirebaseDatabase.getInstance().getReference().child(DataBase_Refrences.BANKQUESTIONS.getRef());
 
-        myref.addListenerForSingleValueEvent( new ValueEventListener() {
+        myref.child(depName).child(yearName).child(unitName).addListenerForSingleValueEvent( new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -68,13 +68,15 @@ public class Question_BankModel implements QuestionsBankContract.model {
         });
     }
 
+
+
     @Override
-    public void addQuestionToAddTestRecycler(String questionID) {
+    public void addQuestionToAddTestRecycler(String questionID,String depName , String yearName ,String unitName) {
 
         DatabaseReference myref = FirebaseDatabase.getInstance().getReference()
-                .child(DataBase_Refrences.CHOSENQUESTIONID.getRef()).child(questionID);
+                .child(DataBase_Refrences.CHOSENQUESTIONID.getRef()).child(depName).child(yearName).child(unitName).child(questionID);
 
-        myref.setValue("yes").addOnSuccessListener(new OnSuccessListener<Void>() {
+        myref.setValue(questionID).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
 
@@ -92,19 +94,19 @@ public class Question_BankModel implements QuestionsBankContract.model {
     }
 
     @Override
-    public void removingQuestionFromDatabase(DatabaseReference reference, String Qid, final QuestionsBankContract.presenter presenter, final int position) {
+    public void removingQuestionFromDatabase(DatabaseReference reference, String Qid, final QuestionsBankContract.presenter presenter, final int position, final String depName , final String yearName , final String unitName) {
 
-        reference.child(Qid).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+        reference.child(depName).child(yearName).child(unitName).child(Qid).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
 
                 if (task.isSuccessful()){
 
-                    presenter.Qremoved(position);
+                    presenter.Qremoved(position,depName,yearName,unitName);
 
                 }else {
 
-                    presenter.Q_notRemoved_checking();
+                    presenter.Q_notRemoved_checking(depName,yearName,unitName);
 
                 }
             }
@@ -112,4 +114,32 @@ public class Question_BankModel implements QuestionsBankContract.model {
 
 
     }
+
+
+
+    @Override
+    public void removallQinTheUnit(final String depName, final String yearName, final String unitName) {
+
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference reference       = firebaseDatabase.getReference("Banck_Questions");
+
+        reference.child(depName).child(yearName).child(unitName).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+
+                if (task.isSuccessful()){
+
+                    presenter.tellUIallQuestionRemoved(depName,yearName,unitName);
+
+                }else {
+
+                    presenter.tellUiallQuestionNotRemoved(depName,yearName,unitName);
+
+                }
+            }
+        });
+
+
+    }
+
 }

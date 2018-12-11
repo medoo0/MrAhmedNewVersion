@@ -6,46 +6,24 @@ xmlns:tools="http://schemas.android.com/tools"
 <group android:checkableBehavior="single">
 
 
-    <item android:id="@+id/emams"
-        android:icon="@drawable/ic_home"
-        android:title="@string/examList"
-        />
+    <item android:id="@+id/more"
+        android:icon="@drawable/more"
+        android:title="الرئيسية"/>
 
-    <item android:id="@+id/MYResult"
+
+
+    <item android:id="@+id/Units"
         android:icon="@drawable/ic_result"
-        android:title="@string/MyResult"
+        android:title="Units"
         />
-
-    <item android:id="@+id/addExam"
-        android:icon="@drawable/ic_addexamicon"
-        android:title="@string/addExam"/>
-
 
     <item android:id="@+id/questions"
         android:icon="@drawable/questionsicon"
-        android:title="@string/questions"/>
-
-    <item android:id="@+id/results"
-        android:icon="@drawable/ic_results"
-        android:title="@string/results"/>
-
-    <item android:id="@+id/studentManger"
-        android:icon="@drawable/ic_gentleman"
-        android:title="@string/mangeStudent"/>
+        android:title="المناهج الدراسية"/>
 
 
 
-    <item android:title="Student Request"
-        android:id="@+id/per"
-        android:icon="@drawable/ic_icon_qq"/>
 
-    <item android:id="@+id/addnotification"
-        android:icon="@drawable/pushnotification"
-        android:title="Send Notification"/>
-
-    <item android:id="@+id/more"
-        android:icon="@drawable/more"
-        android:title="More"/>
 
 </group>
     <item android:title="@string/aboutus">

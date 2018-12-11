@@ -9,15 +9,28 @@ public class Resister_form  implements Parcelable {
     private String email;
     private String phone;
     private String country;
+    private String year;
+    private String parentYear;
 
-    public Resister_form(String nameStudent, String email, String phone, String country) {
+    public Resister_form(String nameStudent, String email, String phone, String country,String year,String parentYear) {
         this.nameStudent = nameStudent;
-        this.email = email;
-        this.phone = phone;
+        this.email   = email;
+        this.phone   = phone;
         this.country = country;
+        this.year    = year;
+        this.parentYear = parentYear;
     }
+
+    public String getParentYear() {
+        return parentYear;
+    }
+
     public Resister_form(){
 
+    }
+
+    public String getYear() {
+        return year;
     }
 
     protected Resister_form(Parcel in) {

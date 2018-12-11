@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -38,6 +39,9 @@ public class PermissionsFromStudent extends Fragment implements PermissionExamsC
     TextView markedd;
     ImageView backgroundgroundempty;
     PermissionExamsAdapter adapter;
+    String depName = "";
+    String yearName = "";
+    String unitName  = "";
 
 
     @Override
@@ -55,9 +59,24 @@ public class PermissionsFromStudent extends Fragment implements PermissionExamsC
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.permiisions_student, container, false);
-        presnter.tellModeltoGetRefrence();
-        ControlPanel.Title.setText("جميع الطلبات");
-        ControlPanel.SetNavChecked(6);
+
+        ControlPanelContract.ControlUI controlUI = (ControlPanelContract.ControlUI) getActivity();
+        if (controlUI!=null){
+            controlUI.enableDisableDrawer(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        }
+
+        if (getArguments()!=null){
+
+
+            depName  = getArguments().getString("depNameExamResult","");
+            yearName = getArguments().getString("yearNameExamResult","");
+            unitName = getArguments().getString("unitNameExamResult","");
+
+
+        }
+
+        presnter.tellModeltoGetRefrence(depName,yearName,unitName);
+        ControlPanel.Title.setText("all request in " + unitName);
         permission       = v.findViewById(R.id.permission);
         mPublisherAdView = v.findViewById(R.id.publisherAdView);
         backgroundgroundempty = v.findViewById(R.id.backgroundgroundempty);
@@ -125,7 +144,7 @@ public class PermissionsFromStudent extends Fragment implements PermissionExamsC
 
 
         ControlPanel.progressBar.setVisibility(View.INVISIBLE);
-        adapter = new PermissionExamsAdapter(list,getActivity(),this);
+        adapter = new PermissionExamsAdapter(list,getActivity(),this,depName,yearName,unitName);
         permission.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mLayoutManager.setReverseLayout(true);
@@ -181,13 +200,13 @@ public class PermissionsFromStudent extends Fragment implements PermissionExamsC
     }
 
     @Override
-    public void ApplicationForExams(String examID,String examName) {
+    public void ApplicationForExams(String examID,String examName,String depName , String yearName , String unitName) {
 
         ControlPanelContract.ControlUI controlUI = (ControlPanelContract.ControlUI) getActivity();
 
         if (controlUI!=null){
 
-            controlUI.showRequestsFromStudent(examID,"0",examName);
+            controlUI.showRequestsFromStudent(examID,"0",examName,depName,yearName,unitName);
 
         }
 

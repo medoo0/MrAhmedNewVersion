@@ -21,9 +21,9 @@ public class StudentResultPresnter implements StudentResultContract.MainPresnter
     }
 
     @Override
-    public void tellModeltoGetDataResults(DatabaseReference reference, String ExamID, ImageView imageView) {
+    public void tellModeltoGetDataResults(DatabaseReference reference, String ExamID, ImageView imageView,String depName , String yearName  , String unitName) {
 
-        studentResultModel.getResultsFromFirebase(reference,ExamID,imageView);
+        studentResultModel.getResultsFromFirebase(reference,ExamID,imageView,depName,yearName,unitName);
 
     }
 

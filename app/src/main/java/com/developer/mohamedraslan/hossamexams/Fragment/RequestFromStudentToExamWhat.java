@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -40,7 +41,7 @@ public class RequestFromStudentToExamWhat extends Fragment implements RequestFro
     TextView txmarks;
     PublisherAdView mPublisherAdView;
     RequestFromStudentToExamWhatPresnter presnter;
-    String examID ,examName;
+    String examID ,examName,depName,yearName,unitName;
     AdapterExamsStudents adapter;
     AnimatedDialog animatedDialog;
 
@@ -49,16 +50,7 @@ public class RequestFromStudentToExamWhat extends Fragment implements RequestFro
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         animatedDialog = new AnimatedDialog(getActivity());
-        Bundle b = getArguments();
-        if (b!=null){
 
-            examName = b.getString("name"    ,"");
-            examID   = b.getString("examid"  ,"");
-            presnter = new RequestFromStudentToExamWhatPresnter(this);
-            presnter.tellModeltoGetStudents(examID);
-
-
-        }
 
     }
 
@@ -68,9 +60,32 @@ public class RequestFromStudentToExamWhat extends Fragment implements RequestFro
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.requests_from_student_for_anyexam,container,false);
+
+
+
+        ControlPanelContract.ControlUI controlUI = (ControlPanelContract.ControlUI) getActivity();
+        if (controlUI!=null){
+
+            controlUI.enableDisableDrawer(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        }
+
+        Bundle b = getArguments();
+        if (b!=null){
+
+
+            depName = b.getString("depName","");
+            yearName= b.getString("yearName","");
+            unitName=b.getString("unitName","");
+            examName = b.getString("name"    ,"");
+            examID   = b.getString("examid"  ,"");
+            presnter = new RequestFromStudentToExamWhatPresnter(this);
+            presnter.tellModeltoGetStudents(examID,depName,yearName,unitName);
+
+
+        }
+
         ControlPanel.progressBar.setVisibility(View.VISIBLE);
-        ControlPanel.Title.setText("طلبه قد إنتهي عليهم الوقت.");
-        ControlPanel.SetNavChecked(6);
+        ControlPanel.Title.setText("أعادة الاختبارات");
         setHasOptionsMenu(true);
         permissionstudentrec = v.findViewById(R.id.permissionstudentrec);
         searchingstudent     = v.findViewById(R.id.searchingstudent);
@@ -188,7 +203,7 @@ public class RequestFromStudentToExamWhat extends Fragment implements RequestFro
     public void Studenssssss(List <PermissionUserEntering> list) {
 
         ControlPanel.progressBar.setVisibility(View.INVISIBLE);
-        adapter = new AdapterExamsStudents(list,getActivity(),examID,this,examName);
+        adapter = new AdapterExamsStudents(list,getActivity(),examID,this,examName,depName,yearName,unitName);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mLayoutManager.setReverseLayout(true);
         mLayoutManager.setStackFromEnd(true);
@@ -204,7 +219,7 @@ public class RequestFromStudentToExamWhat extends Fragment implements RequestFro
         List<PermissionUserEntering>listempty = new ArrayList<>();
         ControlPanel.progressBar.setVisibility(View.INVISIBLE);
         background111.setVisibility(View.VISIBLE);
-        adapter = new AdapterExamsStudents(listempty,getActivity(),examID,this,examName);
+        adapter = new AdapterExamsStudents(listempty,getActivity(),examID,this,examName,depName,yearName,unitName);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mLayoutManager.setReverseLayout(true);
         mLayoutManager.setStackFromEnd(true);
@@ -222,7 +237,7 @@ public class RequestFromStudentToExamWhat extends Fragment implements RequestFro
         if (controlUI!=null){
 
 
-            controlUI.showRequestsFromStudent(examID,"1",examName);
+            controlUI.showRequestsFromStudent(examID,"1",examName,depName,yearName,unitName);
 
         }
 

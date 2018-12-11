@@ -21,7 +21,7 @@ public interface MyResultContract {
     }
     interface presenter {
 
-        void getMyResults(String uid);
+        void getMyResults(String uid,String depName , String yearName , String unitName);
 
         void Problem(String s);
 
@@ -29,6 +29,6 @@ public interface MyResultContract {
     }
     interface model {
 
-        void getMyResults(String uid);
+        void getMyResults(String uid,String depName , String yearName , String unitName);
     }
 }

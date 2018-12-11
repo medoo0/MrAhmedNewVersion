@@ -21,11 +21,15 @@ public class PermissionExamsAdapter extends RecyclerView.Adapter<Permision_Holde
     List<Permission_Refrence> Result,listnew;
     Context context;
     PermissionExamsContract.viewMain viewMainmain;
+    String depName , yearName , UnitName;
 
 
-    public PermissionExamsAdapter(List<Permission_Refrence> result, Context context, PermissionExamsContract.viewMain viewMainmain) {
+    public PermissionExamsAdapter(List<Permission_Refrence> result, Context context, PermissionExamsContract.viewMain viewMainmain,String depName , String yearName , String unitName) {
 
         Result       = result;
+        this.depName = depName;
+        this.yearName = yearName ;
+        this.UnitName = unitName;
         this.context = context;
         this.viewMainmain = viewMainmain;
     }
@@ -48,7 +52,7 @@ public class PermissionExamsAdapter extends RecyclerView.Adapter<Permision_Holde
             @Override
             public void onClick(View v) {
 
-                viewMainmain.ApplicationForExams(Result.get(position).getExamID(),Result.get(position).getExamName());
+                viewMainmain.ApplicationForExams(Result.get(position).getExamID(),Result.get(position).getExamName(),depName,yearName,UnitName);
 
             }
         });

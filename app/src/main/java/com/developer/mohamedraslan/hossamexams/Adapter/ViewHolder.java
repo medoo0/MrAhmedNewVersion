@@ -35,13 +35,13 @@ import com.google.firebase.database.ValueEventListener;
  */
 
 public class ViewHolder extends RecyclerView.ViewHolder  {
-  Button BtnStartExam;
+  Button   BtnStartExam;
   TextView ExamName;
   TextView Date;
   CardView Cardview;
-  Context context;
+  Context  context;
   LinearLayout linear;
-  String ExamID;
+  String   ExamID;
   AnimatedDialog dialog;
   FirebaseAuth auth ;
 
@@ -58,53 +58,52 @@ public class ViewHolder extends RecyclerView.ViewHolder  {
 
     linear.setEnabled(false);
     CheckifAdmin();
-    linear.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-
-
-        PopupMenu popup = new PopupMenu(context, Cardview);
-        //Inflating the Popup using xml file
-        popup.getMenuInflater().inflate(R.menu.deleteexam, popup.getMenu());
-
-        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-          @Override
-          public boolean onMenuItemClick(MenuItem item) {
-            if (item.getItemId() == R.id.Delete_exam){
-
-              //Deleting
-              final AlertDialog alertDialog = new AlertDialog(context,"تحذير","هل انت متأكد من حذف هذا الاختبار ؟ ");
-              alertDialog.show();
-              alertDialog.btnYes.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                  dialog.ShowDialog();
-                  Delete_Exam();
-                  alertDialog.dismiss();
-                }
-              });
-
-
-            }
-
-            return true;
-          }
-        });
-
-
-        Menu menu = popup.getMenu();
-        for (int i = 0; i < menu.size(); i++) {
-          MenuItem mi = menu.getItem(i);
-          applyFontToMenuItem(mi);
-
-        }
-
-
-
-        popup.show();
-      }
-    });
-
+//    linear.setOnClickListener(new View.OnClickListener() {
+//      @Override
+//      public void onClick(View view) {
+//
+//
+//        PopupMenu popup = new PopupMenu(context, Cardview);
+//        //Inflating the Popup using xml file
+//        popup.getMenuInflater().inflate(R.menu.deleteexam, popup.getMenu());
+//
+//        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+//          @Override
+//          public boolean onMenuItemClick(MenuItem item) {
+//            if (item.getItemId() == R.id.Delete_exam){
+//
+//              //Deleting
+//              final AlertDialog alertDialog = new AlertDialog(context,"تحذير","هل انت متأكد من حذف هذا الاختبار ؟ ");
+//              alertDialog.show();
+//              alertDialog.btnYes.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                  dialog.ShowDialog();
+//                  Delete_Exam();
+//                  alertDialog.dismiss();
+//                }
+//              });
+//
+//
+//            }
+//
+//            return true;
+//          }
+//        });
+//
+//
+//        Menu menu = popup.getMenu();
+//        for (int i = 0; i < menu.size(); i++) {
+//          MenuItem mi = menu.getItem(i);
+//          applyFontToMenuItem(mi);
+//
+//        }
+//
+//
+//
+//        popup.show();
+//      }
+//    });
 
   }
 

@@ -54,10 +54,23 @@ public class Register_Fragment extends Fragment implements View.OnClickListener 
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
     String selectedCountry = "";
+    String yearFromAtherFragment = "" , parentFromAtherFrag="";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Bundle b = getArguments();
+        if (b!=null){
+
+
+            yearFromAtherFragment = b.getString("yearName","");
+            parentFromAtherFrag   = b.getString("parentYear","");
+            Toast.makeText(getActivity(), yearFromAtherFragment, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), parentFromAtherFrag, Toast.LENGTH_SHORT).show();
+
+        }
+
         country          = getResources().getStringArray(R.array.country);
         firebaseDatabase = FirebaseDatabase.getInstance();
         animatedDialog   = new AnimatedDialog(getActivity());
@@ -204,10 +217,10 @@ public class Register_Fragment extends Fragment implements View.OnClickListener 
                     && !makeSureFromPass.getText().toString().isEmpty()
                     && isEmailValid(Email.getText().toString().trim())
                     && makeSureFromPass.getText().toString().equals(Password.getText().toString())
-                    && !phoneme.getText().toString().isEmpty() && !selectedCountry.equals("")){
+                    && !phoneme.getText().toString().isEmpty() && !selectedCountry.equals("")&&!yearFromAtherFragment.equals("")&&!parentFromAtherFrag.equals("")){
 
                 animatedDialog.ShowDialog();
-                Resister_form resister_form = new Resister_form(NameStudent.getText().toString(),Email.getText().toString(),phoneme.getText().toString(),selectedCountry);
+                Resister_form resister_form = new Resister_form(NameStudent.getText().toString(),Email.getText().toString(),phoneme.getText().toString(),selectedCountry,yearFromAtherFragment,parentFromAtherFrag);
                 RegisterPresnter registerPresnter = new RegisterPresnter(Register_Fragment.this);
                 registerPresnter.detailsForuserFromUI(editor,Email.getText().toString(),Password.getText().toString(),reference,resister_form);
 
@@ -218,7 +231,7 @@ public class Register_Fragment extends Fragment implements View.OnClickListener 
     }
 
     @Override
-    public void successDataSaved(String email , String password) {
+    public void successDataSaved(String email , String password,String depOfStudent) {
         registeringToData.setEnabled(true);
         animatedDialog.Close_Dialog();
         if (Operation.storingEmails(mydb,email)){
@@ -227,7 +240,7 @@ public class Register_Fragment extends Fragment implements View.OnClickListener 
             MainActivityContract.View view1 = (MainActivityContract.View) getActivity();
             if (view1!=null){
 
-                view1.openControlPanel(email,password);
+                view1.openControlPanel(email,password,depOfStudent);
 
             }
 

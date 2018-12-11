@@ -42,8 +42,8 @@ public class ResultPresenter implements ResultContract.presenter {
     }
 
     @Override
-    public void UploadResult(String examID, String uid, String examDate, String examname, String finalDegree, String total, ArrayList<WorngQestion> worngQestions,String userName) {
-        model.UploadResult(examID,uid,examDate,examname,finalDegree,total,worngQestions,userName);
+    public void UploadResult(String examID, String uid, String examDate, String examname, String finalDegree, String total, ArrayList<WorngQestion> worngQestions,String userName,String depName  , String yearName  , String unitName) {
+        model.UploadResult(examID,uid,examDate,examname,finalDegree,total,worngQestions,userName,depName,yearName,unitName);
     }
 
     @Override

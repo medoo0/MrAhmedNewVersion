@@ -4,6 +4,7 @@ package com.developer.mohamedraslan.hossamexams.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -46,7 +47,7 @@ public class StudentResult extends Fragment implements StudentResultContract.Mai
     @BindView(R.id.background)
     ImageView background;
     StudentResult_Rec_Adapter adapter;
-    String ExamID;
+    String ExamID , deName , yearNamee  , unitName ;
     StudentResultPresnter studentResultPresnter;
 
 
@@ -64,10 +65,14 @@ public class StudentResult extends Fragment implements StudentResultContract.Mai
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
+        ControlPanelContract.ControlUI controlUI = (ControlPanelContract.ControlUI) getActivity();
+        if (controlUI!=null){
+
+            controlUI.enableDisableDrawer(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        }
         View v = inflater.inflate(R.layout.fragment_student_result, container, false);
         ButterKnife.bind(this, v);
         ControlPanel.progressBar.setVisibility(View.VISIBLE);
-        ControlPanel.SetNavChecked(4);
         marking = v.findViewById(R.id.marking);
         setHasOptionsMenu(true);
         searchresult = v.findViewById(R.id.searchresult);
@@ -75,9 +80,13 @@ public class StudentResult extends Fragment implements StudentResultContract.Mai
 
          if (getArguments() != null) {
 
+            ExamID    = getArguments().getString("ExamID");
+            deName    = getArguments().getString("studentResultinDepname");
+            yearNamee = getArguments().getString("studentResultinYearName");
+            unitName  = getArguments().getString("studentResultinUnitName");
 
-            ExamID = getArguments().getString("ExamID");
-            studentResultPresnter.tellModeltoGetDataResults(reference, ExamID,background);
+            studentResultPresnter.tellModeltoGetDataResults(reference,ExamID,background,deName,yearNamee,unitName);
+
 
          }
 
@@ -193,7 +202,7 @@ public class StudentResult extends Fragment implements StudentResultContract.Mai
 
         if (controlUI!= null){
 
-            controlUI.showFragmentWrongs(name,finalDegree,total,examID,arrayList,imageTag,uID,imageView);
+            controlUI.showFragmentWrongs(name,finalDegree,total,examID,arrayList,imageTag,uID,imageView,deName,yearNamee,unitName);
 
         }
 

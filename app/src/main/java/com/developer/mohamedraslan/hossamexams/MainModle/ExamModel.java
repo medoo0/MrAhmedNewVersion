@@ -20,7 +20,7 @@ public class ExamModel implements ExamContract.model {
     }
 
     @Override
-    public void getQuestion(SQLiteDatabase db, String sqlTableName) {
+    public void getQuestion(SQLiteDatabase db, String sqlTableName,String depName , String yearName  , String unitName) {
 
         String[] Cols = {SQlHelper.ID_Qestion, SQlHelper.question, SQlHelper.answerOne
                 , SQlHelper.answerTwo, SQlHelper.answerThree
@@ -35,7 +35,7 @@ public class ExamModel implements ExamContract.model {
                         , Pointer.getString(4), Pointer.getString(5), Pointer.getString(6));
             } else {
 
-                presenter.ExamEnd(" You have finished  the Test ");
+                presenter.ExamEnd(" You have finished  the Test ",depName,yearName,unitName);
 
             }
         } else {

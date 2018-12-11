@@ -2,6 +2,7 @@ package com.developer.mohamedraslan.hossamexams.MainPresnter;
 
 
 import com.developer.mohamedraslan.hossamexams.Contracts.ControlPanelContract;
+import com.developer.mohamedraslan.hossamexams.JsonModel.FullRegisterForm;
 import com.developer.mohamedraslan.hossamexams.MainModle.ControlPanelModel;
 
 public class ControlpanelPresnter implements ControlPanelContract.ControlPresnterUI {
@@ -34,6 +35,8 @@ public class ControlpanelPresnter implements ControlPanelContract.ControlPresnte
 
     @Override
     public void CheckifAdmin(String uid) {
+
+
         controlPanelModel.CheckifAdmin(uid);
     }
 
@@ -43,8 +46,9 @@ public class ControlpanelPresnter implements ControlPanelContract.ControlPresnte
     }
 
     @Override
-    public void HeIsUser() {
-        view.UserTools();
+    public void HeIsUser(FullRegisterForm fullRegisterForm) {
+
+        view.UserTools(fullRegisterForm);
     }
 
     @Override

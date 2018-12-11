@@ -11,14 +11,32 @@ public class FullRegisterForm implements Parcelable{
     private String uID;
     private String country;
     private String areINGroup;
+    private String year;
+    private String studentCode;
+    private String parentYear;
 
-    public FullRegisterForm(String nameStudent, String email, String phone, String uID, String country,String areINGroup) {
+    public FullRegisterForm(String nameStudent, String email, String phone, String uID, String country,String areINGroup,String year,String studentCode,String parentYear) {
         this.nameStudent = nameStudent;
         this.email = email;
         this.phone = phone;
         this.uID = uID;
         this.country = country;
         this.areINGroup = areINGroup;
+        this.year   = year;
+        this.studentCode = studentCode;
+        this.parentYear = parentYear;
+    }
+
+    public String getParentYear() {
+        return parentYear;
+    }
+
+    public String getStudentCode() {
+        return studentCode;
+    }
+
+    public String getYear() {
+        return year;
     }
 
     public String getAreINGroup() {

@@ -3,6 +3,7 @@ package com.developer.mohamedraslan.hossamexams.Contracts;
 
 import android.widget.ProgressBar;
 
+import com.developer.mohamedraslan.hossamexams.JsonModel.FullRegisterForm;
 import com.developer.mohamedraslan.hossamexams.JsonModel.Result_Pojo;
 import com.developer.mohamedraslan.hossamexams.JsonModel.WorngQestion;
 
@@ -14,24 +15,119 @@ public interface ControlPanelContract {
 
     interface ControlUI{
 
+
+
+        void showDialogNotification();
+
+
+
+
+
+        //  هذا الجزء خاااص بال studentMangment
+
+
+
+        void showStudentMangmentFragmenttt(String depName , String yearName);
+
+
+
+
+        ////////////////////////
+
+//  هذا الجزء خااااص بالطلبااااااات بتاعه الطلااااب
+
+
+      void showRequestStudentFragment(String depName , String yearName , String unitName);
+
+
+
+
+
+
+        /////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        ///                 هذا الجزء خاااااااااااااااااص بال  ResultOfStudentOf Units
+
+        void showResultOfStudentInThisUnitFragment (String depName , String yearName  , String unitName) ;
+
+
+
+
+
+
+        ///////////////////////////////
+
+
+void enableDisableDrawer(int mode);
+void enableDrawer(int mode);
+
+        //  هذا الجزء خاص بال Myresult
+
+        void showMyresultFragment(String depName , String yearName  , String unitName);
+
+
+
+
+        //////////////////////
+
+        //  هذا الجزء خااص بال   examlist
+
+        void showExamListForUnit(String depName  , String yearname  , String unitName);
+        void showAddExamFromExamListWhenClickonFloatActionButton(String depName , String yearname  , String unitName);
+
+
+
+
+
+
+
+
+
+
+
+        ///////////////////
+
+
         void showWrongsforStudent(Result_Pojo result_pojo,String finalD , String TotalDegree);
-        void showFragmentWrongs(String name , String finalDegree , String total, String examID , ArrayList<WorngQestion> arrayList, Integer imageTag, String uID, CircleImageView imageView);
-        void showDialogStudent(String what);
+        void showFragmentWrongs(String name , String finalDegree , String total, String examID , ArrayList<WorngQestion> arrayList, Integer imageTag, String uID, CircleImageView imageView
+                ,String depName , String yearname , String unitName);
+        void showDialogStudent(String what,String depName , String yearName);
         void initializeViews();
-        void whenClickFAB_showFrag();
+        void whenClickFAB_showFrag(String depName , String yearName , String unitName);
         void CheckifUserBannedResult(String Result);
-        void editQuestions(String questionID, String val);
-        void editSuccessopenBank();
+        void editQuestions(String questionID, String val,String depName , String yearName , String unitName);
+        void editSuccessopenBank(String depName , String yearName , String unitName);
         void SetUsername(String nameStudent);
         void AdminTools();
 
-        void UserTools();
+        void UserTools(FullRegisterForm fullRegisterForm);
 
 
-        void showRequestsFromStudent(String examID,String what,String nameExam);
+        void showRequestsFromStudent(String examID,String what,String nameExam,String depName , String yearName , String unitName);
 
 
 
+
+        void showQforUnitiRefere(String depName , String yearName , String unitName);
+
+
+
+
+
+        void showunitBankQuestion(String depName , String yearName , String unitName);
 
 
 
@@ -50,7 +146,10 @@ public interface ControlPanelContract {
 
 
 
-        void showYearsDetails(String depsYear);
+        void showfragUnites(String depName , String yearName,int what);
+
+
+        void showYearsDetails(String depsYear,String fragName);
 
 
         void DoneYearAddesSussessfully();
@@ -64,7 +163,7 @@ public interface ControlPanelContract {
 
 
 
-        void notificationMessages(String message, ProgressBar p1,ProgressBar p2);
+        void notificationMessages(String message, ProgressBar p1,ProgressBar p2,String depNamefromAdmin , String yearNameFromAdmin);
 
 
         void showingresults();
@@ -79,6 +178,15 @@ public interface ControlPanelContract {
 
         void userAreDeletedSussess();
         void problemwithDeleteUser();
+
+
+
+
+        //  عند مسح السوال من الداتا بيز
+
+
+        void removedsussesswewillupdateQuestionBankFragment(String depName , String yearName  , String unitName,String what);
+
     }
 
 
@@ -90,7 +198,7 @@ public interface ControlPanelContract {
         void CheckifUserBannedResult(String Result);
         void CheckifAdmin(String uid);
         void HeIsAdmin();
-        void HeIsUser();
+        void HeIsUser(FullRegisterForm fullRegisterForm);
         void getuserName(String uid);
         void SetUsername(String nameStudent);
 

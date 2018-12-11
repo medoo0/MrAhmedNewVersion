@@ -59,11 +59,13 @@ public class ResultModel implements ResultContract.model {
 
     @Override
     public void UploadResult(String examID, String uid, String examDate, String examName,
-                             String finalDegree, String total, ArrayList<WorngQestion> wrongQestions,String userName) {
+                             String finalDegree, String total, ArrayList<WorngQestion> wrongQestions,String userName,String depName  , String yearName  , String unitName) {
 
         DatabaseReference reference = FirebaseDatabase
-                .getInstance().getReference(DataBase_Refrences.RESULT.getRef()).child(examID+uid);
-        Result_Pojo result_pojo = new Result_Pojo(examID,uid,examDate,examName,finalDegree,total,userName,wrongQestions);
+
+                .getInstance().getReference(DataBase_Refrences.RESULT.getRef()).child(depName).child(yearName).child(unitName).child(examID+uid);
+
+        Result_Pojo result_pojo    = new Result_Pojo(examID,uid,examDate,examName,finalDegree,total,userName,wrongQestions);
 
         reference.setValue(result_pojo).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override

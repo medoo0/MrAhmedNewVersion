@@ -4,8 +4,10 @@ import android.support.annotation.NonNull;
 
 import com.developer.mohamedraslan.hossamexams.Contracts.ControlPanelContract;
 import com.developer.mohamedraslan.hossamexams.Enums.DataBase_Refrences;
+import com.developer.mohamedraslan.hossamexams.JsonModel.FullRegisterForm;
 import com.developer.mohamedraslan.hossamexams.JsonModel.Questions_Form;
 import com.developer.mohamedraslan.hossamexams.JsonModel.Resister_form;
+import com.developer.mohamedraslan.hossamexams.JsonModel.Year_modle_json;
 import com.developer.mohamedraslan.hossamexams.JsonModel.YearsModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -14,7 +16,17 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
 
 public class ControlPanelModel implements ControlPanelContract.ControlModelUI {
 
@@ -53,14 +65,14 @@ public class ControlPanelModel implements ControlPanelContract.ControlModelUI {
     }
 
     @Override
-    public void CheckifAdmin(String Uid) {
+    public void CheckifAdmin(final String Uid) {
         DatabaseReference reference = FirebaseDatabase.getInstance()
                 .getReference(DataBase_Refrences.ADMIN.getRef())
                 .child(Uid);
 
 
 
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()){
@@ -69,8 +81,8 @@ public class ControlPanelModel implements ControlPanelContract.ControlModelUI {
 
                 }
                 else {
-
-                    presnterUI.HeIsUser();
+                    //  حنجيب بيانات معينه معانا عشان نعرف نفتح الفراج لان الفراج محتاجها انما الادمن معاه الحاجات دي فا مش لازم من ناحيه الادمن
+                    getDetailsForUser(Uid);
 
                 }
             }
@@ -247,10 +259,15 @@ public class ControlPanelModel implements ControlPanelContract.ControlModelUI {
     @Override
     public void addYearTodatabase(String parent, String childYear) {
 
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        final String startTime = sdf.format(new Date());
 
+
+
+        Year_modle_json year_modle_json   = new Year_modle_json(childYear,getTimeStamp(startTime));
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference reference       = firebaseDatabase.getReference("Years");
-        reference.child(parent).child(childYear).setValue(childYear).addOnCompleteListener(new OnCompleteListener<Void>() {
+        reference.child(parent).child(childYear).setValue(year_modle_json).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
 
@@ -273,5 +290,50 @@ public class ControlPanelModel implements ControlPanelContract.ControlModelUI {
 
     }
 
+
+    public long getTimeStamp(String startTime){
+
+        DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        Date date = null;
+        try {
+            date = formatter.parse(startTime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        long output=date.getTime()/1000L;
+        String str=Long.toString(output);
+        return Long.parseLong(str) * 1000;
+
+    }
+
+
+
+    public void getDetailsForUser(String uID){
+
+
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference reference       = firebaseDatabase.getReference(DataBase_Refrences.USERREF.getRef());
+        reference.child(uID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                if (dataSnapshot.exists()){
+
+                    FullRegisterForm fullRegisterForm =  dataSnapshot.getValue(FullRegisterForm.class);
+
+                    presnterUI.HeIsUser(fullRegisterForm);
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+    }
 
 }

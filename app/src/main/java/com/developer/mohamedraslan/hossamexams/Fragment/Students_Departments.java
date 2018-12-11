@@ -117,7 +117,7 @@ public class Students_Departments extends Fragment implements View.OnClickListen
 
         if (controlUI!=null){
 
-            controlUI.showYearsDetails(depsName);
+            controlUI.showYearsDetails(depsName,"Students_Departments");
 
 
         }

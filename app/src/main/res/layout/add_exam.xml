@@ -42,17 +42,37 @@
                 android:textSize="18sp" />
         </LinearLayout>
 
-        <Button
-            android:id="@+id/deleteAll"
-            style="@style/flatbutton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginStart="10dp"
-            android:fontFamily="@font/cairo"
-            android:gravity="center_vertical"
-            android:text="Delete All"
-            android:textColor="@color/color2" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/deleteAll"
+                style="@style/flatbutton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/cairo"
+                android:gravity="center_vertical"
+                android:text="Delete All"
+                android:textColor="@color/color2" />
+            <ProgressBar
+                android:id="@+id/loadremoveQ"
+                style="?android:attr/progressBarStyleSmall"
+                android:theme="@style/AppTheme.spinner"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:padding="10dp"
+                />
+
+        </LinearLayout>
+
+
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/chosen_Qestions_Rec"
@@ -253,11 +273,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginStart="10dp"
                     android:fontFamily="@font/cairo"
                     android:text=" For each question "
                     android:textColor="@android:color/black"
-                    android:textSize="18sp" />
+                    android:textSize="15dp" />
 
                 <EditText
                     android:id="@+id/et_degree"
@@ -277,7 +297,7 @@
                     android:fontFamily="@font/cairo"
                     android:text=" Grades "
                     android:textColor="@android:color/black"
-                    android:textSize="18sp" />
+                    android:textSize="15dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -294,7 +314,7 @@
                     android:fontFamily="@font/cairo"
                     android:text=" Number of Random Questions "
                     android:textColor="@android:color/black"
-                    android:textSize="18sp" />
+                    android:textSize="15sp" />
 
                 <EditText
                     android:id="@+id/et_random_number_question"
@@ -340,6 +360,10 @@
 
 
         </LinearLayout>
+
+
+
+
 
 
 

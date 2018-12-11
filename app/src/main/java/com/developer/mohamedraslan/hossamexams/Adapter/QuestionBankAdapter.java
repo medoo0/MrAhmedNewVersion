@@ -33,14 +33,18 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
     public static List<Questions_Form> qestions ;
     private List<Questions_Form> listnew;
     Context context;
+    String depName , yearName , unitName;
 
     QuestionsBankContract.view listinParent;
     QuestionsBankContract.presenter presenter;
-    public QuestionBankAdapter(List<Questions_Form> qestions, Context context, QuestionsBankContract.view view){
+    public QuestionBankAdapter(List<Questions_Form> qestions, Context context, QuestionsBankContract.view view,String depName , String yearName , String unitName){
         this.listinParent = view;
-        this.qestions = qestions;
-        this.context  = context;
-        presenter = new Question_BankPresenter(listinParent) ;
+        this.qestions     = qestions;
+        this.depName      = depName;
+        this.yearName     = yearName;
+        this.unitName          = unitName;
+        this.context      = context;
+        presenter         = new Question_BankPresenter(listinParent) ;
 
     }
 
@@ -85,14 +89,15 @@ public class QuestionBankAdapter extends RecyclerView.Adapter<QuestionBankAdapte
 
                         if (item.getItemId() == R.id.edit){
 
-
-
-                            listinParent.updateFragbyValuesTogoEditFrag(qestions.get(p).getQuestionID());
+                            listinParent.updateFragbyValuesTogoEditFrag(qestions.get(p).getQuestionID(),depName,yearName,unitName);
 
                         }
                         if (item.getItemId() == R.id.delete){
 
-                              listinParent.removingQuestion(qestions.get(p).getQuestionID(),p);
+
+                              listinParent.removingQuestion(qestions.get(p).getQuestionID(),p,depName,yearName,unitName);
+
+
                         }
                         return true;
                     }

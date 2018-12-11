@@ -22,11 +22,11 @@ public interface RequestFromStudentToExamWhatContract  {
 
     interface MainModel{
 
-        void getStudents(String examID);
+        void getStudents(String examID,String depName , String yearName , String unitName);
     }
 
     interface  MainPresnter{
-        void tellModeltoGetStudents(String examID);
+        void tellModeltoGetStudents(String examID,String depName , String yearName , String unitName);
         void studentExisits(List<PermissionUserEntering>list);
         void studentNotExisits();
 

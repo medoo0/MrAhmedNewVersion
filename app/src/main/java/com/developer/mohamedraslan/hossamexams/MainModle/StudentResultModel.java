@@ -25,9 +25,9 @@ public class StudentResultModel implements StudentResultContract.MainModel {
     }
 
     @Override
-    public void getResultsFromFirebase(DatabaseReference reference, String ExamID, final ImageView imageView) {
+    public void getResultsFromFirebase(DatabaseReference reference, String ExamID, final ImageView imageView,String depName , String yearName  , String unitName) {
 
-        reference.orderByChild("examID").equalTo(ExamID)
+        reference.child(depName).child(yearName).child(unitName).orderByChild("examID").equalTo(ExamID)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

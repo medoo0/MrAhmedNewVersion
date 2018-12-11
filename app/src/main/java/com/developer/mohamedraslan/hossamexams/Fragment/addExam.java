@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -24,7 +25,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -40,6 +43,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.developer.mohamedraslan.hossamexams.Adapter.addExamTouchHelper;
 import com.developer.mohamedraslan.hossamexams.Adapter.addExam_Rec_Adapter;
+import com.developer.mohamedraslan.hossamexams.Contracts.ControlPanelContract;
 import com.developer.mohamedraslan.hossamexams.Contracts.addExamContract;
 import com.developer.mohamedraslan.hossamexams.Dialog.AnimatedDialog;
 import com.developer.mohamedraslan.hossamexams.Enums.DataBase_Refrences;
@@ -79,6 +83,8 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
 
     static EditText et_hour;
 
+
+
     @BindView(R.id.et_degree)
     EditText et_degree;
 
@@ -102,8 +108,11 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
     int hour, minute, second;
     addExamContract.presenter presenter;
     addExam_Rec_Adapter adapter;
+    ProgressBar loadremoveQ;
     private List<Questions_Form> Questions;
     AnimatedDialog dialog ;
+
+    String depName  = "" , yearName ="" , unitName = "";
 
 
     @Override
@@ -115,11 +124,27 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.add_exam, container, false);
-        et_hour   = v.findViewById(R.id.et_hour);
-        et_minute = v.findViewById(R.id.et_minute);
-        et_second = v.findViewById(R.id.et_second);
-        Questions = new ArrayList<>();
+        View v          = inflater.inflate(R.layout.add_exam, container, false);
+
+
+        ControlPanelContract.ControlUI controlUI = (ControlPanelContract.ControlUI) getActivity();
+        if (controlUI!=null){
+
+            controlUI.enableDisableDrawer(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        }
+
+        if (getArguments()!=null){
+
+            depName = getArguments().getString( "depName2"  ,"");
+            yearName = getArguments().getString("yearname2","");
+            unitName = getArguments().getString("unitName2","");
+
+        }
+        loadremoveQ     = v.findViewById(R.id.loadremoveQ);
+        et_hour         = v.findViewById(R.id.et_hour);
+        et_minute       = v.findViewById(R.id.et_minute);
+        et_second       = v.findViewById(R.id.et_second);
+        Questions       = new ArrayList<>();
         ButterKnife.bind(this, v);
         //display dialog .
         dialog = new AnimatedDialog(getActivity());
@@ -211,8 +236,8 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
         Btn_DeleteList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                presenter.ClearList();
+                loadremoveQ.setVisibility(View.VISIBLE);
+                presenter.ClearList(depName,yearName,unitName);
 
 
             }
@@ -280,7 +305,7 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
 
         //config your recycler view  .
         presenter = new addExamPresenter(this);
-        presenter.CallgetQestionsToRecycleView();
+        presenter.CallgetQestionsToRecycleView(depName,yearName,unitName);
 
         return v;
     }
@@ -291,11 +316,11 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
 
 
        String date  = getDate(zone.getTimestamp());
-
         //  هنا الوقت موجود من هنا بقا حنقدر نخزن الوقت في الداتا بيز
         presenter.storeExaminDatabase(hour,minute,second,et_degree.getText().toString()
                 ,et_random_number_question.getText().toString()
-                ,final_degree,Questions,ExamName.getText().toString(),date,Questions_size.getText().toString(),zone.getTimestamp());
+                ,final_degree,Questions,ExamName.getText().toString(),date,Questions_size.getText().toString(),zone.getTimestamp(),depName,yearName,unitName);
+
 
 
     }
@@ -307,9 +332,11 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
 
     @Override
     public void ConfigRecyclerview(List<Questions_Form> Questions) {
+
+        loadremoveQ.setVisibility(View.INVISIBLE);
         dialog.Close_Dialog();
         this.Questions = Questions ;
-        ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new addExamTouchHelper(0, ItemTouchHelper.LEFT, this);
+        ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new addExamTouchHelper(0, ItemTouchHelper.LEFT, this,depName,yearName,unitName);
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter = new addExam_Rec_Adapter(Questions, this);
@@ -342,6 +369,7 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
     public void refreshAdapter() {
 
         adapter.notifyDataSetChanged();
+        loadremoveQ.setVisibility(View.INVISIBLE);
 
     }
 
@@ -358,7 +386,7 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
             alertDialog.show();
         }
         //send notification to all users
-        sendPost(ExamName.getText().toString());
+        sendPost(ExamName.getText().toString(),depName,yearName);
 
 
         //reset every thing
@@ -367,7 +395,7 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
         et_second.setText("00");
         et_random_number_question.setText("0");
         et_degree.setText("0");
-        presenter.ClearList();
+        presenter.ClearList(depName,yearName,unitName);
         txFinal_Degree.setText("0");
         ExamName.setText("");
         dialog.Close_Dialog();
@@ -378,7 +406,7 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
 
-        adapter.removeItem(viewHolder.getAdapterPosition());
+        adapter.removeItem(viewHolder.getAdapterPosition(),depName,yearName,unitName);
 
     }
 
@@ -553,8 +581,10 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
 
     }
 
-    public void sendPost(String s) {
+    public void sendPost(String s,String depName , String yearName) {
 
+
+        String toTopic = depName+yearName;
 
         JSONObject obj = null;
         JSONObject dataobjData = null;
@@ -565,9 +595,9 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
 
             dataobjData = new JSONObject();
             dataobjData.put("image", "0");
-            dataobjData.put("message","A new test has been added ( "+s+" )");
+            dataobjData.put("message","A new test has been added ( "+s+" ) in "+unitName+"");
 
-            obj.put("to", "/topics/all");
+            obj.put("to", "/topics/"+toTopic+"");
             obj.put("data", dataobjData);
 
             Log.d("MYOBJs", obj.toString());
@@ -604,7 +634,7 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<String, String>();
-                headers.put("Authorization", "key=" + "AAAA0NknKjs:APA91bH8x30IaI5ZAz49kUGAOXEwjiFxZnWTpELAu2DMOu_vgz5GhNDnERYkv7X5Z-NveF02btyVdkMyHWhYH0wYTU3nqtbW9vx67M4Xv1vn7-rOisNEYixwQpeImD-7yguPEhTM_Nkk");
+                headers.put("Authorization", "key=" + "AAAAlXCKxUE:APA91bFGSM9okl_Va_Q5wGeK6LW3KAZNoFeme6l95iRGz5z-llVh1ZLXZ-yH0q5Ua3PmLPghxAirqgBujN-FLR5-OB-gKkGkHlOdW8wO3CkEAZ0x5_-h-SvKyAw_8eKlYDvNA4EO5kvM");
                 headers.put("Content-Type", "application/json");
                 return headers;
             }

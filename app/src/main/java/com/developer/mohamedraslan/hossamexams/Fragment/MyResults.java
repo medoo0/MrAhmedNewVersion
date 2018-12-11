@@ -3,6 +3,7 @@ package com.developer.mohamedraslan.hossamexams.Fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -45,13 +46,31 @@ public class MyResults extends Fragment implements MyResultContract.view {
     TextView markresult;
     PublisherAdView mPublisherAdView;
 
-
+    String depName = "" , yearName = "" , unitName = "";
     MyResultContract.presenter presenter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment .
          View v = inflater.inflate(R.layout.fragment_my_results, container, false);
+
+
+        ControlPanelContract.ControlUI controlUI = (ControlPanelContract.ControlUI) getActivity();
+        if (controlUI!=null){
+
+            controlUI.enableDisableDrawer(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        }
+
+         if (getArguments()!=null){
+
+             depName    = getArguments().getString("mdeNameresukt" ,"");
+             yearName   = getArguments().getString("yearNameresult","");
+             unitName   = getArguments().getString("unitNameresult","");
+
+         }
+
+
+
         ButterKnife.bind(this , v);
         markresult = v.findViewById(R.id.markresult);
         setHasOptionsMenu(true);
@@ -87,23 +106,20 @@ public class MyResults extends Fragment implements MyResultContract.view {
                 // to the app after tapping on an ad.
             }
         });
-        ControlPanel.Title.setText("Results Of Student");
-        ControlPanel.SetNavChecked(1);
+        ControlPanel.Title.setText("My Results in " +  unitName  );
         ControlPanel.progressBar.setVisibility(View.VISIBLE);
         //initialize Presenter .
-        presenter = new MyResultPresenter(this);
+        if (!depName.equals("")&& !yearName.equals("") && !unitName.equals("")){
 
-        if(getArguments() != null) {
 
-            String uid = getArguments().getString("uid");
-            presenter.getMyResults(uid);
+            presenter = new MyResultPresenter(this);
+            presenter.getMyResults(FirebaseAuth.getInstance().getCurrentUser().getUid(),depName,yearName,unitName);
 
-        }
-        else {
-
-            presenter.getMyResults(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
         }
+
+
+
         myresultsearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

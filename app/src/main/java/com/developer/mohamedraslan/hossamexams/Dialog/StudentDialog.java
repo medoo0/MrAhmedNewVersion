@@ -15,10 +15,13 @@ public class StudentDialog extends Dialog implements View.OnClickListener{
 
     Button allStudents , myStudents;
     ControlPanelContract.ControlUI controlUI;
+    String depName , yearName;
 
-    public StudentDialog(@NonNull Context context, int themeResId, ControlPanelContract.ControlUI controlUI) {
+    public StudentDialog(@NonNull Context context, int themeResId, ControlPanelContract.ControlUI controlUI,String depName , String yearName) {
         super(context, themeResId);
         this.controlUI = controlUI;
+        this.depName   = depName;
+        this.yearName  = yearName;
 
     }
 
@@ -46,14 +49,14 @@ public class StudentDialog extends Dialog implements View.OnClickListener{
 
         if (v == allStudents){
 
-            controlUI.showDialogStudent("allStudents");
+            controlUI.showDialogStudent("allStudents",depName,yearName);
 
         }
 
 
         if (v == myStudents){
 
-            controlUI.showDialogStudent("myStudents");
+            controlUI.showDialogStudent("myStudents",depName,yearName);
 
         }
 

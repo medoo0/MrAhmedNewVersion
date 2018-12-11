@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.developer.mohamedraslan.hossamexams.Adapter.StudentsWrongs_Rec_Adapter;
+import com.developer.mohamedraslan.hossamexams.Contracts.ControlPanelContract;
 import com.developer.mohamedraslan.hossamexams.Dialog.AlertDialog;
 import com.developer.mohamedraslan.hossamexams.Dialog.AnimatedDialog;
 import com.developer.mohamedraslan.hossamexams.Enums.DataBase_Refrences;
@@ -60,6 +62,9 @@ public class StudentsWrongs extends Fragment {
     ArrayList<WorngQestion> wrong ;
     String examID , UserUid;
     AnimatedDialog dialog;
+    String depName = "";
+    String yearName = "";
+    String unitName = "";
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,12 +75,7 @@ public class StudentsWrongs extends Fragment {
                     .inflateTransition(android.R.transition.move));
         }
 
-        if (getArguments()!=null){
 
-           val = getArguments().getString("me","");
-
-
-        }
 
 
     }
@@ -86,10 +86,31 @@ public class StudentsWrongs extends Fragment {
 
 
 
+
+
+
         ControlPanel.Title.setText(R.string.studentsWrongs);
+
+        ControlPanelContract.ControlUI controlUI = (ControlPanelContract.ControlUI) getActivity();
+        if (controlUI!=null){
+
+            controlUI.enableDisableDrawer(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        }
 
         // Inflate the layout for this fragment
          View v =inflater.inflate(R.layout.fragment_students_wrongs, container, false);
+
+        if (getArguments()!=null){
+
+            val      = getArguments().getString("me","");
+            depName  = getArguments().getString("depName","");
+            yearName = getArguments().getString("yearName","");
+            unitName = getArguments().getString("unitName","");
+
+        }
+
+
+
         ButterKnife.bind(this,v);
         wrong = new ArrayList<>();
         dialog = new AnimatedDialog(getActivity());
@@ -136,10 +157,11 @@ public class StudentsWrongs extends Fragment {
             txName.setVisibility(View.GONE);
             title.setText("My Mistakes");
             delete.setVisibility(View.GONE);
-            circleimage.setVisibility(View.GONE);
             wrong             = getArguments().getParcelableArrayList("WrongQuestions");
             String total      = getArguments().getString("Total");
             String FinalDegree= getArguments().getString("FinalDegree");
+            int source = getArguments().getInt("Image");
+            circleimage.setVisibility(source);
             txFinalDegree.setText(FinalDegree);
             txDegree.setText(total);
             StudentsWrongs_Rec_Adapter adapter = new StudentsWrongs_Rec_Adapter(wrong);
@@ -153,12 +175,16 @@ public class StudentsWrongs extends Fragment {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
                 final AlertDialog alertDialog = new AlertDialog(getActivity(),"تحذير" , "يُرجى العلم أنه في حالة حذف الطالب، سوف يتمكن الطالب من دخول الاختبار مرة أخرى وذلك في حالة وجود الاختبار في قائمة الاختبارات. متأكد؟");
                 alertDialog.show();
                 alertDialog.btnYes.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Delete();
+
+
+                        Delete(depName,yearName,unitName);
                         dialog.ShowDialog();
                         alertDialog.dismiss();
                     }
@@ -181,25 +207,35 @@ public class StudentsWrongs extends Fragment {
         ((AppCompatActivity)getActivity()).getSupportActionBar().show();
     }
 
-    void  Delete() {
+    void  Delete(final String depName , final String yearName , final String unitName) {
         if (getActivity() != null) {
-            final DatabaseReference reference = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.RESULT.getRef())
-                    .child(examID + UserUid);
-            reference.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void aVoid) {
-                    DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.STARTEDEXAM.getRef())
-                            .child(examID).child(UserUid);
-                    reference1.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            dialog.Close_Dialog();
-                            getActivity().onBackPressed();
 
-                        }
-                    });
-                }
-            });
+            if (!depName.equals("")&&!yearName.equals("")&& !unitName.equals("")){
+
+
+                final DatabaseReference reference = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.RESULT.getRef()).child(depName).child(yearName).child(unitName)
+                        .child(examID + UserUid);
+                reference.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.STARTEDEXAM.getRef()).child(depName).child(yearName).child(unitName)
+                                .child(examID).child(UserUid);
+                        reference1.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                dialog.Close_Dialog();
+                                getActivity().onBackPressed();
+
+                            }
+                        });
+                    }
+                });
+
+
+
+            }
+
+
 
         }
 

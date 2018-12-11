@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -44,8 +45,10 @@ import com.developer.mohamedraslan.hossamexams.Dialog.StudentDialog;
 import com.developer.mohamedraslan.hossamexams.Fragment.AboutDoctor;
 import com.developer.mohamedraslan.hossamexams.Fragment.AboutProgrammer;
 import com.developer.mohamedraslan.hossamexams.Fragment.AddQ_frag;
+import com.developer.mohamedraslan.hossamexams.Fragment.Department_Questions;
 import com.developer.mohamedraslan.hossamexams.Fragment.ExamList;
 import com.developer.mohamedraslan.hossamexams.Fragment.ExamsResults;
+import com.developer.mohamedraslan.hossamexams.Fragment.Exams_Questions_Student_RequestsForUnit;
 import com.developer.mohamedraslan.hossamexams.Fragment.MoreDetailsFromNav;
 import com.developer.mohamedraslan.hossamexams.Fragment.MyResults;
 import com.developer.mohamedraslan.hossamexams.Fragment.PermissionsFromStudent;
@@ -54,8 +57,11 @@ import com.developer.mohamedraslan.hossamexams.Fragment.RequestFromStudentToExam
 import com.developer.mohamedraslan.hossamexams.Fragment.StudentManagement;
 import com.developer.mohamedraslan.hossamexams.Fragment.StudentsWrongs;
 import com.developer.mohamedraslan.hossamexams.Fragment.Students_Departments;
+import com.developer.mohamedraslan.hossamexams.Fragment.Unites_inDepartmentQ;
+import com.developer.mohamedraslan.hossamexams.Fragment.YeareInDepsQuestions;
 import com.developer.mohamedraslan.hossamexams.Fragment.Years_In_Deps;
 import com.developer.mohamedraslan.hossamexams.Fragment.addExam;
+import com.developer.mohamedraslan.hossamexams.JsonModel.FullRegisterForm;
 import com.developer.mohamedraslan.hossamexams.JsonModel.Result_Pojo;
 import com.developer.mohamedraslan.hossamexams.JsonModel.WorngQestion;
 import com.developer.mohamedraslan.hossamexams.MainPresnter.ControlpanelPresnter;
@@ -67,6 +73,9 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -77,31 +86,41 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ControlPanel extends AppCompatActivity
                           implements ControlPanelContract.ControlUI
                                    , View.OnClickListener
-                                   , NavigationView.OnNavigationItemSelectedListener{
+                                   , NavigationView.OnNavigationItemSelectedListener {
 
     private Toolbar toolbar;
     private ImageView open_nav;
     private DrawerLayout drawer;
     private static NavigationView navigation;
-    public static TextView Title ;
+    public static TextView Title;
     private FirebaseAuth auth;
     StudentDialog studentDialog;
+    boolean mHasSaveInstanceState;
     ControlpanelPresnter controlpanelPresnter;
     boolean AreAdmin = false;
     AnimatedDialog animatedDialog;
     RelativeLayout snackBarr;
     BroadcastReceiver broadcastReceiver;
+    FullRegisterForm fullRegisterForm = null;
     NotificationDialog notificationDialog;
     AddDepartmentDialog addDepartmentDialog;
     CircleImageView circleImageView;
     TextView UserName;
     public static ProgressBar progressBar;
+    String depofStudentthahereNow = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawaer);
 
 
+//        if (getIntent()!=null){
+//
+//            depofStudentthahereNow = getIntent().getStringExtra("depofME");
+//
+//        }
+//
 
 
         // حنسجل الtokendevice في الداتا بيز الاول
@@ -128,26 +147,23 @@ public class ControlPanel extends AppCompatActivity
         controlpanelPresnter.CheckifUserBanned(auth.getCurrentUser().getUid());
 
         //default fragment .
-        getSupportFragmentManager()
-                .beginTransaction()
-                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
-                .replace(R.id.Exam_Frame,new ExamList())
-                .commit();
+//        getSupportFragmentManager()
+//                .beginTransaction()
+//                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
+//                .replace(R.id.Exam_Frame,new ExamList())
+//                .commit();
 
         //image profile back ground .
         Random r = new Random();
         int n = r.nextInt(3);
-        if(n == 0 ){
-         circleImageView.setBackgroundResource(R.drawable.ic_student_1);
+        if (n == 0) {
+            circleImageView.setBackgroundResource(R.drawable.ic_student_1);
 
-        }
-        else if(n == 1){
+        } else if (n == 1) {
             circleImageView.setBackgroundResource(R.drawable.ic_student_2);
-        }
-        else if(n == 2){
+        } else if (n == 2) {
             circleImageView.setBackgroundResource(R.drawable.ic_student_3);
-        }
-        else {
+        } else {
             circleImageView.setBackgroundResource(R.drawable.ic_student_4);
         }
 
@@ -158,48 +174,44 @@ public class ControlPanel extends AppCompatActivity
     }
 
 
-
     @Override
-    public void showWrongsforStudent(Result_Pojo result_pojo,String FinalDegree , String TotalD) {
+    public void showWrongsforStudent(Result_Pojo result_pojo, String FinalDegree, String TotalD) {
 
 
         StudentsWrongs myResults = new StudentsWrongs();
-        Bundle b   = new Bundle();
-        b.putString("me" , "1");
-        b.putString("FinalDegree",FinalDegree);
-        b.putString("Total",TotalD);
-        b.putParcelableArrayList("WrongQuestions",result_pojo.getWrongQuestions());
+        Bundle b = new Bundle();
+        b.putString("me", "1");
+        b.putString("FinalDegree", FinalDegree);
+        b.putString("Total", TotalD);
+        b.putParcelableArrayList("WrongQuestions", result_pojo.getWrongQuestions());
         myResults.setArguments(b);
-        getSupportFragmentManager().popBackStack();
         getSupportFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
-                .replace(R.id.Exam_Frame,myResults).addToBackStack(null)
+                .replace(R.id.Exam_Frame, myResults).addToBackStack(null)
                 .commit();
 
     }
 
     @Override
-    public void showFragmentWrongs(String name, String finalDegree, String total, String examID, ArrayList<WorngQestion> arrayList, Integer imageTag, String uID, CircleImageView imageView) {
-
-
+    public void showFragmentWrongs(String name, String finalDegree, String total, String examID, ArrayList<WorngQestion> arrayList, Integer imageTag,
+                                   String uID, CircleImageView imageView, String depName, String yearname, String unitName) {
 
         Bundle bundle = new Bundle();
-        bundle.putString("Name",name );
-        bundle.putString("FinalDegree",finalDegree);
-        bundle.putString("Total",total);
-        bundle.putString("examID",examID);
-        bundle.putParcelableArrayList("WrongQuestions",arrayList);
+        bundle.putString("Name", name);
+        bundle.putString("FinalDegree", finalDegree);
+        bundle.putString("Total", total);
+        bundle.putString("depName", depName);
+        bundle.putString("yearName", yearname);
+        bundle.putString("unitName", unitName);
+        bundle.putString("examID", examID);
+        bundle.putParcelableArrayList("WrongQuestions", arrayList);
         //to pass image to next fragment.
         bundle.putInt("Image", imageTag);
-        bundle.putString("UserUid",uID);
+        bundle.putString("UserUid", uID);
         // set MyFragment Arguments
         StudentsWrongs StudentsWrongs = new StudentsWrongs();
         StudentsWrongs.setArguments(bundle);
-
-
-
-
         ViewCompat.setTransitionName(imageView, "Image");
         getSupportFragmentManager()
                 .beginTransaction()
@@ -209,51 +221,53 @@ public class ControlPanel extends AppCompatActivity
                 .commit();
 
 
-
     }
 
     @Override
-    public void showDialogStudent(String what) {
+    public void showDialogStudent(String what, String depName, String yearName) {
 
-        studentDialog.dismiss();
+//        studentDialog.dismiss();
 
-        switch (what){
+//        switch (what){
+//
+//            case "allStudents":
+//
+//                StudentManagement all = new StudentManagement();
+//                Bundle b = new Bundle();
+//                b.putString("what","allStudents");
+//                b.putString("depName",depName);
+//                b.putString("yearName", yearName);
+//                all.setArguments(b);
+//                getSupportFragmentManager().popBackStack();
+//                getSupportFragmentManager()
+//                        .beginTransaction()
+//                        .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
+//                        .replace(R.id.Exam_Frame,all)
+//                        .addToBackStack(null)
+//                        .commit();
+//
+//                break;
+//
+//           case "myStudents":
+//
+//               StudentManagement myStudnet = new StudentManagement();
+//               Bundle b1 = new Bundle();
+//               b1.putString("what","myStudents");
+//               b1.putString("depName",depName);
+//               b1.putString("yearName", yearName);
+//               myStudnet.setArguments(b1);
+//               getSupportFragmentManager().popBackStack();
+//               getSupportFragmentManager()
+//                       .beginTransaction()
+//                       .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
+//                       .replace(R.id.Exam_Frame,myStudnet)
+//                       .addToBackStack(null)
+//                       .commit();
+//
+//               break;
 
-            case "allStudents":
 
 
-                StudentManagement all = new StudentManagement();
-                Bundle b = new Bundle();
-                b.putString("what","allStudents");
-                all.setArguments(b);
-                getSupportFragmentManager().popBackStack();
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
-                        .replace(R.id.Exam_Frame,all)
-                        .addToBackStack(null)
-                        .commit();
-
-                break;
-
-           case "myStudents":
-
-               StudentManagement myStudnet = new StudentManagement();
-               Bundle b1 = new Bundle();
-               b1.putString("what","myStudents");
-               myStudnet.setArguments(b1);
-               getSupportFragmentManager().popBackStack();
-               getSupportFragmentManager()
-                       .beginTransaction()
-                       .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
-                       .replace(R.id.Exam_Frame,myStudnet)
-                       .addToBackStack(null)
-                       .commit();
-
-               break;
-
-
-        }
 
 
 
@@ -275,6 +289,7 @@ public class ControlPanel extends AppCompatActivity
         Title      = toolbar.findViewById(R.id.toolbar_title);
         auth       = FirebaseAuth.getInstance();
         progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
         animatedDialog = new AnimatedDialog(this);
         View headerLayout = navigation.getHeaderView(0);
         circleImageView = headerLayout.findViewById(R.id.myprofile);
@@ -289,12 +304,18 @@ public class ControlPanel extends AppCompatActivity
 
 
     @Override
-    public void whenClickFAB_showFrag() {
+    public void whenClickFAB_showFrag(String depName , String yearName , String unitName) {
+
+        AddQ_frag addQ_frag = new AddQ_frag();
+        Bundle b            = new Bundle();
+        b.putString("depName1",depName);
+        b.putString("yearName1",yearName);
+        b.putString("unitName1",unitName);
+        addQ_frag.setArguments(b);
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
-                .replace(R.id.Exam_Frame,new AddQ_frag())
+                .replace(R.id.Exam_Frame,addQ_frag)
                 .addToBackStack(null)
                 .commit();
     }
@@ -338,18 +359,19 @@ public class ControlPanel extends AppCompatActivity
     }
 
     @Override
-    public void editQuestions(String questionID, String val) {
+    public void editQuestions(String questionID, String val,String depName , String yearName , String unitName) {
 
         AddQ_frag addQ_frag = new AddQ_frag();
         Bundle b = new Bundle();
         b.putString("ID",questionID);
         b.putString("val",val);
+        b.putString("depName1",depName);
+        b.putString("yearName1",yearName);
+        b.putString("unitName1",unitName);
         addQ_frag.setArguments(b);
-
-
+        getSupportFragmentManager().popBackStack();
         getSupportFragmentManager()
                 .beginTransaction()
-                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
                 .replace(R.id.Exam_Frame,addQ_frag)
                 .addToBackStack(null)
                 .commit();
@@ -358,9 +380,22 @@ public class ControlPanel extends AppCompatActivity
     }
 
     @Override
-    public void editSuccessopenBank() {
+    public void editSuccessopenBank(String depName , String yearName , String unitName) {
 
-        onBackPressed();
+        Question_Bank_Frag question_bank_frag = new Question_Bank_Frag();
+        Bundle b = new Bundle();
+        b.putString("depName",depName);
+        b.putString("yearName",yearName);
+        b.putString("unitName",unitName);
+        question_bank_frag.setArguments(b);
+        getSupportFragmentManager().popBackStack();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.Exam_Frame,question_bank_frag)
+                .addToBackStack(null)
+                .commit();
+
+//        onBackPressed();
 
     }
 
@@ -390,60 +425,57 @@ public class ControlPanel extends AppCompatActivity
         switch (item.getItemId()){
 
 
-            case R.id.emams:
+ //         first element in Nav  (:   //
 
+
+            case R.id.more:
                 getSupportFragmentManager().popBackStack();
                 getSupportFragmentManager()
                         .beginTransaction()
                         .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
-                        .replace(R.id.Exam_Frame,new ExamList()).addToBackStack(null)
+                        .replace(R.id.Exam_Frame,new MoreDetailsFromNav())
                         .commit();
 
                 break;
-            case R.id.MYResult:
 
+
+
+            case R.id.Units:
+                if (fullRegisterForm!=null){
+
+                    Unites_inDepartmentQ years_in_depsQ1 = new Unites_inDepartmentQ();
+                    Bundle b1 = new Bundle();
+                    b1.putString("depName",fullRegisterForm.getParentYear());
+                    b1.putString("yearName",fullRegisterForm.getYear());
+                    years_in_depsQ1.setArguments(b1);
+                    getSupportFragmentManager().popBackStack();
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
+                            .replace(R.id.Exam_Frame,years_in_depsQ1)
+                            .commit();
+                }
+
+                break;
+
+
+
+
+
+
+            case R.id.questions:
                 getSupportFragmentManager().popBackStack();
                 getSupportFragmentManager()
                         .beginTransaction()
                         .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
-                        .replace(R.id.Exam_Frame,new MyResults()).addToBackStack(null)
+                        .replace(R.id.Exam_Frame,new Department_Questions()).addToBackStack(null)
                         .commit();
-
                 break;
 
-            case R.id.studentManger:
-
-                //  اداره الطلاب
 
 
-                studentDialog = new StudentDialog(ControlPanel.this,R.style.PauseDialog,this);
-                studentDialog.show();
 
 
-//
-//
-//                getSupportFragmentManager().popBackStack();
-//                getSupportFragmentManager()
-//                        .beginTransaction()
-//                        .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
-//                        .replace(R.id.Exam_Frame,new StudentManagement())
-//                        .addToBackStack(null)
-//                        .commit();
-
-                
-                break;
-
-            case R.id.per:
-
-                getSupportFragmentManager().popBackStack();
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
-                        .replace(R.id.Exam_Frame,new PermissionsFromStudent()).addToBackStack(null)
-                        .commit();
-
-
-                break;
 
             case R.id.exit:
 
@@ -456,15 +488,19 @@ public class ControlPanel extends AppCompatActivity
 //
 //                        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 //                        String uID                = firebaseAuth.getCurrentUser().getUid();
-
 //                         حنتشيك علي الي في الداتا ولو صح حنطلع بره
                         animatedDialog.ShowDialog();
-                        FirebaseMessaging.getInstance().unsubscribeFromTopic("all");
 
                         if (AreAdmin){
 
                             // notificationstoAdmin Mr.AhmedSamyFrom Students disable when SignOut
                             FirebaseMessaging.getInstance().unsubscribeFromTopic("Admins");
+
+                        }else {
+                            String mytopic = fullRegisterForm.getParentYear()+fullRegisterForm.getYear();
+
+                            FirebaseMessaging.getInstance().unsubscribeFromTopic(mytopic);
+
                         }
 
                         auth.signOut();
@@ -479,43 +515,6 @@ public class ControlPanel extends AppCompatActivity
 
                 break;
 
-
-            case R.id.questions:
-
-
-                getSupportFragmentManager().popBackStack();
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
-                        .replace(R.id.Exam_Frame,new Question_Bank_Frag())
-                        .addToBackStack(null)
-                        .commit();
-
-
-                break;
-
-            case R.id.results :
-
-                getSupportFragmentManager().popBackStack();
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
-                        .replace(R.id.Exam_Frame,new ExamsResults())
-                        .addToBackStack(null)
-                        .commit();
-                break;
-
-            case R.id.addExam :
-
-
-                getSupportFragmentManager().popBackStack();
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
-                        .replace(R.id.Exam_Frame,new addExam())
-                        .addToBackStack(null)
-                        .commit();
-                break;
 
             case R.id.aboutDoctor :
                 SetNavUnChecked();
@@ -542,23 +541,9 @@ public class ControlPanel extends AppCompatActivity
 
                 break;
 
-            case R.id.addnotification:
-
-                 notificationDialog = new NotificationDialog(this,R.style.PauseDialog,this);
-                notificationDialog.show();
-
-                break;
 
 
-            case R.id.more:
-                getSupportFragmentManager().popBackStack();
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
-                        .replace(R.id.Exam_Frame,new MoreDetailsFromNav()).addToBackStack(null)
-                        .commit();
 
-                break;
         }
 //        getSupportFragmentManager().popBackStack();   //finish
         drawer.closeDrawer(GravityCompat.START);
@@ -567,6 +552,9 @@ public class ControlPanel extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
+
+
+
         if (drawer.isDrawerOpen(Gravity.START)){
             drawer.closeDrawer(Gravity.START);
         }else {
@@ -579,14 +567,12 @@ public class ControlPanel extends AppCompatActivity
     private void hideAdminToolsFromUsers()
     {
 
-        Menu nav_Menu = navigation.getMenu();
-        nav_Menu.findItem(R.id.addExam).setVisible(false);
-        nav_Menu.findItem(R.id.questions).setVisible(false);
-        nav_Menu.findItem(R.id.results).setVisible(false);
-        nav_Menu.findItem(R.id.studentManger).setVisible(false);
-        nav_Menu.findItem(R.id.per).setVisible(false);
-        nav_Menu.findItem(R.id.addnotification).setVisible(false);
+        Menu nav_Menu      = navigation.getMenu();
         nav_Menu.findItem(R.id.more).setVisible(false);
+        nav_Menu.findItem(R.id.Units).setVisible(false);
+        nav_Menu.findItem(R.id.questions).setVisible(false);
+
+
 
 
     }
@@ -594,14 +580,18 @@ public class ControlPanel extends AppCompatActivity
     public void AdminTools() {
 
         Menu nav_Menu = navigation.getMenu();
-        nav_Menu.findItem(R.id.addExam).setVisible(true);
-        nav_Menu.findItem(R.id.questions).setVisible(true);
-        nav_Menu.findItem(R.id.results).setVisible(true);
-        nav_Menu.findItem(R.id.studentManger).setVisible(true);
-        nav_Menu.findItem(R.id.per).setVisible(true);
-        nav_Menu.findItem(R.id.addnotification).setVisible(true);
         nav_Menu.findItem(R.id.more).setVisible(true);
+        nav_Menu.findItem(R.id.Units).setVisible(false);
+        nav_Menu.findItem(R.id.questions).setVisible(true);
+
         circleImageView.setBackgroundResource(R.drawable.ahmedsamy);
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.Exam_Frame,new MoreDetailsFromNav())
+                .commitAllowingStateLoss();
+
+
         if (!AreAdmin){
 
             AreAdmin = true;
@@ -609,32 +599,46 @@ public class ControlPanel extends AppCompatActivity
 
         FirebaseMessaging.getInstance().subscribeToTopic("Admins");
         nav_Menu.findItem(R.id.exit).setEnabled(true);
-
-
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     @Override
-    public void UserTools() {
+    public void UserTools(FullRegisterForm fullRegisterForm) {
+
+        this.fullRegisterForm = fullRegisterForm;
+        String subScrib       = fullRegisterForm.getParentYear()+fullRegisterForm.getYear();
+
+        FirebaseMessaging.getInstance().subscribeToTopic(subScrib);
+
 
         Menu nav_Menu = navigation.getMenu();
-        nav_Menu.findItem(R.id.addExam).setVisible(false);
-        nav_Menu.findItem(R.id.questions).setVisible(false);
-        nav_Menu.findItem(R.id.results).setVisible(false);
         nav_Menu.findItem(R.id.more).setVisible(false);
-        nav_Menu.findItem(R.id.studentManger).setVisible(false);
+        nav_Menu.findItem(R.id.Units).setVisible(true);
+        nav_Menu.findItem(R.id.questions).setVisible(false);
         if (AreAdmin){
 
             AreAdmin = false;
         }
 
-        nav_Menu.findItem(R.id.per).setVisible(false);
-        nav_Menu.findItem(R.id.addnotification).setVisible(false);
         nav_Menu.findItem(R.id.exit).setEnabled(true);
+
+        //  هنا حنجيب بعض البيانات من المستخدم عشان الفراج عاوزها عشسان يعرضله الوحدات الي موجوده  ركز جدااااااااااااااااااااااااا
+
+        Unites_inDepartmentQ years_in_depsQ1 = new Unites_inDepartmentQ();
+        Bundle b1 = new Bundle();
+        b1.putString("depName",fullRegisterForm.getParentYear());
+        b1.putString("yearName",fullRegisterForm.getYear());
+        years_in_depsQ1.setArguments(b1);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.Exam_Frame,years_in_depsQ1)
+                .commitAllowingStateLoss();
+        progressBar.setVisibility(View.INVISIBLE);
 
     }
 
     @Override
-    public void showRequestsFromStudent(String examID,String what,String nameExam) {
+    public void showRequestsFromStudent(String examID,String what,String nameExam,String depName , String yearName , String unitName) {
 
 
         RequestFromStudentToExamWhat requestFromStudentToExamWhat = new RequestFromStudentToExamWhat();
@@ -644,6 +648,9 @@ public class ControlPanel extends AppCompatActivity
             case "0":
 
                 Bundle b = new Bundle();
+                b.putString("depName",depName);
+                b.putString("yearName", yearName);
+                b.putString("unitName",unitName);
                 b.putString("examid", examID);
                 b.putString("name",nameExam);
                 requestFromStudentToExamWhat.setArguments(b);
@@ -661,6 +668,9 @@ public class ControlPanel extends AppCompatActivity
                 getSupportFragmentManager().popBackStack();
                 RequestFromStudentToExamWhat requestFromStudentToExamWhat1 = new RequestFromStudentToExamWhat();
                 Bundle b1 = new Bundle();
+                b1.putString("depName",depName);
+                b1.putString("yearName", yearName);
+                b1.putString("unitName",unitName);
                 b1.putString("examid", examID);
                 b1.putString("name",nameExam);
                 requestFromStudentToExamWhat1.setArguments(b1);
@@ -686,6 +696,8 @@ public class ControlPanel extends AppCompatActivity
 
 
     }
+
+
 
     @Override
     public void setElevationZero() {
@@ -761,19 +773,128 @@ public class ControlPanel extends AppCompatActivity
     }
 
     @Override
-    public void showYearsDetails(String depsYear) {
+    public void showfragUnites(String depName, String yearName,int what) {
 
 
-        Years_In_Deps years_in_deps = new Years_In_Deps();
-        Bundle b = new Bundle();
-        b.putString("depsYear",depsYear);
-        years_in_deps.setArguments(b);
-        //  حنجيب كل التفاصيل بتاعه السنه من حيث بقا الطلاب والامتحانات وكل حاجه خاصه بيها توضيح للدكتور فقط ولا تظهر هذه الاشياء للطالب
-        getSupportFragmentManager()
-                .beginTransaction()
-                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
-                .replace(R.id.Exam_Frame,years_in_deps).addToBackStack(null)
-                .commit();
+        //  ركز هنااااااااااااااااا متنساس لان هنا حنرفرش الفراج حالا
+
+        switch (what){
+
+
+            case 0:
+
+                Unites_inDepartmentQ years_in_depsQ = new Unites_inDepartmentQ();
+                Bundle b = new Bundle();
+                b.putString("depName",depName);
+                b.putString("yearName",yearName);
+                years_in_depsQ.setArguments(b);
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
+                        .replace(R.id.Exam_Frame,years_in_depsQ).addToBackStack(null)
+                        .commit();
+
+                break;
+
+            case 1:
+                getSupportFragmentManager().popBackStack();
+                Unites_inDepartmentQ years_in_depsQ1 = new Unites_inDepartmentQ();
+                Bundle b1 = new Bundle();
+                b1.putString("depName",depName);
+                b1.putString("yearName",yearName);
+                years_in_depsQ1.setArguments(b1);
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.Exam_Frame,years_in_depsQ1).addToBackStack(null)
+                        .commit();
+
+
+                Snackbar snackbar = Snackbar
+                        .make(snackBarr, "تم إضافه الوحدة بنجاح.", Snackbar.LENGTH_LONG);
+                View sbView = snackbar.getView();
+                TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+                textView.setTextColor(Color.YELLOW);
+                textView.setTextDirection(View.LAYOUT_DIRECTION_LTR);
+                Typeface font = Typeface.createFromAsset(getAssets(),"atherfont.ttf");
+                textView.setTypeface(font);
+                ViewCompat.setLayoutDirection(snackbar.getView(),ViewCompat.LAYOUT_DIRECTION_RTL);
+                snackbar.show();
+
+                break;
+            case 2:
+                getSupportFragmentManager().popBackStack();
+                Unites_inDepartmentQ years_in_depsQ2 = new Unites_inDepartmentQ();
+                Bundle b2 = new Bundle();
+                b2.putString("depName",depName);
+                b2.putString("yearName",yearName);
+                years_in_depsQ2.setArguments(b2);
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.Exam_Frame,years_in_depsQ2).addToBackStack(null)
+                        .commit();
+
+
+                Snackbar snackbar2 = Snackbar
+                        .make(snackBarr, "لقد تم حذف الوحدة بنجاح.", Snackbar.LENGTH_LONG);
+                View sbView2 = snackbar2.getView();
+                TextView textView2 = (TextView) sbView2.findViewById(android.support.design.R.id.snackbar_text);
+                textView2.setTextColor(Color.YELLOW);
+                textView2.setTextDirection(View.LAYOUT_DIRECTION_LTR);
+                Typeface font2 = Typeface.createFromAsset(getAssets(),"atherfont.ttf");
+                textView2.setTypeface(font2);
+                ViewCompat.setLayoutDirection(snackbar2.getView(),ViewCompat.LAYOUT_DIRECTION_RTL);
+                snackbar2.show();
+
+                break;
+
+        }
+
+
+
+
+
+    }
+
+    @Override
+    public void showYearsDetails(String depsYear,String fragName) {
+
+
+
+        if (fragName.equals("Students_Departments")){
+
+            getSupportFragmentManager().popBackStack();
+
+            Years_In_Deps years_in_deps = new Years_In_Deps();
+            Bundle b = new Bundle();
+            b.putString("depsYear",depsYear);
+            years_in_deps.setArguments(b);
+            //  حنجيب كل التفاصيل بتاعه السنه من حيث بقا الطلاب والامتحانات وكل حاجه خاصه بيها توضيح للدكتور فقط ولا تظهر هذه الاشياء للطالب
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
+                    .replace(R.id.Exam_Frame,years_in_deps).addToBackStack(null)
+                    .commit();
+
+        }
+
+
+        if (fragName.equals("Department_Questions")){
+
+            getSupportFragmentManager().popBackStack();
+            YeareInDepsQuestions years_in_depsQ = new YeareInDepsQuestions();
+            Bundle b = new Bundle();
+            b.putString("depsYear",depsYear);
+            years_in_depsQ.setArguments(b);
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
+                    .replace(R.id.Exam_Frame,years_in_depsQ).addToBackStack(null)
+                    .commit();
+
+
+        }
+
+        //   هنا نفس الحاجه الي حتظهر بس مش عارفين مين الي حيظهرها فحنشوف الاول
 
 
     }
@@ -876,10 +997,10 @@ public class ControlPanel extends AppCompatActivity
 
 
     @Override
-    public void notificationMessages(String message,ProgressBar p1 , ProgressBar p2) {
+    public void notificationMessages(String message,ProgressBar p1 , ProgressBar p2,String depFromAdmin , String yearNameFromAdmin) {
 
         // send notification to allstudent //
-        sendnotificationtoallUsers(message,p1,p2);
+        sendnotificationtoallUsers(message,p1,p2,depFromAdmin,yearNameFromAdmin);
 
 
     }
@@ -954,6 +1075,7 @@ public class ControlPanel extends AppCompatActivity
 
     }
 
+
     @Override
     public void SetUsername(String nameStudent) {
         UserName.setText( "Welcome,  "  + nameStudent );
@@ -963,6 +1085,7 @@ public class ControlPanel extends AppCompatActivity
         navigation.getMenu().getItem(position).setChecked(true);
 
     }
+
     public static void SetNavUnChecked(){
 
         for (int position = 0 ; position < navigation.getMenu().size(); position++  ) {
@@ -974,11 +1097,14 @@ public class ControlPanel extends AppCompatActivity
 
 
 
-    public void sendnotificationtoallUsers(String s, final ProgressBar p1, final ProgressBar p2) {
+    public void sendnotificationtoallUsers(String s, final ProgressBar p1, final ProgressBar p2,String depName , String yearName) {
 
+
+        String topicName  = depName+yearName;
 
         JSONObject obj = null;
         JSONObject dataobjData = null;
+
 
         try {
 
@@ -988,7 +1114,7 @@ public class ControlPanel extends AppCompatActivity
             dataobjData.put("image", "0");
             dataobjData.put("message",s);
 
-            obj.put("to", "/topics/all");
+            obj.put("to", "/topics/"+topicName+"");
             obj.put("data", dataobjData);
 
             Log.d("MYOBJs", obj.toString());
@@ -1031,7 +1157,7 @@ public class ControlPanel extends AppCompatActivity
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<String, String>();
-                headers.put("Authorization", "key=" + "AAAA0NknKjs:APA91bH8x30IaI5ZAz49kUGAOXEwjiFxZnWTpELAu2DMOu_vgz5GhNDnERYkv7X5Z-NveF02btyVdkMyHWhYH0wYTU3nqtbW9vx67M4Xv1vn7-rOisNEYixwQpeImD-7yguPEhTM_Nkk");
+                headers.put("Authorization", "key=" + "AAAAlXCKxUE:APA91bFGSM9okl_Va_Q5wGeK6LW3KAZNoFeme6l95iRGz5z-llVh1ZLXZ-yH0q5Ua3PmLPghxAirqgBujN-FLR5-OB-gKkGkHlOdW8wO3CkEAZ0x5_-h-SvKyAw_8eKlYDvNA4EO5kvM");
                 headers.put("Content-Type", "application/json");
                 return headers;
             }
@@ -1047,5 +1173,367 @@ public class ControlPanel extends AppCompatActivity
 
 
     }
+
+
+    @Override
+    public void showunitBankQuestion(String depName, String yearName, String unitName) {
+
+
+
+        //  حنفتح فراج بقااا ويكون عباره عن الامتحانات والاسئله والطلبه وكل شي متعلق بالوحده اغلدراسيه
+
+        Exams_Questions_Student_RequestsForUnit exams_questions_student_requestsForUnit = new Exams_Questions_Student_RequestsForUnit();
+        Bundle b                                                                        = new Bundle();
+        b.putString( "depName",depName);
+        b.putString( "yearName",yearName);
+        b.putString( "unitName",unitName);
+        exams_questions_student_requestsForUnit.setArguments(b);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
+                .replace(R.id.Exam_Frame,exams_questions_student_requestsForUnit)
+                .addToBackStack(null)
+                .commit();
+
+
+    }
+    @Override
+    public void showQforUnitiRefere(String depName, String yearName, String unitName) {
+
+
+        Question_Bank_Frag question_bank_frag = new Question_Bank_Frag();
+
+        Bundle b = new Bundle();
+        b.putString("depName",depName);
+        b.putString("yearName",yearName);
+        b.putString("unitName",unitName);
+        question_bank_frag.setArguments(b);
+         getSupportFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
+                        .replace(R.id.Exam_Frame,question_bank_frag)
+                        .addToBackStack(null)
+                        .commit();
+    }
+
+
+
+
+    @Override
+    public void removedsussesswewillupdateQuestionBankFragment(String depName, String yearName, String unitName,String what) {
+
+
+
+        switch (what){
+
+
+            case "":
+
+                Question_Bank_Frag question_bank_frag = new Question_Bank_Frag();
+                Bundle b = new Bundle();
+                b.putString("depName",depName);
+                b.putString("yearName",yearName);
+                b.putString("unitName",unitName);
+                question_bank_frag.setArguments(b);
+                getSupportFragmentManager().popBackStack();
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.Exam_Frame,question_bank_frag)
+                        .addToBackStack(null)
+                        .commit();
+
+                break;
+
+            case "allQRemoved":
+
+
+
+                Snackbar snackbar = Snackbar
+                        .make(snackBarr, "All Question are Deleted.", Snackbar.LENGTH_LONG);
+
+
+                View sbView = snackbar.getView();
+                TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+                textView.setTextColor(Color.YELLOW);
+                textView.setTextDirection(View.LAYOUT_DIRECTION_LTR);
+                Typeface font = Typeface.createFromAsset(getAssets(),"atherfont.ttf");
+                textView.setTypeface(font);
+                ViewCompat.setLayoutDirection(snackbar.getView(),ViewCompat.LAYOUT_DIRECTION_LTR);
+                snackbar.show();
+
+
+
+
+
+
+                Question_Bank_Frag question_bank_frag1 = new Question_Bank_Frag();
+                Bundle b1 = new Bundle();
+                b1.putString("depName",depName);
+                b1.putString("yearName",yearName);
+                b1.putString("unitName",unitName);
+                question_bank_frag1.setArguments(b1);
+                getSupportFragmentManager().popBackStack();
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.Exam_Frame,question_bank_frag1)
+                        .addToBackStack(null)
+                        .commit();
+
+
+
+
+                break;
+
+
+            case "NoRemoved":
+
+
+                Snackbar snackbar1 = Snackbar
+                        .make(snackBarr, "Error ocures during deleting.", Snackbar.LENGTH_LONG);
+
+
+                View sbView1 = snackbar1.getView();
+                TextView textView1 = (TextView) sbView1.findViewById(android.support.design.R.id.snackbar_text);
+                textView1.setTextColor(Color.YELLOW);
+                textView1.setTextDirection(View.LAYOUT_DIRECTION_LTR);
+                Typeface font1 = Typeface.createFromAsset(getAssets(),"atherfont.ttf");
+                textView1.setTypeface(font1);
+                ViewCompat.setLayoutDirection(snackbar1.getView(),ViewCompat.LAYOUT_DIRECTION_LTR);
+                snackbar1.show();
+
+
+                Question_Bank_Frag question_bank_frag2 = new Question_Bank_Frag();
+                Bundle b2 = new Bundle();
+                b2.putString("depName",depName);
+                b2.putString("yearName",yearName);
+                b2.putString("unitName",unitName);
+                question_bank_frag2.setArguments(b2);
+                getSupportFragmentManager().popBackStack();
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.Exam_Frame,question_bank_frag2)
+                        .addToBackStack(null)
+                        .commit();
+
+
+
+
+
+                break;
+
+        }
+
+
+
+    }
+
+
+
+
+
+//   هذا الجزء خاااص بال examList
+
+
+
+    @Override
+    public void showExamListForUnit(String depName, String yearname, String unitName) {
+
+
+        ExamList examList = new ExamList();
+        Bundle b = new Bundle();
+        b.putString("depName" ,depName);
+        b.putString("yearname",yearname);
+        b.putString("unitName",unitName);
+        examList.setArguments(b);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
+                .replace(R.id.Exam_Frame,examList).addToBackStack(null)
+                .commit();
+
+
+
+
+    }
+
+    @Override
+    public void showAddExamFromExamListWhenClickonFloatActionButton(String depName, String yearname, String unitName) {
+
+        //  هنا حنعرض الفراج الي بيضيف الامتحانات  ....
+
+        addExam addExam = new addExam();
+        Bundle b        = new Bundle();
+        b.putString("depName2",depName);
+        b.putString("yearname2",yearname);
+        b.putString("unitName2",unitName);
+        addExam.setArguments(b);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
+                .replace(R.id.Exam_Frame,addExam)
+                .addToBackStack(null)
+                .commit();
+
+
+
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putString("WORKAROUND_FOR_BUG_19917_KEY", "WORKAROUND_FOR_BUG_19917_VALUE");
+        super.onSaveInstanceState(outState);
+    }
+
+
+
+
+
+    //  هذا الجزء خاص بال Myresult
+
+
+    @Override
+    public void showMyresultFragment(String depName, String yearName, String unitName) {
+
+        MyResults myResults = new MyResults();
+        Bundle b            = new Bundle();
+        b.putString("mdeNameresukt" ,depName);
+        b.putString("yearNameresult",yearName);
+        b.putString("unitNameresult",unitName);
+        myResults.setArguments(b);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
+                .replace(R.id.Exam_Frame,myResults)
+                .addToBackStack(null)
+                .commit();
+
+
+    }
+
+
+    @Override
+    public void enableDisableDrawer(int mode) {
+        if (drawer != null) {
+            drawer.setDrawerLockMode(mode);
+
+            if (open_nav.isShown())
+            open_nav.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void enableDrawer(int mode) {
+
+        if (drawer!=null){
+            drawer.setDrawerLockMode(mode);
+        }
+
+        if (!open_nav.isShown())
+            open_nav.setVisibility(View.VISIBLE);
+
+
+
+    }
+
+
+
+
+
+
+  //  هذا الجزء خاااااااااااااااص بالنتائج بتاعه الطلاب
+
+
+
+    @Override
+    public void showResultOfStudentInThisUnitFragment(String depName, String yearName, String unitName) {
+
+        ExamsResults examsResults = new ExamsResults();
+        Bundle b                  = new Bundle();
+        b.putString("depNameExamResult" ,depName);
+        b.putString("yearNameExamResult",yearName);
+        b.putString("unitNameExamResult",unitName);
+        examsResults.setArguments(b);
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
+                .replace(R.id.Exam_Frame,examsResults)
+                .addToBackStack(null)
+                .commit();
+
+
+
+    }
+
+
+
+
+
+//  خاص بالطلبات بتاعه الطلااااب
+
+
+    @Override
+    public void showRequestStudentFragment(String depName, String yearName, String unitName) {
+
+        PermissionsFromStudent permissions = new PermissionsFromStudent();
+        Bundle b                  = new Bundle();
+        b.putString("depNameExamResult" ,depName);
+        b.putString("yearNameExamResult",yearName);
+        b.putString("unitNameExamResult",unitName);
+        permissions.setArguments(b);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
+                .replace(R.id.Exam_Frame,permissions).addToBackStack(null)
+                .commit();
+
+
+
+    }
+
+
+
+    @Override
+    public void showStudentMangmentFragmenttt(String depName, String yearName) {
+
+
+        StudentManagement myStudnet = new StudentManagement();
+        Bundle b1 = new Bundle();
+        b1.putString("what","myStudents");
+        b1.putString("depName",depName);
+        b1.putString("yearName", yearName);
+        myStudnet.setArguments(b1);
+        getSupportFragmentManager().popBackStack();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
+                .replace(R.id.Exam_Frame,myStudnet)
+                .addToBackStack(null)
+                .commit();
+
+//
+//        studentDialog = new StudentDialog(ControlPanel.this,R.style.PauseDialog,this,depName,yearName);
+//        studentDialog.show();
+
+
+    }
+
+
+
+
+    @Override
+    public void showDialogNotification() {
+
+
+
+        notificationDialog = new NotificationDialog(this,R.style.PauseDialog,this);
+        notificationDialog.show();
+
+
+
+    }
+
+
+
 
 }

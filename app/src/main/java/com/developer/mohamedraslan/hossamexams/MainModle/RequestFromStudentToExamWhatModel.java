@@ -29,12 +29,12 @@ public class RequestFromStudentToExamWhatModel implements RequestFromStudentToEx
     }
 
     @Override
-    public void getStudents(String examID) {
+    public void getStudents(String examID,String depName , String yearName , String unitName) {
 
 
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference reference = firebaseDatabase.getReference(DataBase_Refrences.Permissions.getRef());
-        reference.child(examID).addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.child(depName).child(yearName).child(unitName).child(examID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 

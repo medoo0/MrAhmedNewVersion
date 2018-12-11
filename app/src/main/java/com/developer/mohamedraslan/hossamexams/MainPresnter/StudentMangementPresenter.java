@@ -22,8 +22,8 @@ public class StudentMangementPresenter implements StudentManagementContract.pres
     }
 
     @Override
-    public void callStudentData() {
-        model.getstudentData();
+    public void callStudentData(String depName , String yearName) {
+        model.getstudentData(depName,yearName);
     }
 
     @Override

@@ -6,6 +6,7 @@
     <string name="s_in_up">    يُرجى تسجيل الدخول \n
     أو الاشتراك لو لم يكن لديك حساب </string>
 
+<string name="notification"> Notifications </string>
 
     <string name="numberExams">   0 \n
     أمتحان </string>
@@ -77,19 +78,43 @@
 
 
 
+    //  طالب ولا اب
+
+    <string-array name="student_or_parent">
+
+        <item>إختر موضعك لإكمال التسجيل</item>
+        <item>طالب</item>
+        <item>ولي أمر</item>
+
+
+    </string-array>
 
 
 
 
 
+
+    <string-array name="unites">
+        <item>Select Unit</item>
+        <item>The First unit</item>
+        <item>The Second Unit</item>
+        <item>The Third Unit</item>
+        <item>The Fourth Unit</item>
+        <item>Fifth Unit</item>
+        <item>Sixth Unit</item>
+        <item>The Seventh Unit</item>
+        <item>The Eighth Unit</item>
+        <item>The ninth unit</item>
+
+    </string-array>
 
 
 
     // more info
 
-    <string name="depStudent"> Study Teams  </string>
+    <string name="depStudent"> Student Mangment  </string>
     <string name="Student_complaints"> Student complaints </string>
-
+    <string name="studentRequest">  Requests of Student in This Unit </string>
 
 
 
@@ -104,19 +129,18 @@
         <item> highschool </item>
         <item> Universities </item>
 
-
     </string-array>
-
 
     <string-array name="PrimaryEducation">
 
         <item>إختر صف دراسي</item>
-        <item>الصف الأول   الأبتدائي</item>
-        <item>الصف الثاني الأبتدائي</item>
-        <item>الصف الثالث الأبتدائي</item>
-        <item>الصف الرابع الأبتدائي</item>
-        <item>الصف الخامس الأبتدائي</item>
-        <item>الصف السادس الأبتدائي</item>
+
+        <item>1st-primary</item>
+        <item>2nd-primary</item>
+        <item>3rd-primary</item>
+        <item>4th-primary</item>
+        <item>5th-primary</item>
+        <item>6th-primary</item>
 
 
     </string-array>
@@ -125,9 +149,9 @@
     <string-array name="SecondaryEducation">
 
         <item>إختر صف دراسي</item>
-        <item>الصف الأول   الأعدادي</item>
-        <item>الصف الثاني الأعدادي</item>
-        <item>الصف الثالث الأعدادي</item>
+        <item>1st-prep</item>
+        <item>2nd-prep</item>
+        <item>3rd-prep</item>
 
 
 
@@ -137,9 +161,9 @@
     <string-array name="highschool">
 
         <item>إختر صف دراسي</item>
-        <item>الصف الأول   الثانوي</item>
-        <item>الصف الثاني الثانوي</item>
-        <item>الصف الثالث الثانوي</item>
+        <item>1st-secondary</item>
+        <item>2nd-secondary</item>
+        <item>3rd-secondary </item>
 
 
 
@@ -148,14 +172,14 @@
     <string-array name="Universities">
 
         <item>إختر فرقه دراسي</item>
-        <item> الفرقه الدراسيه الأولي </item>
-        <item>الفرقه الدراسيه الثانيه</item>
-        <item>الفرقه الدراسيه الثالثه</item>
+        <item>1st-university </item>
+        <item>2nd-university</item>
+        <item>3rd-university</item>
 
-        <item>الفرقه الدراسيه الرابعه</item>
-        <item>الفرقه الدراسيه الخامسه</item>
-        <item>الفرقه الدراسيه السادسه</item>
-        <item>الفرقه الدراسيه السابعه</item>
+        <item>4th-university</item>
+        <item>5th-university</item>
+        <item>6th-university</item>
+        <item>7th-university</item>
 
 
     </string-array>
@@ -168,12 +192,12 @@
     <string name="addExam">Add exam</string>
     <string name="mangeStudent">Students Management</string>
 
-    <string name="examList">Exams List</string>
+    <string name="examList">Exams List in This Unit</string>
     <string name="PleaseMakesure">Please make sure that your email and password are correct</string>
     <string name="banned">Blocking</string>
     <string name="Rating"> تقييم الطالب </string>
-    <string name="results">Results of students</string>
-    <string name="questions">Question Bank </string>
+    <string name="results">Results of students in This Unit</string>
+    <string name="questions">Question Bank in This Unit</string>
     <string name="exit">Exit</string>
     <string name="Search">Search</string>
 
@@ -215,7 +239,7 @@
     <string name="edit">  Editing </string>
     <string name="delete"> Delete Question </string>
 
-    <string name="MyResult">My Results</string>
+    <string name="MyResult">My Results in This Unit</string>
     <string name="aboutus">Contact us</string>
     <string name="aboutDoctor">عن مستر أحمد سامي</string>
     <string name="aboutProgrammer">About Programmer </string>

@@ -17,8 +17,8 @@ public class RequestFromStudentToExamWhatPresnter implements RequestFromStudentT
     }
 
     @Override
-    public void tellModeltoGetStudents(String examID) {
-        requestFromStudentToExamWhatModel.getStudents(examID);
+    public void tellModeltoGetStudents(String examID,String depName , String yearName , String unitName) {
+        requestFromStudentToExamWhatModel.getStudents(examID,depName,yearName,unitName);
     }
 
     @Override

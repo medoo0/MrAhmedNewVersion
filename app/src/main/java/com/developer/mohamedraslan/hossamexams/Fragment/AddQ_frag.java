@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,7 @@ public class AddQ_frag extends Fragment
     AnimatedDialog animatedDialog;
     String val = "";
     String QestionID = "";
+    String depName , yearName , unitName;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,12 +55,19 @@ public class AddQ_frag extends Fragment
         firebaseDatabaseQuestions = FirebaseDatabase.getInstance();
         databaseReferenceQuestions= firebaseDatabaseQuestions.getReference(DataBase_Refrences.BANKQUESTIONS.getRef());
         animatedDialog            = new AnimatedDialog(getActivity());
-
         ControlPanel.Title.setText(getString(R.string.addQ));
+
         if (getArguments()!=null){
-            ControlPanel.Title.setText(getString(R.string.edit));
+
+
+
+            depName   = getArguments().getString("depName1","");
+            yearName  = getArguments().getString("yearName1","");
+            unitName  = getArguments().getString("unitName1","");
             QestionID = getArguments().getString("ID","");
             val       = getArguments().getString("val","");
+
+
 
         }
 
@@ -72,6 +81,13 @@ public class AddQ_frag extends Fragment
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v        = inflater.inflate(R.layout.add_qestion_frag_layout,container,false);
+
+        ControlPanelContract.ControlUI controlUI = (ControlPanelContract.ControlUI) getActivity();
+        if (controlUI!=null){
+
+            controlUI.enableDisableDrawer(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        }
+
 
         buttonA       = v.findViewById(R.id.A);
         buttonB       = v.findViewById(R.id.B);
@@ -89,10 +105,17 @@ public class AddQ_frag extends Fragment
         buttonD.setOnClickListener(this);
         savingData.setOnClickListener(this);
 
+
+        if (!val.equals("")&& !QestionID.equals("")){
+
+            ControlPanel.Title.setText(getString(R.string.edit));
+
+        }
+
         if (val.equals("Editing") && !QestionID.equals("") && !val.equals("")){
             animatedDialog.ShowDialog();
             AddQ_Presnter addQ_presnter = new AddQ_Presnter(this);
-            addQ_presnter.tellModletoGetQuestion(databaseReferenceQuestions,this,QestionID);
+            addQ_presnter.tellModletoGetQuestion(databaseReferenceQuestions,this,QestionID,depName,yearName,unitName);
         }
 
         return v;
@@ -171,25 +194,41 @@ public class AddQ_frag extends Fragment
                     && !selectAnswer.isEmpty()){
 
 
-                if (!val.equals("") && val.equals("Editing") && !QestionID.equals("") ){
+                if (!depName.equals("")&&!yearName.equals("")&&!unitName.equals("")){
 
 
-                    Questions_Form questions_form  = new Questions_Form(writeQuestion.getText().toString(),answerOne.getText().toString(),answerTwo.getText().toString(),answerThree.getText().toString()
-                            ,answerFour.getText().toString(),QestionID,selectAnswer);
-                    animatedDialog.ShowDialog();
-                    AddQ_Presnter addQ_presnter    = new AddQ_Presnter(this);
-                    addQ_presnter.update_modle_to_editQuestion(databaseReferenceQuestions,this,QestionID,questions_form);
 
-                }else {
 
-                    Questions_Form questions_form  = new Questions_Form(writeQuestion.getText().toString(),answerOne.getText().toString(),answerTwo.getText().toString(),answerThree.getText().toString()
-                            ,answerFour.getText().toString(),databaseReferenceQuestions.push().getKey(),selectAnswer);
-                    animatedDialog.ShowDialog();
-                    AddQ_Presnter addQ_presnter    = new AddQ_Presnter(this);
-                    addQ_presnter.updateModelToSaveData(databaseReferenceQuestions,questions_form);
+                    if (!val.equals("") && val.equals("Editing") && !QestionID.equals("") ){
+
+
+                        Questions_Form questions_form  = new Questions_Form(writeQuestion.getText().toString(),answerOne.getText().toString(),answerTwo.getText().toString(),answerThree.getText().toString()
+                                ,answerFour.getText().toString(),QestionID,selectAnswer);
+                        animatedDialog.ShowDialog();
+                        AddQ_Presnter addQ_presnter    = new AddQ_Presnter(this);
+                        addQ_presnter.update_modle_to_editQuestion(databaseReferenceQuestions,this,QestionID,questions_form,depName,yearName,unitName);
+
+                    }else {
+
+                        Questions_Form questions_form  = new Questions_Form(writeQuestion.getText().toString(),answerOne.getText().toString(),answerTwo.getText().toString(),answerThree.getText().toString()
+                                ,answerFour.getText().toString(),databaseReferenceQuestions.push().getKey(),selectAnswer);
+                        animatedDialog.ShowDialog();
+                        AddQ_Presnter addQ_presnter    = new AddQ_Presnter(this);
+                        addQ_presnter.updateModelToSaveData(databaseReferenceQuestions,questions_form,depName,yearName,unitName);
+
+
+                    }
+
+
+
+
+
+
 
 
                 }
+
+
 
 
 
@@ -287,7 +326,7 @@ public class AddQ_frag extends Fragment
 
 
     @Override
-    public void dataEditedsussess() {
+    public void dataEditedsussess(String depName , String yearName , String unitName) {
 
         animatedDialog.Close_Dialog();
         Toast.makeText(getActivity(), "لقد تم تعديل السؤال بنجاح", Toast.LENGTH_SHORT).show();
@@ -295,7 +334,7 @@ public class AddQ_frag extends Fragment
 
         if (controlUI!=null){
 
-            controlUI.editSuccessopenBank();
+            controlUI.editSuccessopenBank(depName,yearName,unitName);
 
         }
 

@@ -57,6 +57,7 @@ public class Result extends AppCompatActivity implements ResultContract.view {
     private String Examname;
     private String ExamDate , Message;
     private InterstitialAd mInterstitialAd;
+    String depName ="" , yearName = "" , unitName="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,11 +68,14 @@ public class Result extends AppCompatActivity implements ResultContract.view {
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){
 
+            depName        = bundle.getString("depName");
+            yearName       = bundle.getString("yearName");
+            unitName       = bundle.getString("unitName");
             TableName      = bundle.getString("SqlTableName");
             finalDegree    = bundle.getString("final_degree");
-            Examname = bundle.getString("Examname");
-            ExamDate = bundle.getString("ExamDate");
-            Message  = bundle.getString("Message");
+            Examname       = bundle.getString("Examname");
+            ExamDate       = bundle.getString("ExamDate");
+            Message        = bundle.getString("Message");
             presenter.CountDegree(db,TableName);
 
         }
@@ -155,6 +159,7 @@ public class Result extends AppCompatActivity implements ResultContract.view {
 
     @Override
     public void TotalDegrees(int total) {
+
         this.total = String.valueOf(total);
         txFinalDegree.setText(finalDegree);
         txDegree.setText(this.total);
@@ -164,7 +169,8 @@ public class Result extends AppCompatActivity implements ResultContract.view {
     }
 
     @Override
-    public void WrongQuestions(final ArrayList<WorngQestion> worngQestions) {
+    public void WrongQuestions(final ArrayList<WorngQestion> worngQestions) {    //    more Infoo to upload Result
+
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.USERREF.getRef())
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
@@ -178,7 +184,7 @@ public class Result extends AppCompatActivity implements ResultContract.view {
 
                     presenter.UploadResult(TableName.replace(FirebaseAuth.getInstance().getCurrentUser().getUid(),"").substring(1)
                             , FirebaseAuth.getInstance().getCurrentUser().getUid(),
-                            ExamDate,Examname,finalDegree, total ,worngQestions, Objects.requireNonNull(form).getNameStudent());
+                            ExamDate,Examname,finalDegree, total ,worngQestions, Objects.requireNonNull(form).getNameStudent(),depName,yearName,unitName);
 
                     dialog.Close_Dialog();
 

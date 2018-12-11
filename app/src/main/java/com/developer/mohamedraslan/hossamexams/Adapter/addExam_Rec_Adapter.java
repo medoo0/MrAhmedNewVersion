@@ -61,9 +61,11 @@ public class addExam_Rec_Adapter extends RecyclerView.Adapter<addExam_Rec_Adapte
         return questions.size();
     }
 
-    public void removeItem(final int position) {
+    public void removeItem(final int position,String depName , String yearName , String unitName) {
+
+
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.CHOSENQUESTIONID.getRef())
-                .child(questions.get(position).getQuestionID());
+                .child(depName).child(yearName).child(unitName).child(questions.get(position).getQuestionID());
 
         reference.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
@@ -90,7 +92,7 @@ public class addExam_Rec_Adapter extends RecyclerView.Adapter<addExam_Rec_Adapte
         LinearLayout background;
         public ViewHolder(View itemView) {
             super(itemView);
-            Cardview = itemView.findViewById(R.id.Cardview);
+            Cardview   = itemView.findViewById(R.id.Cardview);
             txQuestion = itemView.findViewById(R.id.Question);
             background = itemView.findViewById(R.id.background);
         }

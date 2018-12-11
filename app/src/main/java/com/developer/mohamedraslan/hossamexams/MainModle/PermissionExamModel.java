@@ -27,11 +27,11 @@ public class PermissionExamModel implements PermissionExamsContract.PermissionMo
     }
 
     @Override
-    public void getRequestsExams() {
+    public void getRequestsExams(String depName , String yearName , String unitName) {
 
 
         FirebaseDatabase  firebaseDatabase = FirebaseDatabase.getInstance();
-        final DatabaseReference reference        = firebaseDatabase.getReference("PermissionRefrence");
+        final DatabaseReference reference        = firebaseDatabase.getReference("PermissionRefrence").child(depName).child(yearName).child(unitName);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

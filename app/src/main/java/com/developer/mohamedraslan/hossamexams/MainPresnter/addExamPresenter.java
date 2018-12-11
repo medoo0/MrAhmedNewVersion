@@ -53,13 +53,13 @@ public class addExamPresenter implements addExamContract.presenter {
     }
 
     @Override
-    public void CallgetQestionsToRecycleView() {
-        model.getQestionsToRecycleView();
+    public void CallgetQestionsToRecycleView(String depName , String yearName , String unitName) {
+        model.getQestionsToRecycleView(depName , yearName , unitName);
     }
 
     @Override
-    public void ClearList() {
-        model.ClearList();
+    public void ClearList(String depName , String yearName , String unitName) {
+        model.ClearList(depName,yearName,unitName);
     }
 
     public void passQestionSizeToView(int i){
@@ -74,10 +74,10 @@ public class addExamPresenter implements addExamContract.presenter {
     @Override
     public void storeExaminDatabase(int hour, int minute, int second, String oneQestionDegree,
                                     String NumberofQestion, String final_degree, List<Questions_Form> questions,
-                                    String ExamName, String currentDateandTime, String Questions_size, Integer timestamp) {
+                                    String ExamName, String currentDateandTime, String Questions_size, Integer timestamp,String depName , String yearName , String unitName) {
 
         model.storeExaminDatabase(hour,minute,second,oneQestionDegree,
-                NumberofQestion,final_degree,questions,ExamName,currentDateandTime,Questions_size,timestamp);
+                NumberofQestion,final_degree,questions,ExamName,currentDateandTime,Questions_size,timestamp,depName,yearName,unitName);
 
     }
 

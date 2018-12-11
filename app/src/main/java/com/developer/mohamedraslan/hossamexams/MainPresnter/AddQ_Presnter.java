@@ -19,8 +19,8 @@ public class AddQ_Presnter implements AddQuestionContract.AddQPresnter {
 
 
     @Override
-    public void tellModletoGetQuestion(DatabaseReference reference, AddQuestionContract.AddQUI addQUI, String qID) {
-        addQ_model.getQuestionDetails(reference,this,qID);
+    public void tellModletoGetQuestion(DatabaseReference reference, AddQuestionContract.AddQUI addQUI, String qID,String depName , String yearName, String unitName) {
+        addQ_model.getQuestionDetails(reference,this,qID,depName,yearName,unitName);
     }
 
     @Override
@@ -36,13 +36,13 @@ public class AddQ_Presnter implements AddQuestionContract.AddQPresnter {
     }
 
     @Override
-    public void update_modle_to_editQuestion(DatabaseReference reference, AddQuestionContract.AddQUI addQUI, String qID, Questions_Form questions_form) {
-        addQ_model.editingQuestion(reference,this,qID,questions_form);
+    public void update_modle_to_editQuestion(DatabaseReference reference, AddQuestionContract.AddQUI addQUI, String qID, Questions_Form questions_form,String depName , String yearName, String unitName) {
+        addQ_model.editingQuestion(reference,this,qID,questions_form,depName,yearName,unitName);
     }
 
     @Override
-    public void dataedited() {
-        addQUI.dataEditedsussess();
+    public void dataedited(String depName , String yearName , String unitName) {
+        addQUI.dataEditedsussess(depName,yearName,unitName);
     }
 
     @Override
@@ -53,9 +53,9 @@ public class AddQ_Presnter implements AddQuestionContract.AddQPresnter {
 
 
     @Override
-    public void updateModelToSaveData(DatabaseReference reference, Questions_Form questions_form) {
+    public void updateModelToSaveData(DatabaseReference reference, Questions_Form questions_form,String depName , String yearName, String unitName) {
 
-        addQ_model.upload_Questions_toServer(reference,this,questions_form);
+        addQ_model.upload_Questions_toServer(reference,this,questions_form,depName,yearName,unitName);
 
     }
 

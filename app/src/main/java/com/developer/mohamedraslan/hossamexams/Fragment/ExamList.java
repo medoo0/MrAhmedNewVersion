@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 
 import com.developer.mohamedraslan.hossamexams.Adapter.ExamList_Rec_Adapter;
 import com.developer.mohamedraslan.hossamexams.Adapter.ViewHolder;
+import com.developer.mohamedraslan.hossamexams.Contracts.ControlPanelContract;
 import com.developer.mohamedraslan.hossamexams.Contracts.ExamListContract;
 import com.developer.mohamedraslan.hossamexams.Enums.DataBase_Refrences;
 import com.developer.mohamedraslan.hossamexams.JsonModel.AddExam_pojo;
@@ -36,7 +38,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
-public class ExamList extends Fragment implements ExamListContract.view{
+public class ExamList extends Fragment implements ExamListContract.view,View.OnClickListener{
+
+
     @BindView(R.id.Exam_List_rec)
     RecyclerView recyclerView;
 
@@ -49,6 +53,9 @@ public class ExamList extends Fragment implements ExamListContract.view{
 
     private FirebaseAuth auth;
     ExamListContract.presenter presenter;
+
+
+    String depName = "" , yearName = ""  , unitName = "";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,11 +70,27 @@ public class ExamList extends Fragment implements ExamListContract.view{
         // Inflate the layout for this fragment
          View v = inflater.inflate(R.layout.fragment_exam_list, container, false);
 
-         ButterKnife.bind(this,v);
-         ControlPanel.Title.setText(R.string.examList);
-        ControlPanel.progressBar.setVisibility(View.VISIBLE);
-        ControlPanel.SetNavChecked(0);
+        ControlPanelContract.ControlUI controlUI = (ControlPanelContract.ControlUI) getActivity();
 
+        if (controlUI!=null){
+
+            controlUI.enableDisableDrawer(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        }
+
+
+         if (getArguments()!=null){
+
+
+             depName   =  getArguments().getString("depName"  ,"");
+             yearName  =  getArguments().getString("yearname" ,"");
+             unitName  =  getArguments().getString("unitName" ,"");
+
+
+         }
+         ButterKnife.bind(this,v);
+         actionButton.setOnClickListener(this);
+         ControlPanel.Title.setText(unitName  + "  Exams");
+        ControlPanel.progressBar.setVisibility(View.VISIBLE);
         mPublisherAdView = v.findViewById(R.id.publisherAdView);
         PublisherAdRequest adRequest = new PublisherAdRequest.Builder().build();
         mPublisherAdView.loadAd(adRequest);
@@ -117,7 +140,7 @@ public class ExamList extends Fragment implements ExamListContract.view{
     @Override
     public void ConfigRecyceler(String date ){
 
-        Query reference = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.EXAMS.getRef());
+        Query reference = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.EXAMS.getRef()).child(depName).child(yearName).child(unitName);
         recyclerView.setHasFixedSize(true);
         //**// reverse Recycler view .
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
@@ -126,7 +149,7 @@ public class ExamList extends Fragment implements ExamListContract.view{
         recyclerView.setLayoutManager(mLayoutManager);
         //**\\
         ExamList_Rec_Adapter adapter = new ExamList_Rec_Adapter(AddExam_pojo.class,R.layout.examlist_rec_layout,
-               ViewHolder.class,reference,date,getActivity());
+               ViewHolder.class,reference,date,getActivity(),depName,yearName,unitName);   // more Info
 
         recyclerView.setAdapter(adapter);
 
@@ -154,19 +177,6 @@ public class ExamList extends Fragment implements ExamListContract.view{
 
     }
 
-    @OnClick(R.id.FloatActionbutton)
-    void OpenAddExam(View view){
-
-        getActivity().getSupportFragmentManager().popBackStack();
-        getActivity().getSupportFragmentManager()
-                .beginTransaction()
-                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
-                .replace(R.id.Exam_Frame,new addExam())
-                .addToBackStack(null)
-                .commit();
-
-    }
-
 
     @Override
     public void ShowAdminTools() {
@@ -174,6 +184,29 @@ public class ExamList extends Fragment implements ExamListContract.view{
         if(getActivity() != null)
             if(!getActivity().isFinishing())
                 actionButton.setVisibility(View.VISIBLE);
+
+    }
+
+    @Override
+    public void onClick(View view) {
+
+
+        if (view == actionButton){
+
+            ControlPanelContract.ControlUI controlUI = (ControlPanelContract.ControlUI) getActivity();
+
+            if (controlUI!=null){
+
+
+                controlUI.showAddExamFromExamListWhenClickonFloatActionButton(depName,yearName,unitName);
+
+
+            }
+
+
+            //  هنا بقاااا حنروح
+
+        }
 
     }
 }
