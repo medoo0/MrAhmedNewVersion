@@ -55,275 +55,308 @@
     </RelativeLayout>
 
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/Press_on_CardView"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:elevation="8dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
         android:layout_marginStart="5dp"
-        android:padding="5dp"
-        >
-        <LinearLayout
+        android:layout_height="wrap_content">
+
+
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/Press_on_CardView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layoutDirection="rtl"
-            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:elevation="8dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="5dp"
+            android:padding="5dp"
             >
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/circleimage"
-                android:layout_width="150sp"
-                android:layout_height="150sp"
-                android:layout_gravity="center_vertical|end"
-                android:layout_margin="15dp"
-                android:background="@drawable/ic_student_1"
-                />
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:orientation="vertical"
-                android:layout_margin="5dp"
-                android:layout_weight="2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layoutDirection="rtl"
+                android:orientation="horizontal"
                 >
-
-                <TextView
-                    android:id="@+id/txNameStudent"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/cairo"
-                    android:padding="1dp"
-                    android:layout_marginStart="10sp"
-                    android:text="علاء محمود حسين"
-                    android:gravity="right"
-                    android:textColor="@color/color2"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-
-
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/circleimage"
+                    android:layout_width="150sp"
+                    android:layout_height="150sp"
+                    android:layout_gravity="center_vertical|end"
+                    android:layout_margin="15dp"
+                    android:background="@drawable/ic_student_1"
+                    />
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:layout_margin="5dp"
+                    android:layout_weight="2"
+                    >
 
                     <TextView
-                        android:id="@+id/con"
+                        android:id="@+id/txNameStudent"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginEnd="5dp"
                         android:fontFamily="@font/cairo"
-                        android:gravity="right"
                         android:padding="1dp"
-                        android:text="الولايات المتحده الامريكيه"
-                        android:textColor="@android:color/darker_gray"
+                        android:layout_marginStart="10sp"
+                        android:text="علاء محمود حسين"
+                        android:gravity="right"
+                        android:textColor="@color/color2"
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
 
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+
+                        <TextView
+                            android:id="@+id/con"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="5dp"
+                            android:fontFamily="@font/cairo"
+                            android:gravity="right"
+                            android:padding="1dp"
+                            android:text="الولايات المتحده الامريكيه"
+                            android:textColor="@android:color/darker_gray"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+
+
+
+
+
+
+                    </LinearLayout>
 
 
 
 
                 </LinearLayout>
 
-
-
+                <ImageView
+                    android:id="@+id/image_dropdown"
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="20dp"
+                    android:scaleType="fitXY"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_dropdown"
+                    />
 
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/image_dropdown"
-                android:layout_width="40dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="20dp"
-                android:scaleType="fitXY"
-                android:padding="5dp"
-                android:src="@drawable/ic_dropdown"
-                />
 
-        </LinearLayout>
+        </android.support.v7.widget.CardView>
 
 
-    </android.support.v7.widget.CardView>
-
-    <RelativeLayout
-        android:id="@+id/Details_layout"
-        android:background="@drawable/toolbar_background"
-        android:layout_width="match_parent"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:visibility="gone"
-        android:layout_height="500dp">
-
-        <View
-            android:id="@+id/line1"
+        <RelativeLayout
+            android:id="@+id/Details_layout"
+            android:background="@drawable/toolbar_background"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:background="@android:color/darker_gray" />
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:background="@android:color/darker_gray"
-            android:id="@+id/line2" />
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="30dp"
+            android:layout_below="@+id/Press_on_CardView"
+            android:layout_marginEnd="30dp"
+            android:visibility="gone"
+            android:layout_height="500dp">
 
-        <LinearLayout
-            android:id="@+id/phone_Linear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal|center_vertical"
-            android:layout_alignStart="@+id/line1"
-            android:layout_alignEnd="@+id/line2"
-            android:layout_alignTop="@+id/line2"
-            android:layout_alignBottom="@+id/line1"
-            android:background="@drawable/ripple"
-            android:clickable="true"
-            >
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="@android:color/darker_gray" />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="@android:color/darker_gray"
+                android:id="@+id/line2" />
 
-            <TextView
+            <LinearLayout
+                android:id="@+id/phone_Linear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/cairo"
-                android:text="@string/phone"
-                android:textColor="@android:color/white"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-            <TextView
-                android:id="@+id/txphone"
+                android:orientation="vertical"
+                android:gravity="center_horizontal|center_vertical"
+                android:layout_alignStart="@+id/line1"
+                android:layout_alignEnd="@+id/line2"
+                android:layout_alignTop="@+id/line2"
+                android:layout_alignBottom="@+id/line1"
+                android:background="@drawable/ripple"
+                android:clickable="true"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/cairo"
+                    android:text="@string/phone"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/txphone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/cairo"
+                    android:text="00201121341098"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="40sp"
+                    android:layout_height="40sp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_mobile_phone"
+                    android:padding="2dp"
+                    />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/email_linear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/cairo"
-                android:text="00201121341098"
-                android:textColor="@android:color/white"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:orientation="vertical"
+                android:gravity="center_horizontal|center_vertical"
+                android:layout_alignStart="@+id/line2"
+                android:layout_alignEnd="@+id/line1"
+                android:layout_alignTop="@+id/line2"
+                android:layout_alignBottom="@+id/line1"
+                android:background="@drawable/ripple"
+                android:clickable="true"
+                >
 
-            <ImageView
-                android:layout_width="40sp"
-                android:layout_height="40sp"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_mobile_phone"
-                android:padding="2dp"
-                />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/cairo"
+                    android:text="@string/email"
+                    android:textColor="@android:color/white"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/txemail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/cairo"
+                    android:text="Android@example.com"
+                    android:textColor="@android:color/white"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
 
-        </LinearLayout>
+                <ImageView
+                    android:layout_width="50sp"
+                    android:layout_height="50sp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_mail"
+                    android:padding="2dp"
+                    />
 
+            </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/email_linear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal|center_vertical"
-            android:layout_alignStart="@+id/line2"
-            android:layout_alignEnd="@+id/line1"
-            android:layout_alignTop="@+id/line2"
-            android:layout_alignBottom="@+id/line1"
-            android:background="@drawable/ripple"
-            android:clickable="true"
-            >
-
-            <TextView
+            <LinearLayout
+                android:id="@+id/ban_linear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/cairo"
-                android:text="@string/email"
-                android:textColor="@android:color/white"
-                android:textSize="25sp"
-                android:textStyle="bold" />
-            <TextView
-                android:id="@+id/txemail"
+                android:orientation="vertical"
+                android:gravity="center_horizontal|center_vertical"
+                android:layout_alignStart="@+id/line1"
+                android:layout_alignEnd="@+id/line2"
+                android:layout_alignTop="@+id/line1"
+                android:layout_alignBottom="@+id/line2"
+                android:background="@drawable/ripple"
+                android:clickable="true"
+                >
+
+                <TextView
+                    android:id="@+id/txStudentban"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/cairo"
+                    android:text="@string/banned"
+                    android:textColor="@android:color/white"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/banImag"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_ban"
+                    android:padding="2dp"
+                    />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/MYResult_linear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/cairo"
-                android:text="Android@example.com"
-                android:textColor="@android:color/white"
-                android:textSize="25sp"
-                android:textStyle="bold" />
+                android:orientation="vertical"
+                android:gravity="center_horizontal|center_vertical"
+                android:layout_alignStart="@+id/line2"
+                android:layout_alignEnd="@+id/line1"
+                android:layout_alignTop="@+id/line1"
+                android:layout_alignBottom="@+id/line2"
+                android:background="@drawable/ripple"
+                android:clickable="true"
+                >
 
-            <ImageView
-                android:layout_width="50sp"
-                android:layout_height="50sp"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_mail"
-                android:padding="2dp"
-                />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/cairo"
+                    android:gravity="center"
+                    android:text="@string/StudentResult"
+                    android:textColor="@android:color/white"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
 
-        </LinearLayout>
+            </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/ban_linear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal|center_vertical"
-            android:layout_alignStart="@+id/line1"
-            android:layout_alignEnd="@+id/line2"
-            android:layout_alignTop="@+id/line1"
-            android:layout_alignBottom="@+id/line2"
-            android:background="@drawable/ripple"
-            android:clickable="true"
-            >
-
-            <TextView
-                android:id="@+id/txStudentban"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/cairo"
-                android:text="@string/banned"
-                android:textColor="@android:color/white"
-                android:textSize="25sp"
-                android:textStyle="bold" />
-
-            <ImageView
-                android:id="@+id/banImag"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_ban"
-                android:padding="2dp"
-                />
-
-        </LinearLayout>
+        </RelativeLayout>
 
 
-        <LinearLayout
-            android:id="@+id/MYResult_linear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal|center_vertical"
-            android:layout_alignStart="@+id/line2"
-            android:layout_alignEnd="@+id/line1"
-            android:layout_alignTop="@+id/line1"
-            android:layout_alignBottom="@+id/line2"
-            android:background="@drawable/ripple"
-            android:clickable="true"
-            >
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/cairo"
-                android:gravity="center"
-                android:text="@string/StudentResult"
-                android:textColor="@android:color/white"
-                android:textSize="25sp"
-                android:textStyle="bold" />
 
-        </LinearLayout>
+
+
+
+
+
+
+
+
+
+
 
     </RelativeLayout>
+
+
+
+
+
+
 
 
 </FrameLayout>

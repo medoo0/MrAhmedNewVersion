@@ -103,7 +103,7 @@ public class Adapter_show_YearsInDeps extends RecyclerView.Adapter<Adapter_show_
 
         public void setTextinTextView(String text){
 
-            name_of_year.setText("طلاب " + text);
+            name_of_year.setText("Student of " + text);
         }
     }
 
