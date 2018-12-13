@@ -36,4 +36,22 @@ public class MyResultPresenter implements MyResultContract.presenter {
     public void ConfigRecycler(List<Result_Pojo> result) {
         view.ConfigRecycler(result);
     }
+
+    @Override
+    public void tellMyModeltogetResult(String uID, String depName, String yearName) {
+        model.getMyResultFromAtherSide(uID,depName,yearName);
+    }
+
+    @Override
+    public void resultss(List<Result_Pojo> list) {
+        view.resultFromAtherSideHere(list);
+
+    }
+
+    @Override
+    public void noResult() {
+
+        view.notresult();
+
+    }
 }

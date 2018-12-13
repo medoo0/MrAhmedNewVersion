@@ -62,5 +62,42 @@ public class MyResultModel implements MyResultContract.model {
 
     }
 
+    @Override
+    public void getMyResultFromAtherSide(String uID,String depName ,String yearName) {
+
+        Query query = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.RESULT.getRef()).child(depName).child(yearName).orderByChild("uid").equalTo(uID);
+
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+
+                    for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+
+                        Result_Pojo pojo = snapshot.getValue(Result_Pojo.class);
+                        Result.add(pojo);
+
+                    }
+                    presenter.resultss(Result);
+                }
+                else {
+
+                    presenter.noResult();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+
+
+    }
+
 
 }

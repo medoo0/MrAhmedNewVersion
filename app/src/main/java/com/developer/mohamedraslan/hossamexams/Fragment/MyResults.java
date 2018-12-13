@@ -46,7 +46,7 @@ public class MyResults extends Fragment implements MyResultContract.view {
     SearchView myresultsearch;
     TextView markresult;
     PublisherAdView mPublisherAdView;
-
+    String userID = "";
     String depName = "" , yearName = "" , unitName = "";
     MyResultContract.presenter presenter;
     @Override
@@ -67,6 +67,9 @@ public class MyResults extends Fragment implements MyResultContract.view {
              depName    = getArguments().getString("mdeNameresukt" ,"");
              yearName   = getArguments().getString("yearNameresult","");
              unitName   = getArguments().getString("unitNameresult","");
+             userID     = getArguments().getString("uid","");
+
+
 
          }
 
@@ -116,6 +119,12 @@ public class MyResults extends Fragment implements MyResultContract.view {
             presenter = new MyResultPresenter(this);
             presenter.getMyResults(FirebaseAuth.getInstance().getCurrentUser().getUid(),depName,yearName,unitName);
 
+
+        }
+
+        if (!depName.equals("")&&!yearName.equals("")&&unitName.equals("")&& !userID.equals("")){
+            presenter = new MyResultPresenter(this);
+            presenter.tellMyModeltogetResult(userID,depName,yearName);
 
         }
 
@@ -225,6 +234,31 @@ public class MyResults extends Fragment implements MyResultContract.view {
 //        //**\\
 //        recyclerView.setAdapter(adapter);
 
+
+    }
+
+    @Override
+    public void resultFromAtherSideHere(List<Result_Pojo> list) {
+
+        ControlPanel.progressBar.setVisibility(View.INVISIBLE);
+        adapter = new MyResult_Rec_Adapter(list, this);
+        //**// reverse Recycler view .
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        mLayoutManager.setReverseLayout(true);
+        mLayoutManager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(mLayoutManager);
+        //**\\
+        recyclerView.setAdapter(adapter);
+
+
+    }
+
+    @Override
+    public void notresult() {
+
+        ControlPanel.progressBar.setVisibility(View.INVISIBLE);
+        backgroundground.setVisibility(View.VISIBLE);
 
     }
 

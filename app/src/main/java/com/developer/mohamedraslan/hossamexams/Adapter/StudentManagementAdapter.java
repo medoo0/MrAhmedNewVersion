@@ -51,16 +51,20 @@ public class StudentManagementAdapter extends RecyclerView.Adapter<StudentManage
     FirebaseAuth auth;
     int photosCounter = 0 ;
     Context context;
+    String depName , yearName;
     FragmentManager fragmentManager;
     String what;
     StudentManagementContract.view views;
 
-    public  StudentManagementAdapter (Context context, List<FullRegisterForm> items  , FragmentManager fragmentManager, String what, StudentManagementContract.view view){
+    public  StudentManagementAdapter (Context context, List<FullRegisterForm> items  , FragmentManager fragmentManager, String what, StudentManagementContract.view view
+    ,String depName , String yearName){
 
         this.items = items ;
         this.context = context;
         auth = FirebaseAuth.getInstance();
         this.fragmentManager = fragmentManager ;
+        this.depName  = depName;
+        this.yearName = yearName;
         this.what = what;
         this.views = view;
     }
@@ -163,6 +167,8 @@ public class StudentManagementAdapter extends RecyclerView.Adapter<StudentManage
 
                     Bundle bundle = new Bundle();
                     bundle.putString("uid", items.get(position).getuID() );
+                    bundle.putString("mdeNameresukt",depName);
+                    bundle.putString("yearNameresult",yearName);
                     // set MyFragment Arguments
                     MyResults MyResults = new MyResults();
                     MyResults.setArguments(bundle);

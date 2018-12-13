@@ -16,6 +16,8 @@ public interface MyResultContract {
 
         void Problem(String s);
 
+        void resultFromAtherSideHere(List<Result_Pojo>list);
+        void notresult();
 
         void numberofExamsForMe(int number);
     }
@@ -26,9 +28,20 @@ public interface MyResultContract {
         void Problem(String s);
 
         void ConfigRecycler(List<Result_Pojo> result);
+
+
+
+        void tellMyModeltogetResult(String uID , String depName , String yearName);
+        void resultss(List<Result_Pojo>list);
+        void noResult();
+
+
+
     }
     interface model {
 
         void getMyResults(String uid,String depName , String yearName , String unitName);
+
+        void getMyResultFromAtherSide(String uID ,String depName ,String yearName);
     }
 }
