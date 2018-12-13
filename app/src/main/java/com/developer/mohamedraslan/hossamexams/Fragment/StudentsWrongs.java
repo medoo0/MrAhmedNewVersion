@@ -213,7 +213,7 @@ public class StudentsWrongs extends Fragment {
             if (!depName.equals("")&&!yearName.equals("")&& !unitName.equals("")){
 
 
-                final DatabaseReference reference = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.RESULT.getRef()).child(depName).child(yearName).child(unitName)
+                final DatabaseReference reference = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.RESULT.getRef()).child(depName).child(yearName)
                         .child(examID + UserUid);
                 reference.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

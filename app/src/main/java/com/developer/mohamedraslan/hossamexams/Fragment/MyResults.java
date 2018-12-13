@@ -28,6 +28,7 @@ import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
 import com.google.android.gms.ads.doubleclick.PublisherAdView;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -157,10 +158,28 @@ public class MyResults extends Fragment implements MyResultContract.view {
 
     @Override
     public void ConfigRecycler(List<Result_Pojo> result) {
+
+
+        List<Result_Pojo> newList = new ArrayList<>();
+
+        for (int i=0 ; i<result.size();i++){
+
+
+            if (result.get(i).getUid().equals(FirebaseAuth.getInstance().getUid())){
+
+
+                newList.add(result.get(i));
+
+
+            }
+
+        }
+
+
         //Stop progress .
         ControlPanel.progressBar.setVisibility(View.INVISIBLE);
 
-            adapter = new MyResult_Rec_Adapter(result, this);
+            adapter = new MyResult_Rec_Adapter(newList, this);
             //**// reverse Recycler view .
             recyclerView.setHasFixedSize(true);
             LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());

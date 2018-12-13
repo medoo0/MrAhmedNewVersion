@@ -207,7 +207,7 @@ public class Question_Bank_Frag extends Fragment
                                        alert.btnYes.setOnClickListener(new View.OnClickListener() {
                                            @Override
                                            public void onClick(View view) {
-
+                                               alert.dismiss();
                                                dialog.ShowDialog();
                                                presenter.tellModeltoRemoveAllQuestions(depNameforUnite,yearNameforUnit,unitName);
 

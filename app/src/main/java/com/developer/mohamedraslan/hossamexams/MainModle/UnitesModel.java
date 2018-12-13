@@ -253,60 +253,50 @@ public class UnitesModel implements Unites_Contract.ParentUnitesModel {
 
 
 
-                                                                    DatabaseReference referenceresultREF = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.ResultsRef.getRef()).child(depName).child(yearNmae).child(unitName);
+                                                                    final DatabaseReference referenceresultREF = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.ResultsRef.getRef()).child(depName).child(yearNmae).child(unitName);
                                                                     referenceresultREF.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                         @Override
                                                                         public void onComplete(@NonNull Task<Void> task) {
 
                                                                             if (task.isSuccessful()){
-
-                                                                                DatabaseReference referenceresultREFR = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.RESULT.getRef()).child(depName).child(yearNmae).child(unitName);
-                                                                                referenceresultREFR.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                                DatabaseReference referenceresultREFR = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.RESULT.getRef()).child(depName).child(yearNmae);
+                                                                                referenceresultREFR.orderByChild("unitName").equalTo(unitName).addListenerForSingleValueEvent(new ValueEventListener() {
                                                                                     @Override
-                                                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                                                                        if (dataSnapshot.exists()){
+
+                                                                                            dataSnapshot.getRef().removeValue();
+
+                                                                                        }
 
 
-                                                                                        if (task.isSuccessful()){
+                                                                                    }
+
+                                                                                    @Override
+                                                                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                                                    }
+                                                                                });
 
 
-                                                                                            FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                                                                                            final DatabaseReference referenceQ       = firebaseDatabase.getReference("Banck_Questions");
 
-                                                                                            referenceQ.child(depName).child(yearNmae).child(unitName).addListenerForSingleValueEvent(new ValueEventListener() {
+
+
+                                                                                FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                                                                                final DatabaseReference referenceQ       = firebaseDatabase.getReference("Banck_Questions");
+
+                                                                                referenceQ.child(depName).child(yearNmae).child(unitName).addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                                    @Override
+                                                                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                                                                        if (dataSnapshot.exists()){
+
+                                                                                            referenceQ.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                                                 @Override
-                                                                                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                                                                public void onComplete(@NonNull Task<Void> task) {
 
-                                                                                                    if (dataSnapshot.exists()){
-
-                                                                                                        referenceQ.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                                                            @Override
-                                                                                                            public void onComplete(@NonNull Task<Void> task) {
-
-                                                                                                                if (task.isSuccessful()){
-
-
-                                                                                                                    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                                                                                                                    final DatabaseReference referenceunit       = firebaseDatabase.getReference("Unites").child(depName).child(yearNmae).child(unitName);
-
-                                                                                                                    referenceunit.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                                                                        @Override
-                                                                                                                        public void onComplete(@NonNull Task<Void> task) {
-
-                                                                                                                            if (task.isSuccessful())
-                                                                                                                                parentUnitesPresnter.unitDeleted();
-                                                                                                                        }
-                                                                                                                    });
-                                                                                                                    //  كدا كل شي اتمسح
-
-
-                                                                                                                }
-
-                                                                                                            }
-                                                                                                        });
-
-
-                                                                                                    }else {
-
+                                                                                                    if (task.isSuccessful()){
 
 
                                                                                                         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
@@ -316,35 +306,57 @@ public class UnitesModel implements Unites_Contract.ParentUnitesModel {
                                                                                                             @Override
                                                                                                             public void onComplete(@NonNull Task<Void> task) {
 
-                                                                                                                if (task.isSuccessful()){
-
+                                                                                                                if (task.isSuccessful())
                                                                                                                     parentUnitesPresnter.unitDeleted();
-                                                                                                                }
-
                                                                                                             }
                                                                                                         });
+                                                                                                        //  كدا كل شي اتمسح
 
 
                                                                                                     }
-
-
-                                                                                                }
-
-                                                                                                @Override
-                                                                                                public void onCancelled(@NonNull DatabaseError databaseError) {
 
                                                                                                 }
                                                                                             });
 
 
+                                                                                        }else {
 
 
+
+                                                                                            FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                                                                                            final DatabaseReference referenceunit       = firebaseDatabase.getReference("Unites").child(depName).child(yearNmae).child(unitName);
+
+                                                                                            referenceunit.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                                                @Override
+                                                                                                public void onComplete(@NonNull Task<Void> task) {
+
+                                                                                                    if (task.isSuccessful()){
+
+                                                                                                        parentUnitesPresnter.unitDeleted();
+                                                                                                    }
+
+                                                                                                }
+                                                                                            });
 
 
                                                                                         }
 
+
+                                                                                    }
+
+                                                                                    @Override
+                                                                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
                                                                                     }
                                                                                 });
+
+
+
+
+
+
+
+
 
                                                                             }
 
@@ -409,47 +421,54 @@ public class UnitesModel implements Unites_Contract.ParentUnitesModel {
 
                                                     if (task.isSuccessful()){
 
-                                                        DatabaseReference referenceresultREFR = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.RESULT.getRef()).child(depName).child(yearNmae).child(unitName);
-                                                        referenceresultREFR.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                        DatabaseReference referenceresultREFR = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.RESULT.getRef()).child(depName).child(yearNmae);
+
+                                                        referenceresultREFR.orderByChild("unitName").equalTo(unitName).addListenerForSingleValueEvent(new ValueEventListener() {
+                                                            @Override
+                                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                                                if (dataSnapshot.exists()){
+
+                                                                    dataSnapshot.getRef().removeValue();
+
+                                                                }
+
+                                                            }
+
+                                                            @Override
+                                                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                            }
+                                                        });
+
+
+                                                        DatabaseReference reference = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.Permissions.getRef()).child(depName).child(yearNmae).child(unitName);
+
+                                                        reference.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                                                             @Override
                                                             public void onComplete(@NonNull Task<Void> task) {
 
-
                                                                 if (task.isSuccessful()){
 
-                                                                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.Permissions.getRef()).child(depName).child(yearNmae).child(unitName);
-
+                                                                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("PermissionRefrence").child(depName).child(yearNmae).child(unitName);
                                                                     reference.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                         @Override
                                                                         public void onComplete(@NonNull Task<Void> task) {
 
                                                                             if (task.isSuccessful()){
 
-                                                                                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("PermissionRefrence").child(depName).child(yearNmae).child(unitName);
-                                                                                reference.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                                FirebaseDatabase firebaseDatabase           = FirebaseDatabase.getInstance();
+                                                                                final DatabaseReference referenceunit       = firebaseDatabase.getReference("Unites").child(depName).child(yearNmae).child(unitName);
+
+                                                                                referenceunit.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                                     @Override
                                                                                     public void onComplete(@NonNull Task<Void> task) {
 
-                                                                                        if (task.isSuccessful()){
-
-                                                                                            FirebaseDatabase firebaseDatabase           = FirebaseDatabase.getInstance();
-                                                                                            final DatabaseReference referenceunit       = firebaseDatabase.getReference("Unites").child(depName).child(yearNmae).child(unitName);
-
-                                                                                            referenceunit.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                                                @Override
-                                                                                                public void onComplete(@NonNull Task<Void> task) {
 
 
-
-                                                                                                    parentUnitesPresnter.unitDeleted();
-                                                                                                }
-                                                                                            });
-
-                                                                                        }
-
+                                                                                        parentUnitesPresnter.unitDeleted();
                                                                                     }
                                                                                 });
-
 
                                                                             }
 
@@ -457,14 +476,12 @@ public class UnitesModel implements Unites_Contract.ParentUnitesModel {
                                                                     });
 
 
-
-
-
                                                                 }
-
 
                                                             }
                                                         });
+
+
 
                                                     }
 

@@ -31,8 +31,7 @@ public class MyResultModel implements MyResultContract.model {
     @Override
     public void getMyResults(String uid,String depName , String yearName , String unitName) {
 
-        Query query = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.RESULT.getRef()).child(depName).child(yearName).child(unitName).orderByChild("uid")
-                .equalTo(uid);
+        Query query = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.RESULT.getRef()).child(depName).child(yearName).orderByChild("unitName").equalTo(unitName);
 
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

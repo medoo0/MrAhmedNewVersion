@@ -159,8 +159,22 @@ public class StudentResult extends Fragment implements StudentResultContract.Mai
     @Override
     public void myResultResult(List<Result_Pojo> list, ImageView imageView) {
 
+        List<Result_Pojo> newList = new ArrayList<>();
+
+
+        for (int i=0 ; i<list.size();i++){
+
+
+            if (list.get(i).getUnitName().equals(unitName)){
+
+                newList.add(list.get(i));
+
+            }
+
+        }
+
         ControlPanel.progressBar.setVisibility(View.INVISIBLE);
-        adapter = new StudentResult_Rec_Adapter(list,getActivity(),this);
+        adapter = new StudentResult_Rec_Adapter(newList,getActivity(),this);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mLayoutManager.setReverseLayout(true);

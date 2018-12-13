@@ -177,7 +177,7 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
                 holder.BtnStartExam.setEnabled(false);
                 dialog.ShowDialog();
                 String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                DatabaseReference reference = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.RESULT.getRef()).child(depName).child(yearName).child(unitName)
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.RESULT.getRef()).child(depName).child(yearName)
                         .child(model.getExamID()+uid);
                 reference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override

@@ -18,6 +18,7 @@ import com.developer.mohamedraslan.hossamexams.Dialog.AnimatedDialog;
 import com.developer.mohamedraslan.hossamexams.Dialog.CustomTypeFaceSpan;
 import com.developer.mohamedraslan.hossamexams.Enums.DataBase_Refrences;
 import com.developer.mohamedraslan.hossamexams.Fragment.StudentResult;
+import com.developer.mohamedraslan.hossamexams.JsonModel.Result_Pojo;
 import com.developer.mohamedraslan.hossamexams.JsonModel.Results_References;
 import com.developer.mohamedraslan.hossamexams.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -26,8 +27,14 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by microprocess on 2018-10-19.
@@ -152,7 +159,7 @@ public class ExamsResults_Rec_Adapter  extends FirebaseRecyclerAdapter<Results_R
     }
     private void Delete_Exam(final String examID){
 
-        Query reference = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.RESULT.getRef()).child(depName).child(yearName).child(unitName)
+        Query reference = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.RESULT.getRef()).child(depName).child(yearName)
                 .orderByChild("examID")
                 .equalTo(examID);
 
@@ -161,9 +168,13 @@ public class ExamsResults_Rec_Adapter  extends FirebaseRecyclerAdapter<Results_R
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 if(dataSnapshot.exists()) {
+
+
                     for (DataSnapshot appleSnapshot : dataSnapshot.getChildren()) {
+
                         appleSnapshot.getRef().removeValue();
-                    }
+                }
+
                 }
             }
 
