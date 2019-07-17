@@ -86,6 +86,7 @@ public class StudentManagementAdapter extends RecyclerView.Adapter<StudentManage
             holder.Con.setText(items.get(position).getCountry());
             holder.phone.setText(items.get(position).getPhone());
             holder.email.setText(items.get(position).getEmail());
+            holder.code.setText(items.get(position).getStudentCode());
 
                 //photos changer .
                 if (photosCounter == 0 ) {
@@ -239,6 +240,9 @@ public class StudentManagementAdapter extends RecyclerView.Adapter<StudentManage
 
         @BindView(R.id.txemail)
         TextView email ;
+
+        @BindView(R.id.code)
+        TextView code;
 
         @BindView(R.id.phone_Linear)
         LinearLayout phone_Linear;

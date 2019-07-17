@@ -199,7 +199,7 @@ public class ExamsResults_Rec_Adapter  extends FirebaseRecyclerAdapter<Results_R
                     @Override
                     public void onSuccess(Void aVoid) {
 
-                        DatabaseReference reference4  = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.EXAMS.getRef())
+                        DatabaseReference reference4  = FirebaseDatabase.getInstance().getReference(DataBase_Refrences.EXAMS.getRef()).child(depName).child(yearName).child(unitName)
                                 .child(examID);
                         reference4.removeValue();
 

@@ -7,7 +7,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.developer.mohamedraslan.hossamexams.Contracts.MainActivityContract;
 import com.developer.mohamedraslan.hossamexams.R;
@@ -28,6 +31,9 @@ Button Sign_in;
 
 @BindView(R.id.Goto_signup)
 Button Sign_up;
+
+@BindView(R.id.imageAn)
+    ImageView imageAn;
     PublisherAdView  mPublisherAdView;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,6 +80,13 @@ Button Sign_up;
                 // to the app after tapping on an ad.
             }
         });
+
+
+
+        Animation animation;
+        animation = AnimationUtils.loadAnimation(getActivity(),
+                R.anim.fromtoptobottom);
+        imageAn.setAnimation(animation);
 
         Sign_in.setOnClickListener(new View.OnClickListener() {
              @Override

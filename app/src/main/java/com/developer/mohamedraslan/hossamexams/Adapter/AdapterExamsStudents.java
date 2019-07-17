@@ -348,7 +348,7 @@ public class AdapterExamsStudents extends RecyclerView.Adapter<ExamStudenstHolde
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<String, String>();
-                headers.put("Authorization", "key=" + "AAAAlXCKxUE:APA91bFGSM9okl_Va_Q5wGeK6LW3KAZNoFeme6l95iRGz5z-llVh1ZLXZ-yH0q5Ua3PmLPghxAirqgBujN-FLR5-OB-gKkGkHlOdW8wO3CkEAZ0x5_-h-SvKyAw_8eKlYDvNA4EO5kvM");
+                headers.put("Authorization", "key=" + "AAAAsqAfWB4:APA91bFkgAJ3vkdfYT_BOCxJW-XsZo9u6wiI2CZjz4ntAKKgiXXpmt9DqHBJQdPL9t9PyFW_OO-idGMkQ-6Iyb0ftr9T58k8GWUaICOe3kqfmxqjnmW6PPpx3jBJ4xDePUqimy_R-xwJ");
                 headers.put("Content-Type", "application/json");
                 return headers;
             }
@@ -416,7 +416,7 @@ public class AdapterExamsStudents extends RecyclerView.Adapter<ExamStudenstHolde
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<String, String>();
-                headers.put("Authorization", "key=" + "AAAAlXCKxUE:APA91bFGSM9okl_Va_Q5wGeK6LW3KAZNoFeme6l95iRGz5z-llVh1ZLXZ-yH0q5Ua3PmLPghxAirqgBujN-FLR5-OB-gKkGkHlOdW8wO3CkEAZ0x5_-h-SvKyAw_8eKlYDvNA4EO5kvM");
+                headers.put("Authorization", "key=" + "AAAAsqAfWB4:APA91bFkgAJ3vkdfYT_BOCxJW-XsZo9u6wiI2CZjz4ntAKKgiXXpmt9DqHBJQdPL9t9PyFW_OO-idGMkQ-6Iyb0ftr9T58k8GWUaICOe3kqfmxqjnmW6PPpx3jBJ4xDePUqimy_R-xwJ");
                 headers.put("Content-Type", "application/json");
                 return headers;
             }

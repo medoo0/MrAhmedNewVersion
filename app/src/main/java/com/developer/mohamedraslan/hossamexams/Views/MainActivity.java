@@ -6,12 +6,15 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.crashlytics.android.Crashlytics;
 import com.developer.mohamedraslan.hossamexams.Contracts.MainActivityContract;
+import com.developer.mohamedraslan.hossamexams.Fragment.AllDetailsForStudentSearch;
 import com.developer.mohamedraslan.hossamexams.Fragment.First_Fragment;
 import com.developer.mohamedraslan.hossamexams.Fragment.First_Register_Student;
 import com.developer.mohamedraslan.hossamexams.Fragment.Parent_Register;
 import com.developer.mohamedraslan.hossamexams.Fragment.Register_Fragment;
 import com.developer.mohamedraslan.hossamexams.Fragment.Signin_Fragment;
 import com.developer.mohamedraslan.hossamexams.Fragment.Student_Or_Parent;
+import com.developer.mohamedraslan.hossamexams.JsonModel.FullRegisterForm;
+import com.developer.mohamedraslan.hossamexams.MainPresnter.MainActivityPresnter;
 import com.developer.mohamedraslan.hossamexams.Notifications.MyFirebaseMessagingService;
 import com.developer.mohamedraslan.hossamexams.R;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -24,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
 
     FirebaseAuth auth;
     private FirebaseAnalytics mFirebaseAnalytics;
+
+    AllDetailsForStudentSearch allDetailsForStudentSearch;
     @Override
     protected void onStart() {
         super.onStart();
@@ -45,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         auth  = FirebaseAuth.getInstance();
+
         getSupportFragmentManager().
                 beginTransaction().
                 replace(R.id.Main_fragment,new First_Fragment(),"firestFrag")
@@ -136,6 +142,24 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
     }
 
     @Override
+    public void fullRegisterForStudent(FullRegisterForm fullRegisterForm) {
+
+
+        AllDetailsForStudentSearch allDetailsForStudentSearch = new AllDetailsForStudentSearch();
+        Bundle b = new Bundle();
+        b.putParcelable("fullRegister",fullRegisterForm);
+        allDetailsForStudentSearch.setArguments(b);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
+                .replace(R.id.Main_fragment,allDetailsForStudentSearch)
+                .addToBackStack(null)
+                .commit();
+
+    }
+
+
+    @Override
     public void onBackPressed() {
 
 
@@ -144,4 +168,13 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
 
 
     }
+
+
+
+
+
+
+
+
+
 }

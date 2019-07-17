@@ -48,32 +48,64 @@ public class UnitesModel implements Unites_Contract.ParentUnitesModel {
         // احنا حنستخدم الترقيم افضل من ال timeStamp في حاله الوحدات اولا لانها معدوده ثانيا في حاله المسح والاضافه مره اخري الترقيم حيبوظ
         switch (unitName){
 
-            case "The First unit":
+            case "Unit 1":
                 unites_model_json = new Unites_Model_Json(unitName,1000);
                 break;
-            case "The Second Unit":
+            case "Unit 2":
                 unites_model_json = new Unites_Model_Json(unitName,2000);
                 break;
-            case "The Third Unit":
+            case "Unit 3":
                 unites_model_json = new Unites_Model_Json(unitName,3000);
                 break;
-            case "The Fourth Unit":
+            case "Unit 4":
                 unites_model_json = new Unites_Model_Json(unitName,4000);
                 break;
-            case "Fifth Unit":
+            case "Unit 5":
                 unites_model_json = new Unites_Model_Json(unitName,5000);
                 break;
-            case "Sixth Unit":
+            case "Unit 6":
                 unites_model_json = new Unites_Model_Json(unitName,6000);
                 break;
-            case "The Seventh Unit":
+            case "Unit 7":
                 unites_model_json = new Unites_Model_Json(unitName,7000);
                 break;
-            case "The Eighth Unit":
+            case "Unit 8":
                 unites_model_json = new Unites_Model_Json(unitName,8000);
                 break;
-            case "The ninth unit":
+            case "Unit 9":
                 unites_model_json = new Unites_Model_Json(unitName,9000);
+                break;
+
+
+            case "Unit 10":
+                unites_model_json = new Unites_Model_Json(unitName,10000);
+                break;
+            case "Unit 11":
+                unites_model_json = new Unites_Model_Json(unitName,11000);
+                break;
+            case "Unit 12":
+                unites_model_json = new Unites_Model_Json(unitName,12000);
+                break;
+            case "Unit 13":
+                unites_model_json = new Unites_Model_Json(unitName,13000);
+                break;
+            case "Unit 14":
+                unites_model_json = new Unites_Model_Json(unitName,14000);
+                break;
+            case "Unit 15":
+                unites_model_json = new Unites_Model_Json(unitName,15000);
+                break;
+            case "Unit 16":
+                unites_model_json = new Unites_Model_Json(unitName,16000);
+                break;
+            case "Unit 17":
+                unites_model_json = new Unites_Model_Json(unitName,17000);
+                break;
+            case "Unit 18":
+                unites_model_json = new Unites_Model_Json(unitName,18000);
+                break;
+            case "General":
+                unites_model_json = new Unites_Model_Json(unitName,19000);
                 break;
                 default:
                     //  مستحيل حتتنفذ لانهم معدودين

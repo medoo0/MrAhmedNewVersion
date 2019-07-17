@@ -28,6 +28,7 @@ import com.google.android.gms.ads.doubleclick.PublisherAdView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 
 public class AboutDoctor extends Fragment {
@@ -35,6 +36,10 @@ public class AboutDoctor extends Fragment {
     //card view
     @BindView(R.id.Press_on_CardView)
     CardView cardView;
+
+
+    @BindView(R.id.facebookgroup)
+    CardView facebookgroup;
 
 
     @BindView(R.id.Press_on_CardView2)
@@ -54,20 +59,20 @@ public class AboutDoctor extends Fragment {
     PublisherAdView mPublisherAdView;
 
 
-    @BindView(R.id.facebook)
-    ImageView facebook;
-
-    @BindView(R.id.twitter)
-    ImageView twitter;
+//    @BindView(R.id.facebook)
+//    ImageView facebook;
+//
+//    @BindView(R.id.twitter)
+//    ImageView twitter;
 
     @BindView(R.id.Details_layout2)
     LinearLayout Details_layout2;
 
-    @BindView(R.id.youtube)
-    ImageView youtube;
-
-    @BindView(R.id.website)
-    ImageView website;
+//    @BindView(R.id.youtube)
+//    ImageView youtube;
+//
+//    @BindView(R.id.website)
+//    ImageView website;
 
   AdView mAdView;
     @BindView(R.id.scroll)
@@ -135,16 +140,27 @@ public class AboutDoctor extends Fragment {
             @Override
             public void onClick(View view) {
 
-                if(Details_layout2.isShown()){
-                    Details_layout2.setVisibility(View.GONE);
-                    dropdown2.setImageResource(R.drawable.ic_dropdown);
-                }
-                else {
-                    Details_layout2.setVisibility(View.VISIBLE);
-                    dropdown2.setImageResource(R.drawable.ic_dropup);
-                    openAnimation(Details_layout2);
-                }
-                focusOnView(Press_on_CardView2);
+                Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
+                String facebookUrl = getFacebookPageURL(getActivity(),"https://www.facebook.com/agsagamore");
+                facebookIntent.setData(Uri.parse(facebookUrl));
+                startActivity(facebookIntent);
+
+
+
+            }
+        });
+
+
+
+        facebookgroup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
+                String facebookUrl = getFacebookPageURL(getActivity(),"https://www.facebook.com/enginacademy");
+                facebookIntent.setData(Uri.parse(facebookUrl));
+                startActivity(facebookIntent);
 
             }
         });
@@ -155,66 +171,30 @@ public class AboutDoctor extends Fragment {
             @Override
             public void onClick(View view) {
 
-                if(Details_layout.isShown()){
-                    Details_layout.setVisibility(View.GONE);
-                    dropdown.setImageResource(R.drawable.ic_dropdown);
-                }
-                else {
-                    Details_layout.setVisibility(View.VISIBLE);
-                    dropdown.setImageResource(R.drawable.ic_dropup);
-                    openAnimation(Details_layout);
-                }
-                focusOnView(cardView);
+
+                String number = "01201206252";
+                Uri call = Uri.parse("tel:" + number);
+                Intent surf = new Intent(Intent.ACTION_DIAL, call);
+                startActivity(surf);
 
             }
         });
 
 
 
-        youtube.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Intent.ACTION_VIEW,   Uri.parse("https://www.youtube.com/ahmedsamyy?fbclid=IwAR0uPkrDCbzMGRV_tpd-WIuZGHwmQNCHhdMYKM_RKVb6EBmVQoUWpZ1H9x4")));
-            }
-        });
-
-        facebook.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
-                String facebookUrl = getFacebookPageURL(getActivity(),"https://www.facebook.com/ahmedsamy37");
-                        facebookIntent.setData(Uri.parse(facebookUrl));
-                startActivity(facebookIntent);
-            }
-        });
-
-        twitter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                try {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/ahmedsamy3000")));
-                }catch (Exception e) {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/#!/" + "ahmedsamy3000")));
-                }
+//        youtube.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(Intent.ACTION_VIEW,   Uri.parse("https://www.youtube.com/ahmedsamyy?fbclid=IwAR0uPkrDCbzMGRV_tpd-WIuZGHwmQNCHhdMYKM_RKVb6EBmVQoUWpZ1H9x4")));
+//            }
+//        });
 
 
-            }
-        });
 
 
-        website.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_VIEW);
-                intent.addCategory(Intent.CATEGORY_BROWSABLE);
-                intent.setData(Uri.parse("http://english2fun.com/vb/forum.php"));
-                startActivity(intent);
 
-            }
-        });
+
 
         return v ;
     }

@@ -37,15 +37,15 @@
         <!--ads:layout_anchor="@+id/Exam_List_rec"-->
         <!--ads:layout_anchorGravity="top|center" />-->
     <ImageView
-        android:id="@+id/image"
-        android:layout_width="150dp"
+        android:id="@+id/imageAn"
+        android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginStart="15dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="30dp"
         android:elevation="4dp"
         android:scaleType="fitXY"
-        android:src="@drawable/classroom"
+        android:src="@drawable/logo"
 
         />
 
@@ -54,7 +54,7 @@
         android:layout_width="250dp"
         android:gravity="center"
         android:elevation="5dp"
-        android:textSize="18sp"
+        android:textSize="22dp"
         android:text="@string/app_name"
         android:textColor="@android:color/white"
         android:layout_height="wrap_content"
@@ -62,18 +62,6 @@
         android:fontFamily="@font/cairo"
         />
 
-    <TextView
-        android:id="@+id/name2"
-        android:layout_width="250dp"
-        android:gravity="center"
-        android:elevation="5dp"
-        android:textSize="18sp"
-        android:text="@string/topteacher"
-        android:textColor="@android:color/white"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25sp"
-        android:fontFamily="@font/cairo"
-        />
 
     <TextView
         android:id="@+id/txt"

@@ -1,10 +1,13 @@
 <resources>
-    <string name="app_name">Mr. Ahmed Samy </string>
+    <string name="app_name">Mr. Ahmed Gamal </string>
     <string name="Sign_in">تسجيل الدخول</string>
     <string name="Sign_up">الاشتراك</string>
 
     <string name="s_in_up">    يُرجى تسجيل الدخول \n
     أو الاشتراك لو لم يكن لديك حساب </string>
+
+
+   <string name="phoneN">01201206252</string>
 
 <string name="notification"> Notifications </string>
 
@@ -13,6 +16,13 @@
 
     <string name="students">   0 \n
     طالب </string>
+
+    <string name="acadmyface">صفحتنا لاكاديميه اللغة الانجليزية</string>
+
+    <string name="enteras"> إذا كنت ترغب في البحث عن نتائج اشخاص تهمك  قم باختيار \n ولي أمر \n أما اذا كنت ترغب بالتعليم قم بإختيار \n  طالب </string>
+
+    <string name="notesforParent"> قم بإدخال الكود الخاص بالطالب حتي نتمكن من جلب جميع النتائج الخاصة بهذا الطالب   </string>
+
 
     <string name="topteacher"> www.English2Fun.com </string>
     <string name="register"> التسجيل </string>
@@ -96,15 +106,25 @@
 
     <string-array name="unites">
         <item>Select Unit</item>
-        <item>The First unit</item>
-        <item>The Second Unit</item>
-        <item>The Third Unit</item>
-        <item>The Fourth Unit</item>
-        <item>Fifth Unit</item>
-        <item>Sixth Unit</item>
-        <item>The Seventh Unit</item>
-        <item>The Eighth Unit</item>
-        <item>The ninth unit</item>
+        <item> Unit 1</item>
+        <item> Unit 2</item>
+        <item> Unit 3</item>
+        <item> Unit 4</item>
+        <item> Unit 5</item>
+        <item> Unit 6</item>
+        <item> Unit 7</item>
+        <item> Unit 8</item>
+        <item> Unit 9</item>
+        <item> Unit 10</item>
+        <item> Unit 11</item>
+        <item> Unit 12</item>
+        <item> Unit 13</item>
+        <item> Unit 14</item>
+        <item> Unit 15</item>
+        <item> Unit 16</item>
+        <item> Unit 17</item>
+        <item> Unit 18</item>
+        <item> General </item>
 
     </string-array>
 
@@ -123,17 +143,19 @@
 
     <string-array name="educations">
 
-        <item>  Select Item </item>
-        <item> PrimaryEducation </item>
-        <item> SecondaryEducation </item>
-        <item> highschool </item>
-        <item> Universities </item>
+        <item> Select Item </item>
+        <item> Primary </item>
+        <item> Prep </item>
+        <item> Secondary </item>
+        <item> College </item>
 
     </string-array>
 
-    <string-array name="PrimaryEducation">
+    <string-array name="Primary">
 
         <item>إختر صف دراسي</item>
+
+
 
         <item>1st-primary</item>
         <item>2nd-primary</item>
@@ -146,7 +168,7 @@
     </string-array>
 
 
-    <string-array name="SecondaryEducation">
+    <string-array name="Prep">
 
         <item>إختر صف دراسي</item>
         <item>1st-prep</item>
@@ -158,7 +180,7 @@
     </string-array>
 
 
-    <string-array name="highschool">
+    <string-array name="Secondary">
 
         <item>إختر صف دراسي</item>
         <item>1st-secondary</item>
@@ -169,7 +191,7 @@
 
     </string-array>
 
-    <string-array name="Universities">
+    <string-array name="College">
 
         <item>إختر فرقه دراسي</item>
         <item>1st-university </item>
@@ -241,7 +263,7 @@
 
     <string name="MyResult">My Results in This Unit</string>
     <string name="aboutus">Contact us</string>
-    <string name="aboutDoctor">عن مستر أحمد سامي</string>
+    <string name="aboutDoctor">عن مستر أحمد جمال</string>
     <string name="aboutProgrammer">About Programmer </string>
     <string name="sendtoaddexam">Send to Exam</string>
     <string name="delete_Exam">Delete Exam</string>
@@ -260,7 +282,7 @@
     <string name="StudentResult">  Results Of Student \n in all Exams </string>
     <string name="delete_results">Delete Results</string>
     <string name="DoctorName">Mr . Ahmed Samy</string>
-    <string name="Personal_Data"> معلومات عن المستر </string>
+    <string name="Personal_Data">  التواصل  </string>
     <string name="Personal_Data_Details">
         - الاســـم :   أحمد سامي إبراهيم عمر
                     </string>
@@ -278,7 +300,7 @@
     <string name="sexplus"> 7. حاصل على (دورة تأهيل المعلم الحديث) 2009.</string>
 <string name="sex"> 6. شهادات أخرى مختلفة في الحاسب الآلي من بينها البرمجة وتصميم المواقع والجرافيك.  </string>
 
-    <string name="experiences">الشهادات والمؤهلات العلمية</string>
+    <string name="experiences"> صفحه الفيس بوك </string>
 
 
     <string name="numberone">  - الاسم: مستر أحمد سامي إبراهيم عمر.. معلم لغة إنجليزية للمرحلة الثانوية، ومترجم، ومبرمج ويب محترف، ومدرب كورسات معتمدة لغة إنجليزية.. شارك في ترجمة الكثير من الروايات والأفلام والمسلسلات الأجنبية..  </string>

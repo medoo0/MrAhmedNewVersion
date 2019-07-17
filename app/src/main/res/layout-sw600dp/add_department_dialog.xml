@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layoutDirection="ltr"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/snackBar"
+    android:background="@drawable/answercorner"
+    android:layout_margin="10dp"
+
+    >
+
+
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:id="@+id/Liner1"
+        >
+
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_marginTop="20dp"
+            android:layout_centerInParent="true"
+            android:layout_height="100dp"
+            android:src="@drawable/icon"
+            />
+
+        <ProgressBar
+            android:id="@+id/progressBarindialog"
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:padding="10dp"
+            />
+
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/Liner22"
+        android:layoutDirection="ltr"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|end"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_below="@+id/Liner1"
+        >
+
+
+
+
+        <Spinner
+            android:id="@+id/spinnerEducations"
+            android:layout_width="match_parent"
+            android:textDirection="rtl"
+            android:paddingStart="5sp"
+            android:layout_marginStart="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginEnd="5dp"
+            android:paddingEnd="5sp"
+            android:background="@drawable/spinnershape"
+            android:layout_height="80dp" />
+
+
+        <Spinner
+            android:id="@+id/spinner_years"
+            android:layout_width="match_parent"
+            android:textDirection="rtl"
+            android:paddingStart="5sp"
+            android:layout_marginStart="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginEnd="5dp"
+            android:paddingEnd="5sp"
+            android:background="@drawable/spinnershape"
+            android:layout_height="80dp" />
+
+        <Button
+            android:id="@+id/addDeps"
+            android:layout_below="@+id/linearLayout"
+            android:background="@drawable/button_background"
+            android:layout_marginTop="30dp"
+
+            android:text="إضافه فرقه دراسيه"
+            android:layout_marginBottom="40dp"
+            android:fontFamily="@font/cairo"
+            android:textSize="23dp"
+            android:textColor="@color/color2"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="59dp"
+            android:textStyle="bold"
+            />
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

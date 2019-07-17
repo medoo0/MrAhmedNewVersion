@@ -1,5 +1,7 @@
 package com.developer.mohamedraslan.hossamexams.Contracts;
 
+import com.developer.mohamedraslan.hossamexams.JsonModel.FullRegisterForm;
+
 public interface MainActivityContract {
 
     interface View{
@@ -12,14 +14,23 @@ public interface MainActivityContract {
 
         void showParentRegister();
         void showFirstRegisterStudent();
+
+
+        void fullRegisterForStudent(FullRegisterForm fullRegisterForm);
+
+
     }
 
 
     interface Presnter{
 
+
+
+
     }
 
     interface Modle{
+
 
     }
 

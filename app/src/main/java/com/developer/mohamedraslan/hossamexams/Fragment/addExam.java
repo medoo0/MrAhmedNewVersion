@@ -265,6 +265,11 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
                                 map.put("key", DataBase_Refrences.TimeApiKey.getRef());
                                 map.put("format",DataBase_Refrences.Format.getRef());
 
+
+                                // pحنشيلها بعدين//////////////////////////////
+
+
+
                                 addExamPresenter addExamPresenter = new addExamPresenter(addExam.this);
                                 addExamPresenter.tellModelToGetDate(map);
 //
@@ -317,6 +322,7 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
 
        String date  = getDate(zone.getTimestamp());
         //  هنا الوقت موجود من هنا بقا حنقدر نخزن الوقت في الداتا بيز
+
         presenter.storeExaminDatabase(hour,minute,second,et_degree.getText().toString()
                 ,et_random_number_question.getText().toString()
                 ,final_degree,Questions,ExamName.getText().toString(),date,Questions_size.getText().toString(),zone.getTimestamp(),depName,yearName,unitName);
@@ -327,6 +333,9 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
 
     @Override
     public void cantgetRealTime(String E) {
+
+
+        Toast.makeText(getActivity()," تاكد من الاتصال بالانترنت" + E, Toast.LENGTH_SHORT).show();
 
     }
 
@@ -634,7 +643,7 @@ public class addExam extends Fragment implements addExamContract.view  , addExam
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<String, String>();
-                headers.put("Authorization", "key=" + "AAAAlXCKxUE:APA91bFGSM9okl_Va_Q5wGeK6LW3KAZNoFeme6l95iRGz5z-llVh1ZLXZ-yH0q5Ua3PmLPghxAirqgBujN-FLR5-OB-gKkGkHlOdW8wO3CkEAZ0x5_-h-SvKyAw_8eKlYDvNA4EO5kvM");
+                headers.put("Authorization", "key=" + "AAAAsqAfWB4:APA91bFkgAJ3vkdfYT_BOCxJW-XsZo9u6wiI2CZjz4ntAKKgiXXpmt9DqHBJQdPL9t9PyFW_OO-idGMkQ-6Iyb0ftr9T58k8GWUaICOe3kqfmxqjnmW6PPpx3jBJ4xDePUqimy_R-xwJ");
                 headers.put("Content-Type", "application/json");
                 return headers;
             }

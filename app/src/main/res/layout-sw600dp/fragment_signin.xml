@@ -189,7 +189,17 @@
                     android:textStyle="bold" />
 
             </LinearLayout>
-
+            <TextView
+                android:id="@+id/forgetPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/cairo"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:text="Forget Password"
+                android:textColor="@android:color/white"
+                android:textSize="20dp"
+                android:textStyle="bold" />
         </LinearLayout>
 
 

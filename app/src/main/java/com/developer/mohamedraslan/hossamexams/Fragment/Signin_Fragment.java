@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
@@ -16,6 +17,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.developer.mohamedraslan.hossamexams.Contracts.MainActivityContract;
 import com.developer.mohamedraslan.hossamexams.Contracts.SigninContract;
@@ -30,6 +33,9 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
 import com.google.android.gms.ads.doubleclick.PublisherAdView;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +55,9 @@ public class Signin_Fragment extends Fragment implements SigninContract.view {
 
     @BindView(R.id.email)
     EditText et_email;
+
+    @BindView(R.id.forgetPassword)
+    TextView forgetPassword;
 
     SuggestionDialog suggestionDialog;
 
@@ -151,6 +160,58 @@ public class Signin_Fragment extends Fragment implements SigninContract.view {
                 //check first if some thing empty .
 
                presenter.passtocheck(et_email.getText().toString(),et_password.getText().toString());
+
+            }
+        });
+
+
+        forgetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                // resetPassword forME
+
+                if (et_email.getText().toString().isEmpty()){
+
+                    et_email.setError("الحقل فارغ يرجي إدخال البريد حتي نستطيع إرسال الباسورد اليه.");
+
+                }
+
+                if (!isEmailValid(et_email.getText().toString())){
+
+                    et_email.setError("يرجي كتابة بريد الكتروني صالح.");
+
+                }
+
+                if (!et_email.getText().toString().isEmpty()&& isEmailValid(et_email.getText().toString())){
+
+                    dialog.ShowDialog();
+
+                    FirebaseAuth auth = FirebaseAuth.getInstance();
+                    auth.sendPasswordResetEmail(et_email.getText().toString())
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+
+                                        if (getActivity()!=null){
+
+                                            dialog.Close_Dialog();
+                                            com.developer.mohamedraslan.hossamexams.Dialog.AlertDialog alertDialog
+                                                    = new com.developer.mohamedraslan.hossamexams.Dialog.AlertDialog(getActivity(),"لقد تم ارسال الباسورد الخاص بيك الي البريد الالكتروني.");
+                                            alertDialog.show();
+
+                                        }
+
+
+
+
+                                    }
+                                }
+                            });
+
+                }
+
 
             }
         });
@@ -286,5 +347,9 @@ public class Signin_Fragment extends Fragment implements SigninContract.view {
         ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
 
         return cm.getActiveNetworkInfo() != null;
+    }
+    public boolean isEmailValid(CharSequence email) {
+
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches(); //return false if not ok //return true if ok
     }
 }

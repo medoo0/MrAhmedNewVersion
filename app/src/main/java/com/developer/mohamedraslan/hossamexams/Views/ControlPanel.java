@@ -105,7 +105,7 @@ public class ControlPanel extends AppCompatActivity
     NotificationDialog notificationDialog;
     AddDepartmentDialog addDepartmentDialog;
     CircleImageView circleImageView;
-    TextView UserName;
+    TextView UserName,UserCode;
     public static ProgressBar progressBar;
     String depofStudentthahereNow = "";
 
@@ -126,7 +126,7 @@ public class ControlPanel extends AppCompatActivity
         // حنسجل الtokendevice في الداتا بيز الاول
 
         //notification
-        FirebaseMessaging.getInstance().subscribeToTopic("all");
+//        FirebaseMessaging.getInstance().subscribeToTopic("all");
 
 
         controlpanelPresnter = new ControlpanelPresnter(this);
@@ -294,6 +294,7 @@ public class ControlPanel extends AppCompatActivity
         View headerLayout = navigation.getHeaderView(0);
         circleImageView = headerLayout.findViewById(R.id.myprofile);
         UserName        = headerLayout.findViewById(R.id.UserName);
+        UserCode        = headerLayout.findViewById(R.id.UserCode);
         setSupportActionBar(toolbar);
 //        open_nav.setOnClickListener(this);
         navigation.setNavigationItemSelectedListener(this);
@@ -584,7 +585,7 @@ public class ControlPanel extends AppCompatActivity
         nav_Menu.findItem(R.id.Units).setVisible(false);
         nav_Menu.findItem(R.id.questions).setVisible(true);
 
-        circleImageView.setBackgroundResource(R.drawable.ahmedsamy);
+        circleImageView.setBackgroundResource(R.drawable.mrahmedgamal);
 
         getSupportFragmentManager()
                 .beginTransaction()
@@ -607,6 +608,7 @@ public class ControlPanel extends AppCompatActivity
 
         this.fullRegisterForm = fullRegisterForm;
         String subScrib       = fullRegisterForm.getParentYear()+fullRegisterForm.getYear();
+        UserCode.setText("Your Code,  "+ fullRegisterForm.getStudentCode());
 
         FirebaseMessaging.getInstance().subscribeToTopic(subScrib);
 
@@ -626,7 +628,7 @@ public class ControlPanel extends AppCompatActivity
 
         Unites_inDepartmentQ years_in_depsQ1 = new Unites_inDepartmentQ();
         Bundle b1 = new Bundle();
-        b1.putString("depName",fullRegisterForm.getParentYear());
+        b1.putString("depName" ,fullRegisterForm.getParentYear());
         b1.putString("yearName",fullRegisterForm.getYear());
         years_in_depsQ1.setArguments(b1);
         getSupportFragmentManager()
@@ -1078,6 +1080,7 @@ public class ControlPanel extends AppCompatActivity
 
     @Override
     public void SetUsername(String nameStudent) {
+
         UserName.setText( "Welcome,  "  + nameStudent );
     }
     public static void SetNavChecked(int position){
@@ -1157,7 +1160,7 @@ public class ControlPanel extends AppCompatActivity
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<String, String>();
-                headers.put("Authorization", "key=" + "AAAAlXCKxUE:APA91bFGSM9okl_Va_Q5wGeK6LW3KAZNoFeme6l95iRGz5z-llVh1ZLXZ-yH0q5Ua3PmLPghxAirqgBujN-FLR5-OB-gKkGkHlOdW8wO3CkEAZ0x5_-h-SvKyAw_8eKlYDvNA4EO5kvM");
+                headers.put("Authorization", "key=" + "AAAAsqAfWB4:APA91bFkgAJ3vkdfYT_BOCxJW-XsZo9u6wiI2CZjz4ntAKKgiXXpmt9DqHBJQdPL9t9PyFW_OO-idGMkQ-6Iyb0ftr9T58k8GWUaICOe3kqfmxqjnmW6PPpx3jBJ4xDePUqimy_R-xwJ");
                 headers.put("Content-Type", "application/json");
                 return headers;
             }

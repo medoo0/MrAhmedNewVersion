@@ -254,7 +254,7 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
                             dialog.Close_Dialog();
 
                         com.developer.mohamedraslan.hossamexams.Dialog.AlertDialog alertDialog
-                                = new com.developer.mohamedraslan.hossamexams.Dialog.AlertDialog(context, "لقد تم الطلب يرجي الانتظار حتي يوافق Mr.Ahmed Samy علي طلبك.");
+                                = new com.developer.mohamedraslan.hossamexams.Dialog.AlertDialog(context, "لقد تم الطلب يرجي الانتظار حتي يوافق Mr.Ahmed Gamal علي طلبك.");
                         alertDialog.show();
 
 
@@ -284,7 +284,7 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<String, String>();
-                headers.put("Authorization", "key=" + "AAAAlXCKxUE:APA91bFGSM9okl_Va_Q5wGeK6LW3KAZNoFeme6l95iRGz5z-llVh1ZLXZ-yH0q5Ua3PmLPghxAirqgBujN-FLR5-OB-gKkGkHlOdW8wO3CkEAZ0x5_-h-SvKyAw_8eKlYDvNA4EO5kvM");
+                headers.put("Authorization", "key=" + "AAAAsqAfWB4:APA91bFkgAJ3vkdfYT_BOCxJW-XsZo9u6wiI2CZjz4ntAKKgiXXpmt9DqHBJQdPL9t9PyFW_OO-idGMkQ-6Iyb0ftr9T58k8GWUaICOe3kqfmxqjnmW6PPpx3jBJ4xDePUqimy_R-xwJ");
                 headers.put("Content-Type", "application/json");
                 return headers;
             }
@@ -596,7 +596,7 @@ public class ExamList_Rec_Adapter extends FirebaseRecyclerAdapter<AddExam_pojo,V
                            dialog.Close_Dialog();
 
                            com.developer.mohamedraslan.hossamexams.Dialog.AlertDialog alertDialog
-                                   = new com.developer.mohamedraslan.hossamexams.Dialog.AlertDialog(context, "لقد إنتهي وقت إختبارك وقمت بالطلب من  Mr.Ahmed Samy من قبل.");
+                                   = new com.developer.mohamedraslan.hossamexams.Dialog.AlertDialog(context, "لقد إنتهي وقت إختبارك وقمت بالطلب من  Mr.Ahmed Gamal من قبل.");
                            alertDialog.show();
 
 

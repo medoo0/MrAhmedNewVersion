@@ -24,22 +24,27 @@
         android:id="@+id/tvregister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textStyle="normal"
+        android:textStyle="bold"
+        android:layout_marginStart="25sp"
+        android:layout_marginBottom="40dp"
+        android:layout_above="@+id/linear1inparent"
+        android:layout_marginEnd="30dp"
         android:gravity="center_horizontal"
-        android:text="@string/Sign_up"
+        android:text="أختر موضعك"
         android:fontFamily="@font/cairo"
-        android:textSize="30sp"
+        android:textSize="20sp"
         android:textColor="@color/registercolor"
-        android:layout_marginTop="90dp" />
+         />
 
 
 
     <LinearLayout
-            android:paddingBottom="20dp"
+
             android:layout_width="match_parent"
-            android:id="@+id/linear1inparent"
-            android:orientation="vertical"
             android:layout_centerInParent="true"
+            android:id="@+id/linear1inparent"
+
+            android:orientation="vertical"
             android:layout_height="wrap_content">
 
             <EditText

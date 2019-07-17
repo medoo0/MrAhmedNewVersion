@@ -189,6 +189,21 @@
 
             </LinearLayout>
 
+
+            <TextView
+                android:id="@+id/forgetPassword"
+                android:layout_width="129dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/cairo"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:text="Forget Password"
+                android:textColor="@android:color/white"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+
+
         </LinearLayout>
 
 

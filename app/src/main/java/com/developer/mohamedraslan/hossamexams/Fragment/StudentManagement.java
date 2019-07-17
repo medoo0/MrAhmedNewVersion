@@ -141,10 +141,10 @@ public class StudentManagement extends Fragment implements StudentManagementCont
 
             adapter = new StudentManagementAdapter(getActivity(),Result,getActivity().getSupportFragmentManager(),"",this,depName,yearName);
             recyclerView.setAdapter(adapter);
-
-            ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelperStudentMangment(0, ItemTouchHelper.LEFT, this,Result);
-            new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
-
+//
+//            ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelperStudentMangment(0, ItemTouchHelper.LEFT, this,Result);
+//            new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
+//
 
             //close
             dialog.Close_Dialog();
